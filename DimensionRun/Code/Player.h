@@ -10,9 +10,22 @@ public:
 	Player();
 
 	void spawn(Vector2f resolution);
-	void updateAnimation(Clock clock);
+	void updateAnimation(Clock& clock);
 	FloatRect getPosition();
 	Sprite getSprite();
+	void updateMovement();
+
+	// movement functions
+	void moveLeft();
+	void moveRight();
+	void moveUp();
+	void moveDown();
+
+	// stop player moving in certain direction
+	void stopLeft();
+	void stopRight();
+	void stopUp();
+	void stopDown();
 
 private:
 	const float INITIAL_HEALTH = 100;
@@ -28,5 +41,12 @@ private:
 	float m_Speed;
 
 	IntRect m_playerRect;
+	Vector2f m_Position;
+
+	// direction of player
+	bool m_UpPressed;
+	bool m_DownPressed;
+	bool m_LeftPressed;
+	bool m_RightPressed;
 };
 #endif

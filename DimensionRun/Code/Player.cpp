@@ -5,7 +5,7 @@ Player::Player() {
 	m_Speed = INITIAL_SPEED;
 
 	// loading idle spritesheet
-	m_Texture.loadFromFile("Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Idle/Punk_idle.png");
+	m_Texture.loadFromFile("Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Run/Punk_run.png");
 	m_playerRect.left = 0;
 	m_playerRect.width = 48;
 	m_playerRect.top = 0;
@@ -25,17 +25,21 @@ void Player::spawn(Vector2f resolution) {
 		m_Sprite.setPosition(200, 850);
 		m_Sprite.setScale(4, 4);
 	}
+	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
+		m_Sprite.setPosition(200, 800);
+		m_Sprite.setScale(4.5, 4.5);
+	}
 
 	// store resolution for future use
 	m_Resolution.x = resolution.x;
 	m_Resolution.y = resolution.y;
 }
 
-void Player::updateAnimation(Clock clock) {
-	// every 0.25 seconds 
-	// change playerSprite idle animation
-	if (clock.getElapsedTime().asSeconds() > 0.25f) {
-		if (m_playerRect.left == 144) {
+void Player::updateAnimation(Clock& clock) {
+	// every 0.09 seconds 
+	// change playerSprite run frame animation
+	if (clock.getElapsedTime().asSeconds() > 0.09f) {
+		if (m_playerRect.left == 240) {
 			m_playerRect.left = 0;
 		}
 		else {
