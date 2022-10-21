@@ -24,12 +24,24 @@
     <ClCompile Include="Code\Background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\TextureHolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\TextureHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

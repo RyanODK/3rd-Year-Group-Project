@@ -1,15 +1,15 @@
 #include "Background.h"
 
 Background::Background() {
-	m_BackgroundSpeed = 0.3f;
+	m_BackgroundSpeed = 0.2f;
 
 	m_BackgroundTexture.loadFromFile("Graphics/cyberpunk-street-files/PNG/cyberpunk-street.png");
 	m_BackgroundTexture.setSmooth(false);
-	m_BackgroundTexture.setRepeated(true);
+	m_BackgroundTexture.setRepeated(true); // repeats texture
 	m_BackgroundSprite.setTexture(m_BackgroundTexture);
 	m_BackgroundSprite.setPosition(0, 0);
 	m_BackgroundX = 0;
-	m_BackgroundSprite.setTextureRect(IntRect(0, 0, 608, 192));
+	m_BackgroundSprite.setTextureRect(IntRect(0, 0, 608, 192)); // sets texture rectangle to original texture size
 }
 
 void Background::BackgroundScale(Vector2f resolution) {

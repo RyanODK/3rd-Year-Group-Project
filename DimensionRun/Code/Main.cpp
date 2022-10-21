@@ -1,12 +1,14 @@
 // Includes important C++ libraries and headers
 #include "Background.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "TextureHolder.h"
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
 
-// Make code easier to type with "using namespace"
+// Makes code easier to type with "using namespace"
 using namespace sf;
 
 int main()
@@ -27,27 +29,9 @@ int main()
 	// Create and open a window for the game titled Dimension Run
 	RenderWindow window(VideoMode(resolution.x, resolution.y), "Dimension Run", Style::Fullscreen);
 
-	//// Create a texture to hold background graphic on the GPU
-	//Texture textureBackground;
-
-	//// Load background graphic into the texture
-	//textureBackground.loadFromFile("Graphics/cyberpunk-street-files/PNG/cyberpunk-street.png");
-
-	//// Create a sprite for background
-	//Sprite spriteBackground;
-
-	//// Attach the texture to the spriteBackground
-	//spriteBackground.setTexture(textureBackground);
-
-	//// Set the spriteBackground to cover the screen
-	//spriteBackground.setPosition(0, 0);
-
-	//// set scale of background to fit screen
-	//spriteBackground.setScale(resolution.x / spriteBackground.getLocalBounds().width, 
-	//	resolution.y / spriteBackground.getLocalBounds().height);
-
 	Background background;
 	Player player;
+	Enemy enemy;
 	
 	// clock to time everything in game
 	Clock clock;
@@ -77,6 +61,7 @@ int main()
 
 					Time currentTime = clock.restart();
 					deltaTime = currentTime;
+					elapsedTime = deltaTime.asSeconds();
 				}
 				/*else if (event.key.code == Keyboard::Return && state == State::GAME_OVER) {
 					state = State::PLAYING
@@ -93,13 +78,13 @@ int main()
 			window.close();
 		}
 
-		//elapsedTime = clock.restart().asSeconds();
+		player.spawn(resolution, elapsedTime);
+		player.update();
+		//enemy.spawn(resolution, elapsedTime);
+		//enemy.update();
+		background.BackgroundScale(resolution);
+		background.Update(deltaTime);
 
-		player.spawn(resolution);
-
-		// every 0.25 seconds 
-		// change playerSprite idle animation
-		player.updateAnimation(clock);
 
 		/*
 			Draw scene
@@ -108,10 +93,9 @@ int main()
 		if (state == State::PLAYING) {
 			window.clear();
 
-			background.BackgroundScale(resolution);
-			background.Update(deltaTime);
 			background.Render(window);
 			window.draw(player.getSprite());
+			//window.draw(enemy.getSprite());
 		}
 
 		if (state == State::PAUSED) {
@@ -121,5 +105,4 @@ int main()
 		window.display();
 	}
 	return 0;
-
 }

@@ -1,32 +1,35 @@
-#include "Player.h"
+#include "Enemy.h"
+#include "TextureHolder.h"
 
-Player::Player() {
+Enemy::Enemy() {
 	m_Health = INITIAL_HEALTH;
 	m_Speed = INITIAL_SPEED;
 
+	/*m_Sprite.setTexture(m_Texture);
+	m_Sprite.setTextureRect(m_EnemyRect);*/
+
 	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Run/Punk_run.png"));
-	m_Sprite.setTextureRect(IntRect{ 0, 0, 48, 48 });
+		"Graphics/Necromancer_creativekind-Sheet.png"));
+	m_Sprite.setTextureRect(IntRect{ 0, 149, 158, 128 });
 
 	ani_counter = 1;
 }
 
-void Player::spawn(Vector2f resolution, float elapsedTime) {
+void Enemy::spawn(Vector2f resolution, float elapsedTime) {
 	// depending on resolution set position and scale of player
 	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
-		m_Sprite.setPosition(250, 1080);
+		m_Sprite.setPosition(500, 700);
 		m_Sprite.setScale(6, 6);
 	}
 	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
 		m_Sprite.setPosition(200, 850);
-		m_Sprite.setScale(5, 5);
+		m_Sprite.setScale(4, 4);
 	}
 	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
-		m_Sprite.setPosition(200, 800);
-		m_Sprite.setScale(4.5, 4.5);
+		m_Sprite.setPosition(500, 800);
+		m_Sprite.setScale(2, 2);
 	}
 
-	// store time for future use
 	timeElapsed = elapsedTime;
 
 	// store resolution for future use
@@ -34,15 +37,15 @@ void Player::spawn(Vector2f resolution, float elapsedTime) {
 	m_Resolution.y = resolution.y;
 }
 
-void Player::update() {
-	setSpriteFromSheet(IntRect(0, 0, 288, 48));
+void Enemy::update() {
+	setSpriteFromSheet(IntRect(0, 149, 1264, 128));
 	moveTextureRect();
 }
 
-void Player::setSpriteFromSheet(IntRect textureBox)
+void Enemy::setSpriteFromSheet(IntRect textureBox)
 {
 	sheetCoordinate = Vector2i(textureBox.left, textureBox.top);
-	spriteSize = Vector2i(48, 48);
+	spriteSize = Vector2i(158, 128);
 
 	if (textureBox.width > spriteSize.x)
 	{
@@ -59,7 +62,7 @@ void Player::setSpriteFromSheet(IntRect textureBox)
 
 }
 
-void Player::moveTextureRect() {
+void Enemy::moveTextureRect() {
 	if (ani_counter == animation_it_limit) {
 		ani_counter = 0;
 	}
@@ -78,10 +81,10 @@ void Player::moveTextureRect() {
 	}
 }
 
-FloatRect Player::getPosition() {
+FloatRect Enemy::getPosition() {
 	return m_Sprite.getLocalBounds();
 }
 
-Sprite Player::getSprite() {
+Sprite Enemy::getSprite() {
 	return m_Sprite;
 }

@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include "TextureHolder.h"
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -7,46 +8,37 @@ using namespace sf;
 
 class Player {
 public:
-	Player();
+	Player(); // default constructor to set initial values
 
-	void spawn(Vector2f resolution);
-	void updateAnimation(Clock& clock);
-	FloatRect getPosition();
-	Sprite getSprite();
-	void updateMovement();
+	void spawn(Vector2f resolution, float elapsedTime); // spawns player in game and saves resolution and elapsedTime for future use
+	void moveTextureRect(); // this will move the IntRect around the texture for player in order to create an animation
+	void setSpriteFromSheet(IntRect textureBox); // this sets a IntRect around the needed frames from sprite sheet
+	void update(); // updates player animation and movement
 
-	// movement functions
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
+	Sprite getSprite(); // returns sprite
+	FloatRect getPosition(); // returns global bounds position of player sprite
 
-	// stop player moving in certain direction
-	void stopLeft();
-	void stopRight();
-	void stopUp();
-	void stopDown();
+protected:
+	const float INITIAL_HEALTH = 100; // sets initial health (placeholder)
+	const float INITIAL_SPEED = 50; // sets initial speed (placeholder)
 
-private:
-	const float INITIAL_HEALTH = 100;
-	const float INITIAL_SPEED = 50;
+	Sprite m_Sprite; // sprite of player
 
-	Sprite m_Sprite;
+	TextureHolder th; // brings in TextureHolder class
 
-	Texture m_Texture;
+	Vector2i sheetCoordinate; // holds coordinates of sprite sheet
+	Vector2i spriteSize; // holds size of sprite
 
-	Vector2f m_Resolution;
+	int animation_it_limit; // holds limit of animation iterator
+	int ani_counter{}; // holds animation counter
+	float timeElapsed; // holds games timeElapsed
+	float animationTimer = 0; // animation timer to check for switching frames of animation
+
+	Vector2f m_Resolution; // holds resolution of screen
 
 	int m_Health;
 	float m_Speed;
 
-	IntRect m_playerRect;
-	Vector2f m_Position;
-
-	// direction of player
-	bool m_UpPressed;
-	bool m_DownPressed;
-	bool m_LeftPressed;
-	bool m_RightPressed;
+	Vector2f m_Position; // holds position of sprite
 };
 #endif
