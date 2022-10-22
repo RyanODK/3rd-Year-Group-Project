@@ -11,7 +11,7 @@ Player::Player() {
 	ani_counter = 1;
 }
 
-void Player::spawn(Vector2f resolution, float elapsedTime) {
+void Player::spawn(Vector2f resolution, float gravity) {
 	// depending on resolution set position and scale of player
 	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
 		m_Sprite.setPosition(250, 1080);
@@ -26,17 +26,17 @@ void Player::spawn(Vector2f resolution, float elapsedTime) {
 		m_Sprite.setScale(4.5, 4.5);
 	}
 
-	// store time for future use
-	timeElapsed = elapsedTime;
+	// store gravity for future use
+	m_gravity = gravity;
 
 	// store resolution for future use
 	m_Resolution.x = resolution.x;
 	m_Resolution.y = resolution.y;
 }
 
-void Player::update() {
+void Player::update(float elapsedTime) {
 	setSpriteFromSheet(IntRect(0, 0, 288, 48));
-	moveTextureRect();
+	moveTextureRect(elapsedTime);
 }
 
 void Player::setSpriteFromSheet(IntRect textureBox)
@@ -59,7 +59,7 @@ void Player::setSpriteFromSheet(IntRect textureBox)
 
 }
 
-void Player::moveTextureRect() {
+void Player::moveTextureRect(float elapsedTime) {
 	if (ani_counter == animation_it_limit) {
 		ani_counter = 0;
 	}
@@ -69,9 +69,9 @@ void Player::moveTextureRect() {
 
 	// increment animation counter to point to next frame
 	double timePerFrame;
-	timePerFrame = 75;
+	timePerFrame = 0.09;
 
-	animationTimer += timeElapsed;
+	animationTimer += elapsedTime;
 	if (animationTimer > timePerFrame) {
 		ani_counter++;
 		animationTimer = 0;

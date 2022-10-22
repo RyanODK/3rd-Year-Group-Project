@@ -10,10 +10,10 @@ class Player {
 public:
 	Player(); // default constructor to set initial values
 
-	void spawn(Vector2f resolution, float elapsedTime); // spawns player in game and saves resolution and elapsedTime for future use
-	void moveTextureRect(); // this will move the IntRect around the texture for player in order to create an animation
+	void spawn(Vector2f resolution, float gravity); // spawns player in game and saves resolution and elapsedTime for future use
+	void moveTextureRect(float elapsedTime); // this will move the IntRect around the texture for player in order to create an animation
 	void setSpriteFromSheet(IntRect textureBox); // this sets a IntRect around the needed frames from sprite sheet
-	void update(); // updates player animation and movement
+	void update(float elapsedTime); // updates player animation and movement
 
 	Sprite getSprite(); // returns sprite
 	FloatRect getPosition(); // returns global bounds position of player sprite
@@ -24,21 +24,23 @@ protected:
 
 	Sprite m_Sprite; // sprite of player
 
-	TextureHolder th; // brings in TextureHolder class
-
 	Vector2i sheetCoordinate; // holds coordinates of sprite sheet
 	Vector2i spriteSize; // holds size of sprite
 
 	int animation_it_limit; // holds limit of animation iterator
 	int ani_counter{}; // holds animation counter
-	float timeElapsed; // holds games timeElapsed
 	float animationTimer = 0; // animation timer to check for switching frames of animation
 
-	Vector2f m_Resolution; // holds resolution of screen
+private:
+	float m_gravity;
 
 	int m_Health;
 	float m_Speed;
 
 	Vector2f m_Position; // holds position of sprite
+
+	TextureHolder th; // brings in TextureHolder class
+
+	Vector2f m_Resolution; // holds resolution of screen
 };
 #endif

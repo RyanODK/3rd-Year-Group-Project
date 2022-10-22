@@ -10,8 +10,8 @@ public:
 	Background(); // sets default background values
 
 	void BackgroundScale(Vector2f resolution); // this will scale background to resolution size
-	void Update(Time& deltaTime); // this will update background scrolling using deltaTime
-	void Render(RenderWindow& window); // this renders background to window
+	void Update(float dt); // this will update background scrolling using deltaTime
+	Sprite getSprite(); // this returns background sprite
 
 private:
 	Texture m_BackgroundTexture; // holds texture of background

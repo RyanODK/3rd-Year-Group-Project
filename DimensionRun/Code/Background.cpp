@@ -1,7 +1,7 @@
 #include "Background.h"
 
 Background::Background() {
-	m_BackgroundSpeed = 0.2f;
+	m_BackgroundSpeed = 50.0f;
 
 	m_BackgroundTexture.loadFromFile("Graphics/cyberpunk-street-files/PNG/cyberpunk-street.png");
 	m_BackgroundTexture.setSmooth(false);
@@ -21,9 +21,9 @@ void Background::BackgroundScale(Vector2f resolution) {
 	m_Resolution.y = resolution.y;
 }
 
-void Background::Update(Time& deltaTime) {
+void Background::Update(float dt) {
 	if (m_BackgroundX < m_Resolution.x) {
-		m_BackgroundX += m_BackgroundSpeed * deltaTime.asSeconds();
+		m_BackgroundX += m_BackgroundSpeed * dt;
 	}
 	else {
 		m_BackgroundX = 0;
@@ -31,6 +31,6 @@ void Background::Update(Time& deltaTime) {
 	m_BackgroundSprite.setTextureRect(IntRect(m_BackgroundX, 0, 608, 192));
 }
 
-void Background::Render(RenderWindow& window) {
-	window.draw(m_BackgroundSprite);
+Sprite Background::getSprite() {
+	return m_BackgroundSprite;
 }
