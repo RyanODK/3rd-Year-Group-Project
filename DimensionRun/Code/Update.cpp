@@ -15,7 +15,7 @@ void Engine::update(float dtAsSeconds) {
 	m_background.BackgroundScale(m_resolution);
 
 
-	if (m_Playing) {
+	if (state == State::PLAYING) {
 		m_player.update(dtAsSeconds, groundHeight);
 		//enemy.update();
 		m_background.Update(dtAsSeconds);

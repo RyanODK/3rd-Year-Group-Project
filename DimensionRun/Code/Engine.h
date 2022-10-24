@@ -16,11 +16,20 @@ public:
 
 	void run(); // runs game
 
+	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING, MAIN_MENU }; // all possible states of game
+	State state = State::MAIN_MENU; // default state to Main Menu
+
 private:
 	TextureHolder th; // TextureHolder class to hold textures
 
+	Sprite spriteMainMenu; // sprite for main menu
+	Texture textureMainMenu; // texture for main menu background
+
+	Font font; // font for game
+	Text mainMenuText; // main menu text
+	Text pauseMenuText; // pause menu text
+
 	//bool m_spawned = false;
-	bool m_Playing = false; // check if game is playing
 
 	Player m_player; // player class
 	Enemy m_enemy; // enemy class

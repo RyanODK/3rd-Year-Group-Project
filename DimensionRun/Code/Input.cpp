@@ -3,17 +3,47 @@
 void Engine::input() {
 	Event event;
 	while (m_Window.pollEvent(event)) {
-		if (event.type == Event::KeyPressed) {
-			// Handle the player quitting
-			if (Keyboard::isKeyPressed(Keyboard::Escape))
+		if (state == State::MAIN_MENU) {
+			// Handle player entering game
+			if (event.key.code == Keyboard::Num1)
 			{
-				m_Window.close();
+				state = State::PLAYING;
 			}
-
-			// Handle the player starting the game
-			if (Keyboard::isKeyPressed(Keyboard::Return))
+			// handle player wanting to exit game
+			if (event.key.code == Keyboard::Num2)
 			{
-				m_Playing = true;
+				state = State::GAME_OVER;
+			}
+		}
+
+		if (state == State::PAUSED)
+		{
+			// handle player wanting to resume game
+			if (event.key.code == Keyboard::R)
+			{
+				state = State::PLAYING;
+			}
+			// handle player wanting to exit game
+			if (event.key.code == Keyboard::E)
+			{
+				state = State::GAME_OVER;
+			}
+		}
+		// close window if game over
+		if (state == State::GAME_OVER) {
+			m_Window.close();
+		}
+
+		if (state == State::PLAYING) {
+			// escape will bring user to main menu
+			if (event.key.code == (Keyboard::Escape))
+			{
+				state = State::MAIN_MENU;
+			}
+			// backspace will pause users game
+			if (event.key.code == (Keyboard::Backspace))
+			{
+				state = State::PAUSED;
 			}
 		}
 	}
