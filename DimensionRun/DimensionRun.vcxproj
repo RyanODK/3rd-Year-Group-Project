@@ -26,6 +26,7 @@
     <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\Player.cpp" />
+    <ClCompile Include="Code\SoundManager.cpp" />
     <ClCompile Include="Code\TextureHolder.cpp" />
     <ClCompile Include="Code\Update.cpp" />
   </ItemGroup>
@@ -34,6 +35,7 @@
     <ClInclude Include="Code\Enemy.h" />
     <ClInclude Include="Code\Engine.h" />
     <ClInclude Include="Code\Player.h" />
+    <ClInclude Include="Code\SoundManager.h" />
     <ClInclude Include="Code\TextureHolder.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

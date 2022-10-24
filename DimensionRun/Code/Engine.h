@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Background.h"
+#include "SoundManager.h"
 
 using namespace sf;
 
@@ -34,6 +35,7 @@ private:
 	Player m_player; // player class
 	Enemy m_enemy; // enemy class
 	Background m_background; // background class
+	SoundManager m_SoundManager; // soundmanager class
 
 	const float gravity = 550; // sets gravity 
 	int groundHeight; // groundheight

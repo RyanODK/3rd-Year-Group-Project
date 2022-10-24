@@ -4,6 +4,8 @@ void Engine::input() {
 	Event event;
 	while (m_Window.pollEvent(event)) {
 		if (state == State::MAIN_MENU) {
+			m_SoundManager.stopInGameMusic();
+			m_SoundManager.playMainMenuMusic();
 			// Handle player entering game
 			if (event.key.code == Keyboard::Num1)
 			{
@@ -18,6 +20,7 @@ void Engine::input() {
 
 		if (state == State::PAUSED)
 		{
+			m_SoundManager.stopInGameMusic();
 			// handle player wanting to resume game
 			if (event.key.code == Keyboard::R)
 			{
@@ -35,6 +38,8 @@ void Engine::input() {
 		}
 
 		if (state == State::PLAYING) {
+			m_SoundManager.playInGameMusic();
+			m_SoundManager.stopMainMenuMusic();
 			// escape will bring user to main menu
 			if (event.key.code == (Keyboard::Escape))
 			{
