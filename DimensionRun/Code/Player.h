@@ -11,9 +11,10 @@ public:
 	Player(); // default constructor to set initial values
 
 	void spawn(Vector2f resolution, float gravity); // spawns player in game and saves resolution and elapsedTime for future use
+	void update(float elapsedTime, int groundHeight); // updates player animation and movement
+	bool Jump(); // function to return if player jumped already 
 	void moveTextureRect(float elapsedTime); // this will move the IntRect around the texture for player in order to create an animation
 	void setSpriteFromSheet(IntRect textureBox); // this sets a IntRect around the needed frames from sprite sheet
-	void update(float elapsedTime); // updates player animation and movement
 
 	Sprite getSprite(); // returns sprite
 	FloatRect getPosition(); // returns global bounds position of player sprite
@@ -30,6 +31,13 @@ protected:
 	int animation_it_limit; // holds limit of animation iterator
 	int ani_counter{}; // holds animation counter
 	float animationTimer = 0; // animation timer to check for switching frames of animation
+
+	// Jump variables
+	bool m_Jump; // returns true if player can jump
+	bool m_isFalling; // returns true if player is falling
+	float m_JumpDuration; // stores how long players jump will last
+	float m_TimeThisJump; // times current jump to check again m_JumpDuration
+	bool m_JustJumped; // return true if player just jumped
 
 private:
 	float m_gravity;

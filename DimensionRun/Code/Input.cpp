@@ -17,4 +17,8 @@ void Engine::input() {
 			}
 		}
 	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+		m_player.Jump();
+	}
 }

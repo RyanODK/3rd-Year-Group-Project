@@ -12,28 +12,30 @@ using namespace sf;
 
 class Engine {
 public:
-	Engine();
+	Engine(); // default constructor to set game resolution and ground height
 
-	void run();
+	void run(); // runs game
 
 private:
-	TextureHolder th;
+	TextureHolder th; // TextureHolder class to hold textures
 
-	bool m_Playing = false;
+	//bool m_spawned = false;
+	bool m_Playing = false; // check if game is playing
 
-	Player m_player;
-	Enemy m_enemy;
-	Background m_background;
+	Player m_player; // player class
+	Enemy m_enemy; // enemy class
+	Background m_background; // background class
 
-	const float gravity = 0.5;
+	const float gravity = 550; // sets gravity 
+	int groundHeight; // groundheight
 
-	RenderWindow m_Window;
-	Vector2f m_resolution;
+	RenderWindow m_Window; // render window to display game
+	Vector2f m_resolution; // stores resolution for future use
 
-	Time m_GameTimeTotal;
+	Time m_GameTimeTotal; // gets total game time of current opened window
 
-	void input();
-	void update(float dtAsSeconds);
-	void draw();
+	void input(); // input function to handle inputs from user
+	void update(float dtAsSeconds); // update function to update game 
+	void draw(); // draw function to draw sprites on screen
 };
 #endif
