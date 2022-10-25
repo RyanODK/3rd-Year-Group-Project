@@ -5,7 +5,9 @@ void Engine::draw() {
 
 	if (state == State::PLAYING) {
 		//window.setFramerateLimit(60);
-		m_Window.draw(m_background.getSprite());
+		m_Window.draw(m_background.getSprite1());
+		m_Window.draw(m_background.getSprite2());
+		m_Window.draw(m_background.getSprite3());
 		m_Window.draw(m_player.getSprite());
 		//window.draw(enemy.getSprite());
 	}
