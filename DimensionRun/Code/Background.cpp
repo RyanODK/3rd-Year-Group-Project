@@ -1,7 +1,7 @@
 #include "Background.h"
 
 Background::Background() {
-	m_BackgroundSpeed1 = 50.0f;
+	m_BackgroundSpeed = 50.0f;
 	m_BackgroundX = 0;
 
 	//m_BackgroundTexture1.loadFromFile("Graphics/cyberpunk-street-files/PNG/cyberpunk-street.png");
@@ -48,7 +48,7 @@ void Background::BackgroundScale(Vector2f resolution) {
 
 void Background::Update(float dt) {
 	if (m_BackgroundX < m_Resolution.x) {
-		m_BackgroundX += m_BackgroundSpeed1 * dt;
+		m_BackgroundX += m_BackgroundSpeed * dt;
 	}
 	else {
 		m_BackgroundX = 0;

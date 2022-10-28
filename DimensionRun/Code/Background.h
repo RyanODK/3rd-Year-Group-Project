@@ -24,7 +24,7 @@ private:
 	Sprite m_BackgroundSprite2;
 	Sprite m_BackgroundSprite3;
 
-	float m_BackgroundSpeed1; // speed in which background scrolls
+	float m_BackgroundSpeed; // speed in which background scrolls
 	float m_BackgroundX; // x value of background as scrolling will be horizontal
 
 	Vector2f m_Resolution; // stores resolution of screen

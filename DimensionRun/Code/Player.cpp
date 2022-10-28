@@ -3,27 +3,30 @@
 Player::Player() {
 	m_Health = INITIAL_HEALTH;
 	m_Speed = INITIAL_SPEED;
-	m_JumpDuration = 0.5;
+	m_JumpDuration = 0.25;
 
 	m_Sprite = Sprite(TextureHolder::GetTexture(
 		"Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_SpriteSheet.png"));
 	m_Sprite.setTextureRect(IntRect{ 0, 0, 48, 56 });
 
 	ani_counter = 1;
+
+	// setting initial position
+	// will have to be changed to fit resolution
+	m_Position.x = 250;
+	m_Position.y = 1080;
+	m_Sprite.setPosition(m_Position);
 }
 
 void Player::spawn(Vector2f resolution, float gravity) {
 	// depending on resolution set position and scale of player
 	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
-		//m_Sprite.setPosition(250, 1080);
 		m_Sprite.setScale(6, 6);
 	}
 	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
-		//m_Sprite.setPosition(200, 850);
 		m_Sprite.setScale(5, 5);
 	}
 	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
-		//m_Sprite.setPosition(200, 800);
 		m_Sprite.setScale(4.5, 4.5);
 	}
 

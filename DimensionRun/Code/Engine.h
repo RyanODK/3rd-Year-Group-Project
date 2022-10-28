@@ -37,7 +37,7 @@ private:
 	Background m_background; // background class
 	SoundManager m_SoundManager; // soundmanager class
 
-	const float gravity = 550; // sets gravity 
+	const float gravity = 900; // sets gravity 
 	int groundHeight; // groundheight
 
 	RenderWindow m_Window; // render window to display game
