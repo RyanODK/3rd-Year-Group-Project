@@ -1,51 +1,23 @@
 #include "Enemy.h"
 #include "TextureHolder.h"
 
-Enemy::Enemy() {
-	m_Health = INITIAL_HEALTH;
-	m_Speed = INITIAL_SPEED;
+void Enemy::spawn(Vector2f startPosition, Vector2f scale) {
+	m_Position.x = startPosition.x;
+	m_Position.y = startPosition.y;
 
-	/*m_Sprite.setTexture(m_Texture);
-	m_Sprite.setTextureRect(m_EnemyRect);*/
+	m_Sprite.setScale(scale);
 
-	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"Graphics/Necromancer_creativekind-Sheet.png"));
-	m_Sprite.setTextureRect(IntRect{ 0, 149, 158, 128 });
-
-	ani_counter = 1;
+	m_Sprite.setPosition(m_Position);
 }
 
-void Enemy::spawn(Vector2f resolution, float elapsedTime) {
-	// depending on resolution set position and scale of player
-	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
-		m_Sprite.setPosition(500, 700);
-		m_Sprite.setScale(6, 6);
-	}
-	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
-		m_Sprite.setPosition(200, 850);
-		m_Sprite.setScale(4, 4);
-	}
-	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
-		m_Sprite.setPosition(500, 800);
-		m_Sprite.setScale(2, 2);
-	}
-
+void Enemy::update(float elapsedTime) {
 	timeElapsed = elapsedTime;
-
-	// store resolution for future use
-	m_Resolution.x = resolution.x;
-	m_Resolution.y = resolution.y;
 }
 
-void Enemy::update() {
-	setSpriteFromSheet(IntRect(0, 149, 1264, 128));
-	moveTextureRect();
-}
-
-void Enemy::setSpriteFromSheet(IntRect textureBox)
+void Enemy::setSpriteFromSheet(IntRect textureBox, Vector2i size)
 {
 	sheetCoordinate = Vector2i(textureBox.left, textureBox.top);
-	spriteSize = Vector2i(158, 128);
+	spriteSize = size;
 
 	if (textureBox.width > spriteSize.x)
 	{
@@ -62,7 +34,7 @@ void Enemy::setSpriteFromSheet(IntRect textureBox)
 
 }
 
-void Enemy::moveTextureRect() {
+void Enemy::moveTextureRect(double frameTime) {
 	if (ani_counter == animation_it_limit) {
 		ani_counter = 0;
 	}
@@ -72,7 +44,7 @@ void Enemy::moveTextureRect() {
 
 	// increment animation counter to point to next frame
 	double timePerFrame;
-	timePerFrame = 75;
+	timePerFrame = frameTime;
 
 	animationTimer += timeElapsed;
 	if (animationTimer > timePerFrame) {

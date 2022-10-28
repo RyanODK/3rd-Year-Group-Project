@@ -8,30 +8,27 @@ using namespace sf;
 
 class Enemy {
 public:
-	Enemy();
+	void spawn(Vector2f startPosition, Vector2f scale); // spawns enemy taking in desired position and scale
+	void moveTextureRect(double frameTime); // moves texture rect to execute animation 
+	void setSpriteFromSheet(IntRect textureBox, Vector2i size); // sets texture for sprite from enemy sprite sheet
+	void update(float elapsedTime); // takes in elapsedtime to use in class for now
 
-	void spawn(Vector2f resolution, float elapsedTime);
-	void moveTextureRect();
-	void setSpriteFromSheet(IntRect textureBox);
-	void update();
-
-	FloatRect getPosition();
-	Sprite getSprite();
+	FloatRect getPosition(); // gets position of sprite
+	Sprite getSprite(); // returns sprite
 
 private:
 	const float INITIAL_HEALTH = 100;
 	const float INITIAL_SPEED = 50;
-
-	Sprite m_Sprite;
-
-	Vector2f m_Resolution;
 
 	int m_Health;
 	float m_Speed;
 
 	Vector2f m_Position;
 
-	TextureHolder th;
+	TextureHolder th; // texture holder class 
+
+protected:
+	Sprite m_Sprite; 
 
 	Vector2i sheetCoordinate;
 	Vector2i spriteSize;
@@ -39,7 +36,8 @@ private:
 	int animation_it_limit;
 	int ani_counter{};
 	float timeElapsed;
-	Clock clock;
 	float animationTimer = 0;
+	9
+	Vector2f m_Resolution;
 };
 #endif

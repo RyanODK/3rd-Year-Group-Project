@@ -8,8 +8,12 @@ void Engine::draw() {
 		m_Window.draw(m_background.getSprite1());
 		m_Window.draw(m_background.getSprite2());
 		m_Window.draw(m_background.getSprite3());
+
 		m_Window.draw(m_player.getSprite());
-		//window.draw(enemy.getSprite());
+
+		m_Window.draw(m_SmallEnemy1.getSprite());
+		m_Window.draw(m_SmallEnemy2.getSprite());
+		m_Window.draw(m_SmallEnemy3.getSprite());
 	}
 
 	if (state == State::MAIN_MENU)

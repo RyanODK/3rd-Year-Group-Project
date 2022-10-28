@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "SmallEnemy.h"
 #include "Background.h"
 #include "SoundManager.h"
 
@@ -33,9 +33,13 @@ private:
 	//bool m_spawned = false;
 
 	Player m_player; // player class
-	Enemy m_enemy; // enemy class
 	Background m_background; // background class
 	SoundManager m_SoundManager; // soundmanager class
+
+	/* Small Enemies */
+	SmallEnemy m_SmallEnemy1;
+	SmallEnemy m_SmallEnemy2;
+	SmallEnemy m_SmallEnemy3;
 
 	const float gravity = 900; // sets gravity 
 	int groundHeight; // groundheight
