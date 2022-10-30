@@ -11,9 +11,19 @@ void Engine::draw() {
 
 		m_Window.draw(m_player.getSprite());
 
-		m_Window.draw(m_SmallEnemy1.getSprite());
-		m_Window.draw(m_SmallEnemy2.getSprite());
-		m_Window.draw(m_SmallEnemy3.getSprite());
+		if (m_GameTimeTotal.asSeconds() > 10.0f) {
+			m_Window.draw(m_SmallEnemy1.getSprite());
+		}
+
+		if (m_GameTimeTotal.asSeconds() > 20.0f) {
+			m_Window.draw(m_SmallEnemy2.getSprite());
+		}
+
+		if (m_GameTimeTotal.asSeconds() > 30.0f) {
+			m_Window.draw(m_SmallEnemy3.getSprite());
+		}
+
+		m_Window.draw(distanceText);
 	}
 
 	if (state == State::MAIN_MENU)

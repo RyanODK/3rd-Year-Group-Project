@@ -37,7 +37,7 @@ protected:
 	int ani_counter{};
 	float timeElapsed;
 	float animationTimer = 0;
-	9
+	
 	Vector2f m_Resolution;
 };
 #endif

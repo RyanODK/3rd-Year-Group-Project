@@ -79,6 +79,19 @@ void Engine::run() {
 
 		float dtAsSeconds = dt.asSeconds();
 
+		distanceRan += dtAsSeconds;
+
+		distanceText.setFont(font);
+		distanceText.setCharacterSize(80);
+		distanceText.setFillColor(Color::White);
+		distanceText.setPosition(100, 250);
+		stringstream distanceStream;
+		distanceStream <<
+			distanceRan <<
+			"m";
+
+		distanceText.setString(distanceStream.str());
+
 		input();
 		update(dtAsSeconds);
 		draw();

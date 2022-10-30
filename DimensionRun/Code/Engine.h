@@ -49,6 +49,9 @@ private:
 
 	Time m_GameTimeTotal; // gets total game time of current opened window
 
+	float distanceRan = 0.0f; // track distance
+	Text distanceText;
+
 	void input(); // input function to handle inputs from user
 	void update(float dtAsSeconds); // update function to update game 
 	void draw(); // draw function to draw sprites on screen
