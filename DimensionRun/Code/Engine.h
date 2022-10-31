@@ -23,9 +23,6 @@ public:
 private:
 	TextureHolder th; // TextureHolder class to hold textures
 
-	Sprite spriteMainMenu; // sprite for main menu
-	Texture textureMainMenu; // texture for main menu background
-
 	Font font; // font for game
 	Text mainMenuText; // main menu text
 	Text pauseMenuText; // pause menu text
@@ -34,6 +31,7 @@ private:
 
 	Player m_player; // player class
 	Background m_background; // background class
+	Background m_mainMenuBackground;
 	SoundManager m_SoundManager; // soundmanager class
 
 	/* Small Enemies */

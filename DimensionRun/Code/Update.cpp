@@ -11,8 +11,16 @@ void Engine::update(float dtAsSeconds) {
 	m_SmallEnemy2.spawn(Vector2f(1650, 1080), Vector2f(-6, 6));
 	m_SmallEnemy3.spawn(Vector2f(1100, 1000), Vector2f(-4, 4));
 
-	m_background.BackgroundScale(m_resolution);
-
+	m_mainMenuBackground.setBackgroundSpeed(40);
+	m_mainMenuBackground.ChangeBackground(
+		"Graphics/warped city files/ENVIRONMENT/background/skyline-b.png",
+		"Graphics/warped city files/ENVIRONMENT/background/buildings-bg.png",
+		"Graphics/warped city files/ENVIRONMENT/background/near-buildings-bg.png",
+		IntRect(0, 0, 408, 240),
+		IntRect(0, 0, 508, 240),
+		IntRect(0, 0, 608, 192));
+	m_mainMenuBackground.Scroll(dtAsSeconds);
+	m_mainMenuBackground.BackgroundScale(m_resolution);
 
 	if (state == State::PLAYING) {
 		m_player.update(dtAsSeconds, groundHeight);
@@ -27,25 +35,47 @@ void Engine::update(float dtAsSeconds) {
 
 		m_background.Scroll(dtAsSeconds);
 
-		if (m_GameTimeTotal.asSeconds() > 5.0f) {
+		if (m_GameTimeTotal.asSeconds() < 5.0f) {
+			m_background.setBackgroundSpeed(40);
+			m_background.ChangeBackground(
+				"Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png",
+				"Graphics/cyberpunk-street-files/PNG/layers/back-buildings.png",
+				"Graphics/cyberpunk-street-files/PNG/layers/foreground.png",
+				IntRect(0, 0, 408, 192),
+				IntRect(0, 0, 508, 192),
+				IntRect(0, 0, 608, 192));
+			m_background.Scroll(dtAsSeconds);
+			m_background.BackgroundScale(m_resolution);
+		}
+
+		if (m_GameTimeTotal.asSeconds() >= 5.0f) {
+			m_background.setBackgroundSpeed(35);
 			m_background.ChangeBackground(
 				"Graphics/cyberpunk city 2 files/cyberpunk city 2 files/Environmet/background/back.png",
 				"Graphics/cyberpunk city 2 files/cyberpunk city 2 files/Environmet/background/middle.png",
 				"Graphics/cyberpunk city 2 files/cyberpunk city 2 files/Environmet/background/front.png",
-				IntRect(0, 0, 408, 160), IntRect(0, 0, 508, 160), IntRect(0, 0, 608, 160));
+				IntRect(0, 0, 408, 160),
+				IntRect(0, 0, 508, 160),
+				IntRect(0, 0, 608, 160));
 			m_background.Scroll(dtAsSeconds);
+			m_background.BackgroundScale(m_resolution);
 		}
 
-		if (m_GameTimeTotal.asSeconds() > 7.0f) {
+		if (m_GameTimeTotal.asSeconds() >= 10.0f) {
+			m_background.setBackgroundSpeed(20);
 			m_background.ChangeBackground(
 				"Graphics/Rocky Pass Files/Rocky Pass Files/PNG/back.png",
 				"Graphics/Rocky Pass Files/Rocky Pass Files/PNG/middle.png",
 				"Graphics/Rocky Pass Files/Rocky Pass Files/PNG/near.png",
-				IntRect(0, 0, 408, 240), IntRect(0, 0, 508, 240), IntRect(0, 0, 608, 240));
+				IntRect(0, 0, 408, 240),
+				IntRect(0, 0, 508, 240),
+				IntRect(0, 0, 608, 240));
 			m_background.Scroll(dtAsSeconds);
+			m_background.BackgroundScale(m_resolution);
 		}
 
-		if (m_GameTimeTotal.asSeconds() > 10.0f) {
+		if (m_GameTimeTotal.asSeconds() >= 15.0f) {
+			m_background.setBackgroundSpeed(35);
 			m_background.ChangeBackground(
 				"Graphics/underwater-fantasy-files/PNG/layers/far.png",
 				"Graphics/underwater-fantasy-files/PNG/layers/foregound-merged.png",
@@ -54,6 +84,20 @@ void Engine::update(float dtAsSeconds) {
 				IntRect(0, 0, 508, 192),
 				IntRect(0, 0, 608, 192));
 			m_background.Scroll(dtAsSeconds);
+			m_background.BackgroundScale(m_resolution);
+		}
+
+		if (m_GameTimeTotal.asSeconds() >= 20.0f) {
+			m_background.setBackgroundSpeed(20);
+			m_background.ChangeBackground(
+				"Graphics/Tall Forest Files/Layers/back.png",
+				"Graphics/Tall Forest Files/Layers/far.png",
+				"Graphics/Tall Forest Files/Layers/middle.png",
+				IntRect(0, 0, 408, 240),
+				IntRect(0, 0, 508, 240),
+				IntRect(0, 0, 608, 240));
+			m_background.Scroll(dtAsSeconds);
+			m_background.BackgroundScale(m_resolution);
 		}
 	}
 }

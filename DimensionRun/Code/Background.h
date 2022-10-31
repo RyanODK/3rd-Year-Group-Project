@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include "TextureHolder.h"
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
@@ -14,8 +15,9 @@ public:
 	void Scroll(float dt); // this will scroll background using deltaTime
 	void ChangeBackground(
 		string filename1, string filename2, string filename3, // this changes background
-		IntRect rect1, IntRect rect2, IntRect rect3); // NEEDS TO BE FIXED AS IT RUINS FPS EVERY BACKGROUND CHANGE
-	
+		IntRect rect1, IntRect rect2, IntRect rect3); // changes background taking in filename and IntRect
+	void setBackgroundSpeed(float backgroundSpeed); // sets background speed
+
 	// these return background sprites
 	Sprite getSprite1(); 
 	Sprite getSprite2();

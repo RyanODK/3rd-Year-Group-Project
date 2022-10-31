@@ -21,17 +21,6 @@ Engine::Engine() {
 		groundHeight = 800;
 	}
 
-	// hold texture for main menu background
-	textureMainMenu = TextureHolder::GetTexture(
-		"Graphics/Miami-synth-files/Previews/Miami-synth.png");
-	// set texture for background
-	spriteMainMenu.setTexture(textureMainMenu);
-	// position main menu background at (0, 0)
-	spriteMainMenu.setPosition(0, 0);
-	// set scale according to resolution size
-	spriteMainMenu.setScale(resolution.x / spriteMainMenu.getLocalBounds().width,
-		resolution.y / spriteMainMenu.getLocalBounds().height);
-
 	// load font
 	font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillennium Italic.ttf");
 

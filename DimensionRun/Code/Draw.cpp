@@ -29,14 +29,18 @@ void Engine::draw() {
 	if (state == State::MAIN_MENU)
 	{
 		// Draw the main menu
-		m_Window.draw(spriteMainMenu);
+		m_Window.draw(m_mainMenuBackground.getSprite1());
+		m_Window.draw(m_mainMenuBackground.getSprite2());
+		m_Window.draw(m_mainMenuBackground.getSprite3());
 		m_Window.draw(mainMenuText);
 	}
 
 	if (state == State::PAUSED)
 	{
 		// Draw the pause menu
-		m_Window.draw(spriteMainMenu);
+		m_Window.draw(m_mainMenuBackground.getSprite1());
+		m_Window.draw(m_mainMenuBackground.getSprite2());
+		m_Window.draw(m_mainMenuBackground.getSprite3());
 		m_Window.draw(pauseMenuText);
 	}
 

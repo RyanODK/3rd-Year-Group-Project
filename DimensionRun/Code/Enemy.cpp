@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include "TextureHolder.h"
 
 void Enemy::spawn(Vector2f startPosition, Vector2f scale) {
 	m_Position.x = startPosition.x;

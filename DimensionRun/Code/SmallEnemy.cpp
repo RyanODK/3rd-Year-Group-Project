@@ -2,14 +2,14 @@
 
 SmallEnemy::SmallEnemy() {
 	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"Graphics/Necromancer_creativekind-SheetIDLE.png"));
+		"Graphics/Necromancer_creativekind-SheetIDLE.png", false));
 	//m_Sprite.setTextureRect(IntRect{ 0, 0, 80, 80 });
 }
 
 void SmallEnemy::SetSprite(int enemyType)
 {
 	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"Graphics/Enemy/Small Enemy/EnemySpriteSheet.png"));
+		"Graphics/Enemy/Small Enemy/EnemySpriteSheet.png", false));
 
 	if (enemyType == 1) {
 		// Demon

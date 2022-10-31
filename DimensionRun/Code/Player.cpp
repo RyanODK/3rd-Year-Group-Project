@@ -6,7 +6,7 @@ Player::Player() {
 	m_JumpDuration = 0.25;
 
 	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_SpriteSheet.png"));
+		"Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_SpriteSheet.png", false));
 	m_Sprite.setTextureRect(IntRect{ 0, 0, 48, 56 });
 
 	ani_counter = 1;

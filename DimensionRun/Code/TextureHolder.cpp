@@ -9,7 +9,7 @@ TextureHolder::TextureHolder() {
 	m_s_Instance = this;
 }
 
-Texture& TextureHolder::GetTexture(string const& filename) {
+Texture& TextureHolder::GetTexture(string const& filename, bool repeat) {
 	// get reference to m_Texture using m_s_Instance
 	// auto is equivalent of map<string, Texture>::iterator
 	auto& m = m_s_Instance->m_Texture;
@@ -31,6 +31,13 @@ Texture& TextureHolder::GetTexture(string const& filename) {
 
 		// load texture from file in usual way
 		texture.loadFromFile(filename);
+
+		if (repeat) {
+			texture.setRepeated(true);
+		}
+		else {
+			texture.setRepeated(false);
+		}
 
 		// return texture
 		return texture;

@@ -14,7 +14,7 @@ class TextureHolder
 {
 public:
 	TextureHolder();
-	static Texture& GetTexture(string const& filename); // function to get texture from path of filename
+	static Texture& GetTexture(string const& filename, bool repeat); // function to get texture from path of filename
 
 private:
 	// map container from STL
