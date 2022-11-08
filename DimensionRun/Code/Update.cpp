@@ -7,9 +7,17 @@ void Engine::update(float dtAsSeconds) {
 	m_SmallEnemy2.SetSprite(2);
 	m_SmallEnemy3.SetSprite(3);
 
-	m_SmallEnemy1.spawn(Vector2f(1600, 980), Vector2f(2, 2));
-	m_SmallEnemy2.spawn(Vector2f(1650, 1080), Vector2f(-6, 6));
-	m_SmallEnemy3.spawn(Vector2f(1100, 1000), Vector2f(-4, 4));
+	m_SmallEnemy1.spawn(Vector2f(
+		(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 67), Vector2f(
+			(m_resolution.x / 100) * 0.10, (m_resolution.y / 100) * 0.17));
+
+	m_SmallEnemy2.spawn(Vector2f(
+		(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 73), Vector2f(
+			(m_resolution.x / 100) * -0.25, (m_resolution.y / 100) * 0.5));
+
+	m_SmallEnemy3.spawn(Vector2f(
+		(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 67), Vector2f(
+			(m_resolution.x / 100) * -0.22, (m_resolution.y / 100) * 0.37));
 
 	m_mainMenuBackground.setBackgroundSpeed(40);
 	m_mainMenuBackground.ChangeBackground(
@@ -35,7 +43,7 @@ void Engine::update(float dtAsSeconds) {
 
 		m_background.Scroll(dtAsSeconds);
 
-		if (m_GameTimeTotal.asSeconds() < 5.0f) {
+		if (resetTime < 5.0f) {
 			m_background.setBackgroundSpeed(40);
 			m_background.ChangeBackground(
 				"Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png",
@@ -48,7 +56,7 @@ void Engine::update(float dtAsSeconds) {
 			m_background.BackgroundScale(m_resolution);
 		}
 
-		if (m_GameTimeTotal.asSeconds() >= 5.0f) {
+		if (resetTime >= 5.0f) {
 			m_background.setBackgroundSpeed(35);
 			m_background.ChangeBackground(
 				"Graphics/cyberpunk city 2 files/cyberpunk city 2 files/Environmet/background/back.png",
@@ -61,7 +69,7 @@ void Engine::update(float dtAsSeconds) {
 			m_background.BackgroundScale(m_resolution);
 		}
 
-		if (m_GameTimeTotal.asSeconds() >= 10.0f) {
+		if (resetTime >= 10.0f) {
 			m_background.setBackgroundSpeed(20);
 			m_background.ChangeBackground(
 				"Graphics/Rocky Pass Files/Rocky Pass Files/PNG/back.png",
@@ -74,7 +82,7 @@ void Engine::update(float dtAsSeconds) {
 			m_background.BackgroundScale(m_resolution);
 		}
 
-		if (m_GameTimeTotal.asSeconds() >= 15.0f) {
+		if (resetTime >= 15.0f) {
 			m_background.setBackgroundSpeed(35);
 			m_background.ChangeBackground(
 				"Graphics/underwater-fantasy-files/PNG/layers/far.png",
@@ -87,7 +95,7 @@ void Engine::update(float dtAsSeconds) {
 			m_background.BackgroundScale(m_resolution);
 		}
 
-		if (m_GameTimeTotal.asSeconds() >= 20.0f) {
+		if (resetTime >= 20.0f) {
 			m_background.setBackgroundSpeed(20);
 			m_background.ChangeBackground(
 				"Graphics/Tall Forest Files/Layers/back.png",
@@ -98,6 +106,10 @@ void Engine::update(float dtAsSeconds) {
 				IntRect(0, 0, 608, 240));
 			m_background.Scroll(dtAsSeconds);
 			m_background.BackgroundScale(m_resolution);
+		}
+
+		if (resetTime >= 25.0f) {
+			resetTime = 0;
 		}
 	}
 }

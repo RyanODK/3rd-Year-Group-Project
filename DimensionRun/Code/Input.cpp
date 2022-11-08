@@ -68,7 +68,45 @@ void Engine::input() {
 		}
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+	if (Keyboard::isKeyPressed(Keyboard::Space) && canJump) {
 		m_player.Jump();
+		canJump = false;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::C) && canSlide) {
+		m_player.Slide();
+		canSlide = false;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::X) && canLaser) {
+		m_player.Laser();
+		canLaser = false;
+	}
+
+	if (!canJump) {
+		jumpInterval += m_GameTimeTotal.asSeconds();
+
+		if (jumpInterval >= 40000) {
+			jumpInterval = 0.0f;
+			canJump = true;
+		}
+	}
+
+	if (!canSlide) {
+		slideInterval += m_GameTimeTotal.asSeconds();
+
+		if (slideInterval >= 40000) {
+			slideInterval = 0.0f;
+			canSlide = true;
+		}
+	}
+
+	if (!canLaser) {
+		laserInterval += m_GameTimeTotal.asSeconds();
+
+		if (laserInterval >= 40000) {
+			laserInterval = 0.0f;
+			canLaser = true;
+		}
 	}
 }

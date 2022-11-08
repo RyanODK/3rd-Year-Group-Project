@@ -6,6 +6,8 @@
 #include "TextureHolder.h"
 #include "Player.h"
 #include "SmallEnemy.h"
+#include "MediumEnemy.h"
+#include "LargeEnemy.h"
 #include "Background.h"
 #include "SoundManager.h"
 
@@ -39,6 +41,16 @@ private:
 	SmallEnemy m_SmallEnemy2;
 	SmallEnemy m_SmallEnemy3;
 
+	/* Medium Enemies */
+	MediumEnemy m_MediumEnemy1;
+	MediumEnemy m_MediumEnemy2;
+	MediumEnemy m_MediumEnemy3;
+
+	/* Large Enemies */
+	LargeEnemy m_LargeEnemy1;
+	LargeEnemy m_LargeEnemy2;
+	LargeEnemy m_LargeEnemy3;
+
 	const float gravity = 900; // sets gravity 
 	int groundHeight; // groundheight
 
@@ -46,6 +58,16 @@ private:
 	Vector2f m_resolution; // stores resolution for future use
 
 	Time m_GameTimeTotal; // gets total game time of current opened window
+
+	float resetTime = 0.0f; // checks which background to draw
+
+	// checks when player can jump, slide and laser
+	float jumpInterval = 0.0f; 
+	float slideInterval = 0.0f;
+	float laserInterval = 0.0f;
+	bool canJump = true;
+	bool canSlide = true;
+	bool canLaser = true;
 
 	float distanceRan = 0.0f; // track distance
 	Text distanceText;

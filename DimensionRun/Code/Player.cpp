@@ -4,18 +4,12 @@ Player::Player() {
 	m_Health = INITIAL_HEALTH;
 	m_Speed = INITIAL_SPEED;
 	m_JumpDuration = 0.25;
+	m_SlideDuration = 0.5;
 
 	m_Sprite = Sprite(TextureHolder::GetTexture(
 		"Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_SpriteSheet.png", false));
-	m_Sprite.setTextureRect(IntRect{ 0, 0, 48, 56 });
 
 	ani_counter = 1;
-
-	// setting initial position
-	// will have to be changed to fit resolution
-	m_Position.x = 250;
-	m_Position.y = 1080;
-	m_Sprite.setPosition(m_Position);
 }
 
 void Player::spawn(Vector2f resolution, float gravity) {
@@ -28,6 +22,12 @@ void Player::spawn(Vector2f resolution, float gravity) {
 	}
 	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
 		m_Sprite.setScale(4.5, 4.5);
+	}
+
+	if (!m_Jump && !m_isFalling) {
+		m_Position.x = (m_Resolution.x / 100) * 10;
+		m_Position.y = (m_Resolution.y / 100) * 75;
+		m_Sprite.setPosition(m_Position);
 	}
 
 	// store gravity for future use
@@ -61,8 +61,43 @@ bool Player::Jump() {
 	return m_JustJumped;
 }
 
+bool Player::Slide() {
+	m_JustSlid = false;
+
+	if (Keyboard::isKeyPressed(Keyboard::C)) {
+		if (!m_IsSliding) {
+			m_IsSliding = true;
+			m_TimeThisSlide = 0;
+			m_JustSlid = true;
+		}
+	}
+	else {
+		m_IsSliding = false;
+	}
+
+	return m_JustSlid;
+}
+
+bool Player::Laser() {
+	m_JustLasered = false;
+
+	if (Keyboard::isKeyPressed(Keyboard::X)) {
+		if (!m_IsLasering) {
+			m_IsLasering = true;
+			m_TimeThisLaser = 0;
+			m_JustLasered = true;
+		}
+	}
+	else {
+		m_IsLasering = false;
+	}
+
+	return m_JustLasered;
+}
+
 void Player::update(float elapsedTime, int groundHeight) {
 	// plays player run animation
+	m_TimePerFrame = 0.09;
 	setSpriteFromSheet(IntRect(0, 0, 288, 56));
 	moveTextureRect(elapsedTime);
 
@@ -74,9 +109,9 @@ void Player::update(float elapsedTime, int groundHeight) {
 		if (m_TimeThisJump < m_JumpDuration) { 
 			// move player up using gravity and elapsedTime
 			m_Position.y -= m_gravity * 2 * elapsedTime;
-
+			m_Sprite.setPosition(m_Position);
 			// set jump animation frame
-			setSpriteFromSheet(IntRect(48, 58, 96, 56));
+			setSpriteFromSheet(IntRect(0, 58, 96, 54));
 		}
 		// else timer for jump has hit allowed jump duration
 		else {
@@ -89,18 +124,39 @@ void Player::update(float elapsedTime, int groundHeight) {
 	if (m_isFalling) {
 		// increment position y of player with gravity to make sprite fall down
 		m_Position.y += m_gravity * elapsedTime;
-
+		m_Sprite.setPosition(m_Position);
 		// if players position y has hit current ground height
 		// stop falling
 		if (m_Position.y >= groundHeight) {
 			m_isFalling = false;
 		}
 		// set falling animation frame
-		setSpriteFromSheet(IntRect(144, 58, 192, 56));
+		setSpriteFromSheet(IntRect(144, 58, 192, 54));
 	}
 
-	// set sprites position
-	m_Sprite.setPosition(m_Position);
+	if (m_IsSliding) {
+		m_TimeThisSlide += elapsedTime;
+
+		if (m_TimeThisSlide < m_SlideDuration) {
+			setSpriteFromSheet(IntRect(0, 327, 49, 54));
+		}
+		else {
+			m_IsSliding = false;
+		}
+	}
+
+	if (m_IsLasering) {
+		m_TimePerFrame = 0.9;
+		m_TimeThisLaser += elapsedTime;
+
+		if (m_TimeThisLaser < 0.2) {
+			setSpriteFromSheet(IntRect(0, 374, 385, 54));
+			moveTextureRect(elapsedTime);
+		}
+		else {
+			m_IsLasering = false;
+		}
+	}
 }
 
 void Player::setSpriteFromSheet(IntRect textureBox)
@@ -108,7 +164,7 @@ void Player::setSpriteFromSheet(IntRect textureBox)
 	// get sprite sheets left and top values
 	sheetCoordinate = Vector2i(textureBox.left, textureBox.top);
 	// set sprite size
-	spriteSize = Vector2i(48, 56);
+	spriteSize = Vector2i(48, 54);
 
 	// if sprite sheet width is greater than sprite size x
 	if (textureBox.width > spriteSize.x)
@@ -143,10 +199,10 @@ void Player::moveTextureRect(float elapsedTime) {
 
 	// increment animation counter to point to next frame
 	double timePerFrame;
-	timePerFrame = 0.09; // each frame will last 0.09 seconds
+	timePerFrame = m_TimePerFrame;
 
 	animationTimer += elapsedTime;
-	if (animationTimer > timePerFrame) {
+	if (animationTimer >= timePerFrame) {
 		ani_counter++;
 		animationTimer = 0;
 	}

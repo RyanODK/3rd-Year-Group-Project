@@ -11,15 +11,15 @@ void Engine::draw() {
 
 		m_Window.draw(m_player.getSprite());
 
-		if (m_GameTimeTotal.asSeconds() > 10.0f) {
+		if (m_GameTimeTotal.asSeconds() > 5.0f) {
 			m_Window.draw(m_SmallEnemy1.getSprite());
 		}
 
-		if (m_GameTimeTotal.asSeconds() > 20.0f) {
+		if (m_GameTimeTotal.asSeconds() > 10.0f) {
 			m_Window.draw(m_SmallEnemy2.getSprite());
 		}
 
-		if (m_GameTimeTotal.asSeconds() > 30.0f) {
+		if (m_GameTimeTotal.asSeconds() > 15.0f) {
 			m_Window.draw(m_SmallEnemy3.getSprite());
 		}
 

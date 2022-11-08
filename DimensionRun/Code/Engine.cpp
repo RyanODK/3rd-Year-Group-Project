@@ -10,16 +10,8 @@ Engine::Engine() {
 	m_Window.create(VideoMode(resolution.x, resolution.y),
 		"Dimension Run", Style::Fullscreen);
 
-	// sets groundheight depending on resolution
-	if (resolution.x == 2560 && resolution.y == 1440) {
-		groundHeight = 1080;
-	}
-	else if (resolution.x == 1920 && resolution.y == 1080) {
-		groundHeight = 850;
-	}
-	else if (resolution.x == 1680 && resolution.y == 1050) {
-		groundHeight = 800;
-	}
+	// sets groundheight to 75% of screen resolution
+	groundHeight = (resolution.y / 100) * 75;
 
 	// load font
 	font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillennium Italic.ttf");
@@ -62,6 +54,11 @@ void Engine::run() {
 	Clock clock; // clock to store time in game
 
 	while (m_Window.isOpen()) {
+		// pauses game if in pause or main menu screen
+		/*if (state == State::PAUSED || state == State::MAIN_MENU) {
+			clock.restart();
+		}*/
+
 		Time dt = clock.restart();
 
 		m_GameTimeTotal += dt;
@@ -69,6 +66,7 @@ void Engine::run() {
 		float dtAsSeconds = dt.asSeconds();
 
 		distanceRan += dtAsSeconds;
+		resetTime += dtAsSeconds;
 
 		distanceText.setFont(font);
 		distanceText.setCharacterSize(80);
