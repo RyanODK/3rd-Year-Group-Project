@@ -29,16 +29,37 @@ void SmallEnemy::updateAnimation(int enemyType)
 {
 	if (enemyType == 1) {
 		// Demon
-		setSpriteFromSheet(IntRect{ 0, 0, 1728, 212 }, Vector2i(288, 212));
-		moveTextureRect(0.18);
+		if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 165, 3456, 212 }, Vector2i(288, 212));
+			moveTextureRect(0.09);
+		}
+		else {
+			setSpriteFromSheet(IntRect{ 0, 0, 1728, 212 }, Vector2i(288, 212));
+			moveTextureRect(0.18);
+		}
 	}
 	else if (enemyType == 2) {
 		// Nightborne
-		setSpriteFromSheet(IntRect{ 0, 848, 720, 80 }, Vector2i(80, 80));
-		moveTextureRect(0.09);
+		if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 928, 480, 80 }, Vector2i(80, 80));
+			moveTextureRect(0.09);
+		}
+		else {
+			setSpriteFromSheet(IntRect{ 0, 848, 720, 80 }, Vector2i(80, 80));
+			moveTextureRect(0.09);
+		}
 	}
 	else if (enemyType == 3) {
 		// Necromancer
+		/*if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 1369, 1272, 97 }, Vector2i(159, 97));
+			moveTextureRect(0.15);
+		}
+		else {
+			setSpriteFromSheet(IntRect{ 0, 1268, 1272, 97 }, Vector2i(159, 97));
+			moveTextureRect(0.15);
+		}*/
+
 		setSpriteFromSheet(IntRect{ 0, 1268, 1272, 97 }, Vector2i(159, 97));
 		moveTextureRect(0.15);
 	}

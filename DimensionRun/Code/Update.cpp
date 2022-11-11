@@ -2,6 +2,7 @@
 
 void Engine::update(float dtAsSeconds) {
 	m_player.spawn(m_resolution, gravity);
+	m_obstacle.spawn(m_resolution);
 
 	m_SmallEnemy1.SetSprite(1);
 	m_SmallEnemy2.SetSprite(2);
@@ -36,6 +37,10 @@ void Engine::update(float dtAsSeconds) {
 		m_SmallEnemy1.update(dtAsSeconds);
 		m_SmallEnemy2.update(dtAsSeconds);
 		m_SmallEnemy3.update(dtAsSeconds);
+
+		//if active is true then spawn, if false dont, have random number to spawn 
+		m_obstacle.update(dtAsSeconds);
+		checkCol(m_player);
 
 		m_SmallEnemy1.updateAnimation(1);
 		m_SmallEnemy2.updateAnimation(2);

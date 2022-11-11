@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
+#include "Obstacle.h"
 #include "Player.h"
 #include "SmallEnemy.h"
 #include "MediumEnemy.h"
@@ -32,6 +33,7 @@ private:
 	//bool m_spawned = false;
 
 	Player m_player; // player class
+	Obstacle m_obstacle;
 	Background m_background; // background class
 	Background m_mainMenuBackground;
 	SoundManager m_SoundManager; // soundmanager class
@@ -75,5 +77,6 @@ private:
 	void input(); // input function to handle inputs from user
 	void update(float dtAsSeconds); // update function to update game 
 	void draw(); // draw function to draw sprites on screen
+	void checkCol(Player& player);
 };
 #endif

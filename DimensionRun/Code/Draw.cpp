@@ -10,6 +10,7 @@ void Engine::draw() {
 		m_Window.draw(m_background.getSprite3());
 
 		m_Window.draw(m_player.getSprite());
+		m_Window.draw(m_obstacle.getSprite());
 
 		if (m_GameTimeTotal.asSeconds() > 5.0f) {
 			m_Window.draw(m_SmallEnemy1.getSprite());

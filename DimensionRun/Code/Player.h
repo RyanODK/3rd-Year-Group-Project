@@ -16,10 +16,11 @@ public:
 	bool Slide(); // function to check for sliding
 	bool Laser(); // function to check for lasering
 	void moveTextureRect(float elapsedTime); // this will move the IntRect around the texture for player in order to create an animation
-	void setSpriteFromSheet(IntRect textureBox); // this sets a IntRect around the needed frames from sprite sheet
+	void setSpriteFromSheet(IntRect textureBox, Vector2i spriteSize); // this sets a IntRect around the needed frames from sprite sheet
 
 	Sprite getSprite(); // returns sprite
-	FloatRect getPosition(); // returns global bounds position of player sprite
+	FloatRect getPosition(); // returns local bounds position of player sprite
+	FloatRect getGlobal(); // returns global bounds position of player sprite
 
 protected:
 	const float INITIAL_HEALTH = 100; // sets initial health (placeholder)
@@ -28,7 +29,7 @@ protected:
 	Sprite m_Sprite; // sprite of player
 
 	Vector2i sheetCoordinate; // holds coordinates of sprite sheet
-	Vector2i spriteSize; // holds size of sprite
+	Vector2i m_SpriteSize; // holds size of sprite
 
 	int animation_it_limit; // holds limit of animation iterator
 	int ani_counter{}; // holds animation counter

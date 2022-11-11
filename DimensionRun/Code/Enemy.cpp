@@ -1,16 +1,32 @@
 #include "Enemy.h"
 
 void Enemy::spawn(Vector2f startPosition, Vector2f scale) {
-	m_Position.x = startPosition.x;
-	m_Position.y = startPosition.y;
+	resetPosition.x = startPosition.x;
+	resetPosition.y = startPosition.y;
 
 	m_Sprite.setScale(scale);
 
-	m_Sprite.setPosition(m_Position);
+	m_Sprite.setPosition(startPosition);
 }
 
 void Enemy::update(float elapsedTime) {
 	timeElapsed = elapsedTime;
+
+	if (!EnemyActive) {
+		m_Position.x = resetPosition.x;
+		m_Position.y = resetPosition.y;
+		EnemyActive = true;
+	}
+	else {
+		m_Position.x -= 90 * 2 * elapsedTime;
+
+		if (m_Position.x <= -300)
+		{
+			EnemyActive = false;
+		}
+	}
+	m_Position.x -= 120 * 2 * elapsedTime;
+	m_Sprite.setPosition(m_Position);
 }
 
 void Enemy::setSpriteFromSheet(IntRect textureBox, Vector2i size)

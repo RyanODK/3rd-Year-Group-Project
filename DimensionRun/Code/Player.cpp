@@ -7,7 +7,7 @@ Player::Player() {
 	m_SlideDuration = 0.5;
 
 	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"Graphics/Free 3 Cyberpunk Sprites Pixel Art/2 Punk/Punk_SpriteSheet.png", false));
+		"Graphics/Main Player/playerSpritesheet.png", false));
 
 	ani_counter = 1;
 }
@@ -97,8 +97,8 @@ bool Player::Laser() {
 
 void Player::update(float elapsedTime, int groundHeight) {
 	// plays player run animation
-	m_TimePerFrame = 0.09;
-	setSpriteFromSheet(IntRect(0, 0, 288, 56));
+	m_TimePerFrame = 0.08;
+	setSpriteFromSheet(IntRect(0, 228, 166, 33), Vector2i(29, 38));
 	moveTextureRect(elapsedTime);
 
 	//if m_Jump is true
@@ -111,7 +111,7 @@ void Player::update(float elapsedTime, int groundHeight) {
 			m_Position.y -= m_gravity * 2 * elapsedTime;
 			m_Sprite.setPosition(m_Position);
 			// set jump animation frame
-			setSpriteFromSheet(IntRect(0, 58, 96, 54));
+			setSpriteFromSheet(IntRect(0, 152, 23, 35), Vector2i(29, 38));
 		}
 		// else timer for jump has hit allowed jump duration
 		else {
@@ -131,14 +131,14 @@ void Player::update(float elapsedTime, int groundHeight) {
 			m_isFalling = false;
 		}
 		// set falling animation frame
-		setSpriteFromSheet(IntRect(144, 58, 192, 54));
+		setSpriteFromSheet(IntRect(78, 152, 29, 35), Vector2i(29, 38));
 	}
 
 	if (m_IsSliding) {
 		m_TimeThisSlide += elapsedTime;
 
 		if (m_TimeThisSlide < m_SlideDuration) {
-			setSpriteFromSheet(IntRect(0, 327, 49, 54));
+			setSpriteFromSheet(IntRect(0, 327, 49, 54), Vector2i(29, 38));
 		}
 		else {
 			m_IsSliding = false;
@@ -146,11 +146,11 @@ void Player::update(float elapsedTime, int groundHeight) {
 	}
 
 	if (m_IsLasering) {
-		m_TimePerFrame = 0.9;
+		m_TimePerFrame = 0.09;
 		m_TimeThisLaser += elapsedTime;
 
-		if (m_TimeThisLaser < 0.2) {
-			setSpriteFromSheet(IntRect(0, 374, 385, 54));
+		if (m_TimeThisLaser < 0.12) {
+			setSpriteFromSheet(IntRect(95, 190, 83, 38), Vector2i(33, 38));
 			moveTextureRect(elapsedTime);
 		}
 		else {
@@ -159,31 +159,31 @@ void Player::update(float elapsedTime, int groundHeight) {
 	}
 }
 
-void Player::setSpriteFromSheet(IntRect textureBox)
+void Player::setSpriteFromSheet(IntRect textureBox, Vector2i spriteSize)
 {
 	// get sprite sheets left and top values
 	sheetCoordinate = Vector2i(textureBox.left, textureBox.top);
 	// set sprite size
-	spriteSize = Vector2i(48, 54);
+	m_SpriteSize = spriteSize;
 
 	// if sprite sheet width is greater than sprite size x
-	if (textureBox.width > spriteSize.x)
+	if (textureBox.width > m_SpriteSize.x)
 	{
 		// set animation iterator limit to width of sprite sheet / sprite size x
-		animation_it_limit = textureBox.width / spriteSize.x;
+		animation_it_limit = textureBox.width / m_SpriteSize.x;
 	}
 	// else if sprite sheet height is greater than sprite size y
-	else if (textureBox.height > spriteSize.y)
+	else if (textureBox.height > m_SpriteSize.y)
 	{
 		// set animation iterator limit to height of sprite sheet / sprite size y
-		animation_it_limit = textureBox.height / spriteSize.y;
+		animation_it_limit = textureBox.height / m_SpriteSize.y;
 	}
 	// else throw error 
-	else
-		throw logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
+	//else
+		//throw logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
 
 	// set sprites texture rect size to sheet coordinate (left and top) by sprite size (x and y)
-	m_Sprite.setTextureRect(IntRect{ sheetCoordinate, spriteSize });
+	m_Sprite.setTextureRect(IntRect{ sheetCoordinate, m_SpriteSize });
 
 }
 
@@ -195,7 +195,7 @@ void Player::moveTextureRect(float elapsedTime) {
 	}
 
 	m_Sprite.setTextureRect(IntRect(sheetCoordinate + Vector2i(
-		spriteSize.x * ani_counter, 0), spriteSize));
+		m_SpriteSize.x * ani_counter, 0), m_SpriteSize));
 
 	// increment animation counter to point to next frame
 	double timePerFrame;
@@ -210,6 +210,10 @@ void Player::moveTextureRect(float elapsedTime) {
 
 FloatRect Player::getPosition() {
 	return m_Sprite.getLocalBounds();
+}
+
+FloatRect Player::getGlobal() {
+	return m_Sprite.getGlobalBounds();
 }
 
 Sprite Player::getSprite() {

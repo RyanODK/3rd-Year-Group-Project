@@ -24,6 +24,7 @@ private:
 	float m_Speed;
 
 	Vector2f m_Position;
+	Vector2f resetPosition;
 
 	TextureHolder th; // texture holder class 
 
@@ -39,5 +40,7 @@ protected:
 	float animationTimer = 0;
 	
 	Vector2f m_Resolution;
+
+	bool EnemyActive = false;
 };
 #endif
