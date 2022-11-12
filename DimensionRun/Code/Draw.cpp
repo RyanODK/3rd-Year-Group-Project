@@ -10,7 +10,8 @@ void Engine::draw() {
 		m_Window.draw(m_background.getSprite3());
 
 		m_Window.draw(m_player.getSprite());
-		m_Window.draw(m_obstacle.getSprite());
+		m_Window.draw(m_groundObstacle.getSprite());
+		m_Window.draw(m_floatingObstacle.getSprite());
 
 		if (backgroundType == 1) {
 			m_Window.draw(m_SmallEnemy1.getSprite());

@@ -60,10 +60,10 @@
     <ClCompile Include="Code\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GroundObstacle.cpp">
+    <ClCompile Include="Code\FloatingObstacle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\FloatingObstacle.cpp">
+    <ClCompile Include="Code\GroundObstacle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,6 +99,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Obstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\FloatingObstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GroundObstacle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

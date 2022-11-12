@@ -2,7 +2,8 @@
 
 void Engine::update(float dtAsSeconds) {
 	m_player.spawn(m_resolution, gravity);
-	m_obstacle.spawn(m_resolution);
+	m_groundObstacle.spawn(m_resolution);
+	m_floatingObstacle.spawn(m_resolution);
 
 	m_mainMenuBackground.setBackgroundSpeed(40);
 	m_mainMenuBackground.ChangeBackground(
@@ -19,7 +20,8 @@ void Engine::update(float dtAsSeconds) {
 		m_player.update(dtAsSeconds, groundHeight);
 
 		//if active is true then spawn, if false dont, have random number to spawn 
-		m_obstacle.update(dtAsSeconds);
+		m_floatingObstacle.update(dtAsSeconds);
+		m_groundObstacle.update(dtAsSeconds);
 		checkCol(m_player);
 
 		m_background.Scroll(dtAsSeconds);

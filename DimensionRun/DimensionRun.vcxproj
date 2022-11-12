@@ -42,6 +42,8 @@
     <ClInclude Include="Code\Collision.h" />
     <ClInclude Include="Code\Enemy.h" />
     <ClInclude Include="Code\Engine.h" />
+    <ClInclude Include="Code\FloatingObstacle.h" />
+    <ClInclude Include="Code\GroundObstacle.h" />
     <ClInclude Include="Code\LargeEnemy.h" />
     <ClInclude Include="Code\MediumEnemy.h" />
     <ClInclude Include="Code\Obstacle.h" />

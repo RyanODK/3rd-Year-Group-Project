@@ -4,7 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
-#include "Obstacle.h"
+#include "GroundObstacle.h"
+#include "FloatingObstacle.h"
 #include "Player.h"
 #include "SmallEnemy.h"
 #include "MediumEnemy.h"
@@ -33,7 +34,8 @@ private:
 	//bool m_spawned = false;
 
 	Player m_player; // player class
-	Obstacle m_obstacle;
+	FloatingObstacle m_floatingObstacle;
+	GroundObstacle m_groundObstacle;
 	Background m_background; // background class
 	Background m_mainMenuBackground;
 	SoundManager m_SoundManager; // soundmanager class
