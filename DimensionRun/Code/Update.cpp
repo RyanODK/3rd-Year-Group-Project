@@ -78,6 +78,20 @@ void Engine::update(float dtAsSeconds) {
 		}
 
 		if (resetTime >= 15.0f) {
+			backgroundType = 4;
+			m_background.setBackgroundSpeed(20);
+			m_background.ChangeBackground(
+				"Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-moon.png",
+				"Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-mountains.png",
+				"Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-graveyard.png",
+				IntRect(0, 0, 408, 224),
+				IntRect(0, 0, 508, 192),
+				IntRect(0, 0, 608, 192));
+			m_background.Scroll(dtAsSeconds);
+			m_background.BackgroundScale(m_resolution);
+		}
+
+		/*if (resetTime >= 15.0f) {
 			m_background.setBackgroundSpeed(35);
 			m_background.ChangeBackground(
 				"Graphics/underwater-fantasy-files/PNG/layers/far.png",
@@ -88,9 +102,10 @@ void Engine::update(float dtAsSeconds) {
 				IntRect(0, 0, 608, 192));
 			m_background.Scroll(dtAsSeconds);
 			m_background.BackgroundScale(m_resolution);
-		}
+		}*/
 
 		if (resetTime >= 20.0f) {
+			backgroundType = 5;
 			m_background.setBackgroundSpeed(20);
 			m_background.ChangeBackground(
 				"Graphics/Tall Forest Files/Layers/back.png",
@@ -119,18 +134,34 @@ void Engine::update(float dtAsSeconds) {
 		else if (backgroundType == 2) {
 			m_SmallEnemy2.SetSprite(2);
 			m_SmallEnemy2.spawn(Vector2f(
-				(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 73), Vector2f(
-					(m_resolution.x / 100) * 0.1, (m_resolution.y / 100) * 0.2));
+				(m_resolution.x / 100) * 50, (m_resolution.y / 100) * 81), Vector2f(
+					(m_resolution.x / 100) * 0.18, (m_resolution.y / 100) * 0.37));
 			m_SmallEnemy2.update(dtAsSeconds, 80);
 			m_SmallEnemy2.updateAnimation(2);
 		}
 		else if (backgroundType == 3) {
 			m_SmallEnemy3.SetSprite(3);
 			m_SmallEnemy3.spawn(Vector2f(
-				(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 78), Vector2f(
+				(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 77), Vector2f(
 					(m_resolution.x / 100) * -0.22, (m_resolution.y / 100) * 0.37));
 			m_SmallEnemy3.update(dtAsSeconds, 50);
 			m_SmallEnemy3.updateAnimation(3);
+		}
+		else if (backgroundType == 4) {
+			m_SmallEnemy4.SetSprite(4);
+			m_SmallEnemy4.spawn(Vector2f(
+				(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 76), Vector2f(
+					(m_resolution.x / 100) * -0.15, (m_resolution.y / 100) * 0.25));
+			m_SmallEnemy4.update(dtAsSeconds, 50);
+			m_SmallEnemy4.updateAnimation(4);
+		}
+		else if (backgroundType == 5) {
+			m_SmallEnemy5.SetSprite(5);
+			m_SmallEnemy5.spawn(Vector2f(
+				(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 80), Vector2f(
+					(m_resolution.x / 100) * -0.18, (m_resolution.y / 100) * 0.28));
+			m_SmallEnemy5.update(dtAsSeconds, 50);
+			m_SmallEnemy5.updateAnimation(5);
 		}
 	}
 }

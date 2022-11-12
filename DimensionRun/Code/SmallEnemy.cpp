@@ -23,6 +23,14 @@ void SmallEnemy::SetSprite(int enemyType)
 		// old man
 		m_Sprite.setTextureRect(IntRect{ 0, 123, 23, 32 });
 	}
+	else if (enemyType == 4) {
+		// ghost
+		m_Sprite.setTextureRect(IntRect{ 0, 220, 34, 54 });
+	}
+	else if (enemyType == 5) {
+		// huntress
+		m_Sprite.setTextureRect(IntRect{ 0, 351, 50, 34 });
+	}
 }
 
 void SmallEnemy::updateAnimation(int enemyType)
@@ -57,6 +65,24 @@ void SmallEnemy::updateAnimation(int enemyType)
 		}
 		else {
 			setSpriteFromSheet(IntRect{ 0, 123, 92, 32 }, Vector2i(23, 32));
+			moveTextureRect(0.15);
+		}
+	}
+	else if (enemyType == 4) {
+		// ghost
+		if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 220, 136, 32 }, Vector2i(34, 54));
+			moveTextureRect(0.15);
+		}
+	}
+	else if (enemyType == 5) {
+		// huntress
+		if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 351, 400, 34 }, Vector2i(50, 34));
+			moveTextureRect(0.12);
+		}
+		else {
+			setSpriteFromSheet(IntRect{ 0, 274, 336, 34 }, Vector2i(48, 42));
 			moveTextureRect(0.15);
 		}
 	}

@@ -25,6 +25,14 @@ void Engine::draw() {
 			m_Window.draw(m_SmallEnemy3.getSprite());
 		}
 
+		if (backgroundType == 4) {
+			m_Window.draw(m_SmallEnemy4.getSprite());
+		}
+
+		if (backgroundType == 5) {
+			m_Window.draw(m_SmallEnemy5.getSprite());
+		}
+
 		m_Window.draw(distanceText);
 	}
 
