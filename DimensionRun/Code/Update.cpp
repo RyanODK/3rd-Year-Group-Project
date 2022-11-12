@@ -109,7 +109,7 @@ void Engine::update(float dtAsSeconds) {
 			m_SmallEnemy2.SetSprite(2);
 			m_SmallEnemy2.spawn(Vector2f(
 				(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 73), Vector2f(
-					(m_resolution.x / 100) * 0.1, (m_resolution.y / 100) * 0.2));
+					(m_resolution.x / 100) * 0.18, (m_resolution.y / 100) * 0.37));
 			m_SmallEnemy2.update(dtAsSeconds, 80);
 			m_SmallEnemy2.updateAnimation(2);
 		}

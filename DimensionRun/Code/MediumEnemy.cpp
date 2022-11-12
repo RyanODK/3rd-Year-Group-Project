@@ -9,37 +9,55 @@ MediumEnemy::MediumEnemy() {
 void MediumEnemy::SetSprite(int enemyType)
 {
 	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"Graphics/Enemy/Small Enemy/EnemySpriteSheet.png", false));
+		"Graphics/Enemy/Small Enemy/smallEnemySpritesheet.png", false));
 
 	if (enemyType == 1) {
-		// Demon
-		m_Sprite.setTextureRect(IntRect{ 0, 0, 288, 212 });
+		// Cyborg
+		m_Sprite.setTextureRect(IntRect{ 0, 0, 32, 32 });
 	}
 	else if (enemyType == 2) {
-		// Nightborne
-		m_Sprite.setTextureRect(IntRect{ 0, 848, 80, 80 });
+		// egg turret
+		m_Sprite.setTextureRect(IntRect{ 0, 100, 33, 59 });
 	}
 	else if (enemyType == 3) {
-		// Necromancer
-		m_Sprite.setTextureRect(IntRect{ 0, 1268, 159, 97 });
+		// old man
+		m_Sprite.setTextureRect(IntRect{ 0, 278, 23, 32 });
 	}
 }
 
 void MediumEnemy::updateAnimation(int enemyType)
 {
 	if (enemyType == 1) {
-		// Demon
-		setSpriteFromSheet(IntRect{ 0, 0, 1728, 212 }, Vector2i(288, 212));
-		moveTextureRect(0.18);
+		// Cyborg
+		if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 67, 192, 31 }, Vector2i(32, 32));
+			moveTextureRect(0.09);
+		}
+		else {
+			setSpriteFromSheet(IntRect{ 0, 0, 216, 32 }, Vector2i(36, 32));
+			moveTextureRect(0.17);
+		}
 	}
 	else if (enemyType == 2) {
-		// Nightborne
-		setSpriteFromSheet(IntRect{ 0, 848, 720, 80 }, Vector2i(80, 80));
-		moveTextureRect(0.09);
+		// Egg Turret
+		if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 154, 131, 59 }, Vector2i(33, 59));
+			moveTextureRect(0.2);
+		}
+		else {
+			setSpriteFromSheet(IntRect{ 0, 100, 66, 54 }, Vector2i(33, 54));
+			moveTextureRect(0.09);
+		}
 	}
 	else if (enemyType == 3) {
-		// Necromancer
-		setSpriteFromSheet(IntRect{ 0, 1268, 1272, 97 }, Vector2i(159, 97));
-		moveTextureRect(0.15);
+		// old man
+		if (EnemyActive) {
+			setSpriteFromSheet(IntRect{ 0, 277, 132, 32 }, Vector2i(22, 34));
+			moveTextureRect(0.09);
+		}
+		else {
+			setSpriteFromSheet(IntRect{ 0, 213, 92, 32 }, Vector2i(23, 32));
+			moveTextureRect(0.15);
+		}
 	}
 }
