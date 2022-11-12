@@ -24,6 +24,8 @@
     <ClCompile Include="Code\Draw.cpp" />
     <ClCompile Include="Code\Enemy.cpp" />
     <ClCompile Include="Code\Engine.cpp" />
+    <ClCompile Include="Code\FloatingObstacle.cpp" />
+    <ClCompile Include="Code\GroundObstacle.cpp" />
     <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\LargeEnemy.cpp" />
     <ClCompile Include="Code\Main.cpp" />
@@ -40,6 +42,8 @@
     <ClInclude Include="Code\Collision.h" />
     <ClInclude Include="Code\Enemy.h" />
     <ClInclude Include="Code\Engine.h" />
+    <ClInclude Include="Code\FloatingObstacle.h" />
+    <ClInclude Include="Code\GroundObstacle.h" />
     <ClInclude Include="Code\LargeEnemy.h" />
     <ClInclude Include="Code\MediumEnemy.h" />
     <ClInclude Include="Code\Obstacle.h" />
