@@ -55,7 +55,7 @@ private:
 	LargeEnemy m_LargeEnemy2;
 	LargeEnemy m_LargeEnemy3;
 
-	const float gravity = 900; // sets gravity 
+	const float gravity = 450; // sets gravity 
 	int groundHeight; // groundheight
 
 	RenderWindow m_Window; // render window to display game
