@@ -9,7 +9,7 @@ void Enemy::spawn(Vector2f startPosition, Vector2f scale) {
 	m_Sprite.setPosition(startPosition);
 }
 
-void Enemy::update(float elapsedTime) {
+void Enemy::update(float elapsedTime, float velocity) {
 	timeElapsed = elapsedTime;
 
 	if (!EnemyActive) {
@@ -18,14 +18,13 @@ void Enemy::update(float elapsedTime) {
 		EnemyActive = true;
 	}
 	else {
-		m_Position.x -= 90 * 2 * elapsedTime;
+		m_Position.x -= velocity * 2 * elapsedTime;
 
 		if (m_Position.x <= -300)
 		{
 			EnemyActive = false;
 		}
 	}
-	m_Position.x -= 120 * 2 * elapsedTime;
 	m_Sprite.setPosition(m_Position);
 }
 

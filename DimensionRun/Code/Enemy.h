@@ -11,7 +11,7 @@ public:
 	void spawn(Vector2f startPosition, Vector2f scale); // spawns enemy taking in desired position and scale
 	void moveTextureRect(double frameTime); // moves texture rect to execute animation 
 	void setSpriteFromSheet(IntRect textureBox, Vector2i size); // sets texture for sprite from enemy sprite sheet
-	void update(float elapsedTime); // takes in elapsedtime to use in class for now
+	void update(float elapsedTime, float velocity); // takes in elapsedtime to use in class for now
 
 	FloatRect getPosition(); // gets position of sprite
 	Sprite getSprite(); // returns sprite

@@ -4,22 +4,6 @@ void Engine::update(float dtAsSeconds) {
 	m_player.spawn(m_resolution, gravity);
 	m_obstacle.spawn(m_resolution);
 
-	m_SmallEnemy1.SetSprite(1);
-	m_SmallEnemy2.SetSprite(2);
-	m_SmallEnemy3.SetSprite(3);
-
-	m_SmallEnemy1.spawn(Vector2f(
-		(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 67), Vector2f(
-			(m_resolution.x / 100) * 0.10, (m_resolution.y / 100) * 0.17));
-
-	m_SmallEnemy2.spawn(Vector2f(
-		(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 73), Vector2f(
-			(m_resolution.x / 100) * -0.25, (m_resolution.y / 100) * 0.5));
-
-	m_SmallEnemy3.spawn(Vector2f(
-		(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 67), Vector2f(
-			(m_resolution.x / 100) * -0.22, (m_resolution.y / 100) * 0.37));
-
 	m_mainMenuBackground.setBackgroundSpeed(40);
 	m_mainMenuBackground.ChangeBackground(
 		"Graphics/warped city files/ENVIRONMENT/background/skyline-b.png",
@@ -33,22 +17,15 @@ void Engine::update(float dtAsSeconds) {
 
 	if (state == State::PLAYING) {
 		m_player.update(dtAsSeconds, groundHeight);
-		
-		m_SmallEnemy1.update(dtAsSeconds);
-		m_SmallEnemy2.update(dtAsSeconds);
-		m_SmallEnemy3.update(dtAsSeconds);
 
 		//if active is true then spawn, if false dont, have random number to spawn 
 		m_obstacle.update(dtAsSeconds);
 		checkCol(m_player);
 
-		m_SmallEnemy1.updateAnimation(1);
-		m_SmallEnemy2.updateAnimation(2);
-		m_SmallEnemy3.updateAnimation(3);
-
 		m_background.Scroll(dtAsSeconds);
 
 		if (resetTime < 5.0f) {
+			backgroundType = 1;
 			m_background.setBackgroundSpeed(40);
 			m_background.ChangeBackground(
 				"Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png",
@@ -62,6 +39,7 @@ void Engine::update(float dtAsSeconds) {
 		}
 
 		if (resetTime >= 5.0f) {
+			backgroundType = 2;
 			m_background.setBackgroundSpeed(35);
 			m_background.ChangeBackground(
 				"Graphics/cyberpunk city 2 files/cyberpunk city 2 files/Environmet/background/back.png",
@@ -75,6 +53,7 @@ void Engine::update(float dtAsSeconds) {
 		}
 
 		if (resetTime >= 10.0f) {
+			backgroundType = 3;
 			m_background.setBackgroundSpeed(20);
 			m_background.ChangeBackground(
 				"Graphics/Rocky Pass Files/Rocky Pass Files/PNG/back.png",
@@ -115,6 +94,32 @@ void Engine::update(float dtAsSeconds) {
 
 		if (resetTime >= 25.0f) {
 			resetTime = 0;
+		}
+
+
+		if (backgroundType == 1) {
+			m_SmallEnemy1.SetSprite(1);
+			m_SmallEnemy1.spawn(Vector2f(
+				(m_resolution.x / 100) * 65, (m_resolution.y / 100) * 77), Vector2f(
+					(m_resolution.x / 100) * -0.22, (m_resolution.y / 100) * 0.4));
+			m_SmallEnemy1.update(dtAsSeconds, 90);
+			m_SmallEnemy1.updateAnimation(1);
+		}
+		else if (backgroundType == 2) {
+			m_SmallEnemy1.SetSprite(2);
+			m_SmallEnemy1.spawn(Vector2f(
+				(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 75), Vector2f(
+					(m_resolution.x / 100) * 0.1, (m_resolution.y / 100) * 0.2));
+			m_SmallEnemy1.update(dtAsSeconds, 80);
+			//m_SmallEnemy1.updateAnimation(2);
+		}
+		else if (backgroundType == 3) {
+			m_SmallEnemy1.SetSprite(3);
+			m_SmallEnemy1.spawn(Vector2f(
+				(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 78), Vector2f(
+					(m_resolution.x / 100) * -0.22, (m_resolution.y / 100) * 0.37));
+			m_SmallEnemy1.update(dtAsSeconds, 50);
+			//m_SmallEnemy1.updateAnimation(3);
 		}
 	}
 }

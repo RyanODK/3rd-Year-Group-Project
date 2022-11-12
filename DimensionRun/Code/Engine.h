@@ -62,6 +62,7 @@ private:
 	Time m_GameTimeTotal; // gets total game time of current opened window
 
 	float resetTime = 0.0f; // checks which background to draw
+	int backgroundType; // checks which background is currently playing
 
 	// checks when player can jump, slide and laser
 	float jumpInterval = 0.0f; 

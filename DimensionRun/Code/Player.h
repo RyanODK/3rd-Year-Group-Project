@@ -17,8 +17,13 @@ public:
 	bool Laser(); // function to check for lasering
 	void moveTextureRect(float elapsedTime); // this will move the IntRect around the texture for player in order to create an animation
 	void setSpriteFromSheet(IntRect textureBox, Vector2i spriteSize); // this sets a IntRect around the needed frames from sprite sheet
+	void setCollisionZones(); // sets float rectangle for body parts
 
 	Sprite getSprite(); // returns sprite
+	FloatRect getHead(); // returns head rectangle
+	FloatRect getFeet(); // returns feet rectangle
+	FloatRect getLeft(); // returns left rectangle
+	FloatRect getRight(); // returns right rectangle
 	FloatRect getPosition(); // returns local bounds position of player sprite
 	FloatRect getGlobal(); // returns global bounds position of player sprite
 
@@ -35,6 +40,8 @@ protected:
 	int ani_counter{}; // holds animation counter
 	float animationTimer = 0; // animation timer to check for switching frames of animation
 	float m_TimePerFrame;
+
+	bool m_IsRunning; // returns true if running
 
 	// Jump variables
 	bool m_Jump; // returns true if player can jump
@@ -65,5 +72,11 @@ private:
 	TextureHolder th; // brings in TextureHolder class
 
 	Vector2f m_Resolution; // holds resolution of screen
+
+	// body parts
+	FloatRect m_Feet;
+	FloatRect m_Head;
+	FloatRect m_Right;
+	FloatRect m_Left;
 };
 #endif

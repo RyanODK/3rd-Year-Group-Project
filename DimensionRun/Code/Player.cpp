@@ -96,13 +96,16 @@ bool Player::Laser() {
 }
 
 void Player::update(float elapsedTime, int groundHeight) {
+	setCollisionZones();
 	// plays player run animation
-	m_TimePerFrame = 0.08;
-	setSpriteFromSheet(IntRect(0, 228, 166, 33), Vector2i(29, 38));
+	m_IsRunning = true;
+	m_TimePerFrame = 0.09;
+	setSpriteFromSheet(IntRect(0, 228, 174, 35), Vector2i(29, 35));
 	moveTextureRect(elapsedTime);
 
 	//if m_Jump is true
 	if (m_Jump) {
+		m_IsRunning = false;
 		m_TimeThisJump += elapsedTime; // time jump by adding elapsedTime
 
 		// if timer for jump is less than players set jump duration
@@ -122,6 +125,7 @@ void Player::update(float elapsedTime, int groundHeight) {
 
 	// if player is falling
 	if (m_isFalling) {
+		m_IsRunning = false;
 		// increment position y of player with gravity to make sprite fall down
 		m_Position.y += m_gravity * elapsedTime;
 		m_Sprite.setPosition(m_Position);
@@ -208,11 +212,202 @@ void Player::moveTextureRect(float elapsedTime) {
 	}
 }
 
+void Player::setCollisionZones() {
+	FloatRect r = getGlobal();
+
+	if (m_IsRunning) {
+		if (ani_counter == 0) {
+			// Feet
+			m_Feet.left = r.left + 4; // 4
+			m_Feet.top = r.top + r.height - 1; // 34
+			m_Feet.width = r.width - 10; // 19
+			m_Feet.height = 1; // 1
+
+			// Head
+			m_Head.left = r.left + 15; // 15
+			m_Head.top = r.top + 1; // 1
+			m_Head.width = r.width - 25; // 4
+			m_Head.height = 1;
+
+			// Right
+			m_Right.left = r.left + r.width - 6; // 23
+			m_Right.top = r.top + r.height * .37; // 13
+			m_Right.width = 1; // 1
+			m_Right.height = 27; // 27
+
+			// Left
+			m_Left.left = r.left + 4; // 4
+			m_Left.top = r.top + r.height * .72; // 25
+			m_Left.width = 1; // 1
+			m_Left.height = 2; // 2
+		}
+		if (ani_counter == 1) {
+			// Feet
+			m_Feet.left = r.left + 4; // 4
+			m_Feet.top = r.top + r.height - 1; // 34
+			m_Feet.width = r.width - 10; // 19
+			m_Feet.height = 1; // 1
+
+			// Head
+			m_Head.left = r.left + 15; // 15
+			m_Head.top = r.top + 1; // 1
+			m_Head.width = r.width - 25; // 4
+			m_Head.height = 1;
+
+			// Right
+			m_Right.left = r.left + r.width - 7; // 22
+			m_Right.top = r.top + r.height * .2; // 7
+			m_Right.width = 1; // 1
+			m_Right.height = 12; // 12
+
+			// Left
+			m_Left.left = r.left + 8; // 8
+			m_Left.top = r.top + r.height * .8; // 28
+			m_Left.width = 1; // 1
+			m_Left.height = 3; // 3
+		}
+		if (ani_counter == 2) {
+			// Feet
+			m_Feet.left = r.left + 4; // 4
+			m_Feet.top = r.top + r.height - 1; // 34
+			m_Feet.width = r.width - 10; // 19
+			m_Feet.height = 1; // 1
+
+			// Head
+			m_Head.left = r.left + 15; // 15
+			m_Head.top = r.top + 2; // 2
+			m_Head.width = r.width - 25; // 4
+			m_Head.height = 1;
+
+			// Right
+			m_Right.left = r.left + r.width - 3; // 26
+			m_Right.top = r.top + r.height * .58; // 20
+			m_Right.width = 1; // 1
+			m_Right.height = 2; // 2
+
+			// Left
+			m_Left.left = r.left + 6; // 6
+			m_Left.top = r.top + r.height * .46; // 16
+			m_Left.width = 1; // 1
+			m_Left.height = 18; // 18
+		}
+		if (ani_counter == 3) {
+			// Feet
+			m_Feet.left = r.left + 4; // 4
+			m_Feet.top = r.top + r.height - 1; // 34
+			m_Feet.width = r.width - 10; // 19
+			m_Feet.height = 1; // 1
+
+			// Head
+			m_Head.left = r.left + 15; // 15
+			m_Head.top = r.top + 1; // 1
+			m_Head.width = r.width - 25; // 4
+			m_Head.height = 1;
+
+			// Right
+			m_Right.left = r.left + r.width - 1; // 28
+			m_Right.top = r.top + r.height * .43; // 15
+			m_Right.width = 1; // 1
+			m_Right.height = 3; // 3
+
+			// Left
+			m_Left.left = r.left + 1; // 1
+			m_Left.top = r.top + r.height * .46; // 16
+			m_Left.width = 1; // 1
+			m_Left.height = 3; // 3
+		}
+		if (ani_counter == 4) {
+			// Feet
+			m_Feet.left = r.left + 4; // 4
+			m_Feet.top = r.top + r.height - 1; // 34
+			m_Feet.width = r.width - 10; // 19
+			m_Feet.height = 1; // 1
+
+			// Head
+			m_Head.left = r.left + 15; // 15
+			m_Head.top = r.top + 1; // 1
+			m_Head.width = r.width - 25; // 4
+			m_Head.height = 1;
+
+			// Right
+			m_Right.left = r.left + r.width - 7; // 22
+			m_Right.top = r.top + r.height * .2; // 7
+			m_Right.width = 1; // 1
+			m_Right.height = 17; // 17
+
+			// Left
+			m_Left.left = r.left + 7; // 7
+			m_Left.top = r.top + r.height * .57; // 20
+			m_Left.width = 1; // 1
+			m_Left.height = 3; // 3
+		}
+		if (ani_counter == 5) {
+			// Feet
+			m_Feet.left = r.left + 4; // 4
+			m_Feet.top = r.top + r.height - 1; // 34
+			m_Feet.width = r.width - 10; // 19
+			m_Feet.height = 1; // 1
+
+			// Head
+			m_Head.left = r.left + 15; // 15
+			m_Head.top = r.top + 2; // 2
+			m_Head.width = r.width - 25; // 4
+			m_Head.height = 1;
+
+			// Right
+			m_Right.left = r.left + r.width - 5; // 24
+			m_Right.top = r.top + r.height * .23; // 8
+			m_Right.width = 1; // 1
+			m_Right.height = 10; // 10
+
+			// Left
+			m_Left.left = r.left + 5; // 5
+			m_Left.top = r.top + r.height * .915; // 32
+			m_Left.width = 1; // 1
+			m_Left.height = 2; // 2
+		}
+	}
+}
+
+FloatRect Player::getHead()
+{
+	return m_Head;
+}
+
+FloatRect Player::getFeet()
+{
+	return m_Feet;
+}
+
+FloatRect Player::getLeft()
+{
+	return m_Left;
+}
+
+FloatRect Player::getRight()
+{
+	return m_Right;
+}
+
 FloatRect Player::getPosition() {
+	/*cout << "Local Bounds" << endl;
+	cout << "\n";
+	cout << "top: " << m_Sprite.getLocalBounds().top << endl;
+	cout << "left: " << m_Sprite.getLocalBounds().left << endl;
+	cout << "height: " << m_Sprite.getLocalBounds().height << endl;
+	cout << "width: " << m_Sprite.getLocalBounds().width << endl;
+	cout << "\n";*/
 	return m_Sprite.getLocalBounds();
 }
 
 FloatRect Player::getGlobal() {
+	/*cout << "Global Bounds" << endl;
+	cout << "\n";
+	cout << "top: " << m_Sprite.getGlobalBounds().top << endl;
+	cout << "left: " << m_Sprite.getGlobalBounds().left << endl;
+	cout << "height: " << m_Sprite.getGlobalBounds().height << endl;
+	cout << "width: " << m_Sprite.getGlobalBounds().width << endl;
+	cout << "\n";*/
 	return m_Sprite.getGlobalBounds();
 }
 
