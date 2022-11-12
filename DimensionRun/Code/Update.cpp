@@ -106,20 +106,20 @@ void Engine::update(float dtAsSeconds) {
 			m_SmallEnemy1.updateAnimation(1);
 		}
 		else if (backgroundType == 2) {
-			m_SmallEnemy1.SetSprite(2);
-			m_SmallEnemy1.spawn(Vector2f(
-				(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 75), Vector2f(
+			m_SmallEnemy2.SetSprite(2);
+			m_SmallEnemy2.spawn(Vector2f(
+				(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 73), Vector2f(
 					(m_resolution.x / 100) * 0.1, (m_resolution.y / 100) * 0.2));
-			m_SmallEnemy1.update(dtAsSeconds, 80);
-			//m_SmallEnemy1.updateAnimation(2);
+			m_SmallEnemy2.update(dtAsSeconds, 80);
+			m_SmallEnemy2.updateAnimation(2);
 		}
 		else if (backgroundType == 3) {
-			m_SmallEnemy1.SetSprite(3);
-			m_SmallEnemy1.spawn(Vector2f(
+			m_SmallEnemy3.SetSprite(3);
+			m_SmallEnemy3.spawn(Vector2f(
 				(m_resolution.x / 100) * 55, (m_resolution.y / 100) * 78), Vector2f(
 					(m_resolution.x / 100) * -0.22, (m_resolution.y / 100) * 0.37));
-			m_SmallEnemy1.update(dtAsSeconds, 50);
-			//m_SmallEnemy1.updateAnimation(3);
+			m_SmallEnemy3.update(dtAsSeconds, 50);
+			m_SmallEnemy3.updateAnimation(3);
 		}
 	}
 }

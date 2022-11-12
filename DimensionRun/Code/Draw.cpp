@@ -11,7 +11,18 @@ void Engine::draw() {
 
 		m_Window.draw(m_player.getSprite());
 		m_Window.draw(m_obstacle.getSprite());
-		m_Window.draw(m_SmallEnemy1.getSprite());
+
+		if (backgroundType == 1) {
+			m_Window.draw(m_SmallEnemy1.getSprite());
+		}
+
+		if (backgroundType == 2) {
+			m_Window.draw(m_SmallEnemy2.getSprite());
+		}
+
+		if (backgroundType == 3) {
+			m_Window.draw(m_SmallEnemy3.getSprite());
+		}
 
 		m_Window.draw(distanceText);
 	}
