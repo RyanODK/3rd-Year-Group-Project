@@ -1,6 +1,6 @@
 #include "Obstacle.h"
 #include <iostream>
-
+//this is a test
 Obstacle::Obstacle()
 {
 	m_Sprite = Sprite(TextureHolder::GetTexture(
