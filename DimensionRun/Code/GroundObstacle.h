@@ -10,7 +10,8 @@ class GroundObstacle {
 public:
 	GroundObstacle(); // default constructor to set initial values
 
-	void spawn(Vector2f resolution); // spawns player in game and saves resolution and elapsedTime for future use
+	//void spawn(Vector2f resolution); // spawns player in game and saves resolution and elapsedTime for future use
+	void spawn(Vector2f startPosition, Vector2f scale);
 	void update(float elapsedTime); // updates player animation and movement
 	void moveTextureRect(float elapsedTime); // this will move the IntRect around the texture for player in order to create an animation
 	void setSpriteFromSheet(IntRect textureBox); // this sets a IntRect around the needed frames from sprite sheet
@@ -31,6 +32,7 @@ private:
 	bool obstacleActive = false;
 
 	Vector2f m_Position; // holds position of sprite
+	Vector2f resetPosition;
 
 	TextureHolder th; // brings in TextureHolder class
 

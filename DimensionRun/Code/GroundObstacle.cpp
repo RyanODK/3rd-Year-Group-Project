@@ -8,29 +8,36 @@ GroundObstacle::GroundObstacle()
 	m_Sprite.setTextureRect(IntRect{ 0, 0, 48, 48 });
 	//m_Sprite.setPosition(2000, 600);
 }
+void GroundObstacle::spawn(Vector2f startPosition, Vector2f scale) {
+	resetPosition.x = startPosition.x;
+	resetPosition.y = startPosition.y;
 
-void GroundObstacle::spawn(Vector2f resolution) {
-	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
-		//m_Sprite.setPosition(250, 1080);
-		m_Sprite.setScale(5, 5);
-	}
-	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
-		//m_Sprite.setPosition(200, 850);
-		m_Sprite.setScale(2, 2);
-	}
-	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
-		//m_Sprite.setPosition(200, 800);
-		m_Sprite.setScale(4, 4);
-	}
+	m_Sprite.setScale(scale);
 
-	// store resolution for future use
-	m_Resolution.x = resolution.x;
-	m_Resolution.y = resolution.y;
-
-	m_Sprite.setPosition(2500, 900);
-	//m_Position.x = 900;
-	//m_Position.y = 600;
+	m_Sprite.setPosition(startPosition);
 }
+//void GroundObstacle::spawn(Vector2f startPosition, Vector2f scale) {
+//	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
+//		//m_Sprite.setPosition(250, 1080);
+//		m_Sprite.setScale(4, 4);
+//	}
+//	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
+//		//m_Sprite.setPosition(200, 850);
+//		m_Sprite.setScale(2, 2);
+//	}
+//	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
+//		//m_Sprite.setPosition(200, 800);
+//		m_Sprite.setScale(4, 4);
+//	}
+//
+//	// store resolution for future use
+//	m_Resolution.x = resolution.x;
+//	m_Resolution.y = resolution.y;
+//
+//	m_Sprite.setPosition(2500, 900);
+//	//m_Position.x = 900;
+//	//m_Position.y = 600;
+//}
 
 
 void GroundObstacle::update(float elapsedTime) {

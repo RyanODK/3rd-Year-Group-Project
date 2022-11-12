@@ -2,8 +2,8 @@
 
 void Engine::update(float dtAsSeconds) {
 	m_player.spawn(m_resolution, gravity);
-	m_groundObstacle.spawn(m_resolution);
-	m_floatingObstacle.spawn(m_resolution);
+	//m_groundObstacle.spawn(m_resolution);
+	//m_floatingObstacle.spawn(m_resolution);
 
 	m_mainMenuBackground.setBackgroundSpeed(40);
 	m_mainMenuBackground.ChangeBackground(
@@ -20,6 +20,15 @@ void Engine::update(float dtAsSeconds) {
 		m_player.update(dtAsSeconds, groundHeight);
 
 		//if active is true then spawn, if false dont, have random number to spawn 
+
+		m_groundObstacle.spawn(Vector2f(
+			(m_resolution.x / 100) * 80, (m_resolution.y / 100) * 80), Vector2f(
+				(m_resolution.x / 100) * 0.06, (m_resolution.y / 100) * 0.1));
+		m_floatingObstacle.spawn(Vector2f(
+			(m_resolution.x / 100) * 90, (m_resolution.y / 100) * 67), Vector2f(
+				(m_resolution.x / 100) * 0.06, (m_resolution.y / 100) * 0.1));
+
+
 		m_floatingObstacle.update(dtAsSeconds);
 		m_groundObstacle.update(dtAsSeconds);
 		checkCol(m_player);
@@ -110,8 +119,8 @@ void Engine::update(float dtAsSeconds) {
 		else if (backgroundType == 2) {
 			m_SmallEnemy2.SetSprite(2);
 			m_SmallEnemy2.spawn(Vector2f(
-				(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 83), Vector2f(
-					(m_resolution.x / 100) * 0.18, (m_resolution.y / 100) * 0.37));
+				(m_resolution.x / 100) * 70, (m_resolution.y / 100) * 73), Vector2f(
+					(m_resolution.x / 100) * 0.1, (m_resolution.y / 100) * 0.2));
 			m_SmallEnemy2.update(dtAsSeconds, 80);
 			m_SmallEnemy2.updateAnimation(2);
 		}
