@@ -3,7 +3,7 @@
 Player::Player() {
 	m_Health = INITIAL_HEALTH;
 	m_Speed = INITIAL_SPEED;
-	m_JumpDuration = 0.25;
+	m_JumpDuration = 0.3;
 	m_SlideDuration = 0.5;
 
 	m_Sprite = Sprite(TextureHolder::GetTexture(

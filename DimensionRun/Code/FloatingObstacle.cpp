@@ -13,7 +13,7 @@ void FloatingObstacle::spawn(Vector2f resolution) {
 	// depending on resolution set position and scale of player
 	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
 		//m_Sprite.setPosition(250, 1080);
-		m_Sprite.setScale(5, 5);
+		m_Sprite.setScale(4, 4);
 	}
 	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
 		//m_Sprite.setPosition(200, 850);

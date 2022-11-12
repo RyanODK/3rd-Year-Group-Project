@@ -52,7 +52,7 @@ void SmallEnemy::updateAnimation(int enemyType)
 	else if (enemyType == 3) {
 		// old man
 		if (EnemyActive) {
-			setSpriteFromSheet(IntRect{ 0, 187, 132, 32 }, Vector2i(22, 34));
+			setSpriteFromSheet(IntRect{ 0, 186, 132, 32 }, Vector2i(22, 34));
 			moveTextureRect(0.09);
 		}
 		else {
