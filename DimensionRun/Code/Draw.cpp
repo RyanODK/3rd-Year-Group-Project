@@ -36,6 +36,8 @@ void Engine::draw() {
 		}
 
 		m_Window.draw(distanceText);
+		m_Window.draw(bestDistanceText);
+		m_Window.draw(coinCountText);
 	}
 
 	if (state == State::MAIN_MENU)

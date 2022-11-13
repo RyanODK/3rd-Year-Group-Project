@@ -66,19 +66,55 @@ void Engine::run() {
 
 		float dtAsSeconds = dt.asSeconds();
 
-		distanceRan += dtAsSeconds;
+		if (state == State::PLAYING) {
+			distanceRan += dtAsSeconds;
+
+			/*if (distanceRan > bestDistance) {
+				bestDistance = distanceRan;
+			}*/
+		}
+
 		resetTime += dtAsSeconds;
 
+		// current distance text
 		distanceText.setFont(font);
-		distanceText.setCharacterSize(80);
+		distanceText.setCharacterSize(70);
 		distanceText.setFillColor(Color::White);
-		distanceText.setPosition(100, 250);
+		distanceText.setPosition(0, 0);
 		stringstream distanceStream;
-		distanceStream <<
+		distanceStream.precision(0); // no decimal places
+		// fixed will keep it as numbers rather than scientific notation
+		distanceStream << fixed <<
 			distanceRan <<
 			"m";
 
 		distanceText.setString(distanceStream.str());
+
+		// best distance text
+		bestDistanceText.setFont(font);
+		bestDistanceText.setCharacterSize(35);
+		bestDistanceText.setFillColor(Color::White);
+		bestDistanceText.setPosition(0, 70);
+		stringstream bestDistanceStream;
+		bestDistanceStream.precision(0);
+		bestDistanceStream << fixed <<
+			"Best: " <<
+			bestDistance <<
+			"m";
+
+		bestDistanceText.setString(bestDistanceStream.str());
+
+		// coin count text
+		coinCountText.setFont(font);
+		coinCountText.setCharacterSize(50);
+		coinCountText.setFillColor(Color::Yellow);
+		coinCountText.setPosition(0, 105);
+		stringstream coinStream;
+		coinStream.precision(0);
+		coinStream << fixed <<
+			coinCount;
+
+		coinCountText.setString(coinStream.str());
 
 		input();
 		update(dtAsSeconds);

@@ -78,7 +78,11 @@ private:
 	bool canLaser = true;
 
 	float distanceRan = 0.0f; // track distance
-	Text distanceText;
+	float bestDistance = 0.0f; // keeps best time
+	float coinCount = 0.0f;
+	Text distanceText; 
+	Text bestDistanceText;
+	Text coinCountText;
 
 	void input(); // input function to handle inputs from user
 	void update(float dtAsSeconds); // update function to update game 

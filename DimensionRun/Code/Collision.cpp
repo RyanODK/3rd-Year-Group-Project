@@ -7,6 +7,7 @@ void Engine::checkCol(Player& player)
 		cout << "colliding on right side" << endl;
 		m_groundObstacle.update(distanceRan);
 	}
+
 	if (player.getRight().intersects(m_floatingObstacle.getGlobal())) {
 		cout << "colliding on right side" << endl;
 		m_floatingObstacle.update(distanceRan);

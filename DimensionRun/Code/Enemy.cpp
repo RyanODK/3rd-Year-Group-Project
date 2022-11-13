@@ -67,6 +67,10 @@ void Enemy::moveTextureRect(double frameTime) {
 	}
 }
 
+void Enemy::setAttack(bool attack) {
+	EnemyAttack = attack;
+}
+
 FloatRect Enemy::getPosition() {
 	return m_Sprite.getLocalBounds();
 }

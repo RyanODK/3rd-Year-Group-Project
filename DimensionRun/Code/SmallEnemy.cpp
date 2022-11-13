@@ -47,7 +47,8 @@ void SmallEnemy::updateAnimation(int enemyType)
 			setSpriteFromSheet(IntRect{ 0, 67, 192, 31 }, Vector2i(32, 32));
 			moveTextureRect(0.09);
 		}
-		else {
+
+		if (EnemyAttack) {
 			setSpriteFromSheet(IntRect{ 0, 0, 216, 32 }, Vector2i(36, 32));
 			moveTextureRect(0.17);
 		}

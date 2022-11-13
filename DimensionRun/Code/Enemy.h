@@ -12,6 +12,7 @@ public:
 	void moveTextureRect(double frameTime); // moves texture rect to execute animation 
 	void setSpriteFromSheet(IntRect textureBox, Vector2i size); // sets texture for sprite from enemy sprite sheet
 	void update(float elapsedTime, float velocity); // takes in elapsedtime to use in class for now
+	void setAttack(bool attack);
 
 	FloatRect getPosition(); // gets position of sprite
 	Sprite getSprite(); // returns sprite
@@ -42,5 +43,6 @@ protected:
 	Vector2f m_Resolution;
 
 	bool EnemyActive = false;
+	bool EnemyAttack = false;
 };
 #endif
