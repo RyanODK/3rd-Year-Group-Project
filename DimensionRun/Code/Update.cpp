@@ -122,6 +122,12 @@ void Engine::update(float dtAsSeconds) {
 			resetTime = 0;
 		}
 
+		m_Portal.SetSprite(6);
+		m_Portal.spawn(Vector2f(
+			(m_resolution.x / 100) - 770, (m_resolution.y / 100) + 120), Vector2f(
+				(m_resolution.x / 100) * 0.1, (m_resolution.y / 100) * 0.22));
+		m_Portal.update(dtAsSeconds, 0);
+		m_Portal.updateAnimation(6);
 
 		if (backgroundType == 1) {
 			m_SmallEnemy1.SetSprite(1);

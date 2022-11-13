@@ -5,13 +5,15 @@ SoundManager::SoundManager() {
 	mainMenuMusic.openFromFile(
 		"Sound/cyberpunk music/MainMenu/cyberpunk-street.wav");
 	mainMenuMusic.setLoop(true);
-	mainMenuMusic.setVolume(15);
+	mainMenuMusic.setVolume(20);
 
 	// music for in game
+	/*inGameMusic.openFromFile(
+		"Sound/cyberpunk music/InGameSounds/DavidKBD - Pink Bloom Pack - 01 - Pink Bloom.ogg");*/
 	inGameMusic.openFromFile(
-		"Sound/cyberpunk music/InGameSounds/DavidKBD - Pink Bloom Pack - 01 - Pink Bloom.ogg");
+		"Sound/cyberpunk music/InGameSounds/cyber city 2-b.ogg");
 	inGameMusic.setLoop(true);
-	inGameMusic.setVolume(15);
+	inGameMusic.setVolume(20);
 }
 
 void SoundManager::playMainMenuMusic() {

@@ -46,6 +46,7 @@ private:
 	SmallEnemy m_SmallEnemy3;
 	SmallEnemy m_SmallEnemy4;
 	SmallEnemy m_SmallEnemy5;
+	SmallEnemy m_Portal;
 
 	/* Medium Enemies */
 	MediumEnemy m_MediumEnemy1;

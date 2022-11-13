@@ -13,6 +13,8 @@ void Engine::draw() {
 		m_Window.draw(m_groundObstacle.getSprite());
 		m_Window.draw(m_floatingObstacle.getSprite());
 
+		m_Window.draw(m_Portal.getSprite());
+
 		if (backgroundType == 1) {
 			m_Window.draw(m_SmallEnemy1.getSprite());
 		}

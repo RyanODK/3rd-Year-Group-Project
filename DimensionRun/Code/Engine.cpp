@@ -48,6 +48,7 @@ Engine::Engine() {
 	pauseMenuText.setString(pauseMenuStream.str());
 
 	m_resolution = resolution;
+	m_SoundManager.playInGameMusic();
 }
 
 void Engine::run() {
@@ -58,7 +59,7 @@ void Engine::run() {
 		/*if (state == State::PAUSED || state == State::MAIN_MENU) {
 			clock.restart();
 		}*/
-
+				
 		Time dt = clock.restart();
 
 		m_GameTimeTotal += dt;

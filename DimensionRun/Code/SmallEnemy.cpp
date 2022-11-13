@@ -31,6 +31,12 @@ void SmallEnemy::SetSprite(int enemyType)
 		// huntress
 		m_Sprite.setTextureRect(IntRect{ 0, 351, 50, 34 });
 	}
+	else if(enemyType == 6) {
+		// portal
+		m_Sprite = Sprite(TextureHolder::GetTexture(
+			"Graphics/purplePortalEffect.png", false));
+		m_Sprite.setTextureRect(IntRect{ 0, 0, 600, 475 });
+	}
 }
 
 void SmallEnemy::updateAnimation(int enemyType)
@@ -85,5 +91,13 @@ void SmallEnemy::updateAnimation(int enemyType)
 			setSpriteFromSheet(IntRect{ 0, 274, 336, 34 }, Vector2i(48, 42));
 			moveTextureRect(0.15);
 		}
+	}
+	else if (enemyType == 6) {
+		// portal
+		/*m_Sprite = Sprite(TextureHolder::GetTexture(
+			"Graphics/portalEffect.png", false));*/
+		setSpriteFromSheet(IntRect{ 0, 0, 9600, 475 }, Vector2i(480, 475));
+		moveTextureRect(0.05);
+		
 	}
 }

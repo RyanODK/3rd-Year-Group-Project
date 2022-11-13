@@ -16,6 +16,7 @@ public:
 private:
 	Music mainMenuMusic; // stores main menu music
 	Music inGameMusic; // stores in game music
+	Music inGameMusic1;
 
 };
 #endif
