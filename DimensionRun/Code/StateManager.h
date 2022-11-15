@@ -1,25 +1,23 @@
-#ifndef STATE_MANAGER_H
-#define STATE_MANAGER_H
-#include <SFML/Graphics.hpp>
-//#include "BaseState.h"
+#pragma once
+//#include <SFML/Graphics.hpp>
 #include "State_Intro.h"
+#include "State_MainMenu.h"
+#include "State_Game.h"
+#include "State_GameOver.h"
+#include "State_Paused.h"
+#include "State_Credits.h"
+#include "SharedContext.h"
 
 enum class StateType {
 	Intro = 1, MainMenu, Game, Paused, GameOver, Credits
 };
 
-struct SharedContext {
-	SharedContext() :m_Wind(nullptr), m_EventManager(nullptr) {}
-	sf::Window* m_Wind;
-	EventManager* m_EventManager;
-};
+using StateContainer = std::vector<std::pair<StateType, BaseState*>>;
 
-using StateContainer = vector<pair<StateType, BaseState*>>;
+using TypeContainer = std::vector<StateType>;
 
-using TypeContainer = vector<StateType>;
-
-using StateFactory = unordered_map<StateType,
-	function<BaseState*(void)>>;
+using StateFactory = std::unordered_map<StateType,
+	std::function<BaseState*(void)>>;
 
 class StateManager {
 public:
@@ -52,4 +50,3 @@ private:
 	TypeContainer m_ToRemove;
 	StateFactory m_StateFactory;
 };
-#endif

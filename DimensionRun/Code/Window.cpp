@@ -4,7 +4,7 @@ Window::Window() {
 	Setup("Window", sf::Vector2u(640, 480));
 }
 
-Window::Window(const string& l_Title,
+Window::Window(const std::string& l_Title,
 	const sf::Vector2u& l_Size) {
 	Setup(l_Title, l_Size);
 }
@@ -13,16 +13,22 @@ Window::~Window() {
 	Destroy();
 }
 
-void Window::Setup(const string& l_Title,
+void Window::Destroy() {
+	m_Window.close();
+}
+
+void Window::Setup(const std::string& l_Title,
 	const sf::Vector2u& l_Size) {
 	m_WindowTitle = l_Title;
 	m_WindowSize = l_Size;
 	m_IsFullScreen = false;
-	Create();
+	m_IsDone = false;
 
 	m_IsFocused = true; // default value for focused flag
 	m_EventManager.AddCallback(StateType(0), "Fullscreen_toggle",
 		&Window::ToggleFullScreen, this);
+
+	Create();
 }
 
 void Window::Create() {
@@ -31,10 +37,6 @@ void Window::Create() {
 	m_Window.create({
 		m_WindowSize.x, m_WindowSize.y, 32 },
 		m_WindowTitle, style);
-}
-
-void Window::Destroy() {
-	m_Window.close();
 }
 
 void Window::Update() {
@@ -73,6 +75,10 @@ bool Window::IsDone() {
 
 bool Window::IsFullScreen() {
 	return m_IsFullScreen;
+}
+
+bool Window::IsFocused() { 
+	return m_IsFocused; 
 }
 
 sf::Vector2u Window::GetWindowSize() {

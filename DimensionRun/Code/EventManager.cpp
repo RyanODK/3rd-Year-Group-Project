@@ -21,7 +21,7 @@ bool EventManager::AddBinding(Binding* l_Binding) {
 		l_Binding).second;
 }
 
-bool EventManager::RemoveBinding(string l_Name) {
+bool EventManager::RemoveBinding(std::string l_Name) {
 	auto itr = m_Bindings.find(l_Name);
 	if (itr == m_Bindings.end()) {
 		return false;
@@ -160,26 +160,26 @@ void EventManager::Update() {
 }
 
 void EventManager::LoadBindings() {
-	string delimiter = ":";
+	std::string delimiter = ":";
 
-	ifstream bindings;
+	std::ifstream bindings;
 	bindings.open("keys.cfg");
 	if (!bindings.is_open()) {
-		cout << "! Failed loading keys.cfg." << endl;
+		std::cout << "! Failed loading keys.cfg." << std::endl;
 		return;
 	}
-	string line;
+	std::string line;
 	while (getline(bindings, line)) {
-		stringstream keystream(line);
-		string callbackName;
+		std::stringstream keystream(line);
+		std::string callbackName;
 		keystream >> callbackName;
 		Binding* bind = new Binding(callbackName);
 		while (!keystream.eof()) {
-			string keyval;
+			std::string keyval;
 			keystream >> keyval;
 			int start = 0;
 			int end = keyval.find(delimiter);
-			if (end == string::npos) {
+			if (end == std::string::npos) {
 				delete bind;
 				bind = nullptr;
 				break;

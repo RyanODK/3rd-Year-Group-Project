@@ -1,13 +1,13 @@
 #include "StateManager.h"
 
-//StateManager::StateManager(SharedContext* l_Shared) : m_Shared(l_Shared) {
-//	RegisterState<State_Intro>(StateType::Intro);
-//	RegisterState<State_MainMenu>(StateType::MainMenu);
-//	RegisterState<State_Game>(StateType::Game);
-//	RegisterState<State_Paused>(StateType::Paused);
-//    RegisterState<State_GameOver>(StateType::GameOver);
-//    RegisterState<State_Credits>(StateType::Credits);
-//}
+StateManager::StateManager(SharedContext* l_Shared) : m_Shared(l_Shared) {
+    RegisterState<State_Intro>(StateType::Intro);
+	RegisterState<State_MainMenu>(StateType::MainMenu);
+	/*RegisterState<State_Game>(StateType::Game);
+	RegisterState<State_Paused>(StateType::Paused);
+    RegisterState<State_GameOver>(StateType::GameOver);
+    RegisterState<State_Credits>(StateType::Credits);*/
+}
 
 StateManager::~StateManager() {
 	for (auto& itr : m_States) {

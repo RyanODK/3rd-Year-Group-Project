@@ -1,14 +1,14 @@
+#pragma once
 #include <SFML/Graphics.hpp>
+//#include <SFML/Window.hpp>
 #include <unordered_map>
 #include <functional>
 #include <iostream>
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#ifndef EVENT_MANAGER_H
-#define EVENT_MANAGER_H
 
-using namespace std;
+//using namespace std;
 
 enum class EventType {
 	KeyDown = sf::Event::KeyPressed,
@@ -38,15 +38,15 @@ struct EventInfo {
 	};
 };
 
-using Events = vector<pair<EventType, EventInfo>>;
+using Events = std::vector<std::pair<EventType, EventInfo>>;
 
 struct EventDetails {
-	EventDetails(const string& l_BindName) :
+	EventDetails(const std::string& l_BindName) :
 		m_Name(l_BindName) {
 
 		Clear();
 	}
-	string m_Name;
+	std::string m_Name;
 
 	sf::Vector2i m_Size;
 	sf::Uint32 m_TextEntered;
@@ -64,7 +64,7 @@ struct EventDetails {
 };
 
 struct Binding {
-	Binding(const string& l_Name) :
+	Binding(const std::string& l_Name) :
 		m_Name(l_Name), m_Details(l_Name), c(0) {
 
 	}
@@ -76,18 +76,18 @@ struct Binding {
 	}
 
 	Events m_Events;
-	string m_Name;
+	std::string m_Name;
 	int c; // count of events that are "happening"
 
 	EventDetails m_Details;
 };
 
-using Bindings = unordered_map<string, Binding*>;
+using Bindings = std::unordered_map<std::string, Binding*>;
 
-using CallBackContainer = unordered_map<string,
-	function<void(EventDetails*)>>;
+using CallBackContainer = std::unordered_map<std::string,
+	std::function<void(EventDetails*)>>;
 enum class StateType;
-using Callbacks = unordered_map<StateType, CallBackContainer>;
+using Callbacks = std::unordered_map<StateType, CallBackContainer>;
 
 class EventManager {
 public:
@@ -95,17 +95,17 @@ public:
 	~EventManager();
 
 	bool AddBinding(Binding* l_Binding);
-	bool RemoveBinding(string l_Name);
+	bool RemoveBinding(std::string l_Name);
 
 	void SetCurrentState(StateType l_State);
 	void SetFocus(const bool& l_Focus);
 
 	template<class T>
 	bool AddCallback(StateType l_state, const std::string& l_name, 
-		void(T::* l_func)(EventDetails*), T* l_instance)
+		void(T::*l_func)(EventDetails*), T* l_instance)
 	{
 		auto itr = m_CallBacks.emplace(l_state, CallBackContainer()).first;
-		auto temp = bind(l_func, l_instance, placeholders::_1);
+		auto temp = std::bind(l_func, l_instance, std::placeholders::_1);
 		return itr->second.emplace(l_name, temp).second;
 	}
 
@@ -141,4 +141,3 @@ private:
 	StateType m_CurrentState;
 	bool m_HasFocus;
 };
-#endif

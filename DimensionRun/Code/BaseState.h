@@ -1,6 +1,5 @@
-#ifndef BASE_STATE_H
-#define BASE_STATE_H
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
+#pragma once
 #include "EventManager.h"
 
 //using namespace sf;
@@ -57,4 +56,3 @@ protected:
 	bool m_Transcendent;
 
 };
-#endif

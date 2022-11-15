@@ -36,6 +36,8 @@
     <ClCompile Include="Code\SmallEnemy.cpp" />
     <ClCompile Include="Code\SoundManager.cpp" />
     <ClCompile Include="Code\StateManager.cpp" />
+    <ClCompile Include="Code\State_Intro.cpp" />
+    <ClCompile Include="Code\State_MainMenu.cpp" />
     <ClCompile Include="Code\TextureHolder.cpp" />
     <ClCompile Include="Code\Update.cpp" />
     <ClCompile Include="Code\Window.cpp" />
@@ -53,12 +55,21 @@
     <ClInclude Include="Code\MediumEnemy.h" />
     <ClInclude Include="Code\Obstacle.h" />
     <ClInclude Include="Code\Player.h" />
+    <ClInclude Include="Code\SharedContext.h" />
     <ClInclude Include="Code\SmallEnemy.h" />
     <ClInclude Include="Code\SoundManager.h" />
     <ClInclude Include="Code\StateManager.h" />
+    <ClInclude Include="Code\State_Credits.h" />
+    <ClInclude Include="Code\State_Game.h" />
+    <ClInclude Include="Code\State_GameOver.h" />
     <ClInclude Include="Code\State_Intro.h" />
+    <ClInclude Include="Code\State_MainMenu.h" />
+    <ClInclude Include="Code\State_Paused.h" />
     <ClInclude Include="Code\TextureHolder.h" />
     <ClInclude Include="Code\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Code\keys.cfg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

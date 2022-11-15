@@ -1,15 +1,16 @@
+//#include <SFML/Window.hpp>
+//#include <SFML/System.hpp>
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "EventManager.h"
-#ifndef WINDOW_H
-#define WINDOW_H
 
-using namespace std;
+//using namespace std;
 //using namespace sf;
 
 class Window {
 public:
 	Window();
-	Window(const string& l_Title, const
+	Window(const std::string& l_Title, const
 		sf::Vector2u& l_Size);
 	~Window();
 
@@ -27,22 +28,29 @@ public:
 	void Draw(sf::Drawable& l_Drawable);
 
 	bool IsFocused();
-	EventManager* GetEventManager();
+
+	sf::RenderWindow* GetRenderWindow() {
+		return &m_Window;
+	}
+
+	EventManager* GetEventManager() {
+		return &m_EventManager;
+	};
+
 	void Close(EventDetails* l_Details = nullptr);
 
 private:
-	void Setup(const string& l_Title,
+	void Setup(const std::string& l_Title,
 		const sf::Vector2u& l_Size);
 	void Destroy();
 	void Create();
 
 	sf::RenderWindow m_Window;
 	sf::Vector2u m_WindowSize;
-	string m_WindowTitle;
+	std::string m_WindowTitle;
 	bool m_IsDone;
 	bool m_IsFullScreen;
 	EventManager m_EventManager;
 	bool m_IsFocused;
 };
-#endif
 
