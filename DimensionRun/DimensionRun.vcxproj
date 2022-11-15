@@ -24,6 +24,7 @@
     <ClCompile Include="Code\Draw.cpp" />
     <ClCompile Include="Code\Enemy.cpp" />
     <ClCompile Include="Code\Engine.cpp" />
+    <ClCompile Include="Code\EventManager.cpp" />
     <ClCompile Include="Code\FloatingObstacle.cpp" />
     <ClCompile Include="Code\GroundObstacle.cpp" />
     <ClCompile Include="Code\Input.cpp" />
@@ -34,14 +35,18 @@
     <ClCompile Include="Code\Player.cpp" />
     <ClCompile Include="Code\SmallEnemy.cpp" />
     <ClCompile Include="Code\SoundManager.cpp" />
+    <ClCompile Include="Code\StateManager.cpp" />
     <ClCompile Include="Code\TextureHolder.cpp" />
     <ClCompile Include="Code\Update.cpp" />
+    <ClCompile Include="Code\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Background.h" />
+    <ClInclude Include="Code\BaseState.h" />
     <ClInclude Include="Code\Collision.h" />
     <ClInclude Include="Code\Enemy.h" />
     <ClInclude Include="Code\Engine.h" />
+    <ClInclude Include="Code\EventManager.h" />
     <ClInclude Include="Code\FloatingObstacle.h" />
     <ClInclude Include="Code\GroundObstacle.h" />
     <ClInclude Include="Code\LargeEnemy.h" />
@@ -50,7 +55,10 @@
     <ClInclude Include="Code\Player.h" />
     <ClInclude Include="Code\SmallEnemy.h" />
     <ClInclude Include="Code\SoundManager.h" />
+    <ClInclude Include="Code\StateManager.h" />
+    <ClInclude Include="Code\State_Intro.h" />
     <ClInclude Include="Code\TextureHolder.h" />
+    <ClInclude Include="Code\Window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
