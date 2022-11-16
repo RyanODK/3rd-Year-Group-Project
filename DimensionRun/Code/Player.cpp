@@ -13,16 +13,19 @@ Player::Player() {
 }
 
 void Player::spawn(sf::Vector2f resolution, float gravity) {
-	// depending on resolution set position and scale of player
-	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
-		m_Sprite.setScale(6, 6);
-	}
-	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
-		m_Sprite.setScale(5, 5);
-	}
-	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
-		m_Sprite.setScale(4.5, 4.5);
-	}
+	//// depending on resolution set position and scale of player
+	//if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
+	//	m_Sprite.setScale(6, 6);
+	//}
+	//else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
+	//	m_Sprite.setScale(5, 5);
+	//}
+	//else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
+	//	m_Sprite.setScale(4.5, 4.5);
+	//}
+
+	// 162, 228
+	m_Sprite.setScale((resolution.x / 100) / 4.1, (resolution.y / 100) / 2.2);
 
 	if (!m_Jump && !m_isFalling) {
 		m_Position.x = (m_Resolution.x / 100) * 10;

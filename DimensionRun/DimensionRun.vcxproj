@@ -27,7 +27,6 @@
     <ClCompile Include="Code\EventManager.cpp" />
     <ClCompile Include="Code\FloatingObstacle.cpp" />
     <ClCompile Include="Code\GroundObstacle.cpp" />
-    <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\LargeEnemy.cpp" />
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\MediumEnemy.cpp" />
@@ -39,6 +38,7 @@
     <ClCompile Include="Code\State_Game.cpp" />
     <ClCompile Include="Code\State_Intro.cpp" />
     <ClCompile Include="Code\State_MainMenu.cpp" />
+    <ClCompile Include="Code\State_Paused.cpp" />
     <ClCompile Include="Code\TextureHolder.cpp" />
     <ClCompile Include="Code\Update.cpp" />
     <ClCompile Include="Code\Window.cpp" />

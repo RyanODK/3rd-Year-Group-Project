@@ -3,12 +3,12 @@
 
 FloatingObstacle::FloatingObstacle()
 {
-	m_Sprite = Sprite(TextureHolder::GetTexture(
+	m_Sprite = sf::Sprite(TextureHolder::GetTexture(
 		"Graphics/Free/Terrain/TerrainFloating.png", false));
-	m_Sprite.setTextureRect(IntRect{ 0, 0, 48, 48 });
+	m_Sprite.setTextureRect(sf::IntRect{ 0, 0, 48, 48 });
 	//m_Sprite.setPosition(2000, 600);
 }
-void FloatingObstacle::spawn(Vector2f startPosition, Vector2f scale) {
+void FloatingObstacle::spawn(sf::Vector2f startPosition, sf::Vector2f scale) {
 	resetPosition.x = startPosition.x;
 	resetPosition.y = startPosition.y;
 
@@ -75,12 +75,12 @@ void FloatingObstacle::update(float elapsedTime) {
 	m_Sprite.setPosition(m_Position);
 }
 
-void FloatingObstacle::setSpriteFromSheet(IntRect textureBox)
+void FloatingObstacle::setSpriteFromSheet(sf::IntRect textureBox)
 {
 	// get sprite sheets left and top values
-	sheetCoordinate = Vector2i(textureBox.left, textureBox.top);
+	sheetCoordinate = sf::Vector2i(textureBox.left, textureBox.top);
 	// set sprite size
-	spriteSize = Vector2i(48, 48);
+	spriteSize = sf::Vector2i(48, 48);
 
 	//// if sprite sheet width is greater than sprite size x
 	//if (textureBox.width > spriteSize.x)
@@ -99,23 +99,23 @@ void FloatingObstacle::setSpriteFromSheet(IntRect textureBox)
 	//	throw logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
 
 	// set sprites texture rect size to sheet coordinate (left and top) by sprite size (x and y)
-	m_Sprite.setTextureRect(IntRect{ sheetCoordinate, spriteSize });
+	m_Sprite.setTextureRect(sf::IntRect{ sheetCoordinate, spriteSize });
 
 }
 
 void FloatingObstacle::moveTextureRect(float elapsedTime) {
-	m_Sprite.setTextureRect(IntRect(sheetCoordinate + Vector2i(
+	m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(
 		spriteSize.x, 0), spriteSize));
 }
 
-FloatRect FloatingObstacle::getPosition() {
+sf::FloatRect FloatingObstacle::getPosition() {
 	return m_Sprite.getLocalBounds();
 }
 
-FloatRect FloatingObstacle::getGlobal() {
+sf::FloatRect FloatingObstacle::getGlobal() {
 	return m_Sprite.getGlobalBounds();
 }
 
-Sprite FloatingObstacle::getSprite() {
+sf::Sprite FloatingObstacle::getSprite() {
 	return m_Sprite;
 }
