@@ -1,42 +1,37 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <sstream>
 #include "TextureHolder.h"
-#ifndef BACKGROUND_H
-#define BACKGROUND_H
-
-using namespace sf;
-using namespace std;
 
 class Background {
 public:
 	Background(); // sets default background values
 
-	void BackgroundScale(Vector2f resolution); // this will scale background to resolution size
+	void BackgroundScale(sf::Vector2f resolution); // this will scale background to resolution size
 	void Scroll(float dt); // this will scroll background using deltaTime
 	void ChangeBackground(
-		string filename1, string filename2, string filename3, // this changes background
-		IntRect rect1, IntRect rect2, IntRect rect3); // changes background taking in filename and IntRect
+		std::string filename1, std::string filename2, std::string filename3, // this changes background
+		sf::IntRect rect1, sf::IntRect rect2, sf::IntRect rect3); // changes background taking in filename and IntRect
 	void setBackgroundSpeed(float backgroundSpeed); // sets background speed
 
 	// these return background sprites
-	Sprite getSprite1(); 
-	Sprite getSprite2();
-	Sprite getSprite3();
+	sf::Sprite getSprite1(); 
+	sf::Sprite getSprite2();
+	sf::Sprite getSprite3();
 
 private:
 	// holds textures of backgrounds
-	Texture m_BackgroundTexture1; 
-	Texture m_BackgroundTexture2;
-	Texture m_BackgroundTexture3;
+	sf::Texture m_BackgroundTexture1; 
+	sf::Texture m_BackgroundTexture2;
+	sf::Texture m_BackgroundTexture3;
 
 	// sprites for backgrounds
-	Sprite m_BackgroundSprite1; 
-	Sprite m_BackgroundSprite2;
-	Sprite m_BackgroundSprite3;
+	sf::Sprite m_BackgroundSprite1;
+	sf::Sprite m_BackgroundSprite2;
+	sf::Sprite m_BackgroundSprite3;
 
 	float m_BackgroundSpeed; // speed in which background scrolls
 	float m_BackgroundX; // x value of background as scrolling will be horizontal
 
-	Vector2f m_Resolution; // stores resolution of screen
+	sf::Vector2f m_Resolution; // stores resolution of screen
 };
-#endif

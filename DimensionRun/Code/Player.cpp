@@ -6,13 +6,13 @@ Player::Player() {
 	m_JumpDuration = 0.3;
 	m_SlideDuration = 0.5;
 
-	m_Sprite = Sprite(TextureHolder::GetTexture(
+	m_Sprite = sf::Sprite(TextureHolder::GetTexture(
 		"Graphics/Main Player/playerSpritesheet.png", false));
 
 	ani_counter = 1;
 }
 
-void Player::spawn(Vector2f resolution, float gravity) {
+void Player::spawn(sf::Vector2f resolution, float gravity) {
 	// depending on resolution set position and scale of player
 	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
 		m_Sprite.setScale(6, 6);
@@ -42,7 +42,7 @@ bool Player::Jump() {
 	m_JustJumped = false;
 
 	// if user presses space 
-	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 		// m_Jump and m_isFalling is false
 		if (!m_Jump && !m_isFalling) {
 			m_Jump = true; // set m_Jump to true
@@ -64,7 +64,7 @@ bool Player::Jump() {
 bool Player::Slide() {
 	m_JustSlid = false;
 
-	if (Keyboard::isKeyPressed(Keyboard::C)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
 		if (!m_IsSliding) {
 			m_IsSliding = true;
 			m_TimeThisSlide = 0;
@@ -81,7 +81,7 @@ bool Player::Slide() {
 bool Player::Laser() {
 	m_JustLasered = false;
 
-	if (Keyboard::isKeyPressed(Keyboard::X)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
 		if (!m_IsLasering) {
 			m_IsLasering = true;
 			m_TimeThisLaser = 0;
@@ -100,7 +100,7 @@ void Player::update(float elapsedTime, int groundHeight) {
 	// plays player run animation
 	m_IsRunning = true;
 	m_TimePerFrame = 0.09;
-	setSpriteFromSheet(IntRect(0, 228, 174, 35), Vector2i(29, 35));
+	setSpriteFromSheet(sf::IntRect(0, 228, 174, 35), sf::Vector2i(29, 35));
 	moveTextureRect(elapsedTime);
 
 	//if m_Jump is true
@@ -114,7 +114,7 @@ void Player::update(float elapsedTime, int groundHeight) {
 			m_Position.y -= m_gravity * 2 * elapsedTime;
 			m_Sprite.setPosition(m_Position);
 			// set jump animation frame
-			setSpriteFromSheet(IntRect(0, 152, 23, 35), Vector2i(29, 38));
+			setSpriteFromSheet(sf::IntRect(0, 152, 23, 35), sf::Vector2i(29, 38));
 		}
 		// else timer for jump has hit allowed jump duration
 		else {
@@ -135,14 +135,14 @@ void Player::update(float elapsedTime, int groundHeight) {
 			m_isFalling = false;
 		}
 		// set falling animation frame
-		setSpriteFromSheet(IntRect(78, 152, 29, 35), Vector2i(29, 38));
+		setSpriteFromSheet(sf::IntRect(78, 152, 29, 35), sf::Vector2i(29, 38));
 	}
 
 	if (m_IsSliding) {
 		m_TimeThisSlide += elapsedTime;
 
 		if (m_TimeThisSlide < m_SlideDuration) {
-			setSpriteFromSheet(IntRect(0, 327, 49, 54), Vector2i(29, 38));
+			setSpriteFromSheet(sf::IntRect(0, 327, 49, 54), sf::Vector2i(29, 38));
 		}
 		else {
 			m_IsSliding = false;
@@ -154,7 +154,7 @@ void Player::update(float elapsedTime, int groundHeight) {
 		m_TimeThisLaser += elapsedTime;
 
 		if (m_TimeThisLaser < 0.12) {
-			setSpriteFromSheet(IntRect(95, 190, 83, 38), Vector2i(33, 38));
+			setSpriteFromSheet(sf::IntRect(95, 190, 83, 38), sf::Vector2i(33, 38));
 			moveTextureRect(elapsedTime);
 		}
 		else {
@@ -163,10 +163,10 @@ void Player::update(float elapsedTime, int groundHeight) {
 	}
 }
 
-void Player::setSpriteFromSheet(IntRect textureBox, Vector2i spriteSize)
+void Player::setSpriteFromSheet(sf::IntRect textureBox, sf::Vector2i spriteSize)
 {
 	// get sprite sheets left and top values
-	sheetCoordinate = Vector2i(textureBox.left, textureBox.top);
+	sheetCoordinate = sf::Vector2i(textureBox.left, textureBox.top);
 	// set sprite size
 	m_SpriteSize = spriteSize;
 
@@ -187,7 +187,7 @@ void Player::setSpriteFromSheet(IntRect textureBox, Vector2i spriteSize)
 		//throw logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
 
 	// set sprites texture rect size to sheet coordinate (left and top) by sprite size (x and y)
-	m_Sprite.setTextureRect(IntRect{ sheetCoordinate, m_SpriteSize });
+	m_Sprite.setTextureRect(sf::IntRect{ sheetCoordinate, m_SpriteSize });
 
 }
 
@@ -198,7 +198,7 @@ void Player::moveTextureRect(float elapsedTime) {
 		ani_counter = 0;
 	}
 
-	m_Sprite.setTextureRect(IntRect(sheetCoordinate + Vector2i(
+	m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(
 		m_SpriteSize.x * ani_counter, 0), m_SpriteSize));
 
 	// increment animation counter to point to next frame
@@ -213,7 +213,7 @@ void Player::moveTextureRect(float elapsedTime) {
 }
 
 void Player::setCollisionZones() {
-	FloatRect r = getGlobal();
+	sf::FloatRect r = getGlobal();
 
 	if (m_IsRunning) {
 		if (ani_counter == 0) {
@@ -369,27 +369,27 @@ void Player::setCollisionZones() {
 	}
 }
 
-FloatRect Player::getHead()
+sf::FloatRect Player::getHead()
 {
 	return m_Head;
 }
 
-FloatRect Player::getFeet()
+sf::FloatRect Player::getFeet()
 {
 	return m_Feet;
 }
 
-FloatRect Player::getLeft()
+sf::FloatRect Player::getLeft()
 {
 	return m_Left;
 }
 
-FloatRect Player::getRight()
+sf::FloatRect Player::getRight()
 {
 	return m_Right;
 }
 
-FloatRect Player::getPosition() {
+sf::FloatRect Player::getPosition() {
 	/*cout << "Local Bounds" << endl;
 	cout << "\n";
 	cout << "top: " << m_Sprite.getLocalBounds().top << endl;
@@ -400,7 +400,7 @@ FloatRect Player::getPosition() {
 	return m_Sprite.getLocalBounds();
 }
 
-FloatRect Player::getGlobal() {
+sf::FloatRect Player::getGlobal() {
 	/*cout << "Global Bounds" << endl;
 	cout << "\n";
 	cout << "top: " << m_Sprite.getGlobalBounds().top << endl;
@@ -411,6 +411,6 @@ FloatRect Player::getGlobal() {
 	return m_Sprite.getGlobalBounds();
 }
 
-Sprite Player::getSprite() {
+sf::Sprite Player::getSprite() {
 	return m_Sprite;
 }

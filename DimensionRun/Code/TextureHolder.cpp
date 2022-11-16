@@ -9,7 +9,7 @@ TextureHolder::TextureHolder() {
 	m_s_Instance = this;
 }
 
-Texture& TextureHolder::GetTexture(string const& filename, bool repeat) {
+sf::Texture& TextureHolder::GetTexture(std::string const& filename, bool repeat) {
 	// get reference to m_Texture using m_s_Instance
 	// auto is equivalent of map<string, Texture>::iterator
 	auto& m = m_s_Instance->m_Texture;

@@ -36,6 +36,7 @@
     <ClCompile Include="Code\SmallEnemy.cpp" />
     <ClCompile Include="Code\SoundManager.cpp" />
     <ClCompile Include="Code\StateManager.cpp" />
+    <ClCompile Include="Code\State_Game.cpp" />
     <ClCompile Include="Code\State_Intro.cpp" />
     <ClCompile Include="Code\State_MainMenu.cpp" />
     <ClCompile Include="Code\TextureHolder.cpp" />

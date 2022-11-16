@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-void Enemy::spawn(Vector2f startPosition, Vector2f scale) {
+void Enemy::spawn(sf::Vector2f startPosition, sf::Vector2f scale) {
 	resetPosition.x = startPosition.x;
 	resetPosition.y = startPosition.y;
 
@@ -28,9 +28,9 @@ void Enemy::update(float elapsedTime, float velocity) {
 	m_Sprite.setPosition(m_Position);
 }
 
-void Enemy::setSpriteFromSheet(IntRect textureBox, Vector2i size)
+void Enemy::setSpriteFromSheet(sf::IntRect textureBox, sf::Vector2i size)
 {
-	sheetCoordinate = Vector2i(textureBox.left, textureBox.top);
+	sheetCoordinate = sf::Vector2i(textureBox.left, textureBox.top);
 	spriteSize = size;
 
 	if (textureBox.width > spriteSize.x)
@@ -42,9 +42,9 @@ void Enemy::setSpriteFromSheet(IntRect textureBox, Vector2i size)
 		animation_it_limit = textureBox.height / spriteSize.y;
 	}
 	else
-		throw logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
+		throw std::logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
 
-	m_Sprite.setTextureRect(IntRect{ sheetCoordinate, spriteSize });
+	m_Sprite.setTextureRect(sf::IntRect{ sheetCoordinate, spriteSize });
 
 }
 
@@ -53,7 +53,7 @@ void Enemy::moveTextureRect(double frameTime) {
 		ani_counter = 0;
 	}
 
-	m_Sprite.setTextureRect(IntRect(sheetCoordinate + Vector2i(
+	m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(
 		spriteSize.x * ani_counter, 0), spriteSize));
 
 	// increment animation counter to point to next frame
@@ -71,10 +71,10 @@ void Enemy::setAttack(bool attack) {
 	EnemyAttack = attack;
 }
 
-FloatRect Enemy::getPosition() {
+sf::FloatRect Enemy::getPosition() {
 	return m_Sprite.getLocalBounds();
 }
 
-Sprite Enemy::getSprite() {
+sf::Sprite Enemy::getSprite() {
 	return m_Sprite;
 }

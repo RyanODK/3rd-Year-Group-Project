@@ -71,10 +71,10 @@ void Engine::LateUpdate() {
 	RestartClock();
 }
 
-void Engine::run() {
+//void Engine::run() {
 	//Clock clock; // clock to store time in game
 
-	while (!GetWindow()->IsDone()) {
+	//while (!GetWindow()->IsDone()) {
 		// pauses game if in pause or main menu screen
 		/*if (state == State::PAUSED || state == State::MAIN_MENU) {
 			clock.restart();
@@ -137,9 +137,9 @@ void Engine::run() {
 		//coinCountText.setString(coinStream.str());
 
 		//input();
-		update();
-		draw();
-		sf::sleep(sf::seconds(0.2)); // sleep for 0.2 seconds
-		LateUpdate();
-	}
-}
+	//	update();
+	//	draw();
+	//	//sf::sleep(sf::seconds(0.1)); // sleep for 0.2 seconds
+	//	LateUpdate();
+	//}
+//}

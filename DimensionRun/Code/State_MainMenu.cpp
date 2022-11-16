@@ -7,6 +7,16 @@ State_MainMenu::State_MainMenu(StateManager* l_StateManager) :
 State_MainMenu::~State_MainMenu() {}
 
 void State_MainMenu::OnCreate() {
+	GetBackground()->setBackgroundSpeed(40);
+	GetBackground()->ChangeBackground(
+		"Graphics/warped city files/ENVIRONMENT/background/skyline-b.png",
+		"Graphics/warped city files/ENVIRONMENT/background/buildings-bg.png",
+		"Graphics/warped city files/ENVIRONMENT/background/near-buildings-bg.png",
+		sf::IntRect(0, 0, 408, 240),
+		sf::IntRect(0, 0, 508, 240),
+		sf::IntRect(0, 0, 608, 192));
+	GetBackground()->BackgroundScale(sf::Vector2f(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
+
 	m_Font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillennium Italic.ttf");
 	m_MainTitle.setFont(m_Font);
 	m_MainTitle.setString({ "Dimension Run" });
@@ -91,6 +101,9 @@ void State_MainMenu::MouseClick(EventDetails* l_Details) {
 
 void State_MainMenu::Draw() {
 	sf::RenderWindow* window = m_StateMgr->GetContext()->m_Wind->GetRenderWindow();
+	window->draw(GetBackground()->getSprite1());
+	window->draw(GetBackground()->getSprite2());
+	window->draw(GetBackground()->getSprite3());
 	window->draw(m_MainTitle);
 
 	for (int i = 0; i < 3; i++) {
@@ -101,4 +114,7 @@ void State_MainMenu::Draw() {
 
 void State_MainMenu::Deactivate() {}
 
-void State_MainMenu::Update(const sf::Time& l_Time){}
+void State_MainMenu::Update(const sf::Time& l_Time){
+	//m_dtAsSeconds += l_Time.asSeconds();
+	GetBackground()->Scroll(l_Time.asSeconds());
+}

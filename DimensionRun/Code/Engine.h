@@ -36,6 +36,9 @@ public:
 		return &m_Window;
 	};
 
+	void update(); // update function to update game 
+	void draw(); // draw function to draw sprites on screen
+
 private:
 	//TextureHolder th; // TextureHolder class to hold textures
 
@@ -97,8 +100,6 @@ private:
 	//Text coinCountText;
 
 	//void input(); // input function to handle inputs from user
-	void update(); // update function to update game 
-	void draw(); // draw function to draw sprites on screen
 	//void checkCol(Player& player);
 
 	Window m_Window;
