@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ENGINE_H
-#define ENGINE_H
 
 #include "Window.h"
 #include "StateManager.h"
@@ -13,18 +11,16 @@ class Engine {
 public:
 	Engine(); // default constructor to set game resolution and ground height
 
-	void run(); // runs game
-
-	sf::Time GetElapsed();
-	void RestartClock();
+	sf::Time GetElapsed(); // gets elapsed time in game
+	void RestartClock(); // restarts elapsed clock 
 	void LateUpdate();
 
 	Window* GetWindow() {
 		return &m_Window;
 	};
 
-	void update(); // update function to update game 
-	void draw(); // draw function to draw sprites on screen
+	void update(); // function to update game per frame
+	void draw(); // function to draw everything on screen
 
 private:
 
@@ -47,4 +43,3 @@ private:
 	sf::Clock m_Clock;
 	sf::Time m_Elapsed;
 };
-#endif

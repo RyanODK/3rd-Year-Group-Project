@@ -1,8 +1,5 @@
-//#include <SFML/Graphics.hpp>
 #pragma once
 #include "EventManager.h"
-
-//using namespace sf;
 
 // forward declaration of StateManager class to keep pointer of it
 // also avoids recursive definitions
@@ -15,6 +12,12 @@ public:
 	BaseState(StateManager* l_StateManager) :
 		m_StateMgr(l_StateManager), m_Transparent(false),
 		m_Transcendent(false) {}
+
+	/* 
+		These virtual functions need to be implemented in the inheriting state classes
+		for example State_Game needs to include all these virtual fucntions 
+		or else project wont compile!
+	*/
 	virtual ~BaseState() {}
 
 	virtual void OnCreate() = 0;
@@ -33,7 +36,6 @@ public:
 	bool IsTransparent() const {
 		return m_Transparent;
 	}
-
 
 	void SetTranscendent(const bool& l_Transcendent) {
 		m_Transcendent = l_Transcendent;

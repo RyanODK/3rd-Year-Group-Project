@@ -1,33 +1,28 @@
-//#include <SFML/Window.hpp>
-//#include <SFML/System.hpp>
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "EventManager.h"
 
-//using namespace std;
-//using namespace sf;
-
 class Window {
 public:
-	Window();
-	Window(const std::string& l_Title, const
-		sf::Vector2u& l_Size);
-	~Window();
+	Window(); // Default constructor
+	Window(const std::string& l_Title, // tracks window properties
+		const sf::Vector2u& l_Size); // and calls Setup() function
+	~Window(); // destructor contructor
 
 	void BeginDraw(); // clear window
 	void EndDraw(); // display changes
 
-	void Update();
+	void Update(); // this updates window taking in users input to execute 
 
-	bool IsDone();
-	bool IsFullScreen();
-	sf::Vector2u GetWindowSize();
+	bool IsDone(); // returns true if window is done
+	bool IsFullScreen(); // returns true if window is fullscreen
+	sf::Vector2u GetWindowSize(); // gets window size
 
-	void ToggleFullScreen(EventDetails* l_Details);
+	void ToggleFullScreen(EventDetails* l_Details); // this toggles fullscreen mode
 
-	void Draw(sf::Drawable& l_Drawable);
+	void Draw(sf::Drawable& l_Drawable); // draws to window
 
-	bool IsFocused();
+	bool IsFocused(); // returns true if window is focused
 
 	sf::RenderWindow* GetRenderWindow() {
 		return &m_Window;
@@ -40,10 +35,11 @@ public:
 	void Close(EventDetails* l_Details = nullptr);
 
 private:
-	void Setup(const std::string& l_Title,
-		const sf::Vector2u& l_Size);
-	void Destroy();
-	void Create();
+	void Setup(const std::string& l_Title, // keeps track of window properties
+		const sf::Vector2u& l_Size); // calls Create() function
+	void Destroy(); // this will close window
+	void Create(); // uses SFML Uint32 to initialise window style (We use Default style)
+				   // Default style offers Title bar, resizable border, maximize and close buttons
 
 	sf::RenderWindow m_Window;
 	sf::Vector2u m_WindowSize;

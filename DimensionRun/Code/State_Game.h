@@ -65,8 +65,8 @@ public:
 		return &m_SoundManager;
 	}
 
-	void MainMenu(EventDetails* l_Details);
-	void Pause(EventDetails* l_Details);
+	void MainMenu(EventDetails* l_Details); // switches state to MainMenu state
+	void Pause(EventDetails* l_Details); // switches state to Pause state
 
 private:
 	TextureHolder m_TextureHolder;
