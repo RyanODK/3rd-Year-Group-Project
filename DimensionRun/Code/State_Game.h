@@ -8,6 +8,7 @@
 #include "FloatingObstacle.h"
 #include "GroundObstacle.h"
 #include "SoundManager.h"
+#include "Floor.h"
 
 class State_Game : public BaseState {
 public:
@@ -24,6 +25,8 @@ public:
 	void Draw();
 
 	void Jump(EventDetails* l_Details);
+
+	void CheckCol();
 
 	Player* GetPlayer() {
 		return &m_player;
@@ -59,6 +62,10 @@ public:
 
 	GroundObstacle* GetGroundObstacle() {
 		return &m_GroundObstacle;
+	}
+
+	Floor* GetFloor() {
+		return &m_Floor;
 	}
 
 	SoundManager* GetSoundManager() {
@@ -100,6 +107,13 @@ private:
 	/* Obstacles */
 	FloatingObstacle m_FloatingObstacle;
 	GroundObstacle m_GroundObstacle;
+	Floor m_Floor;
 
 	SoundManager m_SoundManager;
+
+	sf::Texture m_background1;
+
+	sf::VertexArray background;
+
+	sf::Transform transform;
 };

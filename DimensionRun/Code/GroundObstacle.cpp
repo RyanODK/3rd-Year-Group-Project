@@ -16,29 +16,6 @@ void GroundObstacle::spawn(sf::Vector2f startPosition, sf::Vector2f scale) {
 
 	m_Sprite.setPosition(startPosition);
 }
-//void GroundObstacle::spawn(Vector2f startPosition, Vector2f scale) {
-//	if (m_Resolution.x == 2560 && m_Resolution.y == 1440) {
-//		//m_Sprite.setPosition(250, 1080);
-//		m_Sprite.setScale(4, 4);
-//	}
-//	else if (m_Resolution.x == 1920 && m_Resolution.y == 1080) {
-//		//m_Sprite.setPosition(200, 850);
-//		m_Sprite.setScale(2, 2);
-//	}
-//	else if (m_Resolution.x == 1680 && m_Resolution.y == 1050) {
-//		//m_Sprite.setPosition(200, 800);
-//		m_Sprite.setScale(4, 4);
-//	}
-//
-//	// store resolution for future use
-//	m_Resolution.x = resolution.x;
-//	m_Resolution.y = resolution.y;
-//
-//	m_Sprite.setPosition(2500, 900);
-//	//m_Position.x = 900;
-//	//m_Position.y = 600;
-//}
-
 
 void GroundObstacle::update(float elapsedTime) {
 	//cout << m_Position.x << "\n";

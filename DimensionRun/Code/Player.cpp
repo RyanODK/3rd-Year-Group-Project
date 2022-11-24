@@ -134,9 +134,9 @@ void Player::update(float elapsedTime, int groundHeight) {
 		m_Sprite.setPosition(m_Position);
 		// if players position y has hit current ground height
 		// stop falling
-		if (m_Position.y >= groundHeight) {
+		/*if (m_Position.y >= groundHeight) {
 			m_isFalling = false;
-		}
+		}*/
 		// set falling animation frame
 		setSpriteFromSheet(sf::IntRect(78, 152, 29, 35), sf::Vector2i(29, 38));
 	}
@@ -372,6 +372,10 @@ void Player::setCollisionZones() {
 	}
 }
 
+void Player::setFalling(bool falling) {
+	m_isFalling = falling;
+}
+
 sf::FloatRect Player::getHead()
 {
 	return m_Head;
@@ -416,4 +420,8 @@ sf::FloatRect Player::getGlobal() {
 
 sf::Sprite Player::getSprite() {
 	return m_Sprite;
+}
+
+float Player::getPositionY() {
+	return m_Position.y;
 }

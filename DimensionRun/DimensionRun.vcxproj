@@ -26,6 +26,7 @@
     <ClCompile Include="Code\Engine.cpp" />
     <ClCompile Include="Code\EventManager.cpp" />
     <ClCompile Include="Code\FloatingObstacle.cpp" />
+    <ClCompile Include="Code\Floor.cpp" />
     <ClCompile Include="Code\GroundObstacle.cpp" />
     <ClCompile Include="Code\LargeEnemy.cpp" />
     <ClCompile Include="Code\Main.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="Code\Engine.h" />
     <ClInclude Include="Code\EventManager.h" />
     <ClInclude Include="Code\FloatingObstacle.h" />
+    <ClInclude Include="Code\Floor.h" />
     <ClInclude Include="Code\GroundObstacle.h" />
     <ClInclude Include="Code\LargeEnemy.h" />
     <ClInclude Include="Code\MediumEnemy.h" />
@@ -67,6 +69,7 @@
     <ClInclude Include="Code\State_MainMenu.h" />
     <ClInclude Include="Code\State_Paused.h" />
     <ClInclude Include="Code\TextureHolder.h" />
+    <ClInclude Include="Code\Utilities.h" />
     <ClInclude Include="Code\Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +151,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\gp\sfml\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-window-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

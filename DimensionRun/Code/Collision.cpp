@@ -1,15 +1,17 @@
-#include "Engine.h"
-#include <iostream>
+#include "State_Game.h"
 
-//void Engine::checkCol(Player& player)
-//{
-//	if (player.getRight().intersects(m_groundObstacle.getGlobal())) {
-//		cout << "colliding on right side" << endl;
-//		m_groundObstacle.update(distanceRan);
-//	}
+void State_Game::CheckCol()
+{
+	if (GetPlayer()->getPositionY() >= groundHeight && !GetPlayer()->Jump()) {
+		GetPlayer()->setFalling(false);
+		std::cout << "Grounded" << std::endl;
+	}
+	else {
+		std::cout << "IT WORKS " << std::endl;
+	}
 //
 //	if (player.getRight().intersects(m_floatingObstacle.getGlobal())) {
 //		cout << "colliding on right side" << endl;
 //		m_floatingObstacle.update(distanceRan);
 //	}
-//}
+}

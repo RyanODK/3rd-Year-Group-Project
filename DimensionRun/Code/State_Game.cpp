@@ -13,6 +13,8 @@ void State_Game::OnCreate() {
 	// sets groundheight to 75% of screen resolution
 	groundHeight = (m_Resolution.y / 100) * 75;
 
+	transform.translate(0, (m_Resolution.y / 100) * 89);
+
 	m_Font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillennium Italic.ttf");
 
 	// current distance text
@@ -34,7 +36,10 @@ void State_Game::OnCreate() {
 	coinCountText.setPosition(0, 105);
 
 	GetSoundManager()->stopMainMenuMusic();
-	GetSoundManager()->playInGameMusic();
+	//GetSoundManager()->playInGameMusic();
+
+	m_background1 = GetFloor()->getTexture();
+	m_background1.setSrgb(false);
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Game, "Key_Escape",
@@ -55,12 +60,13 @@ void State_Game::Draw() {
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetBackground()->getSprite1());
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetBackground()->getSprite2());
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetBackground()->getSprite3());
-	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetPlayer()->getSprite());
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(distanceText);
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(bestDistanceText);
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(coinCountText);
+	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(background, &m_background1);
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetFloatingObstacle()->getSprite());
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetGroundObstacle()->getSprite());
+	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetPlayer()->getSprite());
 
 	// Small enemy drawing
 	if (backgroundType == 1) {
@@ -128,8 +134,14 @@ void State_Game::Update(const sf::Time& l_Time) {
 			(m_Resolution.x / 100) * 90, (m_Resolution.y / 100) * 67), sf::Vector2f(
 				(m_Resolution.x / 100) * 0.06, (m_Resolution.y / 100) * 0.1));
 
+	GetFloor()->createFloor(background, sf::Vector2f((m_Resolution.x / 100) * 50, (m_Resolution.y / 100) * 50));
+
 	GetGroundObstacle()->update(l_Time.asSeconds());
 	GetFloatingObstacle()->update(l_Time.asSeconds());
+
+	CheckCol();
+
+	//GetFloor()->update(l_Time.asSeconds());
 
 	if (resetTime < 5.0f) {
 		backgroundType = 1;

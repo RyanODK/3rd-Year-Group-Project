@@ -15,6 +15,7 @@ public:
 	void moveTextureRect(float elapsedTime); // this will move the IntRect around the texture for player in order to create an animation
 	void setSpriteFromSheet(sf::IntRect textureBox, sf::Vector2i spriteSize); // this sets a IntRect around the needed frames from sprite sheet
 	void setCollisionZones(); // sets float rectangle for body parts
+	void setFalling(bool falling); // sets m_Falling
 
 	sf::Sprite getSprite(); // returns sprite
 	sf::FloatRect getHead(); // returns head rectangle
@@ -23,6 +24,7 @@ public:
 	sf::FloatRect getRight(); // returns right rectangle
 	sf::FloatRect getPosition(); // returns local bounds position of player sprite
 	sf::FloatRect getGlobal(); // returns global bounds position of player sprite
+	float getPositionY();
 
 protected:
 	const float INITIAL_HEALTH = 100; // sets initial health (placeholder)
