@@ -15,7 +15,7 @@ void Enemy::update(float elapsedTime, float velocity) {
 	if (!EnemyActive) {
 		m_Position.x = resetPosition.x;
 		m_Position.y = resetPosition.y;
-		EnemyActive = true;
+		//EnemyActive = true;
 	}
 	else {
 		m_Position.x -= velocity * 2 * elapsedTime;
@@ -71,10 +71,18 @@ void Enemy::setAttack(bool attack) {
 	EnemyAttack = attack;
 }
 
+void Enemy::setActive(bool active) {
+	EnemyActive = active;
+}
+
 sf::FloatRect Enemy::getPosition() {
 	return m_Sprite.getLocalBounds();
 }
 
 sf::Sprite Enemy::getSprite() {
 	return m_Sprite;
+}
+
+bool Enemy::getActive() {
+	return EnemyActive;
 }

@@ -93,6 +93,65 @@ void State_Game::Draw() {
 void State_Game::Update(const sf::Time& l_Time) {
 	resetTime += l_Time.asSeconds();
 	distanceRan += l_Time.asSeconds();
+	resetGenerator += l_Time.asSeconds();
+
+	if (resetGenerator >= 8.0f) {
+		resetGenerator == 0;
+		int rAnD = (std::rand() % 3) + 1;
+
+		switch (rAnD) {
+		case(1):
+			if (GetGroundObstacle()->getActive() == false) {
+				GetGroundObstacle()->setActive(true);
+				//GetGroundObstacle()->update(l_Time.asSeconds());
+			}
+			break;
+		case(2):
+			if (GetFloatingObstacle()->getActive() == false) {
+				GetFloatingObstacle()->setActive(true);
+				//GetFloatingObstacle()->update(l_Time.asSeconds());
+			}
+			break;
+		case(3):
+			if (backgroundType == 1) {
+				if (GetSmallEnemy1()->getActive() == false) {
+					GetSmallEnemy1()->setActive(true);
+					//GetSmallEnemy1()->update(l_Time.asSeconds(), 130);
+				}
+			}
+			else if (backgroundType == 2) {
+				if (GetSmallEnemy2()->getActive() == false) {
+					GetSmallEnemy2()->setActive(true);
+					//GetSmallEnemy2()->update(l_Time.asSeconds(), 130);
+				}
+			}
+			else if (backgroundType == 3) {
+				if (GetSmallEnemy3()->getActive() == false) {
+					GetSmallEnemy3()->setActive(true);
+					//GetSmallEnemy3()->update(l_Time.asSeconds(), 130);
+				}
+			}
+			else if (backgroundType == 4) {
+				if (GetSmallEnemy4()->getActive() == false) {
+					GetSmallEnemy4()->setActive(true);
+					//GetSmallEnemy4()->update(l_Time.asSeconds(), 130);
+				}
+			}
+			else if (backgroundType == 5) {
+				if (GetSmallEnemy5()->getActive() == false) {
+					GetSmallEnemy5()->setActive(true);
+					//GetSmallEnemy5()->update(l_Time.asSeconds(), 130);
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	//GetGenerator()->Generate();
+	GetGroundObstacle()->update(l_Time.asSeconds());
+	GetFloatingObstacle()->update(l_Time.asSeconds());
 
 	/* TEXT ON SCREEN */
 	// current distance
@@ -136,15 +195,20 @@ void State_Game::Update(const sf::Time& l_Time) {
 
 	GetFloor()->createFloor(background, sf::Vector2f((m_Resolution.x / 100) * 50, (m_Resolution.y / 100) * 50));
 
-	GetGroundObstacle()->update(l_Time.asSeconds());
-	GetFloatingObstacle()->update(l_Time.asSeconds());
+	//GetGroundObstacle()->update(l_Time.asSeconds());
+	//GetFloatingObstacle()->update(l_Time.asSeconds());
 
 	CheckCol();
 
 	//GetFloor()->update(l_Time.asSeconds());
 
-	if (resetTime < 5.0f) {
-		backgroundType = 1;
+	if (resetTime >= 5.0f) {
+		backgroundType = (std::rand() % 5) + 1;
+		resetTime = 0;
+	}
+
+	if (backgroundType == 1) {
+		//backgroundType = 1;
 		GetBackground()->setBackgroundSpeed(40);
 		GetBackground()->ChangeBackground(
 			"Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png",
@@ -156,8 +220,8 @@ void State_Game::Update(const sf::Time& l_Time) {
 		GetBackground()->BackgroundScale(m_Resolution);
 	}
 
-	if (resetTime >= 5.0f) {
-		backgroundType = 2;
+	if (backgroundType == 2) {
+		//backgroundType = 2;
 		GetBackground()->setBackgroundSpeed(35);
 		GetBackground()->ChangeBackground(
 			"Graphics/cyberpunk city 2 files/cyberpunk city 2 files/Environmet/background/back.png",
@@ -169,8 +233,8 @@ void State_Game::Update(const sf::Time& l_Time) {
 		GetBackground()->BackgroundScale(m_Resolution);
 	}
 
-	if (resetTime >= 10.0f) {
-		backgroundType = 3;
+	if (backgroundType == 3) {
+		//backgroundType = 3;
 		GetBackground()->setBackgroundSpeed(35);
 		GetBackground()->ChangeBackground(
 			"Graphics/Rocky Pass Files/Rocky Pass Files/PNG/back.png",
@@ -182,8 +246,8 @@ void State_Game::Update(const sf::Time& l_Time) {
 		GetBackground()->BackgroundScale(m_Resolution);
 	}
 
-	if (resetTime >= 15.0f) {
-		backgroundType = 4;
+	if (backgroundType == 4) {
+		//backgroundType = 4;
 		GetBackground()->setBackgroundSpeed(35);
 		GetBackground()->ChangeBackground(
 			"Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-moon.png",
@@ -208,8 +272,8 @@ void State_Game::Update(const sf::Time& l_Time) {
 		m_background.BackgroundScale(m_Resolution);
 	}*/
 
-	if (resetTime >= 20.0f) {
-		backgroundType = 5;
+	if (backgroundType == 5) {
+		//backgroundType = 5;
 		GetBackground()->setBackgroundSpeed(40);
 		GetBackground()->ChangeBackground(
 			"Graphics/Tall Forest Files/Layers/back.png",
@@ -219,10 +283,6 @@ void State_Game::Update(const sf::Time& l_Time) {
 			sf::IntRect(0, 0, 508, 240),
 			sf::IntRect(0, 0, 608, 240));
 		GetBackground()->BackgroundScale(m_Resolution);
-	}
-
-	if (resetTime >= 25.0f) {
-		resetTime = 0;
 	}
 
 	if (backgroundType == 1) {

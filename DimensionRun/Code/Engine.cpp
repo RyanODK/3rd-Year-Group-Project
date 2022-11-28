@@ -6,7 +6,7 @@ Engine::Engine() : m_Window("Dimension Run",
 {
 	m_Context.m_Wind = &m_Window;
 	m_Context.m_EventManager = m_Window.GetEventManager();
-	m_StateManager.SwitchTo(StateType::Intro);
+	m_StateManager.SwitchTo(StateType::Game);
 }
 
 sf::Time Engine::GetElapsed() {

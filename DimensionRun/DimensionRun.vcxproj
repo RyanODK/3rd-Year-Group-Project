@@ -27,6 +27,7 @@
     <ClCompile Include="Code\EventManager.cpp" />
     <ClCompile Include="Code\FloatingObstacle.cpp" />
     <ClCompile Include="Code\Floor.cpp" />
+    <ClCompile Include="Code\Generator.cpp" />
     <ClCompile Include="Code\GroundObstacle.cpp" />
     <ClCompile Include="Code\LargeEnemy.cpp" />
     <ClCompile Include="Code\Main.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Code\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\AudioManager.h" />
     <ClInclude Include="Code\Background.h" />
     <ClInclude Include="Code\BaseState.h" />
     <ClInclude Include="Code\Collision.h" />
@@ -54,12 +56,14 @@
     <ClInclude Include="Code\EventManager.h" />
     <ClInclude Include="Code\FloatingObstacle.h" />
     <ClInclude Include="Code\Floor.h" />
+    <ClInclude Include="Code\Generator.h" />
     <ClInclude Include="Code\GroundObstacle.h" />
     <ClInclude Include="Code\LargeEnemy.h" />
     <ClInclude Include="code\Map.h" />
     <ClInclude Include="Code\MediumEnemy.h" />
     <ClInclude Include="Code\Obstacle.h" />
     <ClInclude Include="Code\Player.h" />
+    <ClInclude Include="Code\ResourceManager.h" />
     <ClInclude Include="Code\SharedContext.h" />
     <ClInclude Include="Code\SmallEnemy.h" />
     <ClInclude Include="Code\SoundManager.h" />
@@ -71,11 +75,13 @@
     <ClInclude Include="Code\State_MainMenu.h" />
     <ClInclude Include="Code\State_Paused.h" />
     <ClInclude Include="Code\TextureHolder.h" />
+    <ClInclude Include="Code\TextureManager.h" />
     <ClInclude Include="Code\Utilities.h" />
     <ClInclude Include="Code\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\keys.cfg" />
+    <None Include="Code\Textures.cfg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -153,7 +159,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\gp\sfml\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shlwapi.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-audio-d.lib;openal32.lib;flac.lib;ogg.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

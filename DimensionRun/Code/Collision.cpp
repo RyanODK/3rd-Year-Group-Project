@@ -4,10 +4,10 @@ void State_Game::CheckCol()
 {
 	if (GetPlayer()->getPositionY() >= groundHeight && !GetPlayer()->Jump()) {
 		GetPlayer()->setFalling(false);
-		std::cout << "Grounded" << std::endl;
+		//std::cout << "Grounded" << std::endl;
 	}
 	else {
-		std::cout << "IT WORKS " << std::endl;
+		//std::cout << "IT WORKS " << std::endl;
 	}
 //
 //	if (player.getRight().intersects(m_floatingObstacle.getGlobal())) {

@@ -12,10 +12,13 @@ public:
 	void update(float elapsedTime); // updates player animation and movement
 	void moveTextureRect(float elapsedTime); // this will move the IntRect around the texture for player in order to create an animation
 	void setSpriteFromSheet(sf::IntRect textureBox); // this sets a IntRect around the needed frames from sprite sheet
+	void setActive(bool active); // sets moving boolean
+
 
 	sf::Sprite getSprite(); // returns sprite
 	sf::FloatRect getPosition(); // returns global bounds position of player spritegetGlobal()
 	sf::FloatRect getGlobal();
+	bool getActive();
 
 protected:
 
@@ -26,7 +29,7 @@ protected:
 
 private:
 	int obstacleSpeed;
-	bool obstacleActive = false;
+	bool floatObstacleActive = false;
 
 	sf::Vector2f m_Position; // holds position of sprite
 	sf::Vector2f resetPosition;

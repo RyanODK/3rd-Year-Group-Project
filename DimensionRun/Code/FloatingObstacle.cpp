@@ -45,14 +45,14 @@ void FloatingObstacle::spawn(sf::Vector2f startPosition, sf::Vector2f scale) {
 
 void FloatingObstacle::update(float elapsedTime) {
 	//cout << m_Position.x << "\n";
-	if (!obstacleActive)
+	if (!floatObstacleActive)
 	{
 		//obstacleSpeed = 30;
 
 		//m_Sprite.setPosition(900, 600);
 		m_Position.x = 2000;
 		m_Position.y = 600;
-		obstacleActive = true;
+		//obstacleActive = true;
 
 	}
 	else
@@ -63,7 +63,7 @@ void FloatingObstacle::update(float elapsedTime) {
 
 		if (m_Position.x < -300)
 		{
-			obstacleActive = false;
+			floatObstacleActive = false;
 		}
 	}
 
@@ -108,6 +108,10 @@ void FloatingObstacle::moveTextureRect(float elapsedTime) {
 		spriteSize.x, 0), spriteSize));
 }
 
+void FloatingObstacle::setActive(bool active) {
+	floatObstacleActive = active;
+}
+
 sf::FloatRect FloatingObstacle::getPosition() {
 	return m_Sprite.getLocalBounds();
 }
@@ -118,4 +122,8 @@ sf::FloatRect FloatingObstacle::getGlobal() {
 
 sf::Sprite FloatingObstacle::getSprite() {
 	return m_Sprite;
+}
+
+bool FloatingObstacle::getActive() {
+	return floatObstacleActive;
 }

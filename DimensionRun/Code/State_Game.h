@@ -9,6 +9,7 @@
 #include "GroundObstacle.h"
 #include "SoundManager.h"
 #include "Floor.h"
+#include "Generator.h"
 
 class State_Game : public BaseState {
 public:
@@ -72,6 +73,10 @@ public:
 		return &m_SoundManager;
 	}
 
+	Generator* GetGenerator() {
+		return &m_generator;
+	}
+
 	void MainMenu(EventDetails* l_Details); // switches state to MainMenu state
 	void Pause(EventDetails* l_Details); // switches state to Pause state
 
@@ -91,6 +96,7 @@ private:
 	float distanceRan = 0.0f; // track distance
 	float bestDistance = 0.0f; // keeps best time
 	float coinCount = 0.0f; // coin counter
+	float resetGenerator;
 
 	int backgroundType;
 	int groundHeight;
@@ -110,6 +116,8 @@ private:
 	Floor m_Floor;
 
 	SoundManager m_SoundManager;
+
+	Generator m_generator;
 
 	sf::Texture m_background1;
 

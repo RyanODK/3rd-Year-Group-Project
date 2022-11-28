@@ -87,7 +87,11 @@
     <ClCompile Include="Code\Floor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="code\Map.cpp">
+=======
+    <ClCompile Include="Code\Generator.cpp">
+>>>>>>> Stashed changes
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,12 +174,28 @@
     <ClInclude Include="Code\Floor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="code\Map.h">
+=======
+    <ClInclude Include="Code\AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\TextureManager.h">
+>>>>>>> Stashed changes
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\keys.cfg">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Textures.cfg">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

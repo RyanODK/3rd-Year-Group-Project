@@ -10,9 +10,11 @@ public:
 	void setSpriteFromSheet(sf::IntRect textureBox, sf::Vector2i size); // sets texture for sprite from enemy sprite sheet
 	void update(float elapsedTime, float velocity); // takes in elapsedtime to use in class for now
 	void setAttack(bool attack);
+	void setActive(bool active); // sets moving boolean
 
 	sf::FloatRect getPosition(); // gets position of sprite
 	sf::Sprite getSprite(); // returns sprite
+	bool getActive();
 
 private:
 	const float INITIAL_HEALTH = 100;

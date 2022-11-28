@@ -19,14 +19,14 @@ void GroundObstacle::spawn(sf::Vector2f startPosition, sf::Vector2f scale) {
 
 void GroundObstacle::update(float elapsedTime) {
 	//cout << m_Position.x << "\n";
-	if (!obstacleActive)
+	if (!groundObstacleActive)
 	{
 		//obstacleSpeed = 30;
 
 		//m_Sprite.setPosition(900, 600);
 		m_Position.x = 2500;
 		m_Position.y = 900;
-		obstacleActive = true;
+		//obstacleActive = true;
 
 	}
 	else
@@ -37,7 +37,7 @@ void GroundObstacle::update(float elapsedTime) {
 
 		if (m_Position.x < -300)
 		{
-			obstacleActive = false;
+			groundObstacleActive = false;
 		}
 	}
 
@@ -82,6 +82,10 @@ void GroundObstacle::moveTextureRect(float elapsedTime) {
 		spriteSize.x, 0), spriteSize));
 }
 
+void GroundObstacle::setActive(bool active) {
+	groundObstacleActive = active;
+}
+
 sf::FloatRect GroundObstacle::getPosition() {
 	return m_Sprite.getLocalBounds();
 }
@@ -92,4 +96,8 @@ sf::FloatRect GroundObstacle::getGlobal() {
 
 sf::Sprite GroundObstacle::getSprite() {
 	return m_Sprite;
+}
+
+bool GroundObstacle::getActive() {
+	return groundObstacleActive;
 }

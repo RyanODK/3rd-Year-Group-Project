@@ -4,7 +4,6 @@
 
 class Floor {
 public:
-	Floor(); // default constructor to set initial values
 	void createFloor(sf::VertexArray& rVA, sf::Vector2f resolution);
 
 	sf::Texture getTexture();
