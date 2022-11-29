@@ -1,9 +1,9 @@
 #pragma once
-#include "EntityBase.h"
-#include "SharedContext.h"
 #include <unordered_map>
 #include <vector>
 #include <functional>
+#include "Player.h"
+#include "SharedContext.h"
 
 using EntityContainer = std::unordered_map<unsigned int, EntityBase*>;
 using EntityFactory = std::unordered_map<EntityType, std::function<EntityBase* (void)>>;

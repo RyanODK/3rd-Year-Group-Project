@@ -18,7 +18,7 @@
     <ClCompile Include="Code\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Player.cpp">
+    <ClCompile Include="Code\PlayerOLD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Background.cpp">
@@ -108,9 +108,12 @@
     <ClCompile Include="Code\Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\Player.h">
+    <ClInclude Include="Code\PlayerOLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Background.h">
@@ -210,6 +213,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\DebugOverlay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -41,6 +41,9 @@ void State_Game::OnCreate() {
 	m_background1 = GetFloor()->getTexture();
 	m_background1.setSrgb(false);
 
+	m_GameMap = new Map(m_StateMgr->GetContext(), this);
+	m_GameMap->LoadMap("");
+
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Game, "Key_Escape",
 		&State_Game::MainMenu, this);
@@ -66,7 +69,7 @@ void State_Game::Draw() {
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(background, &m_background1);
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetFloatingObstacle()->getSprite());
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetGroundObstacle()->getSprite());
-	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetPlayer()->getSprite());
+	//m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetPlayer()->getSprite());
 
 	// Small enemy drawing
 	if (backgroundType == 1) {
@@ -182,7 +185,7 @@ void State_Game::Update(const sf::Time& l_Time) {
 
 	coinCountText.setString(coinStream.str());
 
-	GetPlayer()->spawn(m_Resolution, gravity);
+	//GetPlayer()->spawn(m_Resolution, gravity);
 
 	// Obstacles
 	GetGroundObstacle()->spawn(sf::Vector2f(
@@ -326,13 +329,13 @@ void State_Game::Update(const sf::Time& l_Time) {
 		GetSmallEnemy5()->updateAnimation(5);
 	}
 
-	GetPlayer()->update(l_Time.asSeconds(), groundHeight);
+	//GetPlayer()->update(l_Time.asSeconds(), groundHeight);
 	GetBackground()->Scroll(l_Time.asSeconds());
 }
 
 void State_Game::Jump(EventDetails* l_Details) {
 	if (l_Details->m_Name == "Jump") {
-		GetPlayer()->Jump();
+		//GetPlayer()->Jump();
 	}
 }
 

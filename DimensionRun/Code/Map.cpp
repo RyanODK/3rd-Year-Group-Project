@@ -43,6 +43,8 @@ void Map::LoadMap(const std::string& l_path) {
 	std::string line;
 	std::cout << "--- Loading a map: " << l_path << std::endl;
 
+	EntityManager* entityMgr = m_Context->m_EntityManager;
+	int playerId = -1;
 	while (std::getline(mapFile, line)) {
 		if (line[0] == '|') { 
 			continue; 
@@ -141,6 +143,25 @@ void Map::LoadMap(const std::string& l_path) {
 		//		GetComponent<C_Position>(entityId, Component::Position);
 		//	if (position) { keystream >> *position; }
 		//}
+		else if(type == "Player") {
+			if (playerId != -1) {
+				continue;
+			}
+
+			// set up player position here
+			playerId = entityMgr->Add(EntityType::Player);
+
+			if (playerId < 0) {
+				continue;
+			}
+
+			float playerX = 0;
+			float playerY = 0;
+			keystream >> playerX >> playerY;
+
+			entityMgr->Find(playerId)->SetPosition(playerX, playerY);
+			m_PlayerStart = sf::Vector2f(playerX, playerY);
+		}
 		else {
 			// Something else.
 			std::cout << "! Unknown type \"" << type << "\"." << std::endl;
@@ -196,7 +217,7 @@ void Map::Update(float l_DeltaTime) {
 		m_LoadNextMap = false;
 
 		if (m_NextMap != "") {
-			LoadMap("media/maps/" + m_NextMap);
+			LoadMap("Code/Maps/" + m_NextMap);
 		}
 		else {
 			m_CurrentState->GetStateManager()->SwitchTo(StateType::GameOver);

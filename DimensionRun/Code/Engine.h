@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "StateManager.h"
 #include "EventManager.h"
+#include "EntityManager.h"
 
 //#include "MediumEnemy.h"
 //#include "LargeEnemy.h"
@@ -42,4 +43,6 @@ private:
 
 	sf::Clock m_Clock;
 	sf::Time m_Elapsed;
+
+	EntityManager m_EntityManager;
 };

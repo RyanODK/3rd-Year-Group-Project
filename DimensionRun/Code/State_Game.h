@@ -3,13 +3,14 @@
 #include "EventManager.h"
 #include "Background.h"
 #include "TextureHolder.h"
-#include "Player.h"
+//#include "Player.h"
 #include "SmallEnemy.h"
 #include "FloatingObstacle.h"
 #include "GroundObstacle.h"
 #include "SoundManager.h"
 #include "Floor.h"
 #include "Generator.h"
+#include "Map.h"
 
 class State_Game : public BaseState {
 public:
@@ -29,9 +30,9 @@ public:
 
 	void CheckCol();
 
-	Player* GetPlayer() {
+	/*Player* GetPlayer() {
 		return &m_player;
-	};
+	};*/
 
 	Background* GetBackground() {
 		return &m_background;
@@ -90,7 +91,7 @@ private:
 	sf::Text coinCountText;
 
 	Background m_background;
-	Player m_player;
+	//Player m_player;
 
 	float resetTime;
 	float distanceRan = 0.0f; // track distance
@@ -124,4 +125,6 @@ private:
 	sf::VertexArray background;
 
 	sf::Transform transform;
+
+	Map* m_GameMap;
 };

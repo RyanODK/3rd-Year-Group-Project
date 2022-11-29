@@ -44,6 +44,7 @@ public:
 	unsigned int GetId();
 	EntityType GetType();
 	EntityState GetState();
+	const sf::Vector2f& GetPosition() const;
 	bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two);
 
 	virtual void Update(float l_deltaTime);

@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "EntityManager.h"
 #include "Map.h"
+#include "DebugOverlay.h"
 
 // this is a pointer to the most commonly used classes
 struct SharedContext {
@@ -19,4 +20,5 @@ struct SharedContext {
 	TextureManager* m_TextureManager;
 	EntityManager* m_EntityManager;
 	Map* m_GameMap;
+	DebugOverlay m_DebugOverlay;
 };

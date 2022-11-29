@@ -119,6 +119,10 @@ EntityState EntityBase::GetState() {
 	return m_State;
 }
 
+const sf::Vector2f& EntityBase::GetPosition() const { 
+	return m_Position; 
+}
+
 bool EntityBase::SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two) {
 	return l_One.m_Area > l_Two.m_Area;
 }

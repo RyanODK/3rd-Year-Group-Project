@@ -39,6 +39,7 @@
     <ClCompile Include="Code\MediumEnemy.cpp" />
     <ClCompile Include="Code\Obstacle.cpp" />
     <ClCompile Include="Code\Player.cpp" />
+    <ClCompile Include="Code\PlayerOLD.cpp" />
     <ClCompile Include="Code\SmallEnemy.cpp" />
     <ClCompile Include="Code\SoundManager.cpp" />
     <ClCompile Include="Code\SpriteSheet.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Code\BaseState.h" />
     <ClInclude Include="Code\Character.h" />
     <ClInclude Include="Code\Collision.h" />
+    <ClInclude Include="Code\DebugOverlay.h" />
     <ClInclude Include="Code\Enemy.h" />
     <ClInclude Include="Code\Engine.h" />
     <ClInclude Include="Code\EntityBase.h" />
@@ -70,6 +72,7 @@
     <ClInclude Include="Code\MediumEnemy.h" />
     <ClInclude Include="Code\Obstacle.h" />
     <ClInclude Include="Code\Player.h" />
+    <ClInclude Include="Code\PlayerOLD.h" />
     <ClInclude Include="Code\ResourceManager.h" />
     <ClInclude Include="Code\SharedContext.h" />
     <ClInclude Include="Code\SmallEnemy.h" />
