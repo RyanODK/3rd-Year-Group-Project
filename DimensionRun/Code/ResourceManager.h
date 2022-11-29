@@ -43,7 +43,7 @@ public:
 
 		T* resource = Load(path->second);
 
-		if (!resouce) {
+		if (!resource) {
 			return false;
 		}
 

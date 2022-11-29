@@ -45,6 +45,10 @@ public:
 		return m_Transcendent;
 	}
 
+	sf::View& GetView() { 
+		return m_View; 
+	}
+
 	StateManager* GetStateManager() {
 		return m_StateMgr;
 	}
@@ -56,5 +60,5 @@ protected:
 	// eliminates need of countless enumerations for transitions between states
 	bool m_Transparent;
 	bool m_Transcendent;
-
+	sf::View m_View;
 };

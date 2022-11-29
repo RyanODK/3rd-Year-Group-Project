@@ -19,11 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Anim_Base.cpp" />
     <ClCompile Include="Code\Background.cpp" />
+    <ClCompile Include="Code\Character.cpp" />
     <ClCompile Include="Code\Collision.cpp" />
     <ClCompile Include="Code\Draw.cpp" />
     <ClCompile Include="Code\Enemy.cpp" />
     <ClCompile Include="Code\Engine.cpp" />
+    <ClCompile Include="Code\EntityBase.cpp" />
+    <ClCompile Include="Code\EntityManager.cpp" />
     <ClCompile Include="Code\EventManager.cpp" />
     <ClCompile Include="Code\FloatingObstacle.cpp" />
     <ClCompile Include="Code\Floor.cpp" />
@@ -37,6 +41,7 @@
     <ClCompile Include="Code\Player.cpp" />
     <ClCompile Include="Code\SmallEnemy.cpp" />
     <ClCompile Include="Code\SoundManager.cpp" />
+    <ClCompile Include="Code\SpriteSheet.cpp" />
     <ClCompile Include="Code\StateManager.cpp" />
     <ClCompile Include="Code\State_Game.cpp" />
     <ClCompile Include="Code\State_Intro.cpp" />
@@ -47,11 +52,15 @@
     <ClCompile Include="Code\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Anim_Base.h" />
     <ClInclude Include="Code\Background.h" />
     <ClInclude Include="Code\BaseState.h" />
+    <ClInclude Include="Code\Character.h" />
     <ClInclude Include="Code\Collision.h" />
     <ClInclude Include="Code\Enemy.h" />
     <ClInclude Include="Code\Engine.h" />
+    <ClInclude Include="Code\EntityBase.h" />
+    <ClInclude Include="Code\EntityManager.h" />
     <ClInclude Include="Code\EventManager.h" />
     <ClInclude Include="Code\FloatingObstacle.h" />
     <ClInclude Include="Code\Floor.h" />
@@ -65,6 +74,7 @@
     <ClInclude Include="Code\SharedContext.h" />
     <ClInclude Include="Code\SmallEnemy.h" />
     <ClInclude Include="Code\SoundManager.h" />
+    <ClInclude Include="Code\SpriteSheet.h" />
     <ClInclude Include="Code\StateManager.h" />
     <ClInclude Include="Code\State_Credits.h" />
     <ClInclude Include="Code\State_Game.h" />

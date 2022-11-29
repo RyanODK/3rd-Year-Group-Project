@@ -6,9 +6,11 @@
 #include <sstream>
 #include "Utilities.h"
 #include "SharedContext.h"
+#include "TextureManager.h"
+#include "BaseState.h"
 
 //tile sheet info
-enum Sheet { Tile_Size = 32, Sheet_Width = 256, Sheet_Height = 256, Num_Layers = 4 };
+enum Sheet { Tile_Size = 64, Sheet_Width = 320, Sheet_Height = 43, Num_Layers = 1 };
 
 //type alias for ids
 using TileID = unsigned int;
@@ -16,56 +18,55 @@ using TileID = unsigned int;
 //Tile information structure
 struct TileInfo {
 	//information for tile
-	TileInfo(SharedContext* l_context, const std::string& l_texture = "", TileID l_id = 0) : m_context(l_context), m_id(0), m_deadly(false)
+	TileInfo(SharedContext* l_Context, const std::string& l_Texture = "", TileID l_Id = 0) : m_Context(l_Context), m_Id(0), m_Deadly(false)
 	{
 		//texture the tile is using
-		TextureManager* tmgr = l_context->m_textureManager;
-		if (l_texture == "")
+		TextureManager* tmgr = l_Context->m_TextureManager;
+		if (l_Texture == "")
 		{ 
-			m_id = l_id; 
+			m_Id = l_Id; 
 			return; 
 		}
-		if (!tmgr->RequireResource(l_texture))
+		if (!tmgr->RequireResource(l_Texture))
 		{ 
 			return; 
 		}
-		m_texture = l_texture;
-		m_id = l_id;
+		m_Texture = l_Texture;
+		m_Id = l_Id;
 		//sprite points to tile sheet texture
-		m_sprite.setTexture(*tmgr->GetResource(m_texture));
+		m_Sprite.setTexture(*tmgr->GetResource(m_Texture));
 		//crops tile sheet to the sprite
-		sf::IntRect tileBoundaries(m_id % (Sheet::Sheet_Width / Sheet::Tile_Size) * Sheet::Tile_Size,
-			m_id / (Sheet::Sheet_Height / Sheet::Tile_Size) * Sheet::Tile_Size,
+		sf::IntRect tileBoundaries(m_Id % (Sheet::Sheet_Width / Sheet::Tile_Size) * Sheet::Tile_Size,
+			m_Id / (Sheet::Sheet_Height / Sheet::Tile_Size) * Sheet::Tile_Size,
 			Sheet::Tile_Size, Sheet::Tile_Size);
 		//sets text rect for sprite to the cropped boundaries
-		m_sprite.setTextureRect(tileBoundaries);
+		m_Sprite.setTextureRect(tileBoundaries);
 	}
 
 	~TileInfo() 
 	{
-		if (m_texture == "") 
+		if (m_Texture == "") 
 		{
 			return;
 		}
-		m_context->m_textureManager->ReleaseResource(m_texture);
+		m_Context->m_TextureManager->ReleaseResource(m_Texture);
 	}
 
-	sf::Sprite m_sprite;
+	sf::Sprite m_Sprite;
 
-	TileID m_id;
-	std::string m_name;
-	sf::Vector2f m_friction;
-	bool m_deadly;
+	TileID m_Id;
+	std::string m_Name;
+	sf::Vector2f m_Friction;
+	bool m_Deadly;
 
-	SharedContext* m_context;
-	std::string m_texture;
+	SharedContext* m_Context;
+	std::string m_Texture;
 };
 
 //destructor for tileinfo
 struct Tile {
-	TileInfo* m_properties;
-	bool m_warp; // Is the tile a warp.
-	bool m_solid; // Is the tile a solid.
+	TileInfo* m_Properties;
+	bool m_Warp; // Is the tile a warp. tiles that warps player to next dimension
 };
 
 //tile map is un ordered map container, holds pointers to tile objects 
@@ -74,43 +75,53 @@ using TileMap = std::unordered_map<TileID, Tile*>;
 using TileSet = std::unordered_map<TileID, TileInfo*>;
 
 class Map {
-//public methods
 public:
-	
-	Map(SharedContext* l_context);
+	Map(SharedContext* l_context, BaseState* l_CurrentState);
 	~Map();
 
-	Tile* GetTile(unsigned int l_x, unsigned int l_y, unsigned int l_layer);
+	Tile* GetTile(unsigned int l_X, unsigned int l_Y);
 	TileInfo* GetDefaultTile();
 
-	unsigned int GetTileSize()const;
-	const sf::Vector2u& GetMapSize()const;
-	const sf::Vector2f& GetPlayerStart()const;
-	int GetPlayerId()const;
+	unsigned int GetTileSize() const;
+	const sf::Vector2u& GetMapSize() const;
+	const sf::Vector2f& GetPlayerStart() const;
+	int GetPlayerId() const;
+	float GetGravity() const;
 
-	void LoadMap(const std::string& l_path);
+	void LoadMap(const std::string& l_Path);
+	void LoadNext();
 
-	void Update(float l_dT);
-	void Draw(unsigned int l_layer);
-//private methods
+	void Update(float l_deltaTime);
+	void Draw();
+
 private:
 	// Method for converting 2D coordinates to 1D ints.
-	unsigned int ConvertCoords(unsigned int l_x, unsigned int l_y, unsigned int l_layer)const;
+	unsigned int ConvertCoords(const unsigned int& l_X, const unsigned int& l_Y);
 
-	void LoadTiles(const std::string& l_path);
+	void LoadTiles(const std::string& l_Path);
 
 	void PurgeMap();
 	void PurgeTileSet();
 
-	TileSet m_tileSet;
-	TileMap m_tileMap;
+	TileSet m_TileSet;
+	TileMap m_TileMap;
 
-	TileInfo m_defaultTile;
+	sf::Sprite m_Background;
+	std::string m_BackgroundTexture;
 
-	sf::Vector2u m_maxMapSize;
-	sf::Vector2f m_playerStart;
-	int m_playerId;
-	unsigned int m_tileCount;
-	unsigned int m_tileSetCount;
-	SharedContext* m_context;
+	TileInfo m_DefaultTile;
+
+	sf::Vector2u m_MaxMapSize;
+	sf::Vector2f m_PlayerStart;
+
+	float m_MapGravity;
+	int m_PlayerId;
+
+	bool m_LoadNextMap;
+	std::string m_NextMap;
+	unsigned int m_TileCount;
+	unsigned int m_TileSetCount;
+
+	BaseState* m_CurrentState;
+	SharedContext* m_Context;
 };

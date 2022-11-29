@@ -32,6 +32,14 @@ public:
 		return &m_EventManager;
 	};
 
+	sf::FloatRect GetViewSpace() {
+		sf::Vector2f viewCenter(m_Window.getView().getCenter());
+		sf::Vector2f viewSize(m_Window.getView().getSize());
+		sf::Vector2f viewSizeHalf(viewSize.x / 2, viewSize.y / 2);
+		sf::FloatRect viewSpace(viewCenter - viewSizeHalf, viewSize);
+		return viewSpace;
+	}
+
 	void Close(EventDetails* l_Details = nullptr);
 
 private:
