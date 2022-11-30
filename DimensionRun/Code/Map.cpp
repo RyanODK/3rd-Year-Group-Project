@@ -25,11 +25,25 @@ Tile* Map::GetTile(unsigned int l_X, unsigned int l_Y){
 	return(itr != m_TileMap.end() ? itr->second : nullptr);
 }
 
-//TileInfo* Map::GetDefaultTile() { return &m_defaultTile; }
-//unsigned int Map::GetTileSize()const { return Sheet::Tile_Size; }
-//const sf::Vector2u& Map::GetMapSize()const { return m_maxMapSize; }
-//const sf::Vector2f& Map::GetPlayerStart()const { return m_playerStart; }
-//int Map::GetPlayerId()const { return m_playerId; }
+TileInfo* Map::GetDefaultTile() { 
+	return &m_DefaultTile; 
+}
+
+float Map::GetGravity() const { 
+	return m_MapGravity; 
+}
+
+unsigned int Map::GetTileSize() const { 
+	return Sheet::Tile_Size;
+}
+
+const sf::Vector2u& Map::GetMapSize() const { 
+	return m_MaxMapSize; 
+}
+
+const sf::Vector2f& Map::GetPlayerStart() const { 
+	return m_PlayerStart; 
+}
 
 void Map::LoadMap(const std::string& l_path) {
 	std::ifstream mapFile;
@@ -264,7 +278,7 @@ void Map::Draw() {
 }
 
 //converting coords from 2d to single number. Max size of map must be defined.
-unsigned int Map::ConvertCoords(const unsigned int& l_X, const unsigned int& l_Y)
+unsigned int Map::ConvertCoords(const unsigned int l_X, const unsigned int l_Y)
 {
 	return (l_X * m_MaxMapSize.x) + l_Y; // row-major
 }

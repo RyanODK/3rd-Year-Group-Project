@@ -1,10 +1,16 @@
 #include "EntityBase.h"
 
+bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two) {
+	return l_One.m_Area > l_Two.m_Area;
+}
+
 EntityBase::EntityBase(EntityManager* l_EntityMgr) :
 	m_EntityManager(l_EntityMgr), m_Name("BaseEntity"),
 	m_Type(EntityType::Base), m_ReferenceTile(nullptr),
 	m_State(EntityState::Idle), m_Id(0),
 	m_CollidingOnX(false), m_CollidingOnY(false) {}
+
+EntityBase::~EntityBase() {}
 
 void EntityBase::SetPosition(const float& l_X, const float& l_Y) {
 	m_Position = sf::Vector2f(l_X, l_Y);
@@ -26,6 +32,10 @@ void EntityBase::SetState(const EntityState& l_State) {
 		return;
 	}
 	m_State = l_State;
+}
+
+void EntityBase::SetAcceleration(float l_x, float l_y) {
+	m_Acceleration = sf::Vector2f(l_x, l_y);
 }
 
 void EntityBase::Move(float l_X, float l_Y) {
@@ -121,10 +131,6 @@ EntityState EntityBase::GetState() {
 
 const sf::Vector2f& EntityBase::GetPosition() const { 
 	return m_Position; 
-}
-
-bool EntityBase::SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two) {
-	return l_One.m_Area > l_Two.m_Area;
 }
 
 void EntityBase::CheckCollisions() {

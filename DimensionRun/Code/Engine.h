@@ -1,9 +1,9 @@
 #pragma once
-
 #include "Window.h"
 #include "StateManager.h"
 #include "EventManager.h"
 #include "EntityManager.h"
+#include "TextureManager.h"
 
 //#include "MediumEnemy.h"
 //#include "LargeEnemy.h"
@@ -22,6 +22,7 @@ public:
 
 	void update(); // function to update game per frame
 	void draw(); // function to draw everything on screen
+	void Render();
 
 private:
 
@@ -45,4 +46,5 @@ private:
 	sf::Time m_Elapsed;
 
 	EntityManager m_EntityManager;
+	TextureManager m_TextureManager;
 };

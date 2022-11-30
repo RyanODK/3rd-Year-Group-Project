@@ -1,15 +1,16 @@
 #pragma once
 #include "BaseState.h"
 #include "EventManager.h"
-#include "Background.h"
-#include "TextureHolder.h"
+#include "StateManager.h"
+//#include "Background.h"
+//#include "TextureHolder.h"
 //#include "Player.h"
-#include "SmallEnemy.h"
-#include "FloatingObstacle.h"
-#include "GroundObstacle.h"
-#include "SoundManager.h"
-#include "Floor.h"
-#include "Generator.h"
+//#include "SmallEnemy.h"
+//#include "FloatingObstacle.h"
+//#include "GroundObstacle.h"
+//#include "SoundManager.h"
+//#include "Floor.h"
+//#include "Generator.h"
 #include "Map.h"
 
 class State_Game : public BaseState {
@@ -34,7 +35,7 @@ public:
 		return &m_player;
 	};*/
 
-	Background* GetBackground() {
+	/*Background* GetBackground() {
 		return &m_background;
 	};
 
@@ -76,7 +77,7 @@ public:
 
 	Generator* GetGenerator() {
 		return &m_generator;
-	}
+	}*/
 
 	void MainMenu(EventDetails* l_Details); // switches state to MainMenu state
 	void Pause(EventDetails* l_Details); // switches state to Pause state
@@ -90,41 +91,41 @@ private:
 	sf::Text bestDistanceText;
 	sf::Text coinCountText;
 
-	Background m_background;
-	//Player m_player;
+	//Background m_background;
+	////Player m_player;
 
-	float resetTime;
-	float distanceRan = 0.0f; // track distance
-	float bestDistance = 0.0f; // keeps best time
-	float coinCount = 0.0f; // coin counter
-	float resetGenerator;
+	//float resetTime;
+	//float distanceRan = 0.0f; // track distance
+	//float bestDistance = 0.0f; // keeps best time
+	//float coinCount = 0.0f; // coin counter
+	//float resetGenerator;
 
-	int backgroundType;
-	int groundHeight;
-	const float gravity = 450;
+	//int backgroundType;
+	//int groundHeight;
+	//const float gravity = 450;
 
 	/* Small Enemies */
-	SmallEnemy m_SmallEnemy1;
-	SmallEnemy m_SmallEnemy2;
-	SmallEnemy m_SmallEnemy3;
-	SmallEnemy m_SmallEnemy4;
-	SmallEnemy m_SmallEnemy5;
+	//SmallEnemy m_SmallEnemy1;
+	//SmallEnemy m_SmallEnemy2;
+	//SmallEnemy m_SmallEnemy3;
+	//SmallEnemy m_SmallEnemy4;
+	//SmallEnemy m_SmallEnemy5;
 	//SmallEnemy m_Portal;
 
 	/* Obstacles */
-	FloatingObstacle m_FloatingObstacle;
-	GroundObstacle m_GroundObstacle;
-	Floor m_Floor;
+	//FloatingObstacle m_FloatingObstacle;
+	//GroundObstacle m_GroundObstacle;
+	//Floor m_Floor;
 
-	SoundManager m_SoundManager;
+	//SoundManager m_SoundManager;
 
-	Generator m_generator;
+	//Generator m_generator;
 
-	sf::Texture m_background1;
+	//sf::Texture m_background1;
 
-	sf::VertexArray background;
+	//sf::VertexArray background;
 
-	sf::Transform transform;
+	//sf::Transform transform;
 
 	Map* m_GameMap;
 };

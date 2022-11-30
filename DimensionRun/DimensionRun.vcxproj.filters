@@ -18,16 +18,10 @@
     <ClCompile Include="Code\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\PlayerOLD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\TextureHolder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Engine.cpp">
@@ -42,19 +36,7 @@
     <ClCompile Include="Code\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SmallEnemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\MediumEnemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\LargeEnemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Obstacle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\FloatingObstacle.cpp">
@@ -111,36 +93,21 @@
     <ClCompile Include="Code\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\PlayerOLD.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\TextureHolder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\SoundManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\SmallEnemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\LargeEnemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\MediumEnemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Obstacle.h">
@@ -221,12 +188,21 @@
     <ClInclude Include="Code\DebugOverlay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\keys.cfg">
       <Filter>Source Files</Filter>
     </None>
     <None Include="Code\Textures.cfg">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Tiles.cfg">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Maps\map1.map">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

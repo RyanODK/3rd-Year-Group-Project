@@ -5,7 +5,7 @@ EntityManager::EntityManager(SharedContext* l_Context, unsigned int l_MaxEntitie
 	
 	LoadEnemyTypes("EnemyList.list");
 	RegisterEntity<Player>(EntityType::Player);
-	RegisterEntity<Enemy>(EntityType::Enemy);
+	//RegisterEntity<Enemy>(EntityType::Enemy);
 }
 
 EntityManager::~EntityManager() {
@@ -26,14 +26,14 @@ int EntityManager::Add(const EntityType& l_Type, const std::string& l_Name) {
 
 	m_Entities.emplace(m_IdCounter, entity);
 
-	if (l_Type == EntityType::Enemy) {
+	/*if (l_Type == EntityType::Enemy) {
 		auto itr = m_EnemyTypes.find(l_Name);
 
 		if (itr != m_EnemyTypes.end()) {
 			Enemy* enemy = (Enemy*)entity;
 			enemy->Load(itr->second);
 		}
-	}
+	}*/
 
 	m_IdCounter++;
 	return m_IdCounter - 1;
@@ -128,7 +128,7 @@ void EntityManager::EntityCollisionCheck() {
 			EntityType t2 = itr2->second->GetType();
 			if (t1 == EntityType::Player || t1 == EntityType::Enemy) {
 				Character* c1 = (Character*)itr->second;
-				if (c1->m_attackAABB.intersects(itr2->second->m_AABB)) {
+				if (c1->m_AttackAABB.intersects(itr2->second->m_AABB)) {
 					c1->OnEntityCollision(itr2->second, true);
 				}
 			}
@@ -136,7 +136,7 @@ void EntityManager::EntityCollisionCheck() {
 			if (t2 == EntityType::Player || t2 == EntityType::Enemy) {
 				Character* c2 = (Character*)itr2->second;
 
-				if (c2->m_attackAABB.intersects(itr->second->m_AABB)) {
+				if (c2->m_AttackAABB.intersects(itr->second->m_AABB)) {
 					c2->OnEntityCollision(itr->second, true);
 				}
 			}

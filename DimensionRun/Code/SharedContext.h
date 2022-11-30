@@ -3,10 +3,11 @@
 #include "EventManager.h"
 #include "TextureManager.h"
 #include "EntityManager.h"
-#include "Map.h"
+//#include "Map.h"
 #include "DebugOverlay.h"
 
 // this is a pointer to the most commonly used classes
+class Map;
 struct SharedContext {
 	SharedContext() :
 		m_Wind(nullptr), 

@@ -8,6 +8,7 @@ class Character : public EntityBase {
 public:
 	Character(EntityManager* l_EntityMgr);
 	virtual ~Character();
+
 	void Move();
 	void Jump();
 	void Attack();

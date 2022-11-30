@@ -6,6 +6,8 @@ Anim_Base::Anim_Base() :
 	m_ElapsedTime(0.f), m_FrameActionStart(-1),
 	m_FrameActionEnd(-1), m_Loop(false), m_IsPlaying(false) {}
 
+Anim_Base::~Anim_Base(){}
+
 void Anim_Base::SetSpriteSheet(SpriteSheet* l_Sheet) {
 	m_SpriteSheet = l_Sheet;
 }

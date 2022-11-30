@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "Utilities.h"
+
 template<typename Derived, typename T>
 
 class ResourceManager {
@@ -24,7 +25,7 @@ public:
 
 	std::string GetPath(const std::string& l_id) {
 		auto path = m_paths.find(l_id);
-		return(path != m_paths.end() ? path->second : " ");
+		return(path != m_paths.end() ? path->second : "");
 	}
 
 	bool RequireResource(const std::string& l_id) {
@@ -74,6 +75,7 @@ public:
 			m_resources.erase(m_resources.begin());
 		}
 	}
+
 protected:
 	T* Load(const std::string& l_path) {
 		return static_cast<Derived*>(this)->Load(l_path);
@@ -85,7 +87,7 @@ private:
 
 	std::pair<T*, unsigned int>* Find(const std::string& l_id) {
 		auto itr = m_resources.find(l_id);
-		return (itr != m_resources.end() > &itr->second : nullptr);
+		return (itr != m_resources.end() ? &itr->second : nullptr);
 	}
 
 	bool Unload(const std::string& l_id) {

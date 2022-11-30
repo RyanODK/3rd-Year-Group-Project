@@ -85,6 +85,14 @@ sf::Vector2u Window::GetWindowSize() {
 	return m_WindowSize;
 }
 
+sf::FloatRect Window::GetViewSpace() {
+	sf::Vector2f viewCenter = m_Window.getView().getCenter();
+	sf::Vector2f viewSize = m_Window.getView().getSize();
+	sf::Vector2f viewSizeHalf(viewSize.x / 2, viewSize.y / 2);
+	sf::FloatRect viewSpace(viewCenter - viewSizeHalf, viewSize);
+	return viewSpace;
+}
+
 void Window::Draw(sf::Drawable& l_Drawable) {
 	m_Window.draw(l_Drawable);
 }

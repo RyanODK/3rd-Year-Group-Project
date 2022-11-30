@@ -2,11 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <map>
+#include <array>
 #include <fstream>
 #include <sstream>
 #include "Utilities.h"
 #include "SharedContext.h"
-#include "TextureManager.h"
+//#include "TextureManager.h"
 #include "BaseState.h"
 
 //tile sheet info
@@ -96,7 +97,7 @@ public:
 
 private:
 	// Method for converting 2D coordinates to 1D ints.
-	unsigned int ConvertCoords(const unsigned int& l_X, const unsigned int& l_Y);
+	unsigned int ConvertCoords(const unsigned int l_X, const unsigned int l_Y);
 
 	void LoadTiles(const std::string& l_Path);
 

@@ -1,12 +1,18 @@
 #pragma once
+#include <string>
+#include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "EntityManager.h"
+//#include "SharedContext.h"
+//#include "Map.h"
 
 enum class EntityType { Base, Enemy, Player };
 
 enum class EntityState {
 	Idle, Running, Jumping, Attacking, Dying
 };
+
+struct TileInfo;
 
 struct CollisionElement {
 	CollisionElement(float l_Area, TileInfo* l_Info, const sf::FloatRect& l_Bounds) :
@@ -19,6 +25,7 @@ struct CollisionElement {
 };
 
 using Collisions = std::vector<CollisionElement>;
+bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two);
 
 class EntityManager;
 
@@ -45,7 +52,7 @@ public:
 	EntityType GetType();
 	EntityState GetState();
 	const sf::Vector2f& GetPosition() const;
-	bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two);
+	//bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two);
 
 	virtual void Update(float l_deltaTime);
 	virtual void Draw(sf::RenderWindow* l_Wind) = 0;

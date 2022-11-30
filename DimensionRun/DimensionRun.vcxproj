@@ -22,7 +22,6 @@
     <ClCompile Include="Code\Anim_Base.cpp" />
     <ClCompile Include="Code\Background.cpp" />
     <ClCompile Include="Code\Character.cpp" />
-    <ClCompile Include="Code\Collision.cpp" />
     <ClCompile Include="Code\Draw.cpp" />
     <ClCompile Include="Code\Enemy.cpp" />
     <ClCompile Include="Code\Engine.cpp" />
@@ -33,14 +32,10 @@
     <ClCompile Include="Code\Floor.cpp" />
     <ClCompile Include="Code\Generator.cpp" />
     <ClCompile Include="Code\GroundObstacle.cpp" />
-    <ClCompile Include="Code\LargeEnemy.cpp" />
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\Map.cpp" />
-    <ClCompile Include="Code\MediumEnemy.cpp" />
     <ClCompile Include="Code\Obstacle.cpp" />
     <ClCompile Include="Code\Player.cpp" />
-    <ClCompile Include="Code\PlayerOLD.cpp" />
-    <ClCompile Include="Code\SmallEnemy.cpp" />
     <ClCompile Include="Code\SoundManager.cpp" />
     <ClCompile Include="Code\SpriteSheet.cpp" />
     <ClCompile Include="Code\StateManager.cpp" />
@@ -57,7 +52,6 @@
     <ClInclude Include="Code\Background.h" />
     <ClInclude Include="Code\BaseState.h" />
     <ClInclude Include="Code\Character.h" />
-    <ClInclude Include="Code\Collision.h" />
     <ClInclude Include="Code\DebugOverlay.h" />
     <ClInclude Include="Code\Enemy.h" />
     <ClInclude Include="Code\Engine.h" />
@@ -67,15 +61,11 @@
     <ClInclude Include="Code\FloatingObstacle.h" />
     <ClInclude Include="Code\Floor.h" />
     <ClInclude Include="Code\GroundObstacle.h" />
-    <ClInclude Include="Code\LargeEnemy.h" />
     <ClInclude Include="Code\Map.h" />
-    <ClInclude Include="Code\MediumEnemy.h" />
     <ClInclude Include="Code\Obstacle.h" />
     <ClInclude Include="Code\Player.h" />
-    <ClInclude Include="Code\PlayerOLD.h" />
     <ClInclude Include="Code\ResourceManager.h" />
     <ClInclude Include="Code\SharedContext.h" />
-    <ClInclude Include="Code\SmallEnemy.h" />
     <ClInclude Include="Code\SoundManager.h" />
     <ClInclude Include="Code\SpriteSheet.h" />
     <ClInclude Include="Code\StateManager.h" />
@@ -92,7 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\keys.cfg" />
+    <None Include="Code\Maps\map1.map" />
     <None Include="Code\Textures.cfg" />
+    <None Include="Code\Tiles.cfg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
