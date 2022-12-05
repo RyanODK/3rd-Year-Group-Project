@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "EntityManager.h"
+#include "StateManager.h"
 
 Player::Player(EntityManager* l_EntityMgr) :
 	Character(l_EntityMgr) {

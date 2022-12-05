@@ -4,13 +4,14 @@
 #include "EventManager.h"
 #include "EntityManager.h"
 #include "TextureManager.h"
-
+#include "SystemManager.h"
 //#include "MediumEnemy.h"
 //#include "LargeEnemy.h"
 
 class Engine {
 public:
 	Engine(); // default constructor to set game resolution and ground height
+	~Engine();
 
 	sf::Time GetElapsed(); // gets elapsed time in game
 	void RestartClock(); // restarts elapsed clock 
@@ -47,4 +48,7 @@ private:
 
 	EntityManager m_EntityManager;
 	TextureManager m_TextureManager;
+	AudioManager m_AudioManager;
+	SoundManager m_SoundManager;
+	SystemManager m_SystemManager;
 };

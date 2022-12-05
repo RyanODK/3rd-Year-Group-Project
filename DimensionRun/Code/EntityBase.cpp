@@ -1,4 +1,8 @@
 #include "EntityBase.h"
+#include "EntityManager.h"
+#include "SharedContext.h"
+#include "Map.h"
+#include <cmath>
 
 bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two) {
 	return l_One.m_Area > l_Two.m_Area;
@@ -7,7 +11,7 @@ bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two
 EntityBase::EntityBase(EntityManager* l_EntityMgr) :
 	m_EntityManager(l_EntityMgr), m_Name("BaseEntity"),
 	m_Type(EntityType::Base), m_ReferenceTile(nullptr),
-	m_State(EntityState::Idle), m_Id(0),
+	m_State(EntityState::Running), m_Id(0),
 	m_CollidingOnX(false), m_CollidingOnY(false) {}
 
 EntityBase::~EntityBase() {}

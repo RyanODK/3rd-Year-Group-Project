@@ -35,7 +35,8 @@ void State_Intro::OnCreate() {
 		continueRect.top + continueRect.height / 2.0f);
 	m_continueText.setPosition(windowSize.x / 2.0f, namesRect.top + namesRect.height + 45);
 
-	GetSoundManager()->playIntroMusic();
+	//GetSoundManager()->playIntroMusic();
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("IntroMusic", 40.f, true);
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Intro, "Intro_Continue",

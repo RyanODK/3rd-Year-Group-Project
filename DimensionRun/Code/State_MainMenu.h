@@ -3,7 +3,6 @@
 #include "EventManager.h"
 #include "Background.h"
 #include "TextureHolder.h"
-#include "SoundManager.h"
 
 class State_MainMenu : public BaseState {
 public:
@@ -25,10 +24,6 @@ public:
 		return &m_mainMenuBackground;
 	};
 
-	SoundManager* GetSoundManager() {
-		return &m_SoundManager;
-	}
-
 	void Play(EventDetails* l_Details);
 	void Credits(EventDetails* l_Details);
 	void QuitGame(EventDetails* l_Details);
@@ -47,6 +42,4 @@ private:
 
 	Background m_mainMenuBackground;
 	TextureHolder m_TextureHolder;
-
-	SoundManager m_SoundManager;
 };

@@ -11,7 +11,7 @@
 #include "BaseState.h"
 
 //tile sheet info
-enum Sheet { Tile_Size = 64, Sheet_Width = 320, Sheet_Height = 43, Num_Layers = 1 };
+enum Sheet { Tile_Size = 64, Sheet_Width = 320, Sheet_Height = 43, Num_Layers = 4 };
 
 //type alias for ids
 using TileID = unsigned int;
@@ -68,6 +68,7 @@ struct TileInfo {
 struct Tile {
 	TileInfo* m_Properties;
 	bool m_Warp; // Is the tile a warp. tiles that warps player to next dimension
+	bool m_Solid;
 };
 
 //tile map is un ordered map container, holds pointers to tile objects 
@@ -77,10 +78,10 @@ using TileSet = std::unordered_map<TileID, TileInfo*>;
 
 class Map {
 public:
-	Map(SharedContext* l_context, BaseState* l_CurrentState);
+	Map(SharedContext* l_context);
 	~Map();
 
-	Tile* GetTile(unsigned int l_X, unsigned int l_Y);
+	Tile* GetTile(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer);
 	TileInfo* GetDefaultTile();
 
 	unsigned int GetTileSize() const;
@@ -93,11 +94,11 @@ public:
 	void LoadNext();
 
 	void Update(float l_deltaTime);
-	void Draw();
+	void Draw(unsigned int l_Layer);
 
 private:
 	// Method for converting 2D coordinates to 1D ints.
-	unsigned int ConvertCoords(const unsigned int l_X, const unsigned int l_Y);
+	unsigned int ConvertCoords(const unsigned int l_X, const unsigned int l_Y, const unsigned int l_Layer);
 
 	void LoadTiles(const std::string& l_Path);
 
@@ -107,8 +108,12 @@ private:
 	TileSet m_TileSet;
 	TileMap m_TileMap;
 
-	sf::Sprite m_Background;
-	std::string m_BackgroundTexture;
+	sf::Sprite m_Background1;
+	sf::Sprite m_Background2;
+	sf::Sprite m_Background3;
+	std::string m_BackgroundTexture1;
+	std::string m_BackgroundTexture2;
+	std::string m_BackgroundTexture3;
 
 	TileInfo m_DefaultTile;
 
@@ -125,4 +130,6 @@ private:
 
 	BaseState* m_CurrentState;
 	SharedContext* m_Context;
+
+	int m_PlayerID;
 };

@@ -56,8 +56,9 @@ void State_MainMenu::OnCreate() {
 		m_Options[i].setPosition(buttonPosition);
 	}
 
-	GetSoundManager()->stopInGameMusic();
+	//GetSoundManager()->stopInGameMusic();
 	//GetSoundManager()->playMainMenuMusic();
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 40.f, true);
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::MainMenu, "Mouse_Left",

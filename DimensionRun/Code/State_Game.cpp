@@ -41,24 +41,31 @@ void State_Game::OnCreate() {
 	//m_background1 = GetFloor()->getTexture();
 	//m_background1.setSrgb(false);
 
-	m_GameMap = new Map(m_StateMgr->GetContext(), this);
+	m_GameMap = new Map(m_StateMgr->GetContext());
 	m_GameMap->LoadMap("Code/Maps/map1.map");
+
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Game, "Key_Escape",
 		&State_Game::MainMenu, this);
 	evMgr->AddCallback(StateType::Game, "Key_P",
 		&State_Game::Pause, this);
-	evMgr->AddCallback(StateType::Game, "Jump",
-		&State_Game::Jump, this);
+	evMgr->AddCallback(StateType::Game, "Player_MoveLeft", &State_Game::PlayerMove, this);
+	evMgr->AddCallback(StateType::Game, "Player_MoveRight", &State_Game::PlayerMove, this);
+	evMgr->AddCallback(StateType::Game, "Player_MoveUp", &State_Game::PlayerMove, this);
+	evMgr->AddCallback(StateType::Game, "Player_MoveDown", &State_Game::PlayerMove, this);
 }
 
 void State_Game::OnDestroy() {
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->RemoveCallback(StateType::Game, "Key_Escape");
 	evMgr->RemoveCallback(StateType::Game, "Key_P");
+	evMgr->RemoveCallback(StateType::Game, "Player_MoveLeft");
+	evMgr->RemoveCallback(StateType::Game, "Player_MoveRight");
+	evMgr->RemoveCallback(StateType::Game, "Player_MoveUp");
+	evMgr->RemoveCallback(StateType::Game, "Player_MoveDown");
 	delete m_GameMap;
-	m_GameMap = nullptr;
 }
 
 void State_Game::Draw() {
@@ -94,42 +101,18 @@ void State_Game::Draw() {
 		m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->draw(GetSmallEnemy5()->getSprite());
 	}*/
 
-	m_GameMap->Draw();
-	m_StateMgr->GetContext()->m_EntityManager->Draw();
+	for (unsigned int i = 0; i < Sheet::Num_Layers; ++i) {
+		m_GameMap->Draw(i);
+		m_StateMgr->GetContext()->m_SystemManager->Draw(
+			m_StateMgr->GetContext()->m_Wind, i);
+	}
 }
 
 void State_Game::Update(const sf::Time& l_Time) {
 	SharedContext* context = m_StateMgr->GetContext();
-	EntityBase* player = context->m_EntityManager->Find("Player");
-	
-	if (!player) {
-		std::cout << "Respawning player..." << std::endl;
-		context->m_EntityManager->Add(EntityType::Player, "Player");
-		player = context->m_EntityManager->Find("Player");
-		player->SetPosition(m_GameMap->GetPlayerStart());
-	}
-	//else {
-	//	m_view.setCenter(player->GetPosition());
-	//	context->m_wind->GetRenderWindow()->setView(m_view);
-	//}
-
-	sf::FloatRect viewSpace = context->m_Wind->GetViewSpace();
-	if (viewSpace.left <= 0) {
-		m_View.setCenter(viewSpace.width / 2, m_View.getCenter().y);
-		context->m_Wind->GetRenderWindow()->setView(m_View);
-	}
-	else if (viewSpace.left + viewSpace.width >
-		(m_GameMap->GetMapSize().x + 1) * Sheet::Tile_Size)
-	{
-		m_View.setCenter(((m_GameMap->GetMapSize().x + 1) *
-			Sheet::Tile_Size) - (viewSpace.width / 2),
-			m_View.getCenter().y);
-		context->m_Wind->GetRenderWindow()->setView(m_View);
-	}
-
+	UpdateCamera();
 	m_GameMap->Update(l_Time.asSeconds());
-	m_StateMgr->GetContext()->
-		m_EntityManager->Update(l_Time.asSeconds());
+	context->m_SystemManager->Update(l_Time.asSeconds());
 	//resetTime += l_Time.asSeconds();
 	//distanceRan += l_Time.asSeconds();
 	//resetGenerator += l_Time.asSeconds();
@@ -381,6 +364,61 @@ void State_Game::MainMenu(EventDetails* l_details) {
 
 void State_Game::Pause(EventDetails* l_details) {
 	m_StateMgr->SwitchTo(StateType::Paused);
+}
+
+void State_Game::UpdateCamera() {
+	if (m_Player == -1) { return; }
+	SharedContext* context = m_StateMgr->GetContext();
+	C_Position* pos = m_StateMgr->GetContext()->m_EntityManager->
+		GetComponent<C_Position>(m_Player, Component::Position);
+
+	m_View.setCenter(pos->GetPosition());
+	context->m_Wind->GetRenderWindow()->setView(m_View);
+
+	sf::FloatRect viewSpace = context->m_Wind->GetViewSpace();
+	if (viewSpace.left <= 0) {
+		m_View.setCenter(viewSpace.width / 2, m_View.getCenter().y);
+		context->m_Wind->GetRenderWindow()->setView(m_View);
+	}
+	else if (viewSpace.left + viewSpace.width >
+		(m_GameMap->GetMapSize().x) * Sheet::Tile_Size)
+	{
+		m_View.setCenter(
+			((m_GameMap->GetMapSize().x) * Sheet::Tile_Size) -
+			(viewSpace.width / 2), m_View.getCenter().y);
+		context->m_Wind->GetRenderWindow()->setView(m_View);
+	}
+
+	if (viewSpace.top <= 0) {
+		m_View.setCenter(m_View.getCenter().x, viewSpace.height / 2);
+		context->m_Wind->GetRenderWindow()->setView(m_View);
+	}
+	else if (viewSpace.top + viewSpace.height >
+		(m_GameMap->GetMapSize().y) * Sheet::Tile_Size)
+	{
+		m_View.setCenter(m_View.getCenter().x,
+			((m_GameMap->GetMapSize().y) * Sheet::Tile_Size) -
+			(viewSpace.height / 2));
+		context->m_Wind->GetRenderWindow()->setView(m_View);
+	}
+}
+
+void State_Game::PlayerMove(EventDetails* l_details) {
+	Message msg((MessageType)EntityMessage::Move);
+	if (l_details->m_Name == "Player_MoveLeft") {
+		msg.m_int = (int)Direction::Left;
+	}
+	else if (l_details->m_Name == "Player_MoveRight") {
+		msg.m_int = (int)Direction::Right;
+	}
+	else if (l_details->m_Name == "Player_MoveUp") {
+		msg.m_int = (int)Direction::Up;
+	}
+	else if (l_details->m_Name == "Player_MoveDown") {
+		msg.m_int = (int)Direction::Down;
+	}
+	msg.m_receiver = m_Player;
+	m_StateMgr->GetContext()->m_SystemManager->GetMessageHandler()->Dispatch(msg);
 }
 
 void State_Game::Activate() {}

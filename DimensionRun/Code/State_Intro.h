@@ -1,7 +1,6 @@
 #pragma once
 #include "BaseState.h"
 #include "EventManager.h"
-#include "SoundManager.h"
 
 class State_Intro : public BaseState{
 public:
@@ -19,10 +18,6 @@ public:
 
 	void Continue(EventDetails* l_Details);
 
-	SoundManager* GetSoundManager() {
-		return &m_SoundManager;
-	}
-
 private:
 	sf::Text m_MainTitle;
 	sf::Text m_Names;
@@ -30,6 +25,4 @@ private:
 	sf::Font m_Font;
 
 	float m_TimePassed;
-
-	SoundManager m_SoundManager;
 };

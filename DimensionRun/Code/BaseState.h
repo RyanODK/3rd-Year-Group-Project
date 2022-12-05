@@ -1,5 +1,6 @@
 #pragma once
-#include "EventManager.h"
+#include <SFML/Graphics.hpp>
+//#include "EventManager.h"
 
 // forward declaration of StateManager class to keep pointer of it
 // also avoids recursive definitions

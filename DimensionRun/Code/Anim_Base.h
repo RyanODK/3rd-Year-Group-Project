@@ -13,20 +13,23 @@ public:
 
 	void SetSpriteSheet(SpriteSheet* l_Sheet);
 
-	void SetFrame(const unsigned int& l_Frame);
+	bool SetFrame(Frame l_Frame);
 	void SetName(const std::string& l_Name);
 	void SetLooping(bool l_loop);
 
 	bool IsLooping();
 	bool IsInAction();
 	bool IsPlaying();
+	bool CheckMoved();
 
 	void Play();
 	void Pause();
 	void Stop();
 	void Reset();
 
+	SpriteSheet* GetSpriteSheet();
 	std::string GetName();
+	Frame GetFrame();
 
 	virtual void Update(const float& l_deltaTime);
 
@@ -36,9 +39,9 @@ public:
 	}
 
 protected:
-	virtual void FrameStep() = 0;
-	virtual void CropSprite() = 0;
-	virtual void ReadIn(std::stringstream& l_Stream) = 0;
+	void FrameStep();
+	void CropSprite();
+	void ReadIn(std::stringstream& l_Stream);
 
 	Frame m_FrameCurrent;
 	Frame m_FrameStart;
@@ -53,6 +56,7 @@ protected:
 
 	bool m_Loop;
 	bool m_IsPlaying;
+	bool m_HasMoved;
 
 	std::string m_Name;
 	SpriteSheet* m_SpriteSheet;

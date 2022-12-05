@@ -8,6 +8,13 @@ public:
 		m_debug = false;
 	}
 
+	~DebugOverlay() {
+		while (m_drawables.begin() != m_drawables.end()) {
+			delete m_drawables.back();
+			m_drawables.pop_back();
+		}
+	}
+
 	void Add(sf::Drawable* l_drawable) {
 		m_drawables.push_back(l_drawable);
 	}

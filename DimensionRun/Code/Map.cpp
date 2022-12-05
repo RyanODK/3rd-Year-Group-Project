@@ -1,15 +1,14 @@
 #include "Map.h"
 #include "StateManager.h"
+#include <cmath>
 
 //constructor for map class
-Map::Map(SharedContext* l_Context, BaseState* l_CurrentState) : 
-	m_Context(l_Context), m_DefaultTile(l_Context), m_MaxMapSize(32, 32), m_PlayerId(-1),
-	m_TileCount(0), m_TileSetCount(0), m_MapGravity(512.f), 
-	m_LoadNextMap(false), m_CurrentState(l_CurrentState)
+Map::Map(SharedContext* l_Context) : 
+	m_Context(l_Context), m_DefaultTile(l_Context), m_MaxMapSize(32, 32), m_PlayerId(-1)
 {
 	m_Context->m_GameMap = this;
 	//loads tile from file
-	LoadTiles("tiles.cfg");
+	LoadTiles("Resources/tiles.cfg");
 }
 
 //desctuctor for map class
@@ -20,8 +19,14 @@ Map::~Map() {
 }
 
 //converting 2d coords to single number 
-Tile* Map::GetTile(unsigned int l_X, unsigned int l_Y){
-	auto itr = m_TileMap.find(ConvertCoords(l_X, l_Y));
+Tile* Map::GetTile(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer){
+	if (l_X < 0 || l_Y < 0 || l_X >= m_MaxMapSize.x ||
+		l_Y >= m_MaxMapSize.y || l_Layer < 0 ||
+		l_Layer >= Sheet::Num_Layers)
+	{
+		return nullptr;
+	}
+	auto itr = m_TileMap.find(ConvertCoords(l_X, l_Y, l_Layer));
 	return(itr != m_TileMap.end() ? itr->second : nullptr);
 }
 
@@ -47,7 +52,7 @@ const sf::Vector2f& Map::GetPlayerStart() const {
 
 void Map::LoadMap(const std::string& l_path) {
 	std::ifstream mapFile;
-	mapFile.open(Utils::GetWorkingDirectory() + l_path);
+	mapFile.open(l_path);
 
 	if (!mapFile.is_open()) {
 		std::cout << "! Failed loading map file: " << l_path << std::endl;
@@ -75,34 +80,34 @@ void Map::LoadMap(const std::string& l_path) {
 				std::cout << "! Bad tile id: " << tileId << std::endl;
 				continue;
 			}
-
 			auto itr = m_TileSet.find(tileId);
 			if (itr == m_TileSet.end()) {
 				std::cout << "! Tile id(" << tileId << ") was not found in tileset." << std::endl;
 				continue;
 			}
-
 			sf::Vector2i tileCoords;
-			keystream >> tileCoords.x >> tileCoords.y;
+			unsigned int tileLayer = 0;
+			unsigned int tileSolidity = 0;
+			keystream >> tileCoords.x >> tileCoords.y >> tileLayer >> tileSolidity;
 			if (tileCoords.x > m_MaxMapSize.x ||
-				tileCoords.y > m_MaxMapSize.y) {
+				tileCoords.y > m_MaxMapSize.y ||
+				tileLayer >= Sheet::Num_Layers)
+			{
 				std::cout << "! Tile is out of range: " << tileCoords.x << " " << tileCoords.y << std::endl;
 				continue;
 			}
-
 			Tile* tile = new Tile();
 			// Bind properties of a tile from a set.
 			tile->m_Properties = itr->second;
+			tile->m_Solid = (bool)tileSolidity;
 			if (!m_TileMap.emplace(ConvertCoords(
-				tileCoords.x, tileCoords.y), tile).second)
+				tileCoords.x, tileCoords.y, tileLayer), tile).second)
 			{
 				// Duplicate tile detected!
 				std::cout << "! Duplicate tile! : " << tileCoords.x << " " << tileCoords.y << std::endl;
 				delete tile;
-				tile = nullptr;
 				continue;
 			}
-
 			std::string warp;
 			keystream >> warp;
 			tile->m_Warp = false;
@@ -112,26 +117,78 @@ void Map::LoadMap(const std::string& l_path) {
 			}
 		}
 		else if (type == "BACKGROUND") {
-			if (m_BackgroundTexture != "") { 
+			if (m_BackgroundTexture1 != "") {
 				continue; 
 			}
 
-			keystream >> m_BackgroundTexture;
-			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture))
+			keystream >> m_BackgroundTexture1;
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture1))
 			{
-				m_BackgroundTexture = "";
+				m_BackgroundTexture1 = "";
 				continue;
 			}
 
-			sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture);
-			m_Background.setTexture(*texture);
+			sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture1);
+			m_Background1.setTexture(*texture);
 
-			sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
+			sf::Vector2f viewSize;
+			viewSize.x = sf::VideoMode::getDesktopMode().width;
+			viewSize.y = sf::VideoMode::getDesktopMode().height;
 			sf::Vector2u textureSize = texture->getSize();
 			sf::Vector2f scaleFactors;
 			scaleFactors.x = viewSize.x / textureSize.x;
 			scaleFactors.y = viewSize.y / textureSize.y;
-			m_Background.setScale(scaleFactors);
+			m_Background1.setScale(scaleFactors);
+		}
+		else if (type == "BACKGROUND2") {
+			if (m_BackgroundTexture2 != "") {
+				continue;
+			}
+
+			keystream >> m_BackgroundTexture2;
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture2))
+			{
+				m_BackgroundTexture2 = "";
+				continue;
+			}
+
+			sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture2);
+			m_Background2.setTexture(*texture);
+
+			//sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
+			sf::Vector2f viewSize;
+			viewSize.x = sf::VideoMode::getDesktopMode().width;
+			viewSize.y = sf::VideoMode::getDesktopMode().height;
+			sf::Vector2u textureSize = texture->getSize();
+			sf::Vector2f scaleFactors;
+			scaleFactors.x = viewSize.x / textureSize.x;
+			scaleFactors.y = viewSize.y / textureSize.y;
+			m_Background2.setScale(scaleFactors);
+		}
+		else if (type == "BACKGROUND3") {
+			if (m_BackgroundTexture3 != "") {
+				continue;
+			}
+
+			keystream >> m_BackgroundTexture3;
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture3))
+			{
+				m_BackgroundTexture3 = "";
+				continue;
+			}
+
+			sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture3);
+			m_Background3.setTexture(*texture);
+
+			//sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
+			sf::Vector2f viewSize;
+			viewSize.x = sf::VideoMode::getDesktopMode().width;
+			viewSize.y = sf::VideoMode::getDesktopMode().height;
+			sf::Vector2u textureSize = texture->getSize();
+			sf::Vector2f scaleFactors;
+			scaleFactors.x = viewSize.x / textureSize.x;
+			scaleFactors.y = viewSize.y / textureSize.y;
+			m_Background3.setScale(scaleFactors);
 		}
 		else if (type == "SIZE") {
 			keystream >> m_MaxMapSize.x >> m_MaxMapSize.y;
@@ -145,36 +202,27 @@ void Map::LoadMap(const std::string& l_path) {
 		else if (type == "NEXTMAP") {
 			keystream >> m_NextMap;
 		}
-		//else if (type == "ENTITY") {
-		//	// Set up entity here.
-		//	std::string name;
-		//	keystream >> name;
-		//	if (name == "Player" && m_playerId != -1) { continue; }
-		//	int entityId = m_context->m_EntityManager->AddEntity(name);
-		//	if (entityId < 0) { continue; }
-		//	if (name == "Player") { m_playerId = entityId; }
-		//	C_Base* position = m_context->m_entityManager->
-		//		GetComponent<C_Position>(entityId, Component::Position);
-		//	if (position) { keystream >> *position; }
-		//}
-		else if(type == "Player") {
-			if (playerId != -1) {
-				continue;
+		else if (type == "ENTITY") {
+			// Set up entity here.
+			std::string name;
+			keystream >> name;
+			if (name == "Player" && m_PlayerId != -1) { 
+				continue; 
+			}
+			int entityId = m_Context->m_EntityManager->AddEntity(name);
+
+			if (entityId < 0) { 
+				continue; 
+			}
+			if (name == "Player") {
+				m_PlayerId = entityId; 
 			}
 
-			// set up player position here
-			playerId = entityMgr->Add(EntityType::Player);
-
-			if (playerId < 0) {
-				continue;
+			C_Base* position = m_Context->m_EntityManager->
+				GetComponent<C_Position>(entityId, Component::Position);
+			if (position) { 
+				keystream >> *position; 
 			}
-
-			float playerX = 0;
-			float playerY = 0;
-			keystream >> playerX >> playerY;
-
-			entityMgr->Find(playerId)->SetPosition(playerX, playerY);
-			m_PlayerStart = sf::Vector2f(playerX, playerY);
 		}
 		else {
 			// Something else.
@@ -191,7 +239,7 @@ void Map::LoadNext() {
 
 void Map::LoadTiles(const std::string& l_path) {
 	std::ifstream tileSetFile;
-	tileSetFile.open(Utils::GetWorkingDirectory() + l_path);
+	tileSetFile.open("Code/Resources/tiles.cfg");
 
 	if (!tileSetFile.is_open()) {
 		std::cout << "! Failed loading tile set file: " << l_path << std::endl;
@@ -241,12 +289,20 @@ void Map::Update(float l_DeltaTime) {
 	}
 
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
-	m_Background.setPosition(viewSpace.left, viewSpace.top);
+	m_Background1.setPosition(viewSpace.left, viewSpace.top);
+	m_Background2.setPosition(viewSpace.left, viewSpace.top);
+	m_Background3.setPosition(viewSpace.left, viewSpace.top);
 }
 
-void Map::Draw() {
+void Map::Draw(unsigned int l_layer) {
+	if (l_layer >= Sheet::Num_Layers) { 
+		return; 
+	}
+
 	sf::RenderWindow* l_Wind = m_Context->m_Wind->GetRenderWindow();
-	l_Wind->draw(m_Background);
+	l_Wind->draw(m_Background1);
+	l_Wind->draw(m_Background2);
+	l_Wind->draw(m_Background3);
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
 
 	sf::Vector2i tileBegin(floor(viewSpace.left / Sheet::Tile_Size), 
@@ -258,29 +314,24 @@ void Map::Draw() {
 	unsigned int count = 0;
 	for (int x = tileBegin.x; x <= tileEnd.x; ++x) {
 		for (int y = tileBegin.y; y <= tileEnd.y; ++y) {
-			if (x < 0 || y < 0) { 
-				continue; 
-			}
-
-			Tile* tile = GetTile(x, y);
-
+			Tile* tile = GetTile(x, y, l_layer);
+			
 			if (!tile) { 
 				continue; 
 			}
 
 			sf::Sprite& sprite = tile->m_Properties->m_Sprite;
-			sprite.setPosition(x * Sheet::Tile_Size,
-				y * Sheet::Tile_Size);
+			sprite.setPosition(x * Sheet::Tile_Size, y * Sheet::Tile_Size);
 			l_Wind->draw(sprite);
-			++count;
+			count++;
 		}
 	}
 }
 
 //converting coords from 2d to single number. Max size of map must be defined.
-unsigned int Map::ConvertCoords(const unsigned int l_X, const unsigned int l_Y)
+unsigned int Map::ConvertCoords(const unsigned int l_X, const unsigned int l_Y, const unsigned int l_Layer)
 {
-	return (l_X * m_MaxMapSize.x) + l_Y; // row-major
+	return ((l_Layer * m_MaxMapSize.y + l_Y) * l_X + m_MaxMapSize.x); // row-major
 }
 
 void Map::PurgeMap() {
@@ -293,12 +344,22 @@ void Map::PurgeMap() {
 	m_TileMap.clear();
 	m_Context->m_EntityManager->Purge();
 
-	if (m_BackgroundTexture == "") {
+	if (m_BackgroundTexture1 == "") {
+		return;
+	}
+	if (m_BackgroundTexture2 == "") {
+		return;
+	}
+	if (m_BackgroundTexture3 == "") {
 		return;
 	}
 
-	m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture);
-	m_BackgroundTexture = "";
+	m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture1);
+	m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture2);
+	m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture3);
+	m_BackgroundTexture1 = "";
+	m_BackgroundTexture2 = "";
+	m_BackgroundTexture3 = "";
 }
 
 void Map::PurgeTileSet() {

@@ -3,8 +3,11 @@
 #include "EventManager.h"
 #include "TextureManager.h"
 #include "EntityManager.h"
-//#include "Map.h"
 #include "DebugOverlay.h"
+#include "AudioManager.h"
+#include "SoundManager.h"
+#include "SystemManager.h"
+#include "EntityManager.h"
 
 // this is a pointer to the most commonly used classes
 class Map;
@@ -14,6 +17,9 @@ struct SharedContext {
 		m_EventManager(nullptr),
 		m_TextureManager(nullptr),
 		m_EntityManager(nullptr),
+		m_AudioManager(nullptr),
+		m_SoundManager(nullptr),
+		m_SystemManager(nullptr),
 		m_GameMap(nullptr) {}
 
 	Window* m_Wind;
@@ -21,5 +27,8 @@ struct SharedContext {
 	TextureManager* m_TextureManager;
 	EntityManager* m_EntityManager;
 	Map* m_GameMap;
+	AudioManager* m_AudioManager;
+	SoundManager* m_SoundManager;
+	SystemManager* m_SystemManager;
 	DebugOverlay m_DebugOverlay;
 };

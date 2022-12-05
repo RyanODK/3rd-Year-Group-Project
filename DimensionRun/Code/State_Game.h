@@ -27,6 +27,8 @@ public:
 	void Update(const sf::Time& l_Time);
 	void Draw();
 
+	void PlayerMove(EventDetails* l_Details);
+
 	void Jump(EventDetails* l_Details);
 
 	void CheckCol();
@@ -128,4 +130,7 @@ private:
 	//sf::Transform transform;
 
 	Map* m_GameMap;
+
+	void UpdateCamera();
+	int m_Player;
 };

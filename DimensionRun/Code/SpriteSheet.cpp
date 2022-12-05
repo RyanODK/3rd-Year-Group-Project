@@ -11,14 +11,14 @@ SpriteSheet::~SpriteSheet() {
 void SpriteSheet::ReleaseSheet() {
 	m_TextureManager->ReleaseResource(m_Texture);
 	m_AnimationCurrent = nullptr;
-
+	 
 	while (m_Animations.begin() != m_Animations.end()) {
 		delete m_Animations.begin()->second;
 		m_Animations.erase(m_Animations.begin());
 	}
 }
 
-void SpriteSheet::SetSpriteSize(const sf::Vector2i& l_Size) {
+void SpriteSheet::SetSpriteSize(const sf::Vector2u& l_Size) {
 	m_SpriteSize = l_Size;
 	m_Sprite.setOrigin(m_SpriteSize.x / 2, m_SpriteSize.y);
 }
@@ -33,7 +33,7 @@ void SpriteSheet::CropSprite(const sf::IntRect& l_Rect) {
 
 bool SpriteSheet::LoadSheet(const std::string& l_File) {
 	std::ifstream sheet;
-	sheet.open(Utils::GetWorkingDirectory() + l_File);
+	sheet.open(l_File);
 
 	if (sheet.is_open()) {
 		ReleaseSheet(); // release current sheet resources
@@ -82,7 +82,9 @@ bool SpriteSheet::LoadSheet(const std::string& l_File) {
 					std::cerr << "! Duplicate animation(" << name << ") in: " << l_File << std::endl;
 					continue;
 				}
+
 				Anim_Base* anim = nullptr;
+				anim = new Anim_Base();
 
 				keystream >> *anim;
 				anim->SetSpriteSheet(this);
@@ -93,6 +95,7 @@ bool SpriteSheet::LoadSheet(const std::string& l_File) {
 				if (m_AnimationCurrent) {
 					continue;
 				}
+
 				m_AnimationCurrent = anim;
 				m_AnimationCurrent->Play();
 			}
@@ -138,7 +141,7 @@ void SpriteSheet::Draw(sf::RenderWindow* l_Window) {
 	l_Window->draw(m_Sprite);
 }
 
-sf::Vector2i SpriteSheet::GetSpriteSize() const { 
+sf::Vector2u SpriteSheet::GetSpriteSize() const { 
 	return m_SpriteSize; 
 }
 

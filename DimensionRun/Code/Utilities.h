@@ -1,7 +1,7 @@
 #pragma once
 #define RUNNING_WINDOWS
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <algorithm>
 
 namespace Utils {

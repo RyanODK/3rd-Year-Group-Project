@@ -2,14 +2,14 @@
 #include <string>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "EntityManager.h"
+//#include "EntityManager.h"
 //#include "SharedContext.h"
 //#include "Map.h"
 
 enum class EntityType { Base, Enemy, Player };
 
 enum class EntityState {
-	Idle, Running, Jumping, Attacking, Dying
+	Running, Jumping, Attacking, Dying
 };
 
 struct TileInfo;

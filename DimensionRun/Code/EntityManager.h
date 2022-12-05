@@ -1,52 +1,66 @@
 #pragma once
+#include "C_Position.h"
+#include "C_SpriteSheet.h"
+#include "C_State.h"
+#include "C_Movable.h"
+#include "C_Controller.h"
+#include "C_Collidable.h"
+#include "C_SoundEmitter.h"
+#include "C_SoundListener.h"
+#include "Bitmask.h"
+#include "TextureManager.h"
 #include <unordered_map>
 #include <vector>
 #include <functional>
-#include "Player.h"
-//#include "Enemy.h"
-#include "SharedContext.h"
 
-using EntityContainer = std::unordered_map<unsigned int, EntityBase*>;
-using EntityFactory = std::unordered_map<EntityType, std::function<EntityBase* (void)>>;
-using EnemyTypes = std::unordered_map<std::string, std::string>;
+using EntityId = unsigned int;
 
-struct SharedContext;
+using ComponentContainer = std::vector<C_Base*>;
+using EntityData = std::pair<Bitmask, ComponentContainer>;
+using EntityContainer = std::unordered_map<EntityId, EntityData>;
+using ComponentFactory = std::unordered_map<Component, std::function<C_Base* (void)>>;
 
+class SystemManager;
 class EntityManager {
 public:
-	EntityManager(SharedContext* l_Context, unsigned int l_MaxEntities);
+	EntityManager(SystemManager* l_sysMgr, TextureManager* l_textureMgr);
 	~EntityManager();
 
-	int Add(const EntityType& l_Type, const std::string& l_Name = "");
-	EntityBase* Find(unsigned int l_Id);
-	EntityBase* Find(const std::string& l_Name);
-	void Remove(unsigned int l_Id);
+	int AddEntity(const Bitmask& l_mask);
+	int AddEntity(const std::string& l_entityFile);
+	bool RemoveEntity(const EntityId& l_id);
 
-	void Update(float l_DeltaTime);
-	void Draw();
+	bool AddComponent(const EntityId& l_entity, const Component& l_component);
 
-	void Purge();
-
-	SharedContext* GetContext();
-
-private:
 	template<class T>
-	void RegisterEntity(const EntityType& l_Type) {
-		m_EntityFactory[l_Type] = [this]() -> EntityBase* {
-			return new T(this);
-		};
+	T* GetComponent(const EntityId& l_entity, const Component& l_component)
+	{
+		auto itr = m_Entities.find(l_entity);
+		if (itr == m_Entities.end()) { return nullptr; }
+		// Found the entity.
+		if (!itr->second.first.GetBit((unsigned int)l_component)) { return nullptr; }
+		// Component exists.
+		auto& container = itr->second.second;
+		auto component = std::find_if(container.begin(), container.end(),
+			[&l_component](C_Base* c) { return c->GetType() == l_component; });
+		return (component != container.end() ? dynamic_cast<T*>(*component) : nullptr);
 	}
 
-	void ProcessRemovals();
-	void LoadEnemyTypes(const std::string& l_Name);
-	void EntityCollisionCheck();
+	bool RemoveComponent(const EntityId& l_entity, const Component& l_component);
+	bool HasComponent(const EntityId& l_entity, const Component& l_component);
 
+	void Purge();
+private:
+	template<class T>
+	void AddComponentType(const Component& l_id) {
+		m_CFactory[l_id] = []()->C_Base* { return new T(); };
+	}
+
+	// Data members
+	unsigned int m_IDCounter;
 	EntityContainer m_Entities;
-	EnemyTypes m_EnemyTypes;
-	EntityFactory m_EntityFactory;
-	SharedContext* m_Context;
-	unsigned int m_IdCounter;
-	unsigned int m_MaxEntities;
+	ComponentFactory m_CFactory;
 
-	std::vector<unsigned int> m_EntitiesToRemove;
+	SystemManager* m_Systems;
+	TextureManager* m_TextureManager;
 };

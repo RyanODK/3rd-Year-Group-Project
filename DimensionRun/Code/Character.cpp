@@ -1,4 +1,6 @@
 #include "Character.h"
+#include "EntityManager.h"
+#include "StateManager.h"
 
 Character::Character(EntityManager* l_EntityMgr) :
 	EntityBase(l_EntityMgr), m_SpriteSheet(m_EntityManager->GetContext()->m_TextureManager),
@@ -7,6 +9,8 @@ Character::Character(EntityManager* l_EntityMgr) :
 	m_Name = "Character";
 }
 
+Character::~Character() { }
+
 void Character::Move() {
 	if (GetState() == EntityState::Dying) {
 		return;
@@ -14,7 +18,7 @@ void Character::Move() {
 
 	Accelerate(m_Speed.x, 0);
 
-	if (GetState() == EntityState::Idle) {
+	if (GetState() == EntityState::Running) {
 		SetState(EntityState::Running);
 	}
 }
@@ -56,7 +60,7 @@ void Character::Load(const std::string& l_Path) {
 	std::ifstream file;
 	std::string line;
 
-	file.open(Utils::GetWorkingDirectory() + std::string("Code/") + l_Path);
+	file.open("Code/Resources/Media/Characters/Player.char");
 	if (!file.is_open()) {
 		std::cout << "! Failed loading file: " << l_Path << std::endl;
 		return;
@@ -74,12 +78,12 @@ void Character::Load(const std::string& l_Path) {
 		if (type == "Name") {
 			keystream >> m_Name;
 		}
-		else if (type == "SpriteSheet") {
+		else if (type == "Spritesheet") {
 			std::string path;
 			keystream >> path;
-			m_SpriteSheet.LoadSheet("Code/" + path);
+			m_SpriteSheet.LoadSheet("Code/Resources/Media/Spritesheets/" + path);
 		}
-		else if (type == "HitPoints") {
+		else if (type == "Hitpoints") {
 			keystream >> m_HitPoints;
 		}
 		else if (type == "BoundingBox") {

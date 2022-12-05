@@ -12,11 +12,11 @@ public:
     SpriteSheet(TextureManager* l_textMgr);
     ~SpriteSheet();
 
-    void SetSpriteSize(const sf::Vector2i& l_Size);
+    void SetSpriteSize(const sf::Vector2u& l_Size);
     void SetSpritePosition(const sf::Vector2f& l_Pos);
     void CropSprite(const sf::IntRect& l_rect);
     
-    sf::Vector2i GetSpriteSize() const;
+    sf::Vector2u GetSpriteSize() const;
     sf::Vector2f GetSpritePosition() const;
 
     bool LoadSheet(const std::string& l_file);
@@ -32,7 +32,7 @@ public:
 private:
     std::string m_Texture;
     sf::Sprite m_Sprite;
-    sf::Vector2i m_SpriteSize;
+    sf::Vector2u m_SpriteSize;
     sf::Vector2f m_SpriteScale;
     //std::string m_AnimType;
     Animations m_Animations;

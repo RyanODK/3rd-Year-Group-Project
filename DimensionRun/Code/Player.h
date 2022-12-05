@@ -1,8 +1,8 @@
 #pragma once
 #include "Character.h"
 #include "EventManager.h"
-#include "EntityManager.h"
-#include "StateManager.h"
+//#include "EntityManager.h"
+//#include "StateManager.h"
 
 class Player : public Character {
 public:
