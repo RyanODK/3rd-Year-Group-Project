@@ -1,6 +1,6 @@
 #pragma once
 #include "C_Drawable.h"
-#include "SpriteSheet.h"
+#include "SpriteSheet.h" 
 
 class C_SpriteSheet : public C_Drawable {
 public:
@@ -41,6 +41,7 @@ public:
 
 	void Draw(sf::RenderWindow* l_wind) {
 		if (!m_SpriteSheet) { 
+			std::cout << "no spritesheet for player" << std::endl;
 			return; 
 		}
 		m_SpriteSheet->Draw(l_wind);

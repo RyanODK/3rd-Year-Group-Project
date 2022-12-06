@@ -4,6 +4,9 @@ Engine::Engine() : m_Window("Dimension Run",
 	sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height)),
 	m_StateManager(&m_Context), m_EntityManager(&m_SystemManager, &m_TextureManager), m_SoundManager(&m_AudioManager)
 {
+	m_Clock.restart();
+	srand(time(nullptr));
+
 	m_SystemManager.SetEntityManager(&m_EntityManager);
 
 	m_Context.m_Wind = &m_Window;
@@ -19,20 +22,6 @@ Engine::Engine() : m_Window("Dimension Run",
 }
 
 Engine::~Engine() {}
-
-void Engine::Render() {
-	m_Window.BeginDraw();
-	// Render here.
-	m_StateManager.Draw();
-
-	// Debug.
-	if (m_Context.m_DebugOverlay.Debug()) {
-		m_Context.m_DebugOverlay.Draw(m_Window.GetRenderWindow());
-	}
-	// End debug.
-
-	m_Window.EndDraw();
-}
 
 sf::Time Engine::GetElapsed() {
 	return m_Elapsed;

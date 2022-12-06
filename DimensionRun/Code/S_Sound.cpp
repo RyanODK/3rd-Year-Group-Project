@@ -85,7 +85,7 @@ void S_Sound::SetUp(AudioManager* l_audioManager, SoundManager* l_soundManager)
 }
 
 sf::Vector3f S_Sound::MakeSoundPosition(const sf::Vector2f& l_entityPos, unsigned int l_elevation) {
-	return sf::Vector3f(l_entityPos.x, l_elevation * Sheet::Tile_Size, l_entityPos.y);
+	return sf::Vector3f(l_entityPos.x, l_elevation * Sheet::Tile_SizeY, l_entityPos.y);
 }
 
 void S_Sound::EmitSound(const EntityId& l_entity, const EntitySound& l_sound,

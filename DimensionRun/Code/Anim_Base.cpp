@@ -100,8 +100,14 @@ void Anim_Base::Update(const float& l_DeltaTime) {
 }
 
 void Anim_Base::CropSprite() {
-	sf::IntRect rect(m_SpriteSheet->GetSpriteSize().x * m_FrameCurrent,
+	/*sf::IntRect rect(m_SpriteSheet->GetSpriteSize().x * m_FrameCurrent,
 		m_SpriteSheet->GetSpriteSize().y * m_FrameRow,
+		m_SpriteSheet->GetSpriteSize().x, m_SpriteSheet->GetSpriteSize().y);
+	m_SpriteSheet->CropSprite(rect);*/
+
+	sf::IntRect rect((m_SpriteSheet->GetSpriteSize().x * m_FrameCurrent),
+		(m_SpriteSheet->GetSpriteSize().y * (m_FrameRow + (short)m_SpriteSheet->GetDirection()))
+		+ ((m_FrameRow + (short)m_SpriteSheet->GetDirection())),
 		m_SpriteSheet->GetSpriteSize().x, m_SpriteSheet->GetSpriteSize().y);
 	m_SpriteSheet->CropSprite(rect);
 }

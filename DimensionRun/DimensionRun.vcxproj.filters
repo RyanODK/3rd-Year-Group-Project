@@ -262,7 +262,7 @@
     <None Include="Code\Maps\map1.map">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Code\Resources\tiles.cfg">
+    <None Include="Code\Resources\tiles.cfg.txt">
       <Filter>Source Files</Filter>
     </None>
     <None Include="Code\Resources\Media\Characters\Player.char">
@@ -271,7 +271,7 @@
     <None Include="Code\Resources\keys.cfg">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Code\Resources\Textures.cfg">
+    <None Include="Code\Resources\Textures.cfg.txt">
       <Filter>Source Files</Filter>
     </None>
     <None Include="Code\Resources\Media\Spritesheets\Player.sheet">

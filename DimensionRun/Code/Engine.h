@@ -2,7 +2,6 @@
 #include "Window.h"
 #include "StateManager.h"
 #include "EventManager.h"
-#include "EntityManager.h"
 #include "TextureManager.h"
 #include "SystemManager.h"
 //#include "MediumEnemy.h"
@@ -23,7 +22,6 @@ public:
 
 	void update(); // function to update game per frame
 	void draw(); // function to draw everything on screen
-	void Render();
 
 private:
 

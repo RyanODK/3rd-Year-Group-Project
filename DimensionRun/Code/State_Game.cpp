@@ -1,7 +1,7 @@
 #include "State_Game.h"
 #include "StateManager.h"
 
-State_Game::State_Game(StateManager* l_StateManager) :
+State_Game::State_Game(StateManager* l_StateManager) : 
 	BaseState(l_StateManager) {}
 
 State_Game::~State_Game() {}
@@ -41,11 +41,6 @@ void State_Game::OnCreate() {
 	//m_background1 = GetFloor()->getTexture();
 	//m_background1.setSrgb(false);
 
-	m_GameMap = new Map(m_StateMgr->GetContext());
-	m_GameMap->LoadMap("Code/Maps/map1.map");
-
-	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
-
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Game, "Key_Escape",
 		&State_Game::MainMenu, this);
@@ -55,6 +50,23 @@ void State_Game::OnCreate() {
 	evMgr->AddCallback(StateType::Game, "Player_MoveRight", &State_Game::PlayerMove, this);
 	evMgr->AddCallback(StateType::Game, "Player_MoveUp", &State_Game::PlayerMove, this);
 	evMgr->AddCallback(StateType::Game, "Player_MoveDown", &State_Game::PlayerMove, this);
+
+	sf::Vector2u size = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
+	m_View.setSize(size.x, size.y);
+	m_View.setCenter(size.x / 2, size.y / 2);
+	//m_View.zoom(0.6f);
+	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->setView(m_View);
+
+	m_GameMap = new Map(m_StateMgr->GetContext());
+	m_GameMap->LoadMap("Code/Maps/map1.map");
+
+	EntityManager* entities = m_StateMgr->GetContext()->m_EntityManager;
+	m_StateMgr->GetContext()->m_SystemManager->GetSystem<S_Collision>(System::Collision)->SetMap(m_GameMap);
+	m_StateMgr->GetContext()->m_SystemManager->GetSystem<S_Movement>(System::Movement)->SetMap(m_GameMap);
+	m_Player = m_GameMap->GetPlayerId();
+
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+
 }
 
 void State_Game::OnDestroy() {
@@ -381,10 +393,10 @@ void State_Game::UpdateCamera() {
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
 	else if (viewSpace.left + viewSpace.width >
-		(m_GameMap->GetMapSize().x) * Sheet::Tile_Size)
+		(m_GameMap->GetMapSize().x) * Sheet::Tile_SizeX)
 	{
 		m_View.setCenter(
-			((m_GameMap->GetMapSize().x) * Sheet::Tile_Size) -
+			((m_GameMap->GetMapSize().x) * Sheet::Tile_SizeX) -
 			(viewSpace.width / 2), m_View.getCenter().y);
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
@@ -394,10 +406,10 @@ void State_Game::UpdateCamera() {
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
 	else if (viewSpace.top + viewSpace.height >
-		(m_GameMap->GetMapSize().y) * Sheet::Tile_Size)
+		(m_GameMap->GetMapSize().y) * Sheet::Tile_SizeY)
 	{
 		m_View.setCenter(m_View.getCenter().x,
-			((m_GameMap->GetMapSize().y) * Sheet::Tile_Size) -
+			((m_GameMap->GetMapSize().y) * Sheet::Tile_SizeY) -
 			(viewSpace.height / 2));
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
@@ -423,3 +435,7 @@ void State_Game::PlayerMove(EventDetails* l_details) {
 
 void State_Game::Activate() {}
 void State_Game::Deactivate() {}
+
+void State_Game::ToggleOverlay(EventDetails* l_details) {
+	m_StateMgr->GetContext()->m_DebugOverlay.SetDebug(!m_StateMgr->GetContext()->m_DebugOverlay.Debug());
+}

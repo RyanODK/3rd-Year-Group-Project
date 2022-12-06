@@ -15,7 +15,9 @@ public:
     void SetSpriteSize(const sf::Vector2u& l_Size);
     void SetSpritePosition(const sf::Vector2f& l_Pos);
     void CropSprite(const sf::IntRect& l_rect);
-    
+    void SetDirection(const Direction& l_dir);
+
+    Direction GetDirection();
     sf::Vector2u GetSpriteSize() const;
     sf::Vector2f GetSpritePosition() const;
 
@@ -38,4 +40,5 @@ private:
     Animations m_Animations;
     Anim_Base* m_AnimationCurrent;
     TextureManager* m_TextureManager;
+    Direction m_Direction;
 };

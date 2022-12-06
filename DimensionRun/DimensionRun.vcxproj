@@ -109,8 +109,8 @@
     <None Include="Code\Resources\Media\Characters\Player.char" />
     <None Include="Code\Resources\Media\Entities\Player.entity" />
     <None Include="Code\Resources\Media\Spritesheets\Player.sheet" />
-    <None Include="Code\Resources\Textures.cfg" />
-    <None Include="Code\Resources\tiles.cfg" />
+    <None Include="Code\Resources\Textures.cfg.txt" />
+    <None Include="Code\Resources\tiles.cfg.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

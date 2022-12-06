@@ -41,12 +41,12 @@ void S_Renderer::HandleEvent(const EntityId& l_entity, const EntityEvent& l_even
 
 void S_Renderer::Notify(const Message& l_message) {
 	if (HasEntity(l_message.m_receiver)) {
-		/*EntityMessage m = (EntityMessage)l_message.m_type;
+		EntityMessage m = (EntityMessage)l_message.m_type;
 		switch (m) {
 		case EntityMessage::Direction_Changed:
 			SetSheetDirection(l_message.m_receiver, (Direction)l_message.m_int);
 			break;
-		}*/
+		}
 	}
 }
 
@@ -82,4 +82,15 @@ void S_Renderer::SortDrawables() {
 			}
 			return pos1->GetElevation() < pos2->GetElevation();
 		});
+}
+
+void S_Renderer::SetSheetDirection(const EntityId& l_entity, const Direction& l_dir)
+{
+	EntityManager* entities = m_SystemManager->GetEntityManager();
+	if (!entities->HasComponent(l_entity, Component::SpriteSheet)) { 
+		return; 
+	}
+
+	C_SpriteSheet* sheet = entities->GetComponent<C_SpriteSheet>(l_entity, Component::SpriteSheet);
+	sheet->GetSpriteSheet()->SetDirection(l_dir);
 }

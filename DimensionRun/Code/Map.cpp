@@ -8,7 +8,7 @@ Map::Map(SharedContext* l_Context) :
 {
 	m_Context->m_GameMap = this;
 	//loads tile from file
-	LoadTiles("Resources/tiles.cfg");
+	LoadTiles("Resources/tiles.cfg.txt");
 }
 
 //desctuctor for map class
@@ -27,7 +27,10 @@ Tile* Map::GetTile(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer){
 		return nullptr;
 	}
 	auto itr = m_TileMap.find(ConvertCoords(l_X, l_Y, l_Layer));
-	return(itr != m_TileMap.end() ? itr->second : nullptr);
+	if (itr == m_TileMap.end()) { 
+		return nullptr; 
+	}
+	return itr->second;
 }
 
 TileInfo* Map::GetDefaultTile() { 
@@ -39,7 +42,7 @@ float Map::GetGravity() const {
 }
 
 unsigned int Map::GetTileSize() const { 
-	return Sheet::Tile_Size;
+	return Sheet::Tile_SizeX, Tile_SizeY;
 }
 
 const sf::Vector2u& Map::GetMapSize() const { 
@@ -48,6 +51,10 @@ const sf::Vector2u& Map::GetMapSize() const {
 
 const sf::Vector2f& Map::GetPlayerStart() const { 
 	return m_PlayerStart; 
+}
+
+int Map::GetPlayerId() const { 
+	return m_PlayerId; 
 }
 
 void Map::LoadMap(const std::string& l_path) {
@@ -80,6 +87,7 @@ void Map::LoadMap(const std::string& l_path) {
 				std::cout << "! Bad tile id: " << tileId << std::endl;
 				continue;
 			}
+
 			auto itr = m_TileSet.find(tileId);
 			if (itr == m_TileSet.end()) {
 				std::cout << "! Tile id(" << tileId << ") was not found in tileset." << std::endl;
@@ -239,7 +247,7 @@ void Map::LoadNext() {
 
 void Map::LoadTiles(const std::string& l_path) {
 	std::ifstream tileSetFile;
-	tileSetFile.open("Code/Resources/tiles.cfg");
+	tileSetFile.open("Code/Resources/tiles.cfg.txt");
 
 	if (!tileSetFile.is_open()) {
 		std::cout << "! Failed loading tile set file: " << l_path << std::endl;
@@ -267,7 +275,7 @@ void Map::LoadTiles(const std::string& l_path) {
 			// Duplicate tile detected!
 			std::cout << "! Duplicate tile type: " << tile->m_Name << std::endl;
 			delete tile;
-			//tile = nullptr;
+			tile = nullptr;
 		}
 	}
 	tileSetFile.close();
@@ -305,11 +313,11 @@ void Map::Draw(unsigned int l_layer) {
 	l_Wind->draw(m_Background3);
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
 
-	sf::Vector2i tileBegin(floor(viewSpace.left / Sheet::Tile_Size), 
-						floor(viewSpace.top / Sheet::Tile_Size));
+	sf::Vector2i tileBegin(floor(viewSpace.left / Sheet::Tile_SizeX), 
+						floor(viewSpace.top / Sheet::Tile_SizeY));
 
-	sf::Vector2i tileEnd(ceil((viewSpace.left + viewSpace.width) / Sheet::Tile_Size),
-					ceil((viewSpace.top + viewSpace.height) / Sheet::Tile_Size));
+	sf::Vector2i tileEnd(ceil((viewSpace.left + viewSpace.width) / Sheet::Tile_SizeX),
+					ceil((viewSpace.top + viewSpace.height) / Sheet::Tile_SizeY));
 
 	unsigned int count = 0;
 	for (int x = tileBegin.x; x <= tileEnd.x; ++x) {
@@ -321,7 +329,7 @@ void Map::Draw(unsigned int l_layer) {
 			}
 
 			sf::Sprite& sprite = tile->m_Properties->m_Sprite;
-			sprite.setPosition(x * Sheet::Tile_Size, y * Sheet::Tile_Size);
+			sprite.setPosition(x * Sheet::Tile_SizeX, y * Sheet::Tile_SizeY);
 			l_Wind->draw(sprite);
 			count++;
 		}
@@ -329,7 +337,7 @@ void Map::Draw(unsigned int l_layer) {
 }
 
 //converting coords from 2d to single number. Max size of map must be defined.
-unsigned int Map::ConvertCoords(const unsigned int l_X, const unsigned int l_Y, const unsigned int l_Layer)
+unsigned int Map::ConvertCoords(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer)const
 {
 	return ((l_Layer * m_MaxMapSize.y + l_Y) * l_X + m_MaxMapSize.x); // row-major
 }
@@ -339,6 +347,7 @@ void Map::PurgeMap() {
 
 	for (auto& itr : m_TileMap) {
 		delete itr.second;
+		m_TileMap.erase(m_TileMap.begin());
 	}
 
 	m_TileMap.clear();

@@ -18,6 +18,15 @@ void SpriteSheet::ReleaseSheet() {
 	}
 }
 
+void SpriteSheet::SetDirection(const Direction& l_dir) {
+	if (l_dir == m_Direction) { 
+		return; 
+	}
+
+	m_Direction = l_dir;
+	m_AnimationCurrent->CropSprite();
+}
+
 void SpriteSheet::SetSpriteSize(const sf::Vector2u& l_Size) {
 	m_SpriteSize = l_Size;
 	m_Sprite.setOrigin(m_SpriteSize.x / 2, m_SpriteSize.y);
@@ -151,4 +160,8 @@ sf::Vector2f SpriteSheet::GetSpritePosition() const {
 
 Anim_Base* SpriteSheet::GetCurrentAnim() { 
 	return m_AnimationCurrent; 
+}
+
+Direction SpriteSheet::GetDirection() { 
+	return m_Direction; 
 }

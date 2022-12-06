@@ -84,6 +84,8 @@ public:
 	void MainMenu(EventDetails* l_Details); // switches state to MainMenu state
 	void Pause(EventDetails* l_Details); // switches state to Pause state
 
+	void ToggleOverlay(EventDetails* l_details);
+
 private:
 	TextureHolder m_TextureHolder;
 	sf::Vector2f m_Resolution;

@@ -7,7 +7,6 @@
 #include "AudioManager.h"
 #include "SoundManager.h"
 #include "SystemManager.h"
-#include "EntityManager.h"
 
 // this is a pointer to the most commonly used classes
 class Map;

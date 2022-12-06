@@ -11,7 +11,7 @@
 #include "BaseState.h"
 
 //tile sheet info
-enum Sheet { Tile_Size = 64, Sheet_Width = 320, Sheet_Height = 43, Num_Layers = 4 };
+enum Sheet { Tile_SizeX = 64, Tile_SizeY = 43, Sheet_Width = 320, Sheet_Height = 43, Num_Layers = 1 };
 
 //type alias for ids
 using TileID = unsigned int;
@@ -37,9 +37,9 @@ struct TileInfo {
 		//sprite points to tile sheet texture
 		m_Sprite.setTexture(*tmgr->GetResource(m_Texture));
 		//crops tile sheet to the sprite
-		sf::IntRect tileBoundaries(m_Id % (Sheet::Sheet_Width / Sheet::Tile_Size) * Sheet::Tile_Size,
-			m_Id / (Sheet::Sheet_Height / Sheet::Tile_Size) * Sheet::Tile_Size,
-			Sheet::Tile_Size, Sheet::Tile_Size);
+		sf::IntRect tileBoundaries(m_Id % (Sheet::Sheet_Width / Sheet::Tile_SizeX) * Sheet::Tile_SizeX,
+			m_Id / (Sheet::Sheet_Height / Sheet::Tile_SizeY) * Sheet::Tile_SizeY,
+			Sheet::Tile_SizeX, Sheet::Tile_SizeY);
 		//sets text rect for sprite to the cropped boundaries
 		m_Sprite.setTextureRect(tileBoundaries);
 	}
@@ -98,7 +98,7 @@ public:
 
 private:
 	// Method for converting 2D coordinates to 1D ints.
-	unsigned int ConvertCoords(const unsigned int l_X, const unsigned int l_Y, const unsigned int l_Layer);
+	unsigned int ConvertCoords(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer)const;
 
 	void LoadTiles(const std::string& l_Path);
 

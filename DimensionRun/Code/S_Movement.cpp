@@ -1,7 +1,7 @@
 #include "S_Movement.h"
 #include "SystemManager.h"
 #include "Map.h"
-#include "C_Movable.h"
+//#include "C_Movable.h"
 #include <cmath>
 
 S_Movement::S_Movement(SystemManager* l_systemMgr)
@@ -94,8 +94,8 @@ const sf::Vector2f& S_Movement::GetTileFriction(unsigned int l_elevation,
 
 void S_Movement::MovementStep(float l_dT, C_Movable* l_movable, C_Position* l_position) {
 	sf::Vector2f f_coefficient = GetTileFriction(l_position->GetElevation(),
-		floor(l_position->GetPosition().x / Sheet::Tile_Size),
-		floor(l_position->GetPosition().y / Sheet::Tile_Size));
+		floor(l_position->GetPosition().x / Sheet::Tile_SizeX),
+		floor(l_position->GetPosition().y / Sheet::Tile_SizeY));
 
 	sf::Vector2f friction(l_movable->GetSpeed().x * f_coefficient.x,
 		l_movable->GetSpeed().y * f_coefficient.y);

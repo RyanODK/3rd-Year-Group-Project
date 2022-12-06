@@ -1,4 +1,5 @@
 PlayerSprite Code/Resources/Media/Textures/MainPlayer/playerSpritesheet.png
+TileSheet Graphics/TileSheets/Tiles.png
 SmallEnemy Graphics/Enemy/Small Enemy/smallEnemySpritesheet.png
 bgMainMenuBack Graphics/warped city files/ENVIRONMENT/background/skyline-b.png
 bgMainMenuMiddle Graphics/warped city files/ENVIRONMENT/background/buildings-bg.png
