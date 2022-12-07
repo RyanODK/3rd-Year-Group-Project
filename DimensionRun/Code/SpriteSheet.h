@@ -25,9 +25,7 @@ public:
     void ReleaseSheet();
 
     Anim_Base* GetCurrentAnim();
-    bool SetAnimation(const std::string& l_name,
-        const bool& l_play = false,
-        const bool& l_loop = false);
+    bool SetAnimation(const std::string& l_name, bool l_play = false, bool l_loop = false);
 
     void Update(const float& l_dT);
     void Draw(sf::RenderWindow* l_wnd);
@@ -36,9 +34,9 @@ private:
     sf::Sprite m_Sprite;
     sf::Vector2u m_SpriteSize;
     sf::Vector2f m_SpriteScale;
-    //std::string m_AnimType;
     Animations m_Animations;
     Anim_Base* m_AnimationCurrent;
     TextureManager* m_TextureManager;
     Direction m_Direction;
+    std::string m_AnimType;
 };

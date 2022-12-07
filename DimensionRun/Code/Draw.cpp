@@ -7,6 +7,7 @@ void Engine::draw() {
 
 	sf::View CurrentView = m_Window.GetRenderWindow()->getView();
 	m_Window.GetRenderWindow()->setView(m_Window.GetRenderWindow()->getDefaultView());
+	m_GuiManager.Render(m_Window.GetRenderWindow());
 	m_Window.GetRenderWindow()->setView(CurrentView);
 
 	// Debug.

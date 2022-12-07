@@ -1,7 +1,6 @@
 #include "Map.h"
 #include "StateManager.h"
-#include <cmath>
-
+ 
 //constructor for map class
 Map::Map(SharedContext* l_Context) : 
 	m_Context(l_Context), m_DefaultTile(l_Context), m_MaxMapSize(32, 32), m_PlayerId(-1)
@@ -69,8 +68,6 @@ void Map::LoadMap(const std::string& l_path) {
 	std::string line;
 	std::cout << "--- Loading a map: " << l_path << std::endl;
 
-	EntityManager* entityMgr = m_Context->m_EntityManager;
-	int playerId = -1;
 	while (std::getline(mapFile, line)) {
 		if (line[0] == '|') { 
 			continue; 
@@ -201,9 +198,6 @@ void Map::LoadMap(const std::string& l_path) {
 		else if (type == "SIZE") {
 			keystream >> m_MaxMapSize.x >> m_MaxMapSize.y;
 		}
-		else if (type == "GRAVITY") {
-			keystream >> m_MapGravity;
-		}
 		else if (type == "DEFAULT_FRICTION") {
 			keystream >> m_DefaultTile.m_Friction.x >> m_DefaultTile.m_Friction.y;
 		}
@@ -230,7 +224,7 @@ void Map::LoadMap(const std::string& l_path) {
 				GetComponent<C_Position>(entityId, Component::Position);
 			if (position) { 
 				keystream >> *position; 
-			}
+			} 
 		}
 		else {
 			// Something else.
@@ -282,7 +276,7 @@ void Map::LoadTiles(const std::string& l_path) {
 }
 
 void Map::Update(float l_DeltaTime) {
-	if (m_LoadNextMap) {
+	/*if (m_LoadNextMap) {
 		PurgeMap();
 		m_LoadNextMap = false;
 
@@ -299,7 +293,7 @@ void Map::Update(float l_DeltaTime) {
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
 	m_Background1.setPosition(viewSpace.left, viewSpace.top);
 	m_Background2.setPosition(viewSpace.left, viewSpace.top);
-	m_Background3.setPosition(viewSpace.left, viewSpace.top);
+	m_Background3.setPosition(viewSpace.left, viewSpace.top);*/
 }
 
 void Map::Draw(unsigned int l_layer) {
@@ -331,7 +325,7 @@ void Map::Draw(unsigned int l_layer) {
 			sf::Sprite& sprite = tile->m_Properties->m_Sprite;
 			sprite.setPosition(x * Sheet::Tile_SizeX, y * Sheet::Tile_SizeY);
 			l_Wind->draw(sprite);
-			count++;
+			++count;
 		}
 	}
 }
@@ -339,43 +333,56 @@ void Map::Draw(unsigned int l_layer) {
 //converting coords from 2d to single number. Max size of map must be defined.
 unsigned int Map::ConvertCoords(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer)const
 {
-	return ((l_Layer * m_MaxMapSize.y + l_Y) * l_X + m_MaxMapSize.x); // row-major
+	return ((l_Layer * m_MaxMapSize.y + l_Y) * m_MaxMapSize.x + l_X);
 }
 
 void Map::PurgeMap() {
-	m_TileCount = 0;
+	//m_TileCount = 0;
 
-	for (auto& itr : m_TileMap) {
-		delete itr.second;
+	//for (auto& itr : m_TileMap) {
+	//	delete itr.second;
+	//	m_TileMap.erase(m_TileMap.begin());
+	//}
+
+	//m_TileMap.clear();
+	//m_Context->m_EntityManager->Purge();
+
+	//if (m_BackgroundTexture1 == "") {
+	//	return;
+	//}
+	//if (m_BackgroundTexture2 == "") {
+	//	return;
+	//}
+	//if (m_BackgroundTexture3 == "") {
+	//	return;
+	//}
+
+	//m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture1);
+	//m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture2);
+	//m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture3);
+	//m_BackgroundTexture1 = "";
+	//m_BackgroundTexture2 = "";
+	//m_BackgroundTexture3 = "";
+
+	while (m_TileMap.begin() != m_TileMap.end()) {
+		delete m_TileMap.begin()->second;
 		m_TileMap.erase(m_TileMap.begin());
 	}
-
-	m_TileMap.clear();
+	m_TileCount = 0;
 	m_Context->m_EntityManager->Purge();
-
-	if (m_BackgroundTexture1 == "") {
-		return;
-	}
-	if (m_BackgroundTexture2 == "") {
-		return;
-	}
-	if (m_BackgroundTexture3 == "") {
-		return;
-	}
-
-	m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture1);
-	m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture2);
-	m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture3);
-	m_BackgroundTexture1 = "";
-	m_BackgroundTexture2 = "";
-	m_BackgroundTexture3 = "";
 }
 
 void Map::PurgeTileSet() {
-	for (auto& itr : m_TileSet) {
+	/*for (auto& itr : m_TileSet) {
 		delete itr.second;
 	}
 
 	m_TileSet.clear();
+	m_TileSetCount = 0;*/
+
+	while (m_TileSet.begin() != m_TileSet.end()) {
+		delete m_TileSet.begin()->second;
+		m_TileSet.erase(m_TileSet.begin());
+	}
 	m_TileSetCount = 0;
 }

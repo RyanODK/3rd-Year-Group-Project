@@ -95,6 +95,7 @@ void StateManager::ProcessRequests() {
 
 void StateManager::SwitchTo(const StateType& l_type) {
     m_Shared->m_EventManager->SetCurrentState(l_type);
+    m_Shared->m_GuiManager->SetCurrentState(l_type);
     m_Shared->m_SoundManager->ChangeState(l_type);
     for (auto itr = m_States.begin();
         itr != m_States.end(); ++itr)

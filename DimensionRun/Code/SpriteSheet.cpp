@@ -2,7 +2,7 @@
 
 SpriteSheet::SpriteSheet(TextureManager* l_TextMgr) :
 	m_TextureManager(l_TextMgr), m_AnimationCurrent(nullptr),
-	m_SpriteScale(1.f, 1.f) {}
+	m_SpriteScale(1.f, 1.f), m_Direction(Direction::Right) {}
 
 SpriteSheet::~SpriteSheet() {
 	ReleaseSheet();
@@ -44,79 +44,86 @@ bool SpriteSheet::LoadSheet(const std::string& l_File) {
 	std::ifstream sheet;
 	sheet.open(l_File);
 
-	if (sheet.is_open()) {
-		ReleaseSheet(); // release current sheet resources
-		std::string line;
+	if (!sheet.is_open()) {
+		std::cout << "! Failed loading spritesheet: " << l_File << std::endl;
+		return false;
+	}
 
-		while (std::getline(sheet, line)) {
-			if (line[0] == '|') {
+	ReleaseSheet(); // release current sheet resources
+	std::string line;
+
+	while (std::getline(sheet, line)) {
+		if (line[0] == '|') {
+			continue;
+		}
+
+		std::stringstream keystream(line);
+		std::string type;
+		keystream >> type;
+
+		if (type == "Texture") {
+			if (m_Texture != "") {
+				std::cerr << "! Duplicate texture entries in: " << l_File << std::endl;
+				continue;
+			}
+			std::string texture;
+			keystream >> texture;
+
+			if (!m_TextureManager->RequireResource(texture)) {
+				std::cerr << "! Could not set up the texture: " << texture << std::endl;
+				continue;
+			}
+			m_Texture = texture;
+			m_Sprite.setTexture(*m_TextureManager->GetResource(m_Texture));
+		}
+		else if (type == "Size") {
+			keystream >> m_SpriteSize.x >> m_SpriteSize.y;
+			SetSpriteSize(m_SpriteSize);
+		}
+		else if (type == "Scale") {
+			keystream >> m_SpriteScale.x >> m_SpriteScale.y;
+			m_Sprite.setScale(m_SpriteScale);
+		}
+		else if (type == "AnimationType") {
+			keystream >> m_AnimType;
+		}
+		else if (type == "Animation") {
+			std::string name;
+			keystream >> name;
+
+			if (m_Animations.find(name) != m_Animations.end()) {
+				std::cerr << "! Duplicate animation(" << name << ") in: " << l_File << std::endl;
 				continue;
 			}
 
-			std::stringstream keystream(line);
-			std::string type;
-			keystream >> type;
-
-			if (type == "Texture") {
-				if (m_Texture != "") {
-					std::cerr << "! Duplicate texture entries in: " << l_File << std::endl;
-					continue;
-				}
-				std::string texture;
-				keystream >> texture;
-
-				if (!m_TextureManager->RequireResource(texture)) {
-					std::cerr << "! Could not set up the texture: " << texture << std::endl;
-					continue;
-				}
-				m_Texture = texture;
-				m_Sprite.setTexture(*m_TextureManager->GetResource(m_Texture));
-			}
-			else if (type == "Size") {
-				keystream >> m_SpriteSize.x >> m_SpriteSize.y;
-				SetSpriteSize(m_SpriteSize);
-			}
-			else if (type == "Scale") {
-				keystream >> m_SpriteScale.x >> m_SpriteScale.y;
-				m_Sprite.setScale(m_SpriteScale);
-			}
-			/*else if (type == "AnimationType") {
-				keystream >> m_AnimType;
-			}*/
-			else if (type == "Animation") {
-				std::string name;
-				keystream >> name;
-
-				if (m_Animations.find(name) != m_Animations.end()) {
-					std::cerr << "! Duplicate animation(" << name << ") in: " << l_File << std::endl;
-					continue;
-				}
-
-				Anim_Base* anim = nullptr;
+			Anim_Base* anim = nullptr;
+			if (m_AnimType == "Directional") {
 				anim = new Anim_Base();
-
-				keystream >> *anim;
-				anim->SetSpriteSheet(this);
-				anim->SetName(name);
-				anim->Reset();
-				m_Animations.emplace(name, anim);
-
-				if (m_AnimationCurrent) {
-					continue;
-				}
-
-				m_AnimationCurrent = anim;
-				m_AnimationCurrent->Play();
 			}
+			else {
+				std::cerr << "! Unknown animation type: " << m_AnimType << std::endl;
+				continue;
+			}
+
+			keystream >> *anim;
+			anim->SetSpriteSheet(this);
+			anim->SetName(name);
+			anim->Reset();
+			m_Animations.emplace(name, anim);
+
+			if (m_AnimationCurrent) {
+				continue;
+			}
+
+			m_AnimationCurrent = anim;
+			m_AnimationCurrent->Play();
 		}
-		sheet.close();
-		return true;
 	}
-	std::cerr << "! Failed loading spritesheet: " << l_File << std::endl;
-	return false;
+	sheet.close();
+	return true;
 }
 
-bool SpriteSheet::SetAnimation(const std::string& l_Name, const bool& l_Play, const bool& l_Loop) {
+bool SpriteSheet::SetAnimation(const std::string& l_Name, bool l_Play, bool l_Loop) {
 	auto itr = m_Animations.find(l_Name);
 
 	if (itr == m_Animations.end()) {

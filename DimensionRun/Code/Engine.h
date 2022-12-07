@@ -49,4 +49,6 @@ private:
 	AudioManager m_AudioManager;
 	SoundManager m_SoundManager;
 	SystemManager m_SystemManager;
+	FontManager m_FontManager;
+	GUI_Manager m_GuiManager;
 };

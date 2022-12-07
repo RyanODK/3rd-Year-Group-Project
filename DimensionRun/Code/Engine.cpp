@@ -2,7 +2,8 @@
 
 Engine::Engine() : m_Window("Dimension Run", 
 	sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height)),
-	m_StateManager(&m_Context), m_EntityManager(&m_SystemManager, &m_TextureManager), m_SoundManager(&m_AudioManager)
+	m_StateManager(&m_Context), m_EntityManager(&m_SystemManager, &m_TextureManager),
+	m_SoundManager(&m_AudioManager), m_GuiManager(m_Window.GetEventManager(), &m_Context)
 {
 	m_Clock.restart();
 	srand(time(nullptr));
@@ -16,12 +17,19 @@ Engine::Engine() : m_Window("Dimension Run",
 	m_Context.m_SystemManager = &m_SystemManager;
 	m_Context.m_AudioManager = &m_AudioManager;
 	m_Context.m_SoundManager = &m_SoundManager;
+	m_Context.m_FontManager = &m_FontManager;
+	m_Context.m_GuiManager = &m_GuiManager;
+
+	m_SystemManager.GetSystem<S_Sound>(System::Sound)->SetUp(&m_AudioManager, &m_SoundManager);
 
 	m_SystemManager.m_debugOverlay = &m_Context.m_DebugOverlay;
+	m_FontManager.RequireResource("Main");
 	m_StateManager.SwitchTo(StateType::Game);
 }
 
-Engine::~Engine() {}
+Engine::~Engine() {
+	m_FontManager.ReleaseResource("Main");
+}
 
 sf::Time Engine::GetElapsed() {
 	return m_Elapsed;

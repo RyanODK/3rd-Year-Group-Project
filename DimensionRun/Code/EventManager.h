@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include "Utilities.h"
+#include "GUI_Event.h"
 
 // enumeration table for all possible events
 // last row (keyboard) is terminated to prevent identifer clashes
@@ -27,7 +28,8 @@ enum class EventType {
 	MouseLeft = sf::Event::MouseLeft,
 	Closed = sf::Event::Closed,
 	TextEntered = sf::Event::TextEntered,
-	Keyboard = sf::Event::Count + 1, Mouse, Joystick
+	Keyboard = sf::Event::Count + 1, Mouse, Joystick,
+	GUI_Click, GUI_Release, GUI_Hover, GUI_Leave
 };
 
 // this struct stores these events for each binding in keys.cfg
@@ -39,8 +41,12 @@ struct EventInfo {
 	EventInfo(int l_Event) {
 		m_Code = l_Event;
 	}
+	EventInfo(const GUI_Event& l_guiEvent) { 
+		m_Gui = l_guiEvent; 
+	}
 	union {
 		int m_Code;
+		GUI_Event m_Gui;
 	};
 };
 
@@ -62,12 +68,19 @@ struct EventDetails {
 	int m_MouseWheelDelta;
 	int m_KeyCode; // single key code
 
+	std::string m_guiInterface;
+	std::string m_guiElement;
+	GUI_EventType m_guiEvent;
+
 	void Clear() {
 		m_Size = sf::Vector2i(0, 0);
 		m_TextEntered = 0;
 		m_Mouse = sf::Vector2i(0, 0);
 		m_MouseWheelDelta = 0;
 		m_KeyCode = -1;
+		m_guiInterface = "";
+		m_guiElement = "";
+		m_guiEvent = GUI_EventType::None;
 	}
 };
 
@@ -76,6 +89,20 @@ struct Binding {
 	Binding(const std::string& l_Name) :
 		m_Name(l_Name), m_Details(l_Name), c(0) {
 
+	}
+
+	~Binding() {
+		// GUI portion.
+		for (auto itr = m_Events.begin();
+			itr != m_Events.end(); ++itr)
+		{
+			if (itr->first == EventType::GUI_Click || itr->first == EventType::GUI_Release ||
+				itr->first == EventType::GUI_Hover || itr->first == EventType::GUI_Leave)
+			{
+				delete[] itr->second.m_Gui.m_interface;
+				delete[] itr->second.m_Gui.m_element;
+			}
+		}
 	}
 
 	void BindEvent(EventType l_Type,
@@ -175,6 +202,7 @@ public:
 		Update also has support for a Joystick which most likely will be added in the future 
 	*/
 	void HandleEvent(sf::Event& l_Event);
+	void HandleEvent(GUI_Event& l_event);
 	void Update();
 
 	/*

@@ -69,7 +69,7 @@ void SystemManager::Draw(Window* l_wind, unsigned int l_elevation)
 
 void SystemManager::EntityModified(const EntityId& l_entity, const Bitmask& l_bits)
 {
-	for (auto& s_itr : m_Systems) {
+	for (auto &s_itr : m_Systems) {
 		S_Base* system = s_itr.second;
 		if (system->FitsRequirements(l_bits)) {
 			if (!system->HasEntity(l_entity)) {
@@ -85,19 +85,19 @@ void SystemManager::EntityModified(const EntityId& l_entity, const Bitmask& l_bi
 }
 
 void SystemManager::RemoveEntity(const EntityId& l_entity) {
-	for (auto& system : m_Systems) {
+	for (auto &system : m_Systems) {
 		system.second->RemoveEntity(l_entity);
 	}
 }
 
 void SystemManager::PurgeEntities() {
-	for (auto& system : m_Systems) {
+	for (auto &system : m_Systems) {
 		system.second->Purge();
 	}
 }
 
 void SystemManager::PurgeSystems() {
-	for (auto& system : m_Systems) {
+	for (auto &system : m_Systems) {
 		delete system.second;
 	}
 	m_Systems.clear();

@@ -11,7 +11,7 @@
 #include "BaseState.h"
 
 //tile sheet info
-enum Sheet { Tile_SizeX = 64, Tile_SizeY = 43, Sheet_Width = 320, Sheet_Height = 43, Num_Layers = 1 };
+enum Sheet { Tile_SizeX = 64, Tile_SizeY = 44, Sheet_Width = 320, Sheet_Height = 44, Num_Layers = 1 };
 
 //type alias for ids
 using TileID = unsigned int;
@@ -91,7 +91,7 @@ public:
 	float GetGravity() const;
 
 	void LoadMap(const std::string& l_Path);
-	void LoadNext();
+	void LoadNext(); 
 
 	void Update(float l_deltaTime);
 	void Draw(unsigned int l_Layer);

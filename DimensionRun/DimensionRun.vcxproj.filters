@@ -96,6 +96,24 @@
     <ClCompile Include="Code\S_Sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\GUI_Element.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\GUI_Interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\GUI_Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\GUI_Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\GUI_Scrollbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\GUI_Textfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TextureHolder.h">
@@ -257,6 +275,33 @@
     <ClInclude Include="Code\C_SoundListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\GUI_Style.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\FontManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI_Element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI_Interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI_Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI_Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI_Label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI_Scrollbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI_Textfield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\Maps\map1.map">
@@ -281,6 +326,21 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="Code\Resources\Media\Entities\Player.entity">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\fonts.cfg">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu.interface">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenu.style">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenuLabel.style">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenuTitle.style">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

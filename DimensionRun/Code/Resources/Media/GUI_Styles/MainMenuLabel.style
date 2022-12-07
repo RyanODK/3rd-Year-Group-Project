@@ -1,0 +1,17 @@
+State Neutral
+Size 300 55
+BgColor 255 0 0 255
+TextColor 255 255 255 255
+TextSize 45
+Font Main
+TextPadding 160 28
+TextOriginCenter
+/State
+
+State Hover
+BgColor 255 100 0 255
+/State
+
+State Clicked
+BgColor 255 150 0 255
+/State

@@ -25,6 +25,12 @@
     <ClCompile Include="Code\Engine.cpp" />
     <ClCompile Include="Code\EntityManager.cpp" />
     <ClCompile Include="Code\EventManager.cpp" />
+    <ClCompile Include="Code\GUI_Element.cpp" />
+    <ClCompile Include="Code\GUI_Interface.cpp" />
+    <ClCompile Include="Code\GUI_Label.cpp" />
+    <ClCompile Include="Code\GUI_Manager.cpp" />
+    <ClCompile Include="Code\GUI_Scrollbar.cpp" />
+    <ClCompile Include="Code\GUI_Textfield.cpp" />
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\Map.cpp" />
     <ClCompile Include="Code\SoundManager.cpp" />
@@ -74,6 +80,15 @@
     <ClInclude Include="Code\EntityMessage.h" />
     <ClInclude Include="Code\EventManager.h" />
     <ClInclude Include="Code\EventQueue.h" />
+    <ClInclude Include="Code\FontManager.h" />
+    <ClInclude Include="Code\GUI_Element.h" />
+    <ClInclude Include="Code\GUI_Event.h" />
+    <ClInclude Include="Code\GUI_Interface.h" />
+    <ClInclude Include="Code\GUI_Label.h" />
+    <ClInclude Include="Code\GUI_Manager.h" />
+    <ClInclude Include="Code\GUI_Scrollbar.h" />
+    <ClInclude Include="Code\GUI_Style.h" />
+    <ClInclude Include="Code\GUI_Textfield.h" />
     <ClInclude Include="Code\Map.h" />
     <ClInclude Include="Code\MessageHandler.h" />
     <ClInclude Include="Code\Observer.h" />
@@ -105,9 +120,14 @@
   <ItemGroup>
     <None Include="Code\Maps\map1.map" />
     <None Include="Code\Resources\audio.cfg" />
+    <None Include="Code\Resources\fonts.cfg" />
     <None Include="Code\Resources\keys.cfg" />
     <None Include="Code\Resources\Media\Characters\Player.char" />
     <None Include="Code\Resources\Media\Entities\Player.entity" />
+    <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu.interface" />
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenu.style" />
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenuLabel.style" />
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenuTitle.style" />
     <None Include="Code\Resources\Media\Spritesheets\Player.sheet" />
     <None Include="Code\Resources\Textures.cfg.txt" />
     <None Include="Code\Resources\tiles.cfg.txt" />

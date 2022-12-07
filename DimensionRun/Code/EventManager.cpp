@@ -48,6 +48,12 @@ void EventManager::HandleEvent(sf::Event& l_Event) {
 		for (auto& e_itr : bind->m_Events) {
 			EventType sfmlEvent = (EventType)l_Event.type;
 
+			if (e_itr.first == EventType::GUI_Click || e_itr.first == EventType::GUI_Release ||
+				e_itr.first == EventType::GUI_Hover || e_itr.first == EventType::GUI_Leave)
+			{
+				continue;
+			}
+
 			if (e_itr.first != sfmlEvent) {
 				continue;
 			}
@@ -61,7 +67,7 @@ void EventManager::HandleEvent(sf::Event& l_Event) {
 					if (bind->m_Details.m_KeyCode != -1) {
 						bind->m_Details.m_KeyCode = e_itr.second.m_Code;
 					}
-					(bind->c)++;
+					++(bind->c);
 					break;
 				}
 			}
@@ -77,7 +83,7 @@ void EventManager::HandleEvent(sf::Event& l_Event) {
 					if (bind->m_Details.m_KeyCode != -1) {
 						bind->m_Details.m_KeyCode = e_itr.second.m_Code;
 					}
-					(bind->c)++;
+					++(bind->c);
 					break;
 				}
 			}
@@ -93,8 +99,38 @@ void EventManager::HandleEvent(sf::Event& l_Event) {
 				else if (sfmlEvent == EventType::TextEntered) {
 					bind->m_Details.m_TextEntered = l_Event.text.unicode;
 				}
-				(bind->c)++;
+				++(bind->c);
 			}
+		}
+	}
+}
+
+void EventManager::HandleEvent(GUI_Event& l_event) {
+	for (auto& b_itr : m_Bindings) {
+		Binding* bind = b_itr.second;
+		for (auto& e_itr : bind->m_Events)
+		{
+			if (e_itr.first != EventType::GUI_Click && e_itr.first != EventType::GUI_Release &&
+				e_itr.first != EventType::GUI_Hover && e_itr.first != EventType::GUI_Leave)
+			{
+				continue;
+			}
+			if ((e_itr.first == EventType::GUI_Click && l_event.m_type != GUI_EventType::Click) ||
+				(e_itr.first == EventType::GUI_Release && l_event.m_type != GUI_EventType::Release) ||
+				(e_itr.first == EventType::GUI_Hover && l_event.m_type != GUI_EventType::Hover) ||
+				(e_itr.first == EventType::GUI_Leave && l_event.m_type != GUI_EventType::Leave))
+			{
+				continue;
+			}
+			// REPLACED WITH STRCMP!
+			if (strcmp(e_itr.second.m_Gui.m_interface, l_event.m_interface) ||
+				strcmp(e_itr.second.m_Gui.m_element, l_event.m_element))
+			{
+				continue;
+			}
+			bind->m_Details.m_guiInterface = l_event.m_interface;
+			bind->m_Details.m_guiElement = l_event.m_element;
+			++(bind->c);
 		}
 	}
 }
@@ -115,7 +151,7 @@ void EventManager::Update() {
 					if (bind->m_Details.m_KeyCode != -1) {
 						bind->m_Details.m_KeyCode = e_itr.second.m_Code;
 					}
-					(bind->c)++;
+					++(bind->c);
 				}
 				break;
 			case(EventType::Mouse):
@@ -177,6 +213,13 @@ void EventManager::LoadBindings() {
 		while (!keystream.eof()) {
 			std::string keyval;
 			keystream >> keyval;
+			
+			if (keystream.fail()) {
+				std::cout << "Key failed: " << keyval << std::endl;
+				keystream.clear();
+				break;
+			}
+
 			int start = 0;
 			int end = keyval.find(delimiter);
 			if (end == std::string::npos) {
@@ -186,10 +229,35 @@ void EventManager::LoadBindings() {
 			}
 			EventType type = EventType(
 				stoi(keyval.substr(start, end - start)));
-			int code = stoi(keyval.substr(end + delimiter.length(),
-				keyval.find(delimiter, end + delimiter.length())));
+			
 			EventInfo eventInfo;
-			eventInfo.m_Code = code;
+
+			if (type == EventType::GUI_Click || type == EventType::GUI_Release ||
+				type == EventType::GUI_Hover || type == EventType::GUI_Leave)
+			{
+				start = end + delimiter.length();
+				end = keyval.find(delimiter, start);
+				std::string window = keyval.substr(start, end - start);
+				std::string element;
+				if (end != std::string::npos) {
+					start = end + delimiter.length();
+					end = keyval.length();
+					element = keyval.substr(start, end);
+				}
+				char* w = new char[window.length() + 1]; // +1 for \0
+				char* e = new char[element.length() + 1];
+
+				strcpy_s(w, window.size() + 1, window.c_str());
+				strcpy_s(e, element.size() + 1, element.c_str());
+
+				eventInfo.m_Gui.m_interface = w;
+				eventInfo.m_Gui.m_element = e;
+			}
+			else {
+				int code = stoi(keyval.substr(end + delimiter.length(),
+					keyval.find(delimiter, end + delimiter.length())));
+				eventInfo.m_Code = code;
+			}
 
 			bind->BindEvent(type, eventInfo);
 		}

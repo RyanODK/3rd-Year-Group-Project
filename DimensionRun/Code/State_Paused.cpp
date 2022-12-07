@@ -9,7 +9,7 @@ State_Paused::~State_Paused() {}
 void State_Paused::OnCreate() {
 	SetTransparent(true);
 
-	m_Font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillennium Italic.ttf");
+	m_Font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillenniumItalic.ttf");
 	m_PausedText.setFont(m_Font);
 	m_PausedText.setString(sf::String("PAUSED"));
 	m_PausedText.setCharacterSize(80);

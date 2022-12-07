@@ -25,7 +25,7 @@ int EntityManager::AddEntity(const Bitmask& l_mask) {
 	{
 		return -1;
 	}
-	m_IDCounter++;
+	++m_IDCounter;
 	
 	for (unsigned int i = 0; i < N_COMPONENT_TYPES; ++i) {
 		if (l_mask.GetBit(i)) { 
@@ -71,7 +71,7 @@ int EntityManager::AddEntity(const std::string& l_entityFile) {
 			EntityId = AddEntity(mask);
 			if (EntityId == -1) { 
 				return -1; 
-			}
+			} 
 		}
 		else if (type == "Component") {
 			if (EntityId == -1) { 
@@ -86,9 +86,39 @@ int EntityManager::AddEntity(const std::string& l_entityFile) {
 			}
 
 			keystream >> *component;
+
+			if (component->GetType() == Component::Position) {
+				std::cout << "this is position component with: " << c_id << std::endl;
+			}
+
 			if (component->GetType() == Component::SpriteSheet) {
 				C_SpriteSheet* sheet = (C_SpriteSheet*)component;
 				sheet->Create(m_TextureManager);
+				std::cout << "this is spritesheet component with: " << c_id << std::endl;
+			}
+
+			if (component->GetType() == Component::State) {
+				std::cout << "this is state component with: " << c_id << std::endl;
+			}
+
+			if (component->GetType() == Component::Movable) {
+				std::cout << "this is movable component with: " << c_id << std::endl;
+			}
+
+			if (component->GetType() == Component::Controller) {
+				std::cout << "this is controller component with: " << c_id << std::endl;
+			}
+
+			if (component->GetType() == Component::Collidable) {
+				std::cout << "this is Collidable component with: " << c_id << std::endl;
+			}
+
+			if (component->GetType() == Component::SoundEmitter) {
+				std::cout << "this is SoundEmitter component with: " << c_id << std::endl;
+			}
+
+			if (component->GetType() == Component::SoundListener) {
+				std::cout << "this is SoundListener component with: " << c_id << std::endl;
 			}
 		}
 	}

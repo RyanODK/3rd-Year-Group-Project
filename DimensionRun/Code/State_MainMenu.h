@@ -1,8 +1,8 @@
 #pragma once
 #include "BaseState.h"
 #include "EventManager.h"
-#include "Background.h"
-#include "TextureHolder.h"
+//#include "Background.h"
+#include <SFML/Graphics.hpp>
 
 class State_MainMenu : public BaseState {
 public:
@@ -18,18 +18,18 @@ public:
 	void Update(const sf::Time& l_Time);
 	void Draw();
 
-	void MouseClick(EventDetails* l_Details);
+	//void MouseClick(EventDetails* l_Details);
 
-	Background* GetBackground() {
+	/*Background* GetBackground() {
 		return &m_mainMenuBackground;
-	};
+	};*/
 
 	void Play(EventDetails* l_Details);
 	void Credits(EventDetails* l_Details);
 	void QuitGame(EventDetails* l_Details);
 
 private:
-	sf::Font m_Font;
+	/*sf::Font m_Font;
 
 	sf::Text m_MainTitle;
 	
@@ -41,5 +41,5 @@ private:
 	sf::Text m_Options[3];
 
 	Background m_mainMenuBackground;
-	TextureHolder m_TextureHolder;
+	TextureHolder m_TextureHolder;*/
 };

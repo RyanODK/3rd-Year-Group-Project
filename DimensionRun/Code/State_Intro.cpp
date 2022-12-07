@@ -9,7 +9,7 @@ State_Intro::~State_Intro() {}
 void State_Intro::OnCreate() {
 	sf::Vector2u windowSize = m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->getSize();
 
-	m_Font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillennium Italic.ttf");
+	m_Font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillenniumItalic.ttf");
 
 	m_MainTitle.setFont(m_Font);
 	m_MainTitle.setString({ "Dimension Run" });
