@@ -11,4 +11,5 @@ void main(int argc, void** argv[])
 		engine.draw();
 		engine.LateUpdate();
 	}
+	system("PAUSE");
 }

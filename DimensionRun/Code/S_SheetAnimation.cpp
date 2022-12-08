@@ -65,16 +65,13 @@ void S_SheetAnimation::Notify(const Message& l_message) {
 			EntityState s = (EntityState)l_message.m_int;
 			switch (s) {
 			case EntityState::Idle:
-				ChangeAnimation(l_message.m_receiver, "Running", true, true);
+				ChangeAnimation(l_message.m_receiver, "Idle", true, true);
 				break;
 			case EntityState::Running:
 				ChangeAnimation(l_message.m_receiver, "Running", true, true);
 				break;
 			case EntityState::Attacking:
 				ChangeAnimation(l_message.m_receiver, "Attack", true, false);
-				break;
-			case EntityState::Jumping:
-				ChangeAnimation(l_message.m_receiver, "Jump", true, false);
 				break;
 			case EntityState::Hurt: break;
 			case EntityState::Dying:

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Anim_Base.cpp" />
+    <ClCompile Include="Code\Anim_Directional.cpp" />
     <ClCompile Include="Code\Background.cpp" />
     <ClCompile Include="Code\Draw.cpp" />
     <ClCompile Include="Code\Engine.cpp" />
@@ -55,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Anim_Base.h" />
+    <ClInclude Include="Code\Anim_Directional.h" />
     <ClInclude Include="Code\AudioManager.h" />
     <ClInclude Include="Code\Background.h" />
     <ClInclude Include="Code\BaseState.h" />
@@ -64,7 +66,6 @@
     <ClInclude Include="Code\C_Collidable.h" />
     <ClInclude Include="Code\C_Controller.h" />
     <ClInclude Include="Code\C_Drawable.h" />
-    <ClInclude Include="Code\C_Listener.h" />
     <ClInclude Include="Code\C_Movable.h" />
     <ClInclude Include="Code\C_Position.h" />
     <ClInclude Include="Code\C_SoundEmitter.h" />
@@ -202,12 +203,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\gp\sfml\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\gp\sfml\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\gp\sfml\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\gp\sfml\SFML-2.5.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>shlwapi.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

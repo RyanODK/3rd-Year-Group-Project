@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextureManager.h"
 #include "Utilities.h"
-#include "Anim_Base.h"
+#include "Anim_Directional.h"
 #include <unordered_map>
 
 using Animations = std::unordered_map<std::string, Anim_Base*>;
@@ -21,13 +21,18 @@ public:
     sf::Vector2u GetSpriteSize() const;
     sf::Vector2f GetSpritePosition() const;
 
+    void SetSheetPadding(const sf::Vector2f& l_padding);
+    void SetSpriteSpacing(const sf::Vector2f& l_spacing);
+    const sf::Vector2f& GetSheetPadding()const;
+    const sf::Vector2f& GetSpriteSpacing()const;
+
     bool LoadSheet(const std::string& l_file);
     void ReleaseSheet();
 
     Anim_Base* GetCurrentAnim();
     bool SetAnimation(const std::string& l_name, bool l_play = false, bool l_loop = false);
 
-    void Update(const float& l_dT);
+    void Update(float l_dT);
     void Draw(sf::RenderWindow* l_wnd);
 private:
     std::string m_Texture;
@@ -39,4 +44,7 @@ private:
     TextureManager* m_TextureManager;
     Direction m_Direction;
     std::string m_AnimType;
+
+    sf::Vector2f m_SheetPadding;
+    sf::Vector2f m_SpriteSpacing;
 };

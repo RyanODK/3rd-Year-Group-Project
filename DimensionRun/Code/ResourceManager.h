@@ -70,10 +70,14 @@ public:
 	}
 
 	void PurgeResources() {
+		std::cout << "Purging all resources:" << std::endl;
 		while (m_resources.begin() != m_resources.end()) {
+			std::cout << "Removing: "
+				<< m_resources.begin()->first << std::endl;
 			delete m_resources.begin()->second.first;
 			m_resources.erase(m_resources.begin());
 		}
+		std::cout << "Purging finished." << std::endl;
 	}
 
 protected:

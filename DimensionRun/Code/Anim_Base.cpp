@@ -22,6 +22,25 @@ bool Anim_Base::SetFrame(Frame l_Frame) {
 	return false;
 }
 
+void Anim_Base::SetStartFrame(Frame l_frame) {
+	m_FrameStart = l_frame;
+}
+void Anim_Base::SetEndFrame(Frame l_frame) {
+	m_FrameEnd = l_frame;
+}
+void Anim_Base::SetFrameRow(unsigned int l_row) {
+	m_FrameRow = l_row;
+}
+void Anim_Base::SetActionStart(Frame l_frame) {
+	m_FrameActionStart = l_frame;
+}
+void Anim_Base::SetActionEnd(Frame l_frame) {
+	m_FrameActionEnd = l_frame;
+}
+void Anim_Base::SetFrameTime(float l_time) {
+	m_FrameTime = l_time;
+}
+
 void Anim_Base::SetName(const std::string& l_Name) {
 	m_Name = l_Name;
 }
@@ -40,6 +59,34 @@ SpriteSheet* Anim_Base::GetSpriteSheet() {
 
 Frame Anim_Base::GetFrame() { 
 	return m_FrameCurrent; 
+}
+
+Frame Anim_Base::GetStartFrame() { 
+	return m_FrameStart; 
+}
+
+Frame Anim_Base::GetEndFrame() { 
+	return m_FrameEnd; 
+}
+
+unsigned int Anim_Base::GetFrameRow() { 
+	return m_FrameRow; 
+}
+
+int Anim_Base::GetActionStart() { 
+	return m_FrameActionStart; 
+}
+
+int Anim_Base::GetActionEnd() { 
+	return m_FrameActionEnd; 
+}
+
+float Anim_Base::GetFrameTime() { 
+	return m_FrameTime; 
+}
+
+float Anim_Base::GetElapsedTime() { 
+	return m_ElapsedTime;
 }
 
 bool Anim_Base::IsInAction() {
@@ -83,49 +130,13 @@ void Anim_Base::Reset() {
 	CropSprite();
 }
 
-void Anim_Base::Update(const float& l_DeltaTime) {
-	if (!m_IsPlaying) {
-		return;
+void Anim_Base::Update(float l_DeltaTime) {
+	if (m_IsPlaying) {
+		m_ElapsedTime += l_DeltaTime;
+		if (m_ElapsedTime >= m_FrameTime) {
+			FrameStep();
+			CropSprite();
+			m_ElapsedTime = 0;
+		}
 	}
-
-	m_ElapsedTime += l_DeltaTime;
-
-	if (m_ElapsedTime < m_FrameTime) {
-		return;
-	}
-
-	FrameStep();
-	CropSprite();
-	m_ElapsedTime = 0;
-}
-
-void Anim_Base::CropSprite() {
-	/*sf::IntRect rect(m_SpriteSheet->GetSpriteSize().x * m_FrameCurrent,
-		m_SpriteSheet->GetSpriteSize().y * m_FrameRow,
-		m_SpriteSheet->GetSpriteSize().x, m_SpriteSheet->GetSpriteSize().y);
-	m_SpriteSheet->CropSprite(rect);*/
-
-	sf::IntRect rect((m_SpriteSheet->GetSpriteSize().x * m_FrameCurrent),
-		(m_SpriteSheet->GetSpriteSize().y * (m_FrameRow + (short)m_SpriteSheet->GetDirection()))
-		+ ((m_FrameRow + (short)m_SpriteSheet->GetDirection())),
-		m_SpriteSheet->GetSpriteSize().x, m_SpriteSheet->GetSpriteSize().y);
-	m_SpriteSheet->CropSprite(rect);
-}
-
-void Anim_Base::FrameStep() {
-	bool b = SetFrame(m_FrameCurrent + (m_FrameStart <= m_FrameEnd ? 1 : -1));
-	if (b) { 
-		return; 
-	}
-	if (m_Loop) { 
-		SetFrame(m_FrameStart); 
-	}
-	else { 
-		SetFrame(m_FrameEnd); Pause(); 
-	}
-}
-
-void Anim_Base::ReadIn(std::stringstream& l_stream) {
-	l_stream >> m_FrameStart >> m_FrameEnd >> m_FrameRow
-		>> m_FrameTime >> m_FrameActionStart >> m_FrameActionEnd;
 }

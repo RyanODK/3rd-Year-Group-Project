@@ -2,16 +2,13 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <map>
-#include <array>
 #include <fstream>
 #include <sstream>
 #include "Utilities.h"
 #include "SharedContext.h"
-//#include "TextureManager.h"
-#include "BaseState.h"
 
 //tile sheet info
-enum Sheet { Tile_SizeX = 64, Tile_SizeY = 44, Sheet_Width = 320, Sheet_Height = 44, Num_Layers = 1 };
+enum Sheet { Tile_Size = 64, Sheet_Width = 320, Sheet_Height = 320, Num_Layers = 1 };
 
 //type alias for ids
 using TileID = unsigned int;
@@ -37,9 +34,9 @@ struct TileInfo {
 		//sprite points to tile sheet texture
 		m_Sprite.setTexture(*tmgr->GetResource(m_Texture));
 		//crops tile sheet to the sprite
-		sf::IntRect tileBoundaries(m_Id % (Sheet::Sheet_Width / Sheet::Tile_SizeX) * Sheet::Tile_SizeX,
-			m_Id / (Sheet::Sheet_Height / Sheet::Tile_SizeY) * Sheet::Tile_SizeY,
-			Sheet::Tile_SizeX, Sheet::Tile_SizeY);
+		sf::IntRect tileBoundaries(m_Id % (Sheet::Sheet_Width / Sheet::Tile_Size) * Sheet::Tile_Size,
+			m_Id / (Sheet::Sheet_Height / Sheet::Tile_Size) * Sheet::Tile_Size,
+			Sheet::Tile_Size, Sheet::Tile_Size);
 		//sets text rect for sprite to the cropped boundaries
 		m_Sprite.setTextureRect(tileBoundaries);
 	}
@@ -128,7 +125,7 @@ private:
 	unsigned int m_TileCount;
 	unsigned int m_TileSetCount;
 
-	BaseState* m_CurrentState;
+	//BaseState* m_CurrentState;
 	SharedContext* m_Context;
 
 	int m_PlayerID;

@@ -6,6 +6,8 @@
 #include "State_Paused.h"
 #include "State_Credits.h"
 #include "SharedContext.h"
+#include <vector>
+#include <unordered_map>
 
 // all possible States the game could be in for now
 enum class StateType {

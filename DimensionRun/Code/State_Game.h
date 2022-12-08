@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseState.h"
 #include "Map.h"
+#include <SFML/Graphics.hpp>
 
 class State_Game : public BaseState {
 public:

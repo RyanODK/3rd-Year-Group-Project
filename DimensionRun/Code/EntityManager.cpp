@@ -213,7 +213,7 @@ void EntityManager::Purge() {
 	m_Systems->PurgeEntities();
 
 	for (auto& entity : m_Entities) {
-		for (auto& component : entity.second.second) {
+		for (auto &component : entity.second.second) {
 			delete component;
 		}
 		entity.second.second.clear();

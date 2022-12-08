@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-//#include "EventManager.h"
 
 // forward declaration of StateManager class to keep pointer of it
 // also avoids recursive definitions
@@ -61,5 +60,6 @@ protected:
 	// eliminates need of countless enumerations for transitions between states
 	bool m_Transparent;
 	bool m_Transcendent;
+
 	sf::View m_View;
 };

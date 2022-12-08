@@ -41,17 +41,17 @@ void S_Movement::HandleEvent(const EntityId& l_entity,
 	case EntityEvent::Moving_Left: SetDirection(l_entity, Direction::Left); break;
 	case EntityEvent::Moving_Right: SetDirection(l_entity, Direction::Right); break;
 	case EntityEvent::Moving_Up: 
-	{
-		C_Movable* mov = m_SystemManager->GetEntityManager()->GetComponent<C_Movable>(l_entity, Component::Movable);
-		if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Up); }
-	}
-	break;
+		{
+			C_Movable* mov = m_SystemManager->GetEntityManager()->GetComponent<C_Movable>(l_entity, Component::Movable);
+			if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Up); }
+		}
+		break;
 	case EntityEvent::Moving_Down:
-	{
-		C_Movable* mov = m_SystemManager->GetEntityManager()->GetComponent<C_Movable>(l_entity, Component::Movable);
-		if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Down); }
-	}
-	break;
+		{
+			C_Movable* mov = m_SystemManager->GetEntityManager()->GetComponent<C_Movable>(l_entity, Component::Movable);
+			if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Down); }
+		}
+		break;
 	}
 }
 
@@ -92,8 +92,8 @@ const sf::Vector2f& S_Movement::GetTileFriction(unsigned int l_elevation,
 
 void S_Movement::MovementStep(float l_dT, C_Movable* l_movable, C_Position* l_position) {
 	sf::Vector2f f_coefficient = GetTileFriction(l_position->GetElevation(),
-		floor(l_position->GetPosition().x / m_gameMap->GetMapSize().x),
-		floor(l_position->GetPosition().y / m_gameMap->GetMapSize().y));
+		floor(l_position->GetPosition().x / Sheet::Tile_Size),
+		floor(l_position->GetPosition().y / Sheet::Tile_Size));
 
 	sf::Vector2f friction(l_movable->GetSpeed().x * f_coefficient.x,
 		l_movable->GetSpeed().y * f_coefficient.y);

@@ -1,6 +1,6 @@
 #pragma once
 #include "C_Base.h"
-#include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
 
 class C_Position : public C_Base {
 public:

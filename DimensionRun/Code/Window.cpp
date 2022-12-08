@@ -23,8 +23,8 @@ void Window::Setup(const std::string& l_Title,
 	m_WindowSize = l_Size;
 	m_IsFullScreen = false;
 	m_IsDone = false;
-
 	m_IsFocused = true; // default value for focused flag
+
 	m_EventManager.AddCallback(StateType(0), "Fullscreen_toggle", &Window::ToggleFullScreen, this);
 	m_EventManager.AddCallback(StateType(0), "Window_close", &Window::Close, this);
 
@@ -32,11 +32,12 @@ void Window::Setup(const std::string& l_Title,
 }
 
 void Window::Create() {
-	auto style = (m_IsFullScreen ? sf::Style::Fullscreen :
-		sf::Style::Default);
-	m_Window.create({
-		m_WindowSize.x, m_WindowSize.y, 32 },
-		m_WindowTitle, style);
+	sf::Uint32 style = sf::Style::Default;
+	if (m_IsFullScreen) { 
+		style = sf::Style::Fullscreen; 
+	}
+
+	m_Window.create(sf::VideoMode(m_WindowSize.x, m_WindowSize.y, 32), m_WindowTitle, style);
 }
 
 void Window::Update() {

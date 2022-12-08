@@ -46,8 +46,8 @@ public:
 		}
 		if(m_SpriteSheet) {
 			std::cout << "there is spritesheet for player" << std::endl;
-			m_SpriteSheet->Draw(l_wind);
 		}
+		m_SpriteSheet->Draw(l_wind);
 	}
 private:
 	SpriteSheet* m_SpriteSheet;

@@ -32,7 +32,7 @@ Engine::~Engine() {
 }
 
 sf::Time Engine::GetElapsed() {
-	return m_Elapsed;
+	return m_Clock.getElapsedTime();
 }
 
 void Engine::RestartClock() {

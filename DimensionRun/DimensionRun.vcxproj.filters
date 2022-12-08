@@ -114,6 +114,9 @@
     <ClCompile Include="Code\GUI_Textfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Anim_Directional.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TextureHolder.h">
@@ -266,9 +269,6 @@
     <ClInclude Include="Code\C_SoundEmitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\C_Listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\S_Sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -300,6 +300,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GUI_Textfield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Anim_Directional.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 SpriteSheet::SpriteSheet(TextureManager* l_TextMgr) :
 	m_TextureManager(l_TextMgr), m_AnimationCurrent(nullptr),
-	m_SpriteScale(1.f, 1.f), m_Direction(Direction::Right) {}
+	m_SpriteScale(1.f, 1.f), m_Direction(Direction::Down) {}
 
 SpriteSheet::~SpriteSheet() {
 	ReleaseSheet();
@@ -34,6 +34,22 @@ void SpriteSheet::SetSpriteSize(const sf::Vector2u& l_Size) {
 
 void SpriteSheet::SetSpritePosition(const sf::Vector2f& l_Pos) {
 	m_Sprite.setPosition(l_Pos);
+}
+
+void SpriteSheet::SetSheetPadding(const sf::Vector2f& l_padding) {
+	m_SheetPadding = l_padding;
+}
+
+void SpriteSheet::SetSpriteSpacing(const sf::Vector2f& l_spacing) {
+	m_SpriteSpacing = l_spacing;
+}
+
+const sf::Vector2f& SpriteSheet::GetSheetPadding()const {
+	return m_SheetPadding;
+}
+
+const sf::Vector2f& SpriteSheet::GetSpriteSpacing()const {
+	return m_SpriteSpacing;
 }
 
 void SpriteSheet::CropSprite(const sf::IntRect& l_Rect) {
@@ -84,6 +100,12 @@ bool SpriteSheet::LoadSheet(const std::string& l_File) {
 			keystream >> m_SpriteScale.x >> m_SpriteScale.y;
 			m_Sprite.setScale(m_SpriteScale);
 		}
+		else if (type == "Padding") {
+			keystream >> m_SheetPadding.x >> m_SheetPadding.y;
+		}
+		else if (type == "Spacing") {
+			keystream >> m_SpriteSpacing.x >> m_SpriteSpacing.y;
+		}
 		else if (type == "AnimationType") {
 			keystream >> m_AnimType;
 		}
@@ -98,7 +120,7 @@ bool SpriteSheet::LoadSheet(const std::string& l_File) {
 
 			Anim_Base* anim = nullptr;
 			if (m_AnimType == "Directional") {
-				anim = new Anim_Base();
+				anim = new Anim_Directional();
 			}
 			else {
 				std::cerr << "! Unknown animation type: " << m_AnimType << std::endl;
@@ -149,7 +171,7 @@ bool SpriteSheet::SetAnimation(const std::string& l_Name, bool l_Play, bool l_Lo
 	return true;
 }
 
-void SpriteSheet::Update(const float& l_DeltaTime) {
+void SpriteSheet::Update(float l_DeltaTime) {
 	m_AnimationCurrent->Update(l_DeltaTime);
 }
 

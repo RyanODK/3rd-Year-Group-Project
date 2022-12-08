@@ -36,7 +36,7 @@ void EventManager::SetCurrentState(StateType l_state) {
 	m_CurrentState = l_state;
 }
 
-void EventManager::SetFocus(const bool& l_focus) { 
+void EventManager::SetFocus(bool l_focus) { 
 	m_HasFocus = l_focus; 
 }
 

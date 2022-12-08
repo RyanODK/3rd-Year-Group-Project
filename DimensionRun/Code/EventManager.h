@@ -1,5 +1,5 @@
 #pragma once
-//#include <SFML/Window.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <unordered_map>
@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <assert.h>
 #include "Utilities.h"
 #include "GUI_Event.h"
 
@@ -99,8 +100,8 @@ struct Binding {
 			if (itr->first == EventType::GUI_Click || itr->first == EventType::GUI_Release ||
 				itr->first == EventType::GUI_Hover || itr->first == EventType::GUI_Leave)
 			{
-				delete[] itr->second.m_Gui.m_interface;
-				delete[] itr->second.m_Gui.m_element;
+				delete [] itr->second.m_Gui.m_interface;
+				delete [] itr->second.m_Gui.m_element;
 			}
 		}
 	}
@@ -151,7 +152,7 @@ public:
 	bool RemoveBinding(std::string l_Name);
 
 	void SetCurrentState(StateType l_State);
-	void SetFocus(const bool& l_Focus);
+	void SetFocus(bool l_Focus);
 
 	/*
 		you can think of template as a placeholder class

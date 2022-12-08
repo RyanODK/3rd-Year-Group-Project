@@ -73,7 +73,7 @@ bool StateManager::HasState(const StateType& l_type) {
         itr != m_States.end(); ++itr)
     {
         if (itr->first == l_type) {
-            auto removed = find(m_ToRemove.begin(),
+            auto removed = std::find(m_ToRemove.begin(),
                 m_ToRemove.end(), l_type);
             if (removed == m_ToRemove.end()) { return true; }
             return false;
@@ -83,7 +83,7 @@ bool StateManager::HasState(const StateType& l_type) {
 }
 
 void StateManager::Remove(const StateType& l_type) {
-    m_ToRemove.push_back(l_type);
+    m_ToRemove.emplace_back(l_type);
 }
 
 void StateManager::ProcessRequests() {
@@ -117,7 +117,6 @@ void StateManager::SwitchTo(const StateType& l_type) {
         m_States.back().second->Deactivate(); 
     }
     CreateState(l_type);
-    m_States.back().second->Activate();
     m_States.back().second->Activate();
     m_Shared->m_Wind->GetRenderWindow()->setView(m_States.back().second->GetView());
 }

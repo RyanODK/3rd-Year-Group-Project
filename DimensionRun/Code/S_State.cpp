@@ -31,7 +31,7 @@ void S_State::HandleEvent(const EntityId& l_entity,
 {
 	switch (l_event) {
 	case EntityEvent::Became_Idle:
-		ChangeState(l_entity, EntityState::Idle, false);
+		ChangeState(l_entity, EntityState::Running, false);
 		break;
 	}
 }
@@ -75,7 +75,7 @@ void S_State::Notify(const Message& l_message) {
 }
 
 void S_State::ChangeState(const EntityId& l_entity,
-	const EntityState& l_state, const bool& l_force)
+	const EntityState& l_state, bool l_force)
 {
 	EntityManager* entities = m_SystemManager->GetEntityManager();
 	C_State* state = entities->GetComponent<C_State>(l_entity, Component::State);

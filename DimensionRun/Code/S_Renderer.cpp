@@ -10,7 +10,7 @@ S_Renderer::S_Renderer(SystemManager* l_systemMgr)
 	m_RequiredComponents.push_back(req);
 	req.Clear();
 
-	m_SystemManager->GetMessageHandler()->Subscribe(EntityMessage::Move, this);
+	m_SystemManager->GetMessageHandler()->Subscribe(EntityMessage::Direction_Changed, this);
 }
 
 S_Renderer::~S_Renderer() {}

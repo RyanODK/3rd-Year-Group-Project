@@ -275,7 +275,11 @@ void GUI_Interface::Redraw() {
 	m_backdrop.setTextureRect(sf::IntRect(0, 0, m_style[m_state].m_size.x, m_style[m_state].m_size.y));
 	SetRedraw(false);
 }
-bool GUI_Interface::NeedsContentRedraw() const { return m_contentRedraw; }
+
+bool GUI_Interface::NeedsContentRedraw() const { 
+	return m_contentRedraw;
+}
+
 void GUI_Interface::RedrawContent() {
 	if (m_contentTexture->getSize().x != m_contentSize.x ||
 		m_contentTexture->getSize().y != m_contentSize.y)

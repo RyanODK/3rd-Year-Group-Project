@@ -11,6 +11,5 @@ public:
 	void HandleEvent(const EntityId& l_entity, const EntityEvent& l_event);
 	void Notify(const Message& l_message);
 private:
-	void ChangeState(const EntityId& l_entity, const EntityState& l_state,
-		const bool& l_force);
+	void ChangeState(const EntityId& l_entity, const EntityState& l_state, bool l_force);
 };
