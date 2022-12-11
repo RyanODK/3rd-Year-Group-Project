@@ -313,9 +313,6 @@
     <None Include="Code\Resources\tiles.cfg.txt">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Code\Resources\Media\Characters\Player.char">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="Code\Resources\keys.cfg">
       <Filter>Source Files</Filter>
     </None>

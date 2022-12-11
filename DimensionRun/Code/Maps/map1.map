@@ -1,5 +1,8 @@
 SIZE 4000 4000
 DEFAULT_FRICTION 1.0 1.0
+BACKGROUND bg1Back
+BACKGROUND2 bg1Middle
+BACKGROUND3 bg1Front
 |ENTITY|Name|x|y|elevation|
 ENTITY Player 0.0 0.0 1
 |TILE|ID|x|y|layer|solid|

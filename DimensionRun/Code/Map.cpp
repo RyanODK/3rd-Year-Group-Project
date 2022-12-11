@@ -121,80 +121,80 @@ void Map::LoadMap(const std::string& l_path) {
 				tile->m_Warp = true;
 			}
 		}
-		//else if (type == "BACKGROUND") {
-		//	if (m_BackgroundTexture1 != "") {
-		//		continue; 
-		//	}
+		else if (type == "BACKGROUND") {
+			if (m_BackgroundTexture1 != "") {
+				continue; 
+			}
 
-		//	keystream >> m_BackgroundTexture1;
-		//	if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture1))
-		//	{
-		//		m_BackgroundTexture1 = "";
-		//		continue;
-		//	}
+			keystream >> m_BackgroundTexture1;
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture1))
+			{
+				m_BackgroundTexture1 = "";
+				continue;
+			}
 
-		//	sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture1);
-		//	m_Background1.setTexture(*texture);
+			sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture1);
+			m_Background1.setTexture(*texture);
 
-		//	sf::Vector2f viewSize;
-		//	viewSize.x = sf::VideoMode::getDesktopMode().width;
-		//	viewSize.y = sf::VideoMode::getDesktopMode().height;
-		//	sf::Vector2u textureSize = texture->getSize();
-		//	sf::Vector2f scaleFactors;
-		//	scaleFactors.x = viewSize.x / textureSize.x;
-		//	scaleFactors.y = viewSize.y / textureSize.y;
-		//	m_Background1.setScale(scaleFactors);
-		//}
-		//else if (type == "BACKGROUND2") {
-		//	if (m_BackgroundTexture2 != "") {
-		//		continue;
-		//	}
+			sf::Vector2f viewSize;
+			viewSize.x = sf::VideoMode::getDesktopMode().width;
+			viewSize.y = sf::VideoMode::getDesktopMode().height;
+			sf::Vector2u textureSize = texture->getSize();
+			sf::Vector2f scaleFactors;
+			scaleFactors.x = viewSize.x / textureSize.x;
+			scaleFactors.y = viewSize.y / textureSize.y;
+			m_Background1.setScale(scaleFactors);
+		}
+		else if (type == "BACKGROUND2") {
+			if (m_BackgroundTexture2 != "") {
+				continue;
+			}
 
-		//	keystream >> m_BackgroundTexture2;
-		//	if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture2))
-		//	{
-		//		m_BackgroundTexture2 = "";
-		//		continue;
-		//	}
+			keystream >> m_BackgroundTexture2;
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture2))
+			{
+				m_BackgroundTexture2 = "";
+				continue;
+			}
 
-		//	sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture2);
-		//	m_Background2.setTexture(*texture);
+			sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture2);
+			m_Background2.setTexture(*texture);
 
-		//	//sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
-		//	sf::Vector2f viewSize;
-		//	viewSize.x = sf::VideoMode::getDesktopMode().width;
-		//	viewSize.y = sf::VideoMode::getDesktopMode().height;
-		//	sf::Vector2u textureSize = texture->getSize();
-		//	sf::Vector2f scaleFactors;
-		//	scaleFactors.x = viewSize.x / textureSize.x;
-		//	scaleFactors.y = viewSize.y / textureSize.y;
-		//	m_Background2.setScale(scaleFactors);
-		//}
-		//else if (type == "BACKGROUND3") {
-		//	if (m_BackgroundTexture3 != "") {
-		//		continue;
-		//	}
+			//sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
+			sf::Vector2f viewSize;
+			viewSize.x = sf::VideoMode::getDesktopMode().width;
+			viewSize.y = sf::VideoMode::getDesktopMode().height;
+			sf::Vector2u textureSize = texture->getSize();
+			sf::Vector2f scaleFactors;
+			scaleFactors.x = viewSize.x / textureSize.x;
+			scaleFactors.y = viewSize.y / textureSize.y;
+			m_Background2.setScale(scaleFactors);
+		}
+		else if (type == "BACKGROUND3") {
+			if (m_BackgroundTexture3 != "") {
+				continue;
+			}
 
-		//	keystream >> m_BackgroundTexture3;
-		//	if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture3))
-		//	{
-		//		m_BackgroundTexture3 = "";
-		//		continue;
-		//	}
+			keystream >> m_BackgroundTexture3;
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundTexture3))
+			{
+				m_BackgroundTexture3 = "";
+				continue;
+			}
 
-		//	sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture3);
-		//	m_Background3.setTexture(*texture);
+			sf::Texture* texture = m_Context->m_TextureManager->GetResource(m_BackgroundTexture3);
+			m_Background3.setTexture(*texture);
 
-		//	//sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
-		//	sf::Vector2f viewSize;
-		//	viewSize.x = sf::VideoMode::getDesktopMode().width;
-		//	viewSize.y = sf::VideoMode::getDesktopMode().height;
-		//	sf::Vector2u textureSize = texture->getSize();
-		//	sf::Vector2f scaleFactors;
-		//	scaleFactors.x = viewSize.x / textureSize.x;
-		//	scaleFactors.y = viewSize.y / textureSize.y;
-		//	m_Background3.setScale(scaleFactors);
-		//}
+			//sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
+			sf::Vector2f viewSize;
+			viewSize.x = sf::VideoMode::getDesktopMode().width;
+			viewSize.y = sf::VideoMode::getDesktopMode().height;
+			sf::Vector2u textureSize = texture->getSize();
+			sf::Vector2f scaleFactors;
+			scaleFactors.x = viewSize.x / textureSize.x;
+			scaleFactors.y = viewSize.y / textureSize.y;
+			m_Background3.setScale(scaleFactors);
+		}
 		else if (type == "SIZE") {
 			keystream >> m_MaxMapSize.x >> m_MaxMapSize.y;
 		}
@@ -302,10 +302,10 @@ void Map::Draw(unsigned int l_layer) {
 	}
 
 	sf::RenderWindow* l_Wind = m_Context->m_Wind->GetRenderWindow();
+	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
 	/*l_Wind->draw(m_Background1);
 	l_Wind->draw(m_Background2);
 	l_Wind->draw(m_Background3);*/
-	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
 
 	sf::Vector2i tileBegin(floor(viewSpace.left / Sheet::Tile_Size), 
 						floor(viewSpace.top / Sheet::Tile_Size));

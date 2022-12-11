@@ -44,9 +44,9 @@ public:
 			std::cout << "no spritesheet for player" << std::endl;
 			return; 
 		}
-		if(m_SpriteSheet) {
+		/*if(m_SpriteSheet) {
 			std::cout << "there is spritesheet for player" << std::endl;
-		}
+		}*/
 		m_SpriteSheet->Draw(l_wind);
 	}
 private:

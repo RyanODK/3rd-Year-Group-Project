@@ -28,7 +28,7 @@ void S_SheetAnimation::Update(float l_dT) {
 			{
 				Message msg((MessageType)EntityMessage::Switch_State);
 				msg.m_receiver = entity;
-				msg.m_int = (int)EntityState::Idle;
+				msg.m_int = (int)EntityState::Running;
 				m_SystemManager->GetMessageHandler()->Dispatch(msg);
 			}
 			else if (sheet->GetSpriteSheet()->GetCurrentAnim()->IsInAction())
@@ -64,9 +64,9 @@ void S_SheetAnimation::Notify(const Message& l_message) {
 		{
 			EntityState s = (EntityState)l_message.m_int;
 			switch (s) {
-			case EntityState::Idle:
+			/*case EntityState::Idle:
 				ChangeAnimation(l_message.m_receiver, "Idle", true, true);
-				break;
+				break;*/
 			case EntityState::Running:
 				ChangeAnimation(l_message.m_receiver, "Running", true, true);
 				break;

@@ -8,7 +8,7 @@
 #include "SharedContext.h"
 
 //tile sheet info
-enum Sheet { Tile_Size = 64, Sheet_Width = 320, Sheet_Height = 320, Num_Layers = 1 };
+enum Sheet { Tile_Size = 32, Sheet_Width = 256, Sheet_Height = 256, Num_Layers = 4 };
 
 //type alias for ids
 using TileID = unsigned int;
