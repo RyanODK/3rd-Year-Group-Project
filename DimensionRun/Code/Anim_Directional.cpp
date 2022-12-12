@@ -6,8 +6,8 @@ void Anim_Directional::CropSprite() {
 	sf::Vector2f spacing = m_SpriteSheet->GetSpriteSpacing();
 
 	sf::IntRect rect((m_SpriteSheet->GetSpriteSize().x * m_FrameCurrent) + padding.x + (spacing.x * m_FrameCurrent),
-		(m_SpriteSheet->GetSpriteSize().y * (m_FrameRow + (short)m_SpriteSheet->GetDirection()))
-		+ padding.y + ((m_FrameRow + (short)m_SpriteSheet->GetDirection()) * spacing.y),
+		(m_SpriteSheet->GetSpriteSize().y * (m_FrameRow))
+		+ padding.y + ((m_FrameRow) * spacing.y),
 		m_SpriteSheet->GetSpriteSize().x, m_SpriteSheet->GetSpriteSize().y);
 	m_SpriteSheet->CropSprite(rect);
 }
@@ -21,8 +21,9 @@ void Anim_Directional::FrameStep() {
 		SetFrame(m_FrameStart);
 	}
 	else {
-		SetFrame(m_FrameEnd);
-		Pause();
+		//SetFrame(m_FrameEnd);
+		//Pause();
+		SetFrame(m_FrameStart);
 	}
 }
 

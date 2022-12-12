@@ -64,7 +64,7 @@ void State_Game::OnCreate() {
 	m_StateMgr->GetContext()->m_SystemManager->GetSystem<S_Movement>(System::Movement)->SetMap(m_GameMap);
 	m_Player = m_GameMap->GetPlayerId();
 
-	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
 }
 
 void State_Game::OnDestroy() {
@@ -90,7 +90,7 @@ void State_Game::Draw() {
 
 void State_Game::Update(const sf::Time& l_Time) {
 	SharedContext* context = m_StateMgr->GetContext();
-	UpdateCamera();
+	//UpdateCamera();
 	m_GameMap->Update(l_Time.asSeconds());
 	context->m_SystemManager->Update(l_Time.asSeconds());
 }
