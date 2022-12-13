@@ -53,7 +53,7 @@ void State_Game::OnCreate() {
 	sf::Vector2u size = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
 	m_View.setSize(size.x, size.y);
 	m_View.setCenter(size.x / 2, size.y / 2);
-	//m_View.zoom(0.8f);
+	//m_View.zoom(0.5f);
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->setView(m_View);
 
 	m_GameMap = new Map(m_StateMgr->GetContext());
@@ -64,7 +64,7 @@ void State_Game::OnCreate() {
 	m_StateMgr->GetContext()->m_SystemManager->GetSystem<S_Movement>(System::Movement)->SetMap(m_GameMap);
 	m_Player = m_GameMap->GetPlayerId();
 
-	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+	//_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
 }
 
 void State_Game::OnDestroy() {
