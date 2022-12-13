@@ -326,8 +326,9 @@ void Map::Draw(unsigned int l_layer) {
 			}
 
 			sf::Sprite& sprite = tile->m_Properties->m_Sprite;
-			sprite.setPosition(((resolution.x / 100) * 0.1) * x * Sheet::Tile_Size, ((resolution.y / 100) * 0.1) * y * Sheet::Tile_Size);
-			sprite.setScale((resolution.x / 100) * 0.1, (resolution.y / 100) * 0.1);
+			//sprite.setPosition(((resolution.x / 100) * 0.1) * x * Sheet::Tile_Size, ((resolution.y / 100) * 0.1) * y * Sheet::Tile_Size);
+			sprite.setPosition(x * Sheet::Tile_Size, y * Sheet::Tile_Size);
+			//sprite.setScale((resolution.x / 100) * 0.1, (resolution.y / 100) * 0.1);
 			l_Wind->draw(sprite);
 			++count;
 		}

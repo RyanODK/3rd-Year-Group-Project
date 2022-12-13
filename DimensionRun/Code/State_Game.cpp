@@ -109,11 +109,11 @@ void State_Game::UpdateCamera() {
 	C_Position* pos = m_StateMgr->GetContext()->m_EntityManager->
 		GetComponent<C_Position>(m_Player, Component::Position);
 
- 	m_View.setCenter(pos->GetPosition());
+ 	m_View.setCenter((pos->GetPosition().x + 800), (pos->GetPosition().y - 500));
 	context->m_Wind->GetRenderWindow()->setView(m_View);
 
 	sf::FloatRect viewSpace = context->m_Wind->GetViewSpace();
-	if (viewSpace.left <= 0) {
+	/*if (viewSpace.left <= 0) {
 		m_View.setCenter(viewSpace.width / 2, m_View.getCenter().y);
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
@@ -137,7 +137,7 @@ void State_Game::UpdateCamera() {
 			((m_GameMap->GetMapSize().y) * Sheet::Tile_Size) -
 			(viewSpace.height / 2));
 		context->m_Wind->GetRenderWindow()->setView(m_View);
-	}
+	}*/
 
 	if (context->m_DebugOverlay.Debug()) {
 		sf::Text* d_pos = new sf::Text();
