@@ -85,11 +85,9 @@ void S_Collision::MapCollisions(const EntityId& l_entity, C_Position* l_pos, C_C
 			for (int l = 0; l < Sheet::Num_Layers; ++l) {
 				Tile* t = m_gameMap->GetTile(x, y, l);
 				if (!t) { 
-					std::cout << "TEST2" << std::endl;
 					continue; 
 				}
-				if (!t->m_Solid) { continue; 
-				}
+				if (!t->m_Solid) { continue; }
 				sf::FloatRect TileAABB(x * TileSize, y * TileSize, TileSize, TileSize);
 				sf::FloatRect Intersection;
 				EntityAABB.intersects(TileAABB, Intersection);
