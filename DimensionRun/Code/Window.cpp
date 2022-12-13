@@ -91,6 +91,7 @@ sf::FloatRect Window::GetViewSpace() {
 	sf::Vector2f viewSize = m_Window.getView().getSize();
 	sf::Vector2f viewSizeHalf(viewSize.x / 2, viewSize.y / 2);
 	sf::FloatRect viewSpace(viewCenter - viewSizeHalf, viewSize);
+	//sf::FloatRect viewSpace(0, 0, 1920, 1080);
 	return viewSpace;
 }
 
