@@ -303,6 +303,9 @@ void Map::Draw(unsigned int l_layer) {
 
 	sf::RenderWindow* l_Wind = m_Context->m_Wind->GetRenderWindow();
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
+	sf::Vector2u resolution;
+	resolution.x = sf::VideoMode::getDesktopMode().width;
+	resolution.y = sf::VideoMode::getDesktopMode().height;
 	/*l_Wind->draw(m_Background1);
 	l_Wind->draw(m_Background2);
 	l_Wind->draw(m_Background3);*/
@@ -324,6 +327,7 @@ void Map::Draw(unsigned int l_layer) {
 
 			sf::Sprite& sprite = tile->m_Properties->m_Sprite;
 			sprite.setPosition(x * Sheet::Tile_Size, y * Sheet::Tile_Size);
+			//sprite.setScale((resolution.x / 100) * 1, (resolution.y / 100) * 1);
 			l_Wind->draw(sprite);
 			++count;
 		}
