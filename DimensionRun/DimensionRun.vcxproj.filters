@@ -66,9 +66,6 @@
     <ClCompile Include="Code\EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Background.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\S_Base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -183,9 +180,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\DebugOverlay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\AudioManager.h">
@@ -343,5 +337,10 @@
     <None Include="Code\Resources\Media\GUI_Styles\MainMenuTitle.style">
       <Filter>Source Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Code\Resources\background.cfg.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

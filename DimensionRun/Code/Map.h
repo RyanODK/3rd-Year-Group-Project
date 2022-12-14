@@ -79,6 +79,7 @@ public:
 	~Map();
 
 	Tile* GetTile(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer);
+
 	TileInfo* GetDefaultTile();
 
 	unsigned int GetTileSize() const;
@@ -104,13 +105,6 @@ private:
 
 	TileSet m_TileSet;
 	TileMap m_TileMap;
-
-	sf::Sprite m_Background1;
-	sf::Sprite m_Background2;
-	sf::Sprite m_Background3;
-	std::string m_BackgroundTexture1;
-	std::string m_BackgroundTexture2;
-	std::string m_BackgroundTexture3;
 
 	TileInfo m_DefaultTile;
 

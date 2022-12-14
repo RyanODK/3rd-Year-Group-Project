@@ -64,7 +64,7 @@ void State_Game::OnCreate() {
 	m_StateMgr->GetContext()->m_SystemManager->GetSystem<S_Movement>(System::Movement)->SetMap(m_GameMap);
 	m_Player = m_GameMap->GetPlayerId();
 
-	//_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
 }
 
 void State_Game::OnDestroy() {
@@ -81,6 +81,15 @@ void State_Game::OnDestroy() {
 }
 
 void State_Game::Draw() {
+	sf::Sprite background;
+	sf::Texture backgroundtexture;
+	backgroundtexture.loadFromFile("Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png");
+	background.setTexture(backgroundtexture);
+	background.setTextureRect(sf::IntRect(0, 0, 408, 192));
+	background.setScale(6, 6);
+	sf::RenderWindow* l_Wind = m_StateMgr->GetContext()->m_Wind->GetRenderWindow();
+	l_Wind->draw(background);
+
 	for (unsigned int i = 0; i < Sheet::Num_Layers; ++i) {
 		m_GameMap->Draw(i);
 		m_StateMgr->GetContext()->m_SystemManager->Draw(

@@ -1,0 +1,16 @@
+|id|name
+0 bg1Back
+1 bg1Middle
+2 bg1Front
+3 bg2Back
+4 bg2Middle
+5 bg2Front
+6 bg3Back
+7 bg3Middle
+8 bg3Front
+9 bg4Back
+10 bg4Middle
+11 bg4Front
+12 bg5Back
+13 bg5Middle
+14 bg5Front
