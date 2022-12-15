@@ -37,6 +37,10 @@ public:
 		return m_direction; 
 	}
 
+	float GetGravity() {
+		return m_gravity;
+	}
+
 	void SetVelocity(const sf::Vector2f& l_vec) {
 		m_velocity = l_vec; 
 	}
@@ -57,14 +61,24 @@ public:
 		m_direction = l_dir; 
 	}
 
+	void SetGravity(float l_grav) {
+		m_gravity = l_grav;
+	}
+
 	void AddVelocity(const sf::Vector2f& l_vec) {
-		m_velocity += l_vec;
+		m_velocity.x = m_velocityMax;
+		//m_velocity += l_vec;
 		if (std::abs(m_velocity.x) > m_velocityMax) {
 			m_velocity.x = m_velocityMax * (m_velocity.x / std::abs(m_velocity.x));
 		}
 
 		if (std::abs(m_velocity.y) > m_velocityMax) {
-			m_velocity.y = m_velocityMax * (m_velocity.y / std::abs(m_velocity.y));
+			m_velocity.y = m_velocityMax * (m_velocity.y / std::abs(m_velocity.y)*100);
+			/*int i = 0;
+			while (i < 1000000) {
+				m_velocity.y = -m_velocityMax;
+				i++;
+			}*/
 		}
 	}
 
@@ -98,7 +112,15 @@ public:
 
 	void Move(const Direction& l_dir) {
 		if (l_dir == Direction::Up) {
-			m_acceleration.y -= m_speed.y;
+			//m_acceleration.y -= 1000;
+			/*for (int i = 0; i < 10000; i++) {
+				m_velocity.y -= m_velocityMax;
+			}*/
+			float gravity;
+			int i = 0;
+			gravity = 5;
+			m_velocity.y -= gravity;
+			std::cout << "Going up" << std::endl;
 		}
 		else if (l_dir == Direction::Down) {
 			m_acceleration.y += m_speed.y;
@@ -110,10 +132,13 @@ public:
 			m_acceleration.x += m_speed.x;
 		}
 	}
+
+
 private:
 	sf::Vector2f m_velocity;
 	float m_velocityMax;
 	sf::Vector2f m_speed;
 	sf::Vector2f m_acceleration;
 	Direction m_direction;
+	float m_gravity;
 };

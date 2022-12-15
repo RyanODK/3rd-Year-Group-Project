@@ -20,10 +20,10 @@ void S_Control::HandleEvent(const EntityId& l_entity,
 	const EntityEvent& l_event)
 {
 	switch (l_event) {
-	case EntityEvent::Moving_Left: MoveEntity(l_entity, Direction::Left); break;
+	//case EntityEvent::Moving_Left: MoveEntity(l_entity, Direction::Left); break;
 	case EntityEvent::Moving_Right: MoveEntity(l_entity, Direction::Right); break;
 	case EntityEvent::Moving_Up: MoveEntity(l_entity, Direction::Up); break;
-	case EntityEvent::Moving_Down: MoveEntity(l_entity, Direction::Down); break;
+	//case EntityEvent::Moving_Down: MoveEntity(l_entity, Direction::Down); break;
 	}
 }
 

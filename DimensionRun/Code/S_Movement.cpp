@@ -27,7 +27,7 @@ void S_Movement::Update(float l_dT) {
 	for (auto& entity : m_Entities) {
 		C_Position* position = entities->GetComponent<C_Position>(entity, Component::Position);
 		C_Movable* movable = entities->GetComponent<C_Movable>(entity, Component::Movable);
-		MovementStep(l_dT, movable, position);
+		//MovementStep(l_dT, movable, position);
 		position->MoveBy(movable->GetVelocity() * l_dT);
 	}
 }
@@ -43,7 +43,9 @@ void S_Movement::HandleEvent(const EntityId& l_entity,
 	case EntityEvent::Moving_Up: 
 		{
 			C_Movable* mov = m_SystemManager->GetEntityManager()->GetComponent<C_Movable>(l_entity, Component::Movable);
-			if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Up); }
+			//if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Up); }
+			SetDirection(l_entity, Direction::Up);
+		std::cout << "up" << std::endl;
 		}
 		break;
 	case EntityEvent::Moving_Down:
@@ -116,6 +118,17 @@ void S_Movement::MovementStep(float l_dT, C_Movable* l_movable, C_Position* l_po
 		(l_movable->GetVelocity().y / magnitude) * max_V));
 }
 
+void S_Movement::Jump(float l_dT, C_Movable* l_movable, C_Position* l_position) {
+	/*float postitionX = l_position->GetPosition().x;*/
+	float postitionY = l_position->GetPosition().y;
+	float velocityY = l_movable->GetVelocity().y;
+	l_movable->SetGravity(5);
+	postitionY -= velocityY;
+	velocityY += l_movable->GetGravity();
+	l_position->SetPosition().y;
+
+}
+
 void S_Movement::SetMap(Map* l_gameMap) { 
 	m_gameMap = l_gameMap; 
 }
@@ -143,3 +156,4 @@ void S_Movement::SetDirection(const EntityId& l_entity,
 	msg.m_int = (int)l_dir;
 	m_SystemManager->GetMessageHandler()->Dispatch(msg);
 }
+

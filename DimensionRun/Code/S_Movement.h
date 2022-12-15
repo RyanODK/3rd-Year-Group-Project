@@ -20,7 +20,8 @@ private:
 	void SetDirection(const EntityId& l_entity, const Direction& l_dir);
 	const sf::Vector2f& GetTileFriction(unsigned int l_elevation,
 		unsigned int l_x, unsigned int l_y);
-	void MovementStep(float l_dT, C_Movable* l_movable, C_Position* l_position);
+	void MovementStep(float l_dT, C_Movable* l_movable, C_Position* l_position); 
+	void Jump(float l_dT, C_Movable* l_movable, C_Position* l_position);
 
 	Map* m_gameMap;
 };

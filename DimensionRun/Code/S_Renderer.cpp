@@ -33,7 +33,7 @@ void S_Renderer::HandleEvent(const EntityId& l_entity, const EntityEvent& l_even
 {
 	if (l_event == EntityEvent::Moving_Left || l_event == EntityEvent::Moving_Right ||
 		l_event == EntityEvent::Moving_Up || l_event == EntityEvent::Moving_Down ||
-		l_event == EntityEvent::Elevation_Change || l_event == EntityEvent::Spawned)
+		l_event == EntityEvent::Elevation_Change || l_event == EntityEvent::Spawned/*|| l_event == EntityEvent::Jump*/)
 	{
 		SortDrawables();
 	}
