@@ -28,6 +28,7 @@ void S_Movement::Update(float l_dT) {
 		C_Position* position = entities->GetComponent<C_Position>(entity, Component::Position);
 		C_Movable* movable = entities->GetComponent<C_Movable>(entity, Component::Movable);
 		MovementStep(l_dT, movable, position);
+		Jump(l_dT, movable, position);
 		position->MoveBy(movable->GetVelocity() * l_dT);
 	}
 }
@@ -43,7 +44,7 @@ void S_Movement::HandleEvent(const EntityId& l_entity,
 	case EntityEvent::Moving_Up: 
 		{
 			C_Movable* mov = m_SystemManager->GetEntityManager()->GetComponent<C_Movable>(l_entity, Component::Movable);
-			if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Up); }
+			//if (mov->GetVelocity().x == 0) { SetDirection(l_entity, Direction::Up); }
 		}
 		break;
 	case EntityEvent::Moving_Down:
@@ -114,6 +115,33 @@ void S_Movement::MovementStep(float l_dT, C_Movable* l_movable, C_Position* l_po
 	l_movable->SetVelocity(sf::Vector2f(
 		(l_movable->GetVelocity().x / magnitude) * max_V,
 		(l_movable->GetVelocity().y / magnitude) * max_V));
+}
+
+void S_Movement::Jump(float l_dT, C_Movable* l_movable, C_Position* l_position)
+{
+	sf::Vector2f position = l_position->GetPosition();
+	sf::Vector2f velocity = l_movable->GetVelocity();
+	float checkTime = 0.0f;
+
+	l_movable->SetGravity(0.5);
+
+	checkTime += l_dT;
+
+	if (checkTime >= 2.0f) {
+		velocity.y = -6.0f;
+		position.y -= velocity.y * l_dT;
+		velocity.y -= l_movable->GetGravity() * l_dT;
+		checkTime = 0.f;
+	}
+	else if (checkTime < 2.0f) {
+		velocity.y = -12.f;
+		position.y += velocity.y * l_dT;
+		velocity.y += l_movable->GetGravity() * l_dT;
+	}
+
+	std::cout << l_dT << std::endl;
+	l_movable->SetVelocity(velocity);
+	l_position->SetPosition(position);
 }
 
 void S_Movement::SetMap(Map* l_gameMap) { 

@@ -9,7 +9,6 @@
 #include <iostream>
 #include <sstream>
 #include <assert.h>
-#include "Utilities.h"
 #include "GUI_Event.h"
 
 // enumeration table for all possible events

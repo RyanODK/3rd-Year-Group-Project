@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseState.h"
 #include "Map.h"
+#include "Background.h"
+#include "TextureHolder.h"
 #include <SFML/Graphics.hpp>
 
 class State_Game : public BaseState {
@@ -23,9 +25,16 @@ public:
 	void PlayerMove(EventDetails* l_Details);
 	void ToggleOverlay(EventDetails* l_details);
 
+	Background* GetBackground() {
+		return &m_Background;
+	}
+
 private:
 	void UpdateCamera();
 
 	Map* m_GameMap;
 	int m_Player;
+
+	TextureHolder m_TextureHolder;
+	Background m_Background;
 };

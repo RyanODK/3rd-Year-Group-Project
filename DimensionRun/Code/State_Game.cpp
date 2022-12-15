@@ -81,14 +81,19 @@ void State_Game::OnDestroy() {
 }
 
 void State_Game::Draw() {
-	sf::Sprite background;
+	/*sf::Sprite background;
 	sf::Texture backgroundtexture;
 	backgroundtexture.loadFromFile("Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png");
 	background.setTexture(backgroundtexture);
 	background.setTextureRect(sf::IntRect(0, 0, 408, 192));
-	background.setScale(6, 6);
+	background.setScale(6, 6);*/
+
+	sf::Vector2u m_Resolution = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
+
 	sf::RenderWindow* l_Wind = m_StateMgr->GetContext()->m_Wind->GetRenderWindow();
-	l_Wind->draw(background);
+	l_Wind->draw(GetBackground()->getSprite1());
+	l_Wind->draw(GetBackground()->getSprite2());
+	l_Wind->draw(GetBackground()->getSprite3());
 
 	for (unsigned int i = 0; i < Sheet::Num_Layers; ++i) {
 		m_GameMap->Draw(i);
@@ -102,6 +107,16 @@ void State_Game::Update(const sf::Time& l_Time) {
 	UpdateCamera();
 	m_GameMap->Update(l_Time.asSeconds());
 	context->m_SystemManager->Update(l_Time.asSeconds());
+	GetBackground()->ChangeBackground(
+		"Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png",
+		"Graphics/cyberpunk-street-files/PNG/layers/back-buildings.png",
+		"Graphics/cyberpunk-street-files/PNG/layers/foreground.png",
+		sf::IntRect(0, 0, 408, 192),
+		sf::IntRect(0, 0, 508, 192),
+		sf::IntRect(0, 0, 608, 192));
+	sf::Vector2u m_Resolution = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
+	GetBackground()->BackgroundScale(m_Resolution);
+	GetBackground()->Scroll(l_Time.asSeconds());
 }
 
 void State_Game::MainMenu(EventDetails* l_details) {

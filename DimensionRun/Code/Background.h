@@ -7,7 +7,7 @@ class Background {
 public:
 	Background(); // sets default background values
 
-	void BackgroundScale(sf::Vector2f resolution); // this will scale background to resolution size
+	void BackgroundScale(sf::Vector2u resolution); // this will scale background to resolution size
 	void Scroll(float dt); // this will scroll background using deltaTime
 	void ChangeBackground(
 		std::string filename1, std::string filename2, std::string filename3, // this changes background
@@ -33,5 +33,5 @@ private:
 	float m_BackgroundSpeed; // speed in which background scrolls
 	float m_BackgroundX; // x value of background as scrolling will be horizontal
 
-	sf::Vector2f m_Resolution; // stores resolution of screen
+	sf::Vector2u m_Resolution; // stores resolution of screen
 };

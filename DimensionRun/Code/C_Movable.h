@@ -37,6 +37,10 @@ public:
 		return m_direction; 
 	}
 
+	float GetGravity() {
+		return m_gravity;
+	}
+
 	void SetVelocity(const sf::Vector2f& l_vec) {
 		m_velocity = l_vec; 
 	}
@@ -55,6 +59,10 @@ public:
 
 	void SetDirection(const Direction& l_dir) { 
 		m_direction = l_dir; 
+	}
+
+	void SetGravity(float l_grav) {
+		m_gravity = l_grav;
 	}
 
 	void AddVelocity(const sf::Vector2f& l_vec) {
@@ -87,9 +95,6 @@ public:
 				m_velocity.y += (m_velocity.y > 0 ? l_vec.y * -1 : l_vec.y);
 			}
 		}
-
-		C_Base* position = m_Context->m_EntityManager->
-			GetComponent<C_Position>(entityId, Component::Position);
 	}
 
 	void Accelerate(const sf::Vector2f& l_vec) { 
@@ -120,5 +125,5 @@ private:
 	sf::Vector2f m_speed;
 	sf::Vector2f m_acceleration;
 	Direction m_direction;
-	SharedContext* m_Context;
+	float m_gravity;
 };

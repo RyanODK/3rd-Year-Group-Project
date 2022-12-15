@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Anim_Base.cpp" />
     <ClCompile Include="Code\Anim_Directional.cpp" />
+    <ClCompile Include="Code\Background.cpp" />
     <ClCompile Include="Code\Draw.cpp" />
     <ClCompile Include="Code\Engine.cpp" />
     <ClCompile Include="Code\EntityManager.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Code\Anim_Base.h" />
     <ClInclude Include="Code\Anim_Directional.h" />
     <ClInclude Include="Code\AudioManager.h" />
+    <ClInclude Include="Code\Background.h" />
     <ClInclude Include="Code\BaseState.h" />
     <ClInclude Include="Code\Bitmask.h" />
     <ClInclude Include="Code\Communicator.h" />

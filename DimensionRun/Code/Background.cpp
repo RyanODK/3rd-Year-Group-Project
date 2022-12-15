@@ -1,11 +1,11 @@
 #include "Background.h"
 
 Background::Background() {
-	m_BackgroundSpeed = 50.0f;
+	m_BackgroundSpeed = 0.0f;
 	m_BackgroundX = 0;
 }
 
-void Background::BackgroundScale(sf::Vector2f resolution) {
+void Background::BackgroundScale(sf::Vector2u resolution) {
 	m_BackgroundSprite1.setScale(resolution.x / m_BackgroundSprite1.getLocalBounds().width,
 		resolution.y / m_BackgroundSprite1.getLocalBounds().height);
 
