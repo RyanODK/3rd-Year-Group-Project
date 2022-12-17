@@ -67,7 +67,9 @@ void EntityBase::Move(float l_X, float l_Y) {
 }
 
 void EntityBase::AddVelocity(float l_X, float l_Y) {
-	m_Velocity += sf::Vector2f(l_X, l_Y);
+	//m_Velocity += sf::Vector2f(l_X, l_Y);
+	m_Velocity.x = m_MaxVelocity.x;
+	m_Velocity.y += l_Y;
 
 	if (abs(m_Velocity.x) > m_MaxVelocity.x) {
 		if (m_Velocity.x < 0) {
@@ -98,7 +100,8 @@ void EntityBase::ApplyFriction(float l_X, float l_Y) {
 			m_Velocity.x = 0;
 		}
 		else {
-			m_Velocity.x -= l_X;
+			if (m_Velocity.x < 0) { m_Velocity.x += l_X; }
+			else { m_Velocity.x -= l_X; }
 		}
 	}
 
@@ -182,6 +185,15 @@ void EntityBase::ResolveCollisions() {
 			if (!m_AABB.intersects(itr.m_TileBounds)) {
 				continue;
 			}
+			// Debug
+			if (m_EntityManager->GetContext()->m_DebugOverlay.Debug()) {
+				sf::Vector2f tempPos(itr.m_TileBounds.left, itr.m_TileBounds.top);
+				sf::RectangleShape* rect = new sf::RectangleShape(sf::Vector2f(tileSize, tileSize));
+				rect->setPosition(tempPos);
+				rect->setFillColor(sf::Color(255, 255, 0, 150));
+				m_EntityManager->GetContext()->m_DebugOverlay.Add(rect);
+			}
+			// End debug.
 
 			float xDiff = (m_AABB.left + (m_AABB.width / 2)) -
 				(itr.m_TileBounds.left + (itr.m_TileBounds.width / 2));

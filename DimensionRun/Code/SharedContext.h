@@ -6,7 +6,6 @@
 #include "DebugOverlay.h"
 #include "AudioManager.h"
 #include "SoundManager.h"
-#include "SystemManager.h"
 #include "FontManager.h"
 #include "GUI_Manager.h"
 
@@ -20,7 +19,6 @@ struct SharedContext {
 		m_EntityManager(nullptr),
 		m_AudioManager(nullptr),
 		m_SoundManager(nullptr),
-		m_SystemManager(nullptr),
 		m_FontManager(nullptr),
 		m_GuiManager(nullptr),
 		m_GameMap(nullptr) {}
@@ -32,7 +30,6 @@ struct SharedContext {
 	Map* m_GameMap;
 	AudioManager* m_AudioManager;
 	SoundManager* m_SoundManager;
-	SystemManager* m_SystemManager;
 	FontManager* m_FontManager;
 	GUI_Manager* m_GuiManager;
 	DebugOverlay m_DebugOverlay;

@@ -25,6 +25,17 @@ void Anim_Directional::FrameStep() {
 		//Pause();
 		SetFrame(m_FrameStart);
 	}
+
+	/*if (m_frameStart < m_frameEnd) { ++m_frameCurrent; }
+	else { --m_frameCurrent; }
+
+	if ((m_frameStart < m_frameEnd && m_frameCurrent > m_frameEnd) ||
+		(m_frameStart > m_frameEnd && m_frameCurrent < m_frameEnd))
+	{
+		if (m_loop) { m_frameCurrent = m_frameStart; return; }
+		m_frameCurrent = m_frameEnd;
+		Pause();
+	}*/
 }
 
 void Anim_Directional::ReadIn(std::stringstream& l_stream) {

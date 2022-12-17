@@ -11,16 +11,15 @@ Character::Character(EntityManager* l_EntityMgr) :
 
 Character::~Character() { }
 
-void Character::Move() {
+void Character::Move(const Direction& l_dir) {
 	if (GetState() == EntityState::Dying) {
 		return;
 	}
 
-	Accelerate(m_Speed.x, 0);
+	if (l_dir == Direction::Left) { Accelerate(-m_Speed.x, 0); }
+	else { Accelerate(m_Speed.x, 0); }
 
-	if (GetState() == EntityState::Running) {
-		SetState(EntityState::Running);
-	}
+	SetState(EntityState::Running);
 }
 
 void Character::Jump() {
@@ -60,7 +59,7 @@ void Character::Load(const std::string& l_Path) {
 	std::ifstream file;
 	std::string line;
 
-	file.open("Code/Resources/Media/Characters/Player.char");
+	file.open("Code/Resources/Media/Entities/Player.char");
 	if (!file.is_open()) {
 		std::cout << "! Failed loading file: " << l_Path << std::endl;
 		return;
@@ -138,6 +137,17 @@ void Character::Update(float l_deltaTime) {
 
 	if (m_AttackAABB.width != 0 && m_AttackAABB.height != 0) {
 		UpdateAttackAABB();
+
+		// Debug.
+		if (m_EntityManager->GetContext()->m_DebugOverlay.Debug()) {
+			sf::RectangleShape* arect = new sf::RectangleShape(sf::Vector2f(m_AttackAABB.width, m_AttackAABB.height));
+			arect->setPosition(m_AttackAABB.left, m_AttackAABB.top);
+			arect->setFillColor(sf::Color(255, 255, 255,
+				(m_State == EntityState::Attacking && m_SpriteSheet.GetCurrentAnim()->IsInAction()
+					? 200 : 100)));
+			m_EntityManager->GetContext()->m_DebugOverlay.Add(arect);
+		}
+		// End debug.
 	}
 
 	if (GetState() != EntityState::Dying && GetState() != EntityState::Attacking) {
@@ -158,7 +168,7 @@ void Character::Update(float l_deltaTime) {
 	}
 	else if (GetState() == EntityState::Dying) {
 		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
-			m_EntityManager->Remove(m_Id);
+			m_EntityManager->RemoveEntity(m_Id);
 		}
 	}
 	Animate();

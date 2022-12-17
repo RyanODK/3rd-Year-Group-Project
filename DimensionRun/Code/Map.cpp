@@ -2,8 +2,9 @@
 #include "StateManager.h"
  
 //constructor for map class
-Map::Map(SharedContext* l_Context) : 
-	m_Context(l_Context), m_DefaultTile(l_Context), m_MaxMapSize(32, 32), m_PlayerId(-1)
+Map::Map(SharedContext* l_Context, BaseState* l_currentState) :
+	m_Context(l_Context), m_DefaultTile(l_Context), m_MaxMapSize(32, 32), m_TileCount(0), 
+	m_TileSetCount(0), m_MapGravity(512.f), m_LoadNextMap(false), m_CurrentState(l_currentState)
 {
 	m_Context->m_GameMap = this;
 	//loads tile from file
@@ -18,18 +19,9 @@ Map::~Map() {
 }
 
 //converting 2d coords to single number 
-Tile* Map::GetTile(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer){
-	if (l_X < 0 || l_Y < 0 || l_X >= m_MaxMapSize.x ||
-		l_Y >= m_MaxMapSize.y || l_Layer < 0 ||
-		l_Layer >= Sheet::Num_Layers)
-	{
-		return nullptr;
-	}
-	auto itr = m_TileMap.find(ConvertCoords(l_X, l_Y, l_Layer));
-	if (itr == m_TileMap.end()) { 
-		return nullptr; 
-	}
-	return itr->second;
+Tile* Map::GetTile(unsigned int l_X, unsigned int l_Y){
+	auto itr = m_TileMap.find(ConvertCoords(l_X, l_Y));
+	return(itr != m_TileMap.end() ? itr->second : nullptr);
 }
 
 TileInfo* Map::GetDefaultTile() { 
@@ -52,10 +44,6 @@ const sf::Vector2f& Map::GetPlayerStart() const {
 	return m_PlayerStart; 
 }
 
-int Map::GetPlayerId() const { 
-	return m_PlayerId; 
-}
-
 void Map::LoadMap(const std::string& l_path) {
 	std::ifstream mapFile;
 	mapFile.open(l_path);
@@ -65,9 +53,11 @@ void Map::LoadMap(const std::string& l_path) {
 		return;
 	}
 
+	EntityManager* entityMgr = m_Context->m_EntityManager;
 	std::string line;
 	std::cout << "--- Loading a map: " << l_path << std::endl;
 
+	int playerId = -1;
 	while (std::getline(mapFile, line)) {
 		if (line[0] == '|') { 
 			continue; 
@@ -91,12 +81,9 @@ void Map::LoadMap(const std::string& l_path) {
 				continue;
 			}
 			sf::Vector2i tileCoords;
-			unsigned int tileLayer = 0;
-			unsigned int tileSolidity = 0;
-			keystream >> tileCoords.x >> tileCoords.y >> tileLayer >> tileSolidity;
+			keystream >> tileCoords.x >> tileCoords.y;
 			if (tileCoords.x > m_MaxMapSize.x ||
-				tileCoords.y > m_MaxMapSize.y ||
-				tileLayer >= Sheet::Num_Layers)
+				tileCoords.y > m_MaxMapSize.y)
 			{
 				std::cout << "! Tile is out of range: " << tileCoords.x << " " << tileCoords.y << std::endl;
 				continue;
@@ -104,13 +91,13 @@ void Map::LoadMap(const std::string& l_path) {
 			Tile* tile = new Tile();
 			// Bind properties of a tile from a set.
 			tile->m_Properties = itr->second;
-			tile->m_Solid = (bool)tileSolidity;
 			if (!m_TileMap.emplace(ConvertCoords(
-				tileCoords.x, tileCoords.y, tileLayer), tile).second)
+				tileCoords.x, tileCoords.y), tile).second)
 			{
 				// Duplicate tile detected!
 				std::cout << "! Duplicate tile! : " << tileCoords.x << " " << tileCoords.y << std::endl;
 				delete tile;
+				tile = nullptr;
 				continue;
 			}
 			std::string warp;
@@ -121,8 +108,53 @@ void Map::LoadMap(const std::string& l_path) {
 				tile->m_Warp = true;
 			}
 		}
+		else if (type == "BACKGROUND") {
+			keystream >> m_BackgroundBack >> m_BackgroundMiddle >> m_BackgroundFront;
+
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundBack)) {
+				m_BackgroundBack = "";
+				continue;
+			}
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundMiddle)) {
+				m_BackgroundMiddle = "";
+				continue;
+			}
+			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundFront)) {
+				m_BackgroundFront = "";
+				continue;
+			}
+
+			sf::Texture* texture1 = m_Context->m_TextureManager->GetResource(m_BackgroundBack);
+			sf::Texture* texture2 = m_Context->m_TextureManager->GetResource(m_BackgroundMiddle);
+			sf::Texture* texture3 = m_Context->m_TextureManager->GetResource(m_BackgroundFront);
+
+			m_Background1.setTexture(*texture1);
+			m_Background2.setTexture(*texture2);
+			m_Background3.setTexture(*texture3);
+
+			sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
+			sf::Vector2u textureSize1 = texture1->getSize();
+			sf::Vector2u textureSize2 = texture2->getSize();
+			sf::Vector2u textureSize3 = texture3->getSize();
+			sf::Vector2f scaleFactors;
+
+			scaleFactors.x = viewSize.x / textureSize1.x;
+			scaleFactors.y = viewSize.y / textureSize1.y;
+			m_Background1.setScale(scaleFactors);
+
+			scaleFactors.x = viewSize.x / textureSize2.x;
+			scaleFactors.y = viewSize.y / textureSize2.y;
+			m_Background2.setScale(scaleFactors);
+
+			scaleFactors.x = viewSize.x / textureSize3.x;
+			scaleFactors.y = viewSize.y / textureSize3.y;
+			m_Background3.setScale(scaleFactors);
+		}
 		else if (type == "SIZE") {
 			keystream >> m_MaxMapSize.x >> m_MaxMapSize.y;
+		}
+		else if (type == "GRAVITY") {
+			keystream >> m_MapGravity;
 		}
 		else if (type == "DEFAULT_FRICTION") {
 			keystream >> m_DefaultTile.m_Friction.x >> m_DefaultTile.m_Friction.y;
@@ -130,27 +162,37 @@ void Map::LoadMap(const std::string& l_path) {
 		else if (type == "NEXTMAP") {
 			keystream >> m_NextMap;
 		}
-		else if (type == "ENTITY") {
-			// Set up entity here.
-			std::string name;
-			keystream >> name;
-			if (name == "Player" && m_PlayerId != -1) { 
+		else if (type == "PLAYER") {
+			if (playerId != -1) { 
 				continue; 
 			}
-			int entityId = m_Context->m_EntityManager->AddEntity(name);
-
-			if (entityId < 0) { 
+			// Set up the player position here.
+			playerId = entityMgr->AddEntity(EntityType::Player);
+			if (playerId < 0) { 
 				continue; 
 			}
-			if (name == "Player") {
-				m_PlayerId = entityId; 
+
+			float playerX = 0; 
+			float playerY = 0;
+
+			keystream >> playerX >> playerY;
+			entityMgr->Find(playerId)->SetPosition(playerX, playerY);
+			m_PlayerStart = sf::Vector2f(playerX, playerY);
+		}
+		else if (type == "ENEMY") {
+			std::string enemyName;
+			keystream >> enemyName;
+			int enemyId = entityMgr->AddEntity(EntityType::Enemy, enemyName);
+
+			if (enemyId < 0) { 
+				continue; 
 			}
 
-			C_Base* position = m_Context->m_EntityManager->
-				GetComponent<C_Position>(entityId, Component::Position);
-			if (position) { 
-				keystream >> *position; 
-			} 
+			float enemyX = 0; 
+			float enemyY = 0;
+
+			keystream >> enemyX >> enemyY;
+			entityMgr->Find(enemyId)->SetPosition(enemyX, enemyY);
 		}
 		else {
 			// Something else.
@@ -202,7 +244,7 @@ void Map::LoadTiles(const std::string& l_path) {
 }
 
 void Map::Update(float l_DeltaTime) {
-	/*if (m_LoadNextMap) {
+	if (m_LoadNextMap) {
 		PurgeMap();
 		m_LoadNextMap = false;
 
@@ -219,22 +261,15 @@ void Map::Update(float l_DeltaTime) {
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
 	m_Background1.setPosition(viewSpace.left, viewSpace.top);
 	m_Background2.setPosition(viewSpace.left, viewSpace.top);
-	m_Background3.setPosition(viewSpace.left, viewSpace.top);*/
+	m_Background3.setPosition(viewSpace.left, viewSpace.top);
 }
 
-void Map::Draw(unsigned int l_layer) {
-	if (l_layer >= Sheet::Num_Layers) { 
-		return; 
-	}
-
+void Map::Draw() {
 	sf::RenderWindow* l_Wind = m_Context->m_Wind->GetRenderWindow();
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
-	sf::Vector2u resolution;
-	resolution.x = sf::VideoMode::getDesktopMode().width;
-	resolution.y = sf::VideoMode::getDesktopMode().height;
-	/*l_Wind->draw(m_Background1);
+	l_Wind->draw(m_Background1);
 	l_Wind->draw(m_Background2);
-	l_Wind->draw(m_Background3);*/
+	l_Wind->draw(m_Background3);
 
 	sf::Vector2i tileBegin(floor(viewSpace.left / Sheet::Tile_Size), 
 						floor(viewSpace.top / Sheet::Tile_Size));
@@ -245,7 +280,12 @@ void Map::Draw(unsigned int l_layer) {
 	unsigned int count = 0;
 	for (int x = tileBegin.x; x <= tileEnd.x; ++x) {
 		for (int y = tileBegin.y; y <= tileEnd.y; ++y) {
-			Tile* tile = GetTile(x, y, l_layer);
+			
+			if (x < 0 || y < 0) { 
+				continue; 
+			}
+
+			Tile* tile = GetTile(x, y);
 			
 			if (!tile) { 
 				continue; 
@@ -257,50 +297,59 @@ void Map::Draw(unsigned int l_layer) {
 			//sprite.setScale((resolution.x / 100) * 0.1, (resolution.y / 100) * 0.1);
 			l_Wind->draw(sprite);
 			++count;
+
+			// Debug.
+			if (m_Context->m_DebugOverlay.Debug()) {
+				if (tile->m_Properties->m_Deadly || tile->m_Warp) {
+					sf::RectangleShape* tileMarker = new sf::RectangleShape(
+						sf::Vector2f(Sheet::Tile_Size, Sheet::Tile_Size));
+					tileMarker->setPosition(x * Sheet::Tile_Size, y * Sheet::Tile_Size);
+					if (tile->m_Properties->m_Deadly) {
+						tileMarker->setFillColor(sf::Color(255, 0, 0, 100));
+					}
+					else if (tile->m_Warp) {
+						tileMarker->setFillColor(sf::Color(0, 255, 0, 150));
+					}
+					m_Context->m_DebugOverlay.Add(tileMarker);
+				}
+			}
+			// End debug.
 		}
 	}
 }
 
 //converting coords from 2d to single number. Max size of map must be defined.
-unsigned int Map::ConvertCoords(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer)const
+unsigned int Map::ConvertCoords(unsigned int l_X, unsigned int l_Y)
 {
-	return ((l_Layer * m_MaxMapSize.y + l_Y) * m_MaxMapSize.x + l_X);
+	return (l_X * m_MaxMapSize.x) + l_Y; // Row-major.
 }
 
 void Map::PurgeMap() {
-	//m_TileCount = 0;
-
-	//for (auto& itr : m_TileMap) {
-	//	delete itr.second;
-	//	m_TileMap.erase(m_TileMap.begin());
-	//}
-
-	//m_TileMap.clear();
-	//m_Context->m_EntityManager->Purge();
-
-	//if (m_BackgroundTexture1 == "") {
-	//	return;
-	//}
-	//if (m_BackgroundTexture2 == "") {
-	//	return;
-	//}
-	//if (m_BackgroundTexture3 == "") {
-	//	return;
-	//}
-
-	//m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture1);
-	//m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture2);
-	//m_Context->m_TextureManager->ReleaseResource(m_BackgroundTexture3);
-	//m_BackgroundTexture1 = "";
-	//m_BackgroundTexture2 = "";
-	//m_BackgroundTexture3 = "";
-
-	while (m_TileMap.begin() != m_TileMap.end()) {
-		delete m_TileMap.begin()->second;
-		m_TileMap.erase(m_TileMap.begin());
-	}
 	m_TileCount = 0;
+	for (auto& itr : m_TileMap) {
+		delete itr.second;
+	}
+	m_TileMap.clear();
 	m_Context->m_EntityManager->Purge();
+
+	if (m_BackgroundBack == "") { 
+		return; 
+	}
+	if (m_BackgroundMiddle == "") {
+		return;
+	}
+	if (m_BackgroundFront == "") {
+		return;
+	}
+
+	m_Context->m_TextureManager->ReleaseResource(m_BackgroundBack);
+	m_BackgroundBack = "";
+
+	m_Context->m_TextureManager->ReleaseResource(m_BackgroundMiddle);
+	m_BackgroundMiddle = "";
+
+	m_Context->m_TextureManager->ReleaseResource(m_BackgroundFront);
+	m_BackgroundFront = "";
 }
 
 void Map::PurgeTileSet() {

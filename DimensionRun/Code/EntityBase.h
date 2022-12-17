@@ -2,9 +2,6 @@
 #include <string>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-//#include "EntityManager.h"
-//#include "SharedContext.h"
-//#include "Map.h"
 
 enum class EntityType { Base, Enemy, Player };
 
@@ -52,7 +49,6 @@ public:
 	EntityType GetType();
 	EntityState GetState();
 	const sf::Vector2f& GetPosition() const;
-	//bool SortCollisions(const CollisionElement& l_One, const CollisionElement& l_Two);
 
 	virtual void Update(float l_deltaTime);
 	virtual void Draw(sf::RenderWindow* l_Wind) = 0;
@@ -62,6 +58,7 @@ protected:
 	void UpdateAABB();
 	void CheckCollisions();
 	void ResolveCollisions();
+
 	// Method for what THIS entity does TO the l_collider entity.
 	virtual void OnEntityCollision(EntityBase* l_Collider, bool l_Attack) = 0;
 

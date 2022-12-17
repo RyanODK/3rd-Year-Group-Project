@@ -9,7 +9,7 @@ public:
 	Character(EntityManager* l_EntityMgr);
 	virtual ~Character();
 
-	void Move();
+	void Move(const Direction& l_dir);
 	void Jump();
 	void Attack();
 	void GetHurt(const int& l_Damage);

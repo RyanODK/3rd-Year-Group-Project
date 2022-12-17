@@ -4,11 +4,13 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <array>
 #include "Utilities.h"
 #include "SharedContext.h"
+#include "BaseState.h"
 
 //tile sheet info
-enum Sheet { Tile_Size = 43, Sheet_Width = 258, Sheet_Height = 43, Num_Layers = 5 };
+enum Sheet { Tile_Size = 43, Sheet_Width = 258, Sheet_Height = 258 };
 
 //type alias for ids
 using TileID = unsigned int;
@@ -75,33 +77,39 @@ using TileSet = std::unordered_map<TileID, TileInfo*>;
 
 class Map {
 public:
-	Map(SharedContext* l_context);
+	Map(SharedContext* l_context, BaseState* l_currentState);
 	~Map();
 
-	Tile* GetTile(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer);
+	Tile* GetTile(unsigned int l_X, unsigned int l_Y);
 
 	TileInfo* GetDefaultTile();
 
+	float GetGravity() const;
 	unsigned int GetTileSize() const;
 	const sf::Vector2u& GetMapSize() const;
 	const sf::Vector2f& GetPlayerStart() const;
-	int GetPlayerId() const;
-	float GetGravity() const;
 
 	void LoadMap(const std::string& l_Path);
 	void LoadNext(); 
 
 	void Update(float l_deltaTime);
-	void Draw(unsigned int l_Layer);
+	void Draw();
 
 private:
 	// Method for converting 2D coordinates to 1D ints.
-	unsigned int ConvertCoords(unsigned int l_X, unsigned int l_Y, unsigned int l_Layer)const;
+	unsigned int ConvertCoords(unsigned int l_X, unsigned int l_Y);
 
 	void LoadTiles(const std::string& l_Path);
 
 	void PurgeMap();
 	void PurgeTileSet();
+
+	std::string m_BackgroundBack;
+	std::string m_BackgroundMiddle;
+	std::string m_BackgroundFront;
+	sf::Sprite m_Background1;
+	sf::Sprite m_Background2;
+	sf::Sprite m_Background3;
 
 	TileSet m_TileSet;
 	TileMap m_TileMap;
@@ -119,8 +127,6 @@ private:
 	unsigned int m_TileCount;
 	unsigned int m_TileSetCount;
 
-	//BaseState* m_CurrentState;
+	BaseState* m_CurrentState;
 	SharedContext* m_Context;
-
-	int m_PlayerID;
 };

@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "EntityManager.h"
-#include "StateManager.h"
+#include "StateManager.h" 
 
 Player::Player(EntityManager* l_EntityMgr) :
 	Character(l_EntityMgr) {
@@ -9,12 +9,16 @@ Player::Player(EntityManager* l_EntityMgr) :
 	m_Type = EntityType::Player;
 
 	EventManager* events = m_EntityManager->GetContext()->m_EventManager;
+	events->AddCallback<Player>(StateType::Game, "Player_MoveLeft", &Player::React, this);
+	events->AddCallback<Player>(StateType::Game, "Player_MoveRight", &Player::React, this);
 	events->AddCallback<Player>(StateType::Game, "Player_Jump", &Player::React, this);
 	events->AddCallback<Player>(StateType::Game, "Player_Attack", &Player::React, this);
 }
 
 Player::~Player() {
 	EventManager* events = m_EntityManager->GetContext()->m_EventManager;
+	events->RemoveCallback(StateType::Game, "Player_MoveLeft");
+	events->RemoveCallback(StateType::Game, "Player_MoveRight");
 	events->RemoveCallback(StateType::Game, "Player_Jump");
 	events->RemoveCallback(StateType::Game, "Player_Attack");
 }
@@ -54,7 +58,13 @@ void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 }
 
 void Player::React(EventDetails* l_Details) {
-	if (l_Details->m_Name == "Player_Jump") {
+	if (l_Details->m_Name == "Player_MoveLeft") {
+		Character::Move(Direction::Left);
+	}
+	else if (l_Details->m_Name == "Player_MoveRight") {
+		Character::Move(Direction::Right);
+	}
+	else if (l_Details->m_Name == "Player_Jump") {
 		Character::Jump();
 	}
 	else if (l_Details->m_Name == "Player_Attack") {
