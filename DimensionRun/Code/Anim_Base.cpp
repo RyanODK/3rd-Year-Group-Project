@@ -4,7 +4,7 @@
 Anim_Base::Anim_Base() :
 	m_FrameCurrent(0), m_FrameStart(0), m_FrameEnd(0), m_FrameRow(0), m_FrameTime(0.f),
 	m_ElapsedTime(0.f), m_FrameActionStart(-1),
-	m_FrameActionEnd(-1), m_Loop(false), m_IsPlaying(false), m_HasMoved(false) {}
+	m_FrameActionEnd(-1), m_Loop(false), m_IsPlaying(false) {}
 
 Anim_Base::~Anim_Base(){}
 
@@ -12,14 +12,11 @@ void Anim_Base::SetSpriteSheet(SpriteSheet* l_Sheet) {
 	m_SpriteSheet = l_Sheet;
 }
 
-bool Anim_Base::SetFrame(Frame l_Frame) {
+void Anim_Base::SetFrame(Frame l_Frame) {
 	if ((l_Frame >= m_FrameStart && l_Frame <= m_FrameEnd) ||
 		(l_Frame >= m_FrameEnd && l_Frame <= m_FrameStart)) {
 		m_FrameCurrent = l_Frame;
-		m_HasMoved = true;
-		return true;
 	}
-	return false;
 }
 
 void Anim_Base::SetStartFrame(Frame l_frame) {
@@ -28,7 +25,7 @@ void Anim_Base::SetStartFrame(Frame l_frame) {
 void Anim_Base::SetEndFrame(Frame l_frame) {
 	m_FrameEnd = l_frame;
 }
-void Anim_Base::SetFrameRow(unsigned int l_row) {
+void Anim_Base::SetFrameRow(Frame l_row) {
 	m_FrameRow = l_row;
 }
 void Anim_Base::SetActionStart(Frame l_frame) {
@@ -69,7 +66,7 @@ Frame Anim_Base::GetEndFrame() {
 	return m_FrameEnd; 
 }
 
-unsigned int Anim_Base::GetFrameRow() { 
+Frame Anim_Base::GetFrameRow() { 
 	return m_FrameRow; 
 }
 
@@ -130,13 +127,20 @@ void Anim_Base::Reset() {
 	CropSprite();
 }
 
-void Anim_Base::Update(float l_DeltaTime) {
-	if (m_IsPlaying) {
-		m_ElapsedTime += l_DeltaTime;
-		if (m_ElapsedTime >= m_FrameTime) {
-			FrameStep();
-			CropSprite();
-			m_ElapsedTime = 0;
-		}
+void Anim_Base::Update(const float& l_DeltaTime) {
+	if (!m_IsPlaying) { 
+		return; 
 	}
+
+	m_ElapsedTime += l_DeltaTime;
+	
+	if (m_ElapsedTime < m_FrameTime) { 
+		return; 
+	}
+
+	FrameStep();
+	CropSprite();
+	m_ElapsedTime = 0;
+
+	//std::cout << m_Loop << std::endl;
 }

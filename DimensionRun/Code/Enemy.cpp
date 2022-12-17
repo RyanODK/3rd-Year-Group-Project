@@ -28,8 +28,8 @@ void Enemy::Update(float l_dT) {
 
 	if (m_HasDestination) {
 		if (abs(m_Destination.x - m_Position.x) < 16) { m_HasDestination = false; return; }
-		/*if (m_Destination.x - m_Position.x > 0) { Move(Direction::Right); }
-		else { Move(Direction::Left); }*/
+		if (m_Destination.x - m_Position.x > 0) { Move(Direction::Right); }
+		else { Move(Direction::Left); }
 		if (m_CollidingOnX) { m_HasDestination = false; }
 		return;
 	}

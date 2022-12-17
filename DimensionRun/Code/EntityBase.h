@@ -6,7 +6,7 @@
 enum class EntityType { Base, Enemy, Player };
 
 enum class EntityState {
-	Running, Jumping, Attacking, Dying
+	Running, Jumping, Attacking, Sliding, Dying
 };
 
 struct TileInfo;
@@ -39,16 +39,17 @@ public:
 	void ApplyFriction(float l_X, float l_Y);
 
 	void SetAcceleration(float l_X, float l_Y);
-	void SetPosition(const float& l_X, const float& l_Y);
+	void SetPosition(float l_X, float l_Y);
 	void SetPosition(const sf::Vector2f& l_Pos);
-	void SetSize(const float& l_X, const float& l_Y);
+	void SetSize(float l_X, float l_Y);
 	void SetState(const EntityState& l_State);
 
-	std::string GetName();
-	unsigned int GetId();
-	EntityType GetType();
-	EntityState GetState();
+	std::string GetName() const;
+	unsigned int GetId() const;
+	EntityType GetType() const;
+	EntityState GetState() const;
 	const sf::Vector2f& GetPosition() const;
+	const sf::Vector2f& GetSize() const;
 
 	virtual void Update(float l_deltaTime);
 	virtual void Draw(sf::RenderWindow* l_Wind) = 0;

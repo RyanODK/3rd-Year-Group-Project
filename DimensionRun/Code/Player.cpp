@@ -13,14 +13,16 @@ Player::Player(EntityManager* l_EntityMgr) :
 	events->AddCallback<Player>(StateType::Game, "Player_MoveRight", &Player::React, this);
 	events->AddCallback<Player>(StateType::Game, "Player_Jump", &Player::React, this);
 	events->AddCallback<Player>(StateType::Game, "Player_Attack", &Player::React, this);
+	events->AddCallback<Player>(StateType::Game, "Player_Slide", &Player::React, this);
 }
-
+ 
 Player::~Player() {
 	EventManager* events = m_EntityManager->GetContext()->m_EventManager;
 	events->RemoveCallback(StateType::Game, "Player_MoveLeft");
 	events->RemoveCallback(StateType::Game, "Player_MoveRight");
 	events->RemoveCallback(StateType::Game, "Player_Jump");
 	events->RemoveCallback(StateType::Game, "Player_Attack");
+	events->RemoveCallback(StateType::Game, "Player_Slide");
 }
 
 void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
@@ -69,5 +71,8 @@ void Player::React(EventDetails* l_Details) {
 	}
 	else if (l_Details->m_Name == "Player_Attack") {
 		Character::Attack();
+	}
+	else if (l_Details->m_Name == "Player_Slide") {
+		Character::Slide();
 	}
 }

@@ -27,7 +27,7 @@ void SpriteSheet::SetDirection(const Direction& l_dir) {
 	m_AnimationCurrent->CropSprite();
 }
 
-void SpriteSheet::SetSpriteSize(const sf::Vector2u& l_Size) {
+void SpriteSheet::SetSpriteSize(const sf::Vector2i& l_Size) {
 	m_SpriteSize = l_Size;
 	m_Sprite.setOrigin(m_SpriteSize.x / 2, m_SpriteSize.y);
 }
@@ -145,7 +145,7 @@ bool SpriteSheet::LoadSheet(const std::string& l_File) {
 	return true;
 }
 
-bool SpriteSheet::SetAnimation(const std::string& l_Name, bool l_Play, bool l_Loop) {
+bool SpriteSheet::SetAnimation(const std::string& l_Name, const bool& l_Play, const bool& l_Loop) {
 	auto itr = m_Animations.find(l_Name);
 
 	if (itr == m_Animations.end()) {
@@ -171,7 +171,7 @@ bool SpriteSheet::SetAnimation(const std::string& l_Name, bool l_Play, bool l_Lo
 	return true;
 }
 
-void SpriteSheet::Update(float l_DeltaTime) {
+void SpriteSheet::Update(const float& l_DeltaTime) {
 	m_AnimationCurrent->Update(l_DeltaTime);
 }
 
@@ -179,7 +179,7 @@ void SpriteSheet::Draw(sf::RenderWindow* l_Window) {
 	l_Window->draw(m_Sprite);
 }
 
-sf::Vector2u SpriteSheet::GetSpriteSize() const { 
+sf::Vector2i SpriteSheet::GetSpriteSize() const { 
 	return m_SpriteSize; 
 }
 
@@ -191,6 +191,6 @@ Anim_Base* SpriteSheet::GetCurrentAnim() {
 	return m_AnimationCurrent; 
 }
 
-Direction SpriteSheet::GetDirection() { 
+Direction SpriteSheet::GetDirection() const{ 
 	return m_Direction; 
 }

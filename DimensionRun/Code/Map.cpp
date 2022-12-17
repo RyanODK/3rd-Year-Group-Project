@@ -252,10 +252,11 @@ void Map::Update(float l_DeltaTime) {
 			LoadMap("Code/Maps/" + m_NextMap);
 		}
 		else {
+			std::cout << "Cant load map" << std::endl;
 			m_CurrentState->GetStateManager()->SwitchTo(StateType::GameOver);
 		}
 
-		m_NextMap = "";
+		//m_NextMap = "";
 	}
 
 	sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();

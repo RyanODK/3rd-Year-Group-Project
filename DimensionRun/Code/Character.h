@@ -12,6 +12,7 @@ public:
 	void Move(const Direction& l_dir);
 	void Jump();
 	void Attack();
+	void Slide();
 	void GetHurt(const int& l_Damage);
 	void Load(const std::string& l_Path);
 	void Draw(sf::RenderWindow* l_Window);

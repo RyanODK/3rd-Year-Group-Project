@@ -1,0 +1,8 @@
+Texture SmallEnemy
+Size 34 32
+Scale 3.5 3.5
+|Type|Name|StartFrame|EndFrame|Row|FrameTime|FrameActionStart|FrameActionEnd|
+AnimationType Directional
+Animation Run 0 5 2 0.1 -1 -1
+Animation Attack 0 5 0 0.1 2 3
+Animation Death 0 5 1 0.2 -1 -1

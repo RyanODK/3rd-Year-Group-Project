@@ -70,7 +70,7 @@ void State_MainMenu::OnCreate() {
 
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_Play", &State_MainMenu::Play, this);
-	eMgr->AddCallback(StateType::MainMenu, "MainMenu_Quit", &State_MainMenu::QuitGame, this);
+	eMgr->AddCallback(StateType::MainMenu, "MainMenu_Quit", &State_MainMenu::Quit, this);
 }
 
 void State_MainMenu::OnDestroy() {
@@ -123,7 +123,7 @@ void State_MainMenu::Play(EventDetails* l_details) {
 
 void State_MainMenu::Credits(EventDetails* l_details) {}
 
-void State_MainMenu::QuitGame(EventDetails* l_details) { 
+void State_MainMenu::Quit(EventDetails* l_details) { 
 	m_StateMgr->GetContext()->m_Wind->Close(); 
 }
 

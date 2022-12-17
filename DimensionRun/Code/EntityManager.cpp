@@ -4,9 +4,9 @@
 EntityManager::EntityManager(SharedContext* l_context, unsigned int l_maxEntities)
 	:m_context(l_context), m_maxEntities(l_maxEntities), m_idCounter(0)
 {
-	//LoadEnemyTypes("EnemyList.list");
+	LoadEnemyTypes("EnemyList.list");
 	RegisterEntity<Player>(EntityType::Player);
-	//RegisterEntity<Enemy>(EntityType::Enemy);
+	RegisterEntity<Enemy>(EntityType::Enemy);
 }
 
 EntityManager::~EntityManager() { 
@@ -22,13 +22,13 @@ int EntityManager::AddEntity(const EntityType& l_type, const std::string& l_name
 
 	m_entities.emplace(m_idCounter, entity);
 
-	/*if (l_type == EntityType::Enemy) {
+	if (l_type == EntityType::Enemy) {
 		auto itr = m_enemyTypes.find(l_name);
 		if (itr != m_enemyTypes.end()) {
 			Enemy* enemy = (Enemy*)entity;
 			enemy->Load(itr->second);
 		}
-	}*/
+	}
 
 	++m_idCounter;
 	return m_idCounter - 1;
@@ -126,20 +126,20 @@ void EntityManager::EntityCollisionCheck() {
 	}
 }
 
-//void EntityManager::LoadEnemyTypes(const std::string& l_name) {
-//	std::ifstream file;
-//	file.open(Utils::GetResourceDirectory() + std::string("media/Characters/") + l_name);
-//	if (!file.is_open()) { std::cout << "! Failed loading file: " << l_name << std::endl; return; }
-//	std::string line;
-//	while (std::getline(file, line)) {
-//		if (line[0] == '|') { continue; }
-//		std::stringstream keystream(line);
-//		std::string name;
-//		std::string charFile;
-//		keystream >> name >> charFile;
-//		m_enemyTypes.emplace(name, charFile);
-//	}
-//	file.close();
-//}
+void EntityManager::LoadEnemyTypes(const std::string& l_name) {
+	std::ifstream file;
+	file.open("Code/Resources/Media/Entities/" + l_name);
+	if (!file.is_open()) { std::cout << "! Failed loading file: " << l_name << std::endl; return; }
+	std::string line;
+	while (std::getline(file, line)) {
+		if (line[0] == '|') { continue; }
+		std::stringstream keystream(line);
+		std::string name;
+		std::string charFile;
+		keystream >> name >> charFile;
+		m_enemyTypes.emplace(name, charFile);
+	}
+	file.close();
+}
 
 SharedContext* EntityManager::GetContext() { return m_context; }

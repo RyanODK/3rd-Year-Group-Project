@@ -13,10 +13,10 @@ public:
 
 	void SetSpriteSheet(SpriteSheet* l_Sheet);
 
-	bool SetFrame(Frame l_Frame);
+	void SetFrame(Frame l_Frame);
 	void SetStartFrame(Frame l_frame);
 	void SetEndFrame(Frame l_frame);
-	void SetFrameRow(unsigned int l_row);
+	void SetFrameRow(Frame l_row);
 	void SetActionStart(Frame l_frame);
 	void SetActionEnd(Frame l_frame);
 	void SetFrameTime(float l_time);
@@ -38,13 +38,13 @@ public:
 	Frame GetFrame();
 	Frame GetStartFrame();
 	Frame GetEndFrame();
-	unsigned int GetFrameRow();
+	Frame GetFrameRow();
 	int GetActionStart();
 	int GetActionEnd();
 	float GetFrameTime();
 	float GetElapsedTime();
 
-	virtual void Update(float l_deltaTime);
+	virtual void Update(const float& l_deltaTime);
 
 	friend std::stringstream& operator >>(std::stringstream& l_Stream, Anim_Base& a) {
 		a.ReadIn(l_Stream);

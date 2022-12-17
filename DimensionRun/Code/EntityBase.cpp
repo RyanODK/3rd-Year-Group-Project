@@ -16,7 +16,7 @@ EntityBase::EntityBase(EntityManager* l_EntityMgr) :
 
 EntityBase::~EntityBase() {}
 
-void EntityBase::SetPosition(const float& l_X, const float& l_Y) {
+void EntityBase::SetPosition(float l_X, float l_Y) {
 	m_Position = sf::Vector2f(l_X, l_Y);
 	UpdateAABB();
 }
@@ -26,7 +26,7 @@ void EntityBase::SetPosition(const sf::Vector2f& l_Pos) {
 	UpdateAABB();
 }
 
-void EntityBase::SetSize(const float& l_X, const float& l_Y) {
+void EntityBase::SetSize(float l_X, float l_Y) {
 	m_Size = sf::Vector2f(l_X, l_Y);
 	UpdateAABB();
 }
@@ -120,20 +120,24 @@ void EntityBase::ApplyFriction(float l_X, float l_Y) {
 	}
 }
 
-std::string EntityBase::GetName() {
+std::string EntityBase::GetName() const{
 	return m_Name;
 }
 
-unsigned int EntityBase::GetId() {
+unsigned int EntityBase::GetId() const{
 	return m_Id;
 }
 
-EntityType EntityBase::GetType() {
+EntityType EntityBase::GetType() const{
 	return m_Type;
 }
 
-EntityState EntityBase::GetState() {
+EntityState EntityBase::GetState() const{
 	return m_State;
+}
+
+const sf::Vector2f& EntityBase::GetSize() const { 
+	return m_Size; 
 }
 
 const sf::Vector2f& EntityBase::GetPosition() const { 

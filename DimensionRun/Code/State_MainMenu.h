@@ -26,7 +26,7 @@ public:
 
 	void Play(EventDetails* l_Details);
 	void Credits(EventDetails* l_Details);
-	void QuitGame(EventDetails* l_Details);
+	void Quit(EventDetails* l_Details);
 
 private:
 	/*sf::Font m_Font;

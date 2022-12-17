@@ -3,6 +3,7 @@
 #include <vector>
 #include <functional>
 #include "Player.h"
+#include "Enemy.h"
 
 using EntityContainer = std::unordered_map<unsigned int, EntityBase*>;
 using EntityFactory = std::unordered_map<EntityType, std::function<EntityBase* (void)>>;
@@ -37,6 +38,8 @@ private:
 	void ProcessRemovals();
 	//void LoadEnemyTypes(const std::string& l_name);
 	void EntityCollisionCheck();
+
+	void LoadEnemyTypes(const std::string& l_name);
 
 	EntityContainer m_entities;
 	EnemyTypes m_enemyTypes;

@@ -19,7 +19,7 @@ void Character::Move(const Direction& l_dir) {
 	if (l_dir == Direction::Left) { Accelerate(-m_Speed.x, 0); }
 	else { Accelerate(m_Speed.x, 0); }
 
-	SetState(EntityState::Running);
+	//SetState(EntityState::Running);
 }
 
 void Character::Jump() {
@@ -36,6 +36,17 @@ void Character::Attack() {
 		return;
 	}
 	SetState(EntityState::Attacking);
+}
+
+void Character::Slide() {
+	if (GetState() == EntityState::Dying || GetState() == EntityState::Jumping || GetState() == EntityState::Sliding ) {
+		std::cout << "cant slide" << std::endl;
+		return;
+	}
+
+	SetState(EntityState::Sliding);
+	//SetPosition(m_Position.x, m_Position.y + 50);
+	//SetSize(10, 5);
 }
 
 void Character::GetHurt(const int& l_Damage) {
@@ -59,7 +70,7 @@ void Character::Load(const std::string& l_Path) {
 	std::ifstream file;
 	std::string line;
 
-	file.open("Code/Resources/Media/Entities/Player.char");
+	file.open("Code/Resources/Media/Entities/" + l_Path);
 	if (!file.is_open()) {
 		std::cout << "! Failed loading file: " << l_Path << std::endl;
 		return;
@@ -127,6 +138,9 @@ void Character::Animate() {
 	else if (state == EntityState::Attacking && m_SpriteSheet.GetCurrentAnim()->GetName() != "Attack") {
 		m_SpriteSheet.SetAnimation("Attack", true, false);
 	}
+	else if (state == EntityState::Sliding && m_SpriteSheet.GetCurrentAnim()->GetName() != "Slide") {
+		m_SpriteSheet.SetAnimation("Slide", true, false);
+	}
 	else if (state == EntityState::Dying && m_SpriteSheet.GetCurrentAnim()->GetName() != "Death") {
 		m_SpriteSheet.SetAnimation("Death", true, false);
 	}
@@ -150,18 +164,20 @@ void Character::Update(float l_deltaTime) {
 		// End debug.
 	}
 
-	if (GetState() != EntityState::Dying && GetState() != EntityState::Attacking) {
+	if (GetState() != EntityState::Dying && GetState() != EntityState::Attacking && GetState() != EntityState::Sliding) {
 		if (abs(m_Velocity.y) >= 0.001f) {
 			SetState(EntityState::Jumping);
 		}
 		else if (abs(m_Velocity.x) >= 0.1f) {
 			SetState(EntityState::Running);
 		}
-		/*else {
-			SetState(EntityState::)
-		}*/
 	}
 	else if (GetState() == EntityState::Attacking) {
+		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
+			SetState(EntityState::Running);
+		}
+	}
+	else if (GetState() == EntityState::Sliding) {
 		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
 			SetState(EntityState::Running);
 		}
@@ -174,6 +190,8 @@ void Character::Update(float l_deltaTime) {
 	Animate();
 	m_SpriteSheet.Update(l_deltaTime);
 	m_SpriteSheet.SetSpritePosition(m_Position);
+
+	//std::cout << m_SpriteSheet.GetCurrentAnim()->GetName() << std::endl;
 }
 
 void Character::Draw(sf::RenderWindow* l_Window) {
