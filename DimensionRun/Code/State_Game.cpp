@@ -21,7 +21,7 @@ void State_Game::OnCreate() {
 	m_GameMap = new Map(m_StateMgr->GetContext(), this);
 	m_GameMap->LoadMap("Code/Maps/map1.map");
 
-	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
 }
 
 void State_Game::OnDestroy() {

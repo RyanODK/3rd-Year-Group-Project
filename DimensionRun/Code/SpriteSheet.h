@@ -12,13 +12,13 @@ public:
     SpriteSheet(TextureManager* l_textMgr);
     ~SpriteSheet();
 
-    void SetSpriteSize(const sf::Vector2i& l_Size);
+    void SetSpriteSize(const sf::Vector2f& l_Size);
     void SetSpritePosition(const sf::Vector2f& l_Pos);
     void CropSprite(const sf::IntRect& l_rect);
     void SetDirection(const Direction& l_dir);
 
     Direction GetDirection()const;
-    sf::Vector2i GetSpriteSize() const;
+    sf::Vector2f GetSpriteSize() const;
     sf::Vector2f GetSpritePosition() const;
 
     void SetSheetPadding(const sf::Vector2f& l_padding);
@@ -37,7 +37,7 @@ public:
 private:
     std::string m_Texture;
     sf::Sprite m_Sprite;
-    sf::Vector2i m_SpriteSize;
+    sf::Vector2f m_SpriteSize;
     sf::Vector2f m_SpriteScale;
     Animations m_Animations;
     Anim_Base* m_AnimationCurrent;

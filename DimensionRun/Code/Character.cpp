@@ -45,8 +45,9 @@ void Character::Slide() {
 	}
 
 	SetState(EntityState::Sliding);
-	//SetPosition(m_Position.x, m_Position.y + 50);
-	//SetSize(10, 5);
+	SetSize(26, 14);
+	m_SpriteSheet.SetSpriteSize(sf::Vector2f(26, 14.7));
+	UpdateAABB();
 }
 
 void Character::GetHurt(const int& l_Damage) {
@@ -159,7 +160,14 @@ void Character::Update(float l_deltaTime) {
 			arect->setFillColor(sf::Color(255, 255, 255,
 				(m_State == EntityState::Attacking && m_SpriteSheet.GetCurrentAnim()->IsInAction()
 					? 200 : 100)));
+
+			sf::RectangleShape* spriteSize = new sf::RectangleShape(sf::Vector2f(m_AABB.width, m_AABB.height));
+			spriteSize->setPosition(m_AABB.left, m_AABB.top);
+			spriteSize->setFillColor(sf::Color(0, 0, 0,
+				(m_State == EntityState::Running && m_SpriteSheet.GetCurrentAnim()->IsInAction()
+					? 200 : 100)));
 			m_EntityManager->GetContext()->m_DebugOverlay.Add(arect);
+			m_EntityManager->GetContext()->m_DebugOverlay.Add(spriteSize);
 		}
 		// End debug.
 	}
@@ -167,9 +175,15 @@ void Character::Update(float l_deltaTime) {
 	if (GetState() != EntityState::Dying && GetState() != EntityState::Attacking && GetState() != EntityState::Sliding) {
 		if (abs(m_Velocity.y) >= 0.001f) {
 			SetState(EntityState::Jumping);
+			SetSize(27, 33);
+			m_SpriteSheet.SetSpriteSize(sf::Vector2f(27, 33));
+			UpdateAABB();
 		}
 		else if (abs(m_Velocity.x) >= 0.1f) {
 			SetState(EntityState::Running);
+			SetSize(27, 33);
+			m_SpriteSheet.SetSpriteSize(sf::Vector2f(27, 33));
+			UpdateAABB();
 		}
 	}
 	else if (GetState() == EntityState::Attacking) {
@@ -183,6 +197,9 @@ void Character::Update(float l_deltaTime) {
 		}
 	}
 	else if (GetState() == EntityState::Dying) {
+		SetSize(27, 33);
+		m_SpriteSheet.SetSpriteSize(sf::Vector2f(27, 33));
+		UpdateAABB();
 		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
 			m_EntityManager->RemoveEntity(m_Id);
 		}
