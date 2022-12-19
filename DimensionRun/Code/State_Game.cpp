@@ -12,10 +12,19 @@ void State_Game::OnCreate() {
 	evMgr->AddCallback(StateType::Game, "Key_P", &State_Game::Pause, this);
 	evMgr->AddCallback(StateType::Game, "Key_O", &State_Game::ToggleOverlay, this);
 
-	sf::Vector2u size = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
+	sf::Vector2f size = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
 	m_View.setSize(size.x, size.y);
 	m_View.setCenter(size.x / 2, size.y / 2);
-	m_View.zoom(0.5f);
+
+	if (size.x == 2560 && size.y == 1440) {
+		m_View.zoom(0.5f);
+	}
+	else if (size.x == 1920 && size.y == 1080) {
+		m_View.zoom(0.7f);
+	}
+	else if (size.x == 1680 && size.y == 1050) {
+		m_View.zoom(0.9f);
+	}
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->setView(m_View);
 
 	m_GameMap = new Map(m_StateMgr->GetContext(), this);
@@ -42,6 +51,7 @@ void State_Game::Draw() {
 void State_Game::Update(const sf::Time& l_Time) {
 	SharedContext* context = m_StateMgr->GetContext();
 	EntityBase* player = context->m_EntityManager->Find("Player");
+	sf::Vector2f size = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
 	if (!player) {
 		std::cout << "Respawning player..." << std::endl;
 		context->m_EntityManager->AddEntity(EntityType::Player, "Player");
@@ -49,7 +59,15 @@ void State_Game::Update(const sf::Time& l_Time) {
 		player->SetPosition(m_GameMap->GetPlayerStart());
 	}
 	else {
-		m_View.setCenter(player->GetPosition().x + 300, 1000);
+		if (size.x == 2560 && size.y == 1440) {
+			m_View.setCenter(player->GetPosition().x + 300, (size.y / 100) * 70);
+		}
+		else if(size.x == 1920 && size.y == 1080) {
+			m_View.setCenter(player->GetPosition().x + 300, (size.y / 100) * 92);
+		}
+		else if (size.x == 1680 && size.y == 1050) {
+			m_View.setCenter(player->GetPosition().x + 300, (size.y / 100) * 95);
+		}
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
 

@@ -1,7 +1,7 @@
 #include "Engine.h"
 
 Engine::Engine() : m_Window("Dimension Run", 
-	sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height)),
+	sf::Vector2f(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height)),
 	m_StateManager(&m_Context), m_EntityManager(&m_Context, 100),
 	m_SoundManager(&m_AudioManager), m_GuiManager(m_Window.GetEventManager(), &m_Context)
 {

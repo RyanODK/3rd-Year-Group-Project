@@ -1,11 +1,11 @@
 #include "Window.h"
 
 Window::Window() {
-	Setup("Window", sf::Vector2u(640, 480));
+	Setup("Window", sf::Vector2f(640, 480));
 }
 
 Window::Window(const std::string& l_Title,
-	const sf::Vector2u& l_Size) {
+	const sf::Vector2f& l_Size) {
 	Setup(l_Title, l_Size);
 }
 
@@ -18,10 +18,10 @@ void Window::Destroy() {
 }
 
 void Window::Setup(const std::string& l_Title,
-	const sf::Vector2u& l_Size) {
+	const sf::Vector2f& l_Size) {
 	m_WindowTitle = l_Title;
 	m_WindowSize = l_Size;
-	m_IsFullScreen = false;
+	m_IsFullScreen = true;
 	m_IsDone = false;
 	m_IsFocused = true; // default value for focused flag
 
@@ -82,7 +82,7 @@ bool Window::IsFocused() {
 	return m_IsFocused; 
 }
 
-sf::Vector2u Window::GetWindowSize() {
+sf::Vector2f Window::GetWindowSize() {
 	return m_WindowSize;
 }
 

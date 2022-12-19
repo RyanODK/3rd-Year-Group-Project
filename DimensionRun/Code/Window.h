@@ -9,7 +9,7 @@ class Window {
 public:
 	Window(); // Default constructor
 	Window(const std::string& l_Title, // tracks window properties
-		const sf::Vector2u& l_Size); // and calls Setup() function
+		const sf::Vector2f& l_Size); // and calls Setup() function
 	~Window(); // destructor contructor
 
 	void BeginDraw(); // clear window
@@ -19,7 +19,7 @@ public:
 
 	bool IsDone(); // returns true if window is done
 	bool IsFullScreen(); // returns true if window is fullscreen
-	sf::Vector2u GetWindowSize(); // gets window size
+	sf::Vector2f GetWindowSize(); // gets window size
 
 	void ToggleFullScreen(EventDetails* l_Details); // this toggles fullscreen mode
 
@@ -41,13 +41,13 @@ public:
 
 private:
 	void Setup(const std::string& l_Title, // keeps track of window properties
-		const sf::Vector2u& l_Size); // calls Create() function
+		const sf::Vector2f& l_Size); // calls Create() function
 	void Destroy(); // this will close window
 	void Create(); // uses SFML Uint32 to initialise window style (We use Default style)
 				   // Default style offers Title bar, resizable border, maximize and close buttons
 
 	sf::RenderWindow m_Window;
-	sf::Vector2u m_WindowSize;
+	sf::Vector2f m_WindowSize;
 	std::string m_WindowTitle;
 	bool m_IsDone;
 	bool m_IsFullScreen;
