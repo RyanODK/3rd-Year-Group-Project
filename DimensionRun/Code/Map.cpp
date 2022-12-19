@@ -109,6 +109,10 @@ void Map::LoadMap(const std::string& l_path) {
 			}
 		}
 		else if (type == "BACKGROUND") {
+			if (m_BackgroundBack != "") { 
+				continue; 
+			}
+
 			keystream >> m_BackgroundBack >> m_BackgroundMiddle >> m_BackgroundFront;
 
 			if (!m_Context->m_TextureManager->RequireResource(m_BackgroundBack)) {
@@ -125,30 +129,47 @@ void Map::LoadMap(const std::string& l_path) {
 			}
 
 			sf::Texture* texture1 = m_Context->m_TextureManager->GetResource(m_BackgroundBack);
+			texture1->setRepeated(true);
 			sf::Texture* texture2 = m_Context->m_TextureManager->GetResource(m_BackgroundMiddle);
+			texture2->setRepeated(true);
 			sf::Texture* texture3 = m_Context->m_TextureManager->GetResource(m_BackgroundFront);
+			texture3->setRepeated(true);
+			sf::FloatRect viewSpace = m_Context->m_Wind->GetViewSpace();
+			m_BackgroundSpeed = 40;
 
 			m_Background1.setTexture(*texture1);
+			//m_Background1.setTextureRect(sf::IntRect(viewSpace.left, viewSpace.top, 8, 192));
 			m_Background2.setTexture(*texture2);
+			//m_Background1.setTextureRect(sf::IntRect(viewSpace.left, viewSpace.top, 108, 192));
 			m_Background3.setTexture(*texture3);
+			//m_Background1.setTextureRect(sf::IntRect(viewSpace.left, viewSpace.top, 908, 192));
 
 			sf::Vector2f viewSize = m_CurrentState->GetView().getSize();
 			sf::Vector2u textureSize1 = texture1->getSize();
 			sf::Vector2u textureSize2 = texture2->getSize();
 			sf::Vector2u textureSize3 = texture3->getSize();
-			sf::Vector2f scaleFactors;
+			//textureSize1 = sf::Vector2u(m_Background1.getLocalBounds().width, m_Background1.getLocalBounds().height);
+			/*sf::Vector2u textureSize2 = sf::Vector2u(m_Background2.getLocalBounds().width, m_Background2.getLocalBounds().height);
+			sf::Vector2u textureSize3 = sf::Vector2u(m_Background3.getLocalBounds().width, m_Background3.getLocalBounds().height);*/
+			/*std::cout << "x: " << textureSize1.x << " y: " << textureSize1.y << 
+				"x: " << textureSize2.x << " y: " << textureSize2.y << 
+				"x: " << textureSize3.x << " y: " << textureSize3.y << std::endl;*/
 
-			scaleFactors.x = viewSize.x / textureSize1.x;
-			scaleFactors.y = viewSize.y / textureSize1.y;
-			m_Background1.setScale(scaleFactors);
+			m_ScaleFactors.x = viewSize.x / textureSize1.x;
+			m_ScaleFactors.y = viewSize.y / textureSize1.y;
+			m_Background1.setScale(m_ScaleFactors);
 
-			scaleFactors.x = viewSize.x / textureSize2.x;
-			scaleFactors.y = viewSize.y / textureSize2.y;
-			m_Background2.setScale(scaleFactors);
+			m_ScaleFactors.x = viewSize.x / textureSize2.x;
+			m_ScaleFactors.y = viewSize.y / textureSize2.y;
+			m_Background2.setScale(m_ScaleFactors);
 
-			scaleFactors.x = viewSize.x / textureSize3.x;
-			scaleFactors.y = viewSize.y / textureSize3.y;
-			m_Background3.setScale(scaleFactors);
+			m_ScaleFactors.x = viewSize.x / textureSize3.x;
+			m_ScaleFactors.y = viewSize.y / textureSize3.y;
+			m_Background3.setScale(m_ScaleFactors);
+
+			textureSize1 = sf::Vector2u(0, 0);
+			textureSize2 = sf::Vector2u(0, 0);
+			textureSize3 = sf::Vector2u(0, 0);
 		}
 		else if (type == "SIZE") {
 			keystream >> m_MaxMapSize.x >> m_MaxMapSize.y;
@@ -168,6 +189,7 @@ void Map::LoadMap(const std::string& l_path) {
 			}
 			// Set up the player position here.
 			playerId = entityMgr->AddEntity(EntityType::Player);
+			m_PlayerId = playerId;
 			if (playerId < 0) { 
 				continue; 
 			}
@@ -263,6 +285,35 @@ void Map::Update(float l_DeltaTime) {
 	m_Background1.setPosition(viewSpace.left, viewSpace.top);
 	m_Background2.setPosition(viewSpace.left, viewSpace.top);
 	m_Background3.setPosition(viewSpace.left, viewSpace.top);
+
+	if (m_BackgroundX < viewSpace.width) {
+		m_BackgroundX += m_BackgroundSpeed * l_DeltaTime;
+	}
+	else {
+		// this is the reason the background will do that weird resetting thing 
+		// 
+		// potentially find a different way 
+		// than just setting the x straight back to 0 when it hits the full width
+		m_BackgroundX = 0;
+	}
+
+	m_Background1.setTextureRect(sf::IntRect(
+		m_BackgroundX,
+		m_Background1.getTextureRect().top,
+		m_Background1.getTextureRect().width,
+		m_Background1.getTextureRect().height));
+
+	m_Background2.setTextureRect(sf::IntRect(
+		m_BackgroundX,
+		m_Background2.getTextureRect().top,
+		m_Background2.getTextureRect().width,
+		m_Background2.getTextureRect().height));
+
+	m_Background3.setTextureRect(sf::IntRect(
+		m_BackgroundX,
+		m_Background3.getTextureRect().top,
+		m_Background3.getTextureRect().width,
+		m_Background3.getTextureRect().height));
 }
 
 void Map::Draw() {

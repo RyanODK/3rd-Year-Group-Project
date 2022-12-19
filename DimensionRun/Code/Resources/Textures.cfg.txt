@@ -1,21 +1,21 @@
 PlayerSprite Code/Resources/Media/Textures/MainPlayer/playerSprite.png
 TileSheet Graphics/TileSheets/sheetTile.png
 SmallEnemy Graphics/Enemy/SmallEnemy/smallEnemySpritesheet.png
-bgMainMenuBack Graphics/warped city files/ENVIRONMENT/background/skyline-b.png
-bgMainMenuMiddle Graphics/warped city files/ENVIRONMENT/background/buildings-bg.png
-bgMainMenuFront Graphics/warped city files/ENVIRONMENT/background/near-buildings-bg.png
+bgMainMenuBack Graphics/warped-city-files/ENVIRONMENT/background/skyline-b.png
+bgMainMenuMiddle Graphics/warped-city-files/ENVIRONMENT/background/buildings-bg.png
+bgMainMenuFront Graphics/warped-city-files/ENVIRONMENT/background/near-buildings-bg.png
 bg1Back Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png
 bg1Middle Graphics/cyberpunk-street-files/PNG/layers/back-buildings.png
 bg1Front Graphics/cyberpunk-street-files/PNG/layers/foreground.png
-bg2Back Graphics/cyberpunk-city-2-files/cyberpunk-city-2-files/Environmet/background/back.png
-bg2Middle Graphics/cyberpunk-city-2-files/cyberpunk-city-2-files/Environmet/background/middle.png
-bg2Front Graphics/cyberpunk-city-2-files/cyberpunk-city-2-files/Environmet/background/front.png
-bg3Back Graphics/Rocky-Pass-Files/Rocky-Pass-Files/PNG/back.png
-bg3Middle Graphics/Rocky-Pass-Files/Rocky-Pass-Files/PNG/middle.png
-bg3Front Graphics/Rocky-Pass-Files/Rocky-Pass-Files/PNG/near.png
-bg4Back Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-moon.png
-bg4Middle Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-mountains.png
-bg4Front Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-graveyard.png
-bg5Back Graphics/Tall-Forest-Files/Layers/back.png
-bg5Middle Graphics/Tall-Forest-Files/Layers/far.png
-bg5Front Graphics/Tall-Forest-Files/Layers/middle.png
+bg2Back Graphics/Sideview-Sci-Fi-Patreon-Collection/Environments/alien-environment/PNG/layers/blank.png
+bg2Middle Graphics/Sideview-Sci-Fi-Patreon-Collection/Environments/alien-environment/PNG/layers/background.png
+bg2Front Graphics/Sideview-Sci-Fi-Patreon-Collection/Environments/alien-environment/PNG/layers/back-structures.png
+bg3Back Graphics/Super-Mountain-Dusk-Files/Layers/sky.png
+bg3Middle Graphics/Super-Mountain-Dusk-Files/Layers/mountains.png
+bg3Front Graphics/Super-Mountain-Dusk-Files/Layers/trees.png
+bg4Back Graphics/warped-files/PNG/environment/layers/background.png
+bg4Middle Graphics/warped-files/PNG/environment/layers/middleground.png
+bg4Front Graphics/warped-files/PNG/environment/layers/blank.png
+bg5Back Graphics/gothicvania-cemetery-files/demo\assets/environment/bg-moon.png
+bg5Middle Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-mountains.png
+bg5Front Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-graveyard.png

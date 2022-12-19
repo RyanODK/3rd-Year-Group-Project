@@ -110,6 +110,9 @@ private:
 	sf::Sprite m_Background1;
 	sf::Sprite m_Background2;
 	sf::Sprite m_Background3;
+	sf::Vector2f m_ScaleFactors;
+	float m_BackgroundSpeed;
+	float m_BackgroundX;
 
 	TileSet m_TileSet;
 	TileMap m_TileMap;

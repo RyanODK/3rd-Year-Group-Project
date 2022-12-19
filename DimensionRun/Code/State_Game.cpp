@@ -49,7 +49,7 @@ void State_Game::Update(const sf::Time& l_Time) {
 		player->SetPosition(m_GameMap->GetPlayerStart());
 	}
 	else {
-		m_View.setCenter(player->GetPosition());
+		m_View.setCenter(player->GetPosition().x + 300, 1000);
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
 

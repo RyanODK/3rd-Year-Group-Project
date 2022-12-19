@@ -40,7 +40,7 @@ void Character::Attack() {
 
 void Character::Slide() {
 	if (GetState() == EntityState::Dying || GetState() == EntityState::Jumping || GetState() == EntityState::Sliding ) {
-		std::cout << "cant slide" << std::endl;
+		//std::cout << "cant slide" << std::endl;
 		return;
 	}
 
@@ -200,6 +200,7 @@ void Character::Update(float l_deltaTime) {
 		SetSize(27, 33);
 		m_SpriteSheet.SetSpriteSize(sf::Vector2f(27, 33));
 		UpdateAABB();
+		SetMaxVelocity(0, 0);
 		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
 			m_EntityManager->RemoveEntity(m_Id);
 		}

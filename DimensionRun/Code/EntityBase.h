@@ -43,6 +43,7 @@ public:
 	void SetPosition(const sf::Vector2f& l_Pos);
 	void SetSize(float l_X, float l_Y);
 	void SetState(const EntityState& l_State);
+	void SetMaxVelocity(float l_X, float l_Y);
 
 	std::string GetName() const;
 	unsigned int GetId() const;

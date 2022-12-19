@@ -38,6 +38,10 @@ void EntityBase::SetState(const EntityState& l_State) {
 	m_State = l_State;
 }
 
+void EntityBase::SetMaxVelocity(float l_X, float l_Y) {
+	m_MaxVelocity = sf::Vector2f(l_X, l_Y);
+}
+
 void EntityBase::SetAcceleration(float l_x, float l_y) {
 	m_Acceleration = sf::Vector2f(l_x, l_y);
 }
