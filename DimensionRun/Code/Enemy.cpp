@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(EntityManager * l_entityMgr)
-	:Character(l_entityMgr), m_HasDestination(false) {
+	:EnemyCharacter(l_entityMgr), m_HasDestination(false) {
 	m_Type = EntityType::Enemy;
 }
 
@@ -9,24 +9,24 @@ Enemy::~Enemy() {}
 
 void Enemy::OnEntityCollision(EntityBase* l_collider, bool l_attack)
 {
-	if (m_State == EntityState::Dying) { return; }
-	if (l_attack) { return; }
-	if (l_collider->GetType() != EntityType::Player) { return; }
-	Character* player = (Character*)l_collider;
-	SetState(EntityState::Attacking);
-	player->GetHurt(1);
-	if (m_Position.x > player->GetPosition().x) {
-		player->AddVelocity(-m_Speed.x, 0);
-	}
-	else {
-		player->AddVelocity(m_Speed.y, 0);
-	}
+	//if (m_State == EntityState::Dying) { return; }
+	//if (l_attack) { return; }
+	//if (l_collider->GetType() != EntityType::Player) { return; }
+	//EnemyCharacter* player = (EnemyCharacter*)l_collider;
+	//SetState(EntityState::Attacking);
+	//player->GetHurt(1);
+	///*if (m_Position.x > player->GetPosition().x) {
+	//	player->AddVelocity(-m_Speed.x, 0);
+	//}
+	//else {
+	//	player->AddVelocity(m_Speed.y, 0);
+	//}*/
 }
 
 void Enemy::Update(float l_dT) {
-	Character::Update(l_dT);
+	EnemyCharacter::Update(l_dT);
 
-	if (m_HasDestination) {
+	/*if (m_HasDestination) {
 		if (abs(m_Destination.x - m_Position.x) < 16) { m_HasDestination = false; return; }
 		if (m_Destination.x - m_Position.x > 0) { Move(Direction::Right); }
 		else { Move(Direction::Left); }
@@ -39,6 +39,6 @@ void Enemy::Update(float l_dT) {
 	if (rand() % 2) { newX = -newX; }
 	m_Destination.x = m_Position.x + newX;
 	if (m_Destination.x < 0) { m_Destination.x = 0; }
-	m_HasDestination = true;
+	m_HasDestination = true;*/
 }
 

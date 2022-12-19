@@ -25,6 +25,7 @@
     <ClCompile Include="Code\Character.cpp" />
     <ClCompile Include="Code\Draw.cpp" />
     <ClCompile Include="Code\Enemy.cpp" />
+    <ClCompile Include="Code\EnemyCharacter.cpp" />
     <ClCompile Include="Code\Engine.cpp" />
     <ClCompile Include="Code\EntityBase.cpp" />
     <ClCompile Include="Code\EntityManager.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="Code\DebugOverlay.h" />
     <ClInclude Include="Code\Directions.h" />
     <ClInclude Include="Code\Enemy.h" />
+    <ClInclude Include="Code\EnemyCharacter.h" />
     <ClInclude Include="Code\Engine.h" />
     <ClInclude Include="Code\EntityBase.h" />
     <ClInclude Include="Code\EntityManager.h" />

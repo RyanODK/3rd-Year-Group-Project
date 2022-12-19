@@ -1,7 +1,7 @@
 #pragma once
-#include "Character.h"
+#include "EnemyCharacter.h"
 
-class Enemy : public Character {
+class Enemy : public EnemyCharacter {
 public:
 	Enemy(EntityManager* l_entityMgr);
 	~Enemy();
