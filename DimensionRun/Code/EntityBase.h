@@ -3,7 +3,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-enum class EntityType { Base, Enemy, Player };
+enum class EntityType { Base, Enemy, Player, Coin };
 
 enum class EntityState {
 	Running, Jumping, Attacking, Sliding, Dying

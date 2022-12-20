@@ -43,18 +43,23 @@ void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 			l_Collider->GetType() != EntityType::Player) {
 			return;
 		}
+
 		
 		Character* opponent = (Character*)l_Collider;
 		opponent->GetHurt(1);
 
-		if (m_Position.x > opponent->GetPosition().x) {
+		/*if (m_Position.x > opponent->GetPosition().x) {
 			opponent->AddVelocity(-32, 0);
 		}
 		else {
 			opponent->AddVelocity(32, 0);
-		}
+		}*/
 	}
 	else {
+		Character* opponent = (Character*)l_Collider;
+		if (opponent->GetName() == "Cyborg") {
+			std::cout << "colliding with enemy character: " << l_Collider->GetName() << std::endl;
+		}
 		// other behaviour
 	}
 }

@@ -23,14 +23,14 @@ void State_Game::OnCreate() {
 		m_View.zoom(0.7f);
 	}
 	else if (size.x == 1680 && size.y == 1050) {
-		m_View.zoom(0.9f);
+		m_View.zoom(0.7f);
 	}
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->setView(m_View);
 
 	m_GameMap = new Map(m_StateMgr->GetContext(), this);
 	m_GameMap->LoadMap("Code/Maps/map1.map");
 
-	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
 }
 
 void State_Game::OnDestroy() {

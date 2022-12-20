@@ -1,5 +1,6 @@
 PlayerSprite Code/Resources/Media/Textures/MainPlayer/playerSprite.png
-TileSheet Graphics/TileSheets/sheetTile.png
+TileSheet Graphics/TileSheets/sheetTile1.png
+Coin Code/Resources/Media/Textures/MOEDA-DOURADA/coinSheet.png
 SmallEnemy Graphics/Enemy/SmallEnemy/smallEnemySpritesheet2.png
 bgMainMenuBack Graphics/warped-city-files/ENVIRONMENT/background/skyline-b.png
 bgMainMenuMiddle Graphics/warped-city-files/ENVIRONMENT/background/buildings-bg.png

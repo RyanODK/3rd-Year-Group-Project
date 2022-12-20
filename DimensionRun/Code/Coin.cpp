@@ -1,13 +1,13 @@
-#include "Enemy.h"
+#include "Coin.h"
 
-Enemy::Enemy(EntityManager * l_entityMgr)
-	:EnemyCharacter(l_entityMgr), m_HasDestination(false) {
-	m_Type = EntityType::Enemy;
+Coin::Coin(EntityManager* l_entityMgr)
+	:CoinEntity(l_entityMgr), m_HasDestination(false) {
+	m_Type = EntityType::Coin;
 }
 
-Enemy::~Enemy() {}
+Coin::~Coin() {}
 
-void Enemy::OnEntityCollision(EntityBase* l_collider, bool l_attack)
+void Coin::OnEntityCollision(EntityBase* l_collider, bool l_attack)
 {
 	/*if (m_State == EntityState::Dying) { return; }
 	if (l_attack) { return; }
@@ -23,8 +23,8 @@ void Enemy::OnEntityCollision(EntityBase* l_collider, bool l_attack)
 	}*/
 }
 
-void Enemy::Update(float l_dT) {
-	EnemyCharacter::Update(l_dT);
+void Coin::Update(float l_dT) {
+	CoinEntity::Update(l_dT);
 
 	/*if (m_HasDestination) {
 		if (abs(m_Destination.x - m_Position.x) < 16) { m_HasDestination = false; return; }
@@ -41,4 +41,3 @@ void Enemy::Update(float l_dT) {
 	if (m_Destination.x < 0) { m_Destination.x = 0; }
 	m_HasDestination = true;*/
 }
-

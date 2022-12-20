@@ -216,6 +216,19 @@ void Map::LoadMap(const std::string& l_path) {
 			keystream >> enemyX >> enemyY;
 			entityMgr->Find(enemyId)->SetPosition(enemyX, enemyY);
 		}
+		else if (type == "COIN") {
+			int coinId = entityMgr->AddEntity(EntityType::Coin);
+
+			if (coinId < 0) {
+				continue;
+			}
+
+			float coinX = 0;
+			float coinY = 0;
+
+			keystream >> coinX >> coinY;
+			entityMgr->Find(coinId)->SetPosition(coinX, coinY);
+		}
 		else {
 			// Something else.
 			std::cout << "! Unknown type \"" << type << "\"." << std::endl;
