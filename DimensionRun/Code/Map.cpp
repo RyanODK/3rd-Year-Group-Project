@@ -382,11 +382,7 @@ void Map::PurgeMap() {
 		delete itr.second;
 	}
 	m_TileMap.clear();
-	//m_Context->m_EntityManager->Purge();
-	
-	if (!m_Context->m_EntityManager->Find("Player")) {
-		m_Context->m_EntityManager->Purge();
-	}
+	m_Context->m_EntityManager->Purge();
 
 	if (m_BackgroundBack == "") { 
 		return; 
