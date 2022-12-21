@@ -148,6 +148,10 @@ const sf::Vector2f& EntityBase::GetPosition() const {
 	return m_Position; 
 }
 
+const int& EntityBase::GetCoinCount() const {
+	return coinCount;
+}
+
 void EntityBase::CheckCollisions() {
 	Map* gameMap = m_EntityManager->GetContext()->m_GameMap;
 	unsigned int tileSize = gameMap->GetTileSize();

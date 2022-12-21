@@ -1,0 +1,8 @@
+Name Coin
+Spritesheet Coin.sheet
+Hitpoints 0
+BoundingBox 29 29
+DamageBox -29 0 29 29
+Speed 512 64
+JumpVelocity 128
+MaxVelocity 0 1024

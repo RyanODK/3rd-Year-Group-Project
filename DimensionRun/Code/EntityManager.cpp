@@ -29,6 +29,13 @@ int EntityManager::AddEntity(const EntityType& l_type, const std::string& l_name
 			enemy->Load(itr->second);
 		}
 	}
+	/*if (l_type == EntityType::Coin) {
+		auto itr = m_enemyTypes.find(l_name);
+		if (itr != m_enemyTypes.end()) {
+			Enemy* enemy = (Enemy*)entity;
+			enemy->Load(itr->second);
+		}
+	}*/
 
 	++m_idCounter;
 	return m_idCounter - 1;
@@ -109,14 +116,14 @@ void EntityManager::EntityCollisionCheck() {
 
 			EntityType t1 = itr->second->GetType();
 			EntityType t2 = itr2->second->GetType();
-			if (t1 == EntityType::Player || t1 == EntityType::Enemy) {
+			if (t1 == EntityType::Player || t1 == EntityType::Enemy || t1 == EntityType::Coin) {
 				Character* c1 = (Character*)itr->second;
 				if (c1->m_AttackAABB.intersects(itr2->second->m_AABB)) {
 					c1->OnEntityCollision(itr2->second, true);
 				}
 			}
 
-			if (t2 == EntityType::Player || t2 == EntityType::Enemy) {
+			if (t2 == EntityType::Player || t2 == EntityType::Enemy || t2 == EntityType::Coin) {
 				Character* c2 = (Character*)itr2->second;
 				if (c2->m_AttackAABB.intersects(itr->second->m_AABB)) {
 					c2->OnEntityCollision(itr->second, true);

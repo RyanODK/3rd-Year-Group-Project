@@ -25,5 +25,8 @@ public:
 	void ToggleOverlay(EventDetails* l_details);
 
 private:
+	sf::Font m_Font;
+	sf::Text coinCountText;
 	Map* m_GameMap;
+	int coinCount;
 };

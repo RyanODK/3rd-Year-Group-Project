@@ -2,9 +2,9 @@ PlayerSprite Code/Resources/Media/Textures/MainPlayer/playerSprite.png
 TileSheet Graphics/TileSheets/sheetTile1.png
 Coin Code/Resources/Media/Textures/MOEDA-DOURADA/coinSheet.png
 SmallEnemy Graphics/Enemy/SmallEnemy/smallEnemySpritesheet2.png
-bgMainMenuBack Graphics/warped-city-files/ENVIRONMENT/background/skyline-b.png
-bgMainMenuMiddle Graphics/warped-city-files/ENVIRONMENT/background/buildings-bg.png
-bgMainMenuFront Graphics/warped-city-files/ENVIRONMENT/background/near-buildings-bg.png
+bgMainMenu1440 Code/Resources/Media/Textures/bg1440.png
+bgMainMenu1080 Code/Resources/Media/Textures/bg1080.png
+bgMainMenu1050 Code/Resources/Media/Textures/bg1050.png
 bg1Back Graphics/cyberpunk-street-files/PNG/layers/far-buildings.png
 bg1Middle Graphics/cyberpunk-street-files/PNG/layers/back-buildings.png
 bg1Front Graphics/cyberpunk-street-files/PNG/layers/foreground.png

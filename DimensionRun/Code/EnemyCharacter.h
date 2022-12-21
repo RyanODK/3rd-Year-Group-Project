@@ -10,9 +10,9 @@ public:
 	virtual ~EnemyCharacter();
 
 	void Move(const Direction& l_dir);
-	void Jump();
-	void Attack();
+	void Kill();
 	void GetHurt(const int& l_Damage);
+	int GetHitpoints();
 	void Load(const std::string& l_Path);
 	void Draw(sf::RenderWindow* l_Window);
 

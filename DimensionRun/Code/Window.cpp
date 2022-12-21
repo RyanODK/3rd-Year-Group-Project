@@ -21,7 +21,7 @@ void Window::Setup(const std::string& l_Title,
 	const sf::Vector2f& l_Size) {
 	m_WindowTitle = l_Title;
 	m_WindowSize = l_Size;
-	m_IsFullScreen = true;
+	m_IsFullScreen = false;
 	m_IsDone = false;
 	m_IsFocused = true; // default value for focused flag
 

@@ -1,0 +1,5 @@
+Interface MainMenu MainMenu1050.style 0 0 Immovable NoTitle "Main menu"
+Element Label Title 570 20 MainMenuTitle.style "Dimension Run"
+Element Label Play 690 444 MainMenuLabel.style "PLAY"
+Element Label Credits 690 507 MainMenuLabel.style "CREDITS"
+Element Label Quit 690 570 MainMenuLabel.style "EXIT"

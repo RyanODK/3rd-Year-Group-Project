@@ -105,12 +105,6 @@
     <ClCompile Include="Code\EnemyCharacter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\CoinEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Coin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TextureHolder.h">
@@ -236,12 +230,6 @@
     <ClInclude Include="Code\EnemyCharacter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Coin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\CoinEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\Maps\map1.map">
@@ -265,10 +253,10 @@
     <None Include="Code\Resources\fonts.cfg">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu.interface">
+    <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1440.interface">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Code\Resources\Media\GUI_Styles\MainMenu.style">
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenu1440.style">
       <Filter>Source Files</Filter>
     </None>
     <None Include="Code\Resources\Media\GUI_Styles\MainMenuLabel.style">
@@ -299,6 +287,24 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="Code\Resources\Media\Spritesheets\Cyborg.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Coin.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Coin.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1080.interface">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1050.interface">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenu1080.style">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Styles\MainMenu1050.style">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

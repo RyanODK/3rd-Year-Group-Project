@@ -15,27 +15,10 @@ void EnemyCharacter::Move(const Direction& l_dir) {
 	if (GetState() == EntityState::Dying) {
 		return;
 	}
-
-	if (l_dir == Direction::Left) { Accelerate(-m_Speed.x, 0); }
-	else { Accelerate(m_Speed.x, 0); }
-
-	//SetState(EntityState::Running);
 }
 
-void EnemyCharacter::Jump() {
-	if (GetState() == EntityState::Dying || GetState() == EntityState::Jumping) {
-		return;
-	}
-
-	SetState(EntityState::Jumping);
-	AddVelocity(0, -m_JumpVelocity);
-}
-
-void EnemyCharacter::Attack() {
-	if (GetState() == EntityState::Dying || GetState() == EntityState::Jumping || GetState() == EntityState::Attacking) {
-		return;
-	}
-	SetState(EntityState::Attacking);
+void EnemyCharacter::Kill() {
+	m_EntityManager->RemoveEntity(m_Id);
 }
 
 void EnemyCharacter::GetHurt(const int& l_Damage) {
@@ -45,14 +28,11 @@ void EnemyCharacter::GetHurt(const int& l_Damage) {
 
 	m_HitPoints = (m_HitPoints - l_Damage > 0 ? m_HitPoints - l_Damage : 0);
 
-	/*if (m_HitPoints) {
-		SetState(EntityState::Dying);
-	}
-	else {
-		SetState
-	}*/
-
 	SetState(EntityState::Dying);
+}
+
+int EnemyCharacter::GetHitpoints() {
+	return m_HitPoints;
 }
 
 void EnemyCharacter::Load(const std::string& l_Path) {
@@ -118,14 +98,9 @@ void EnemyCharacter::UpdateAttackAABB() {
 void EnemyCharacter::Animate() {
 	EntityState state = GetState();
 
-	if (state == EntityState::Running && m_SpriteSheet.GetCurrentAnim()->GetName() != "Idle") {
+	if (state == EntityState::Idle && m_SpriteSheet.GetCurrentAnim()->GetName() != "Idle") {
 		m_SpriteSheet.SetAnimation("Idle", true, true);
-	}
-	else if (state == EntityState::Jumping && m_SpriteSheet.GetCurrentAnim()->GetName() != "Jump") {
-		m_SpriteSheet.SetAnimation("Jump", true, false);
-	}
-	else if (state == EntityState::Attacking && m_SpriteSheet.GetCurrentAnim()->GetName() != "Attack") {
-		m_SpriteSheet.SetAnimation("Attack", true, false);
+		//std::cout << "idle" << std::endl;
 	}
 	else if (state == EntityState::Dying && m_SpriteSheet.GetCurrentAnim()->GetName() != "Death") {
 		m_SpriteSheet.SetAnimation("Death", true, false);
@@ -157,30 +132,18 @@ void EnemyCharacter::Update(float l_deltaTime) {
 		// End debug.
 	}
 
-	if (GetState() != EntityState::Dying && GetState() != EntityState::Attacking && GetState() != EntityState::Sliding) {
-		if (abs(m_Velocity.y) >= 0.001f) {
-			SetState(EntityState::Jumping);
-		}
-		else if (abs(m_Velocity.x) >= 0.1f) {
-			SetState(EntityState::Running);
-		}
-	}
-	else if (GetState() == EntityState::Attacking) {
-		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
-			SetState(EntityState::Running);
-		}
-	}
-	else if (GetState() == EntityState::Sliding) {
-		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
-			SetState(EntityState::Running);
+	if (GetState() != EntityState::Dying){
+		if (abs(m_Velocity.x) <= 0) {
+			SetState(EntityState::Idle);
 		}
 	}
 	else if (GetState() == EntityState::Dying) {
-		SetMaxVelocity(0, 0);
+		//m_EntityManager->RemoveEntity(m_Id);
 		if (!m_SpriteSheet.GetCurrentAnim()->IsPlaying()) {
 			m_EntityManager->RemoveEntity(m_Id);
 		}
 	}
+
 	Animate();
 	m_SpriteSheet.Update(l_deltaTime);
 	m_SpriteSheet.SetSpritePosition(m_Position);

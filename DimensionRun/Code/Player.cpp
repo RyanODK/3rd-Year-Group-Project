@@ -45,7 +45,7 @@ void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 		}
 
 		
-		Character* opponent = (Character*)l_Collider;
+		EnemyCharacter* opponent = (EnemyCharacter*)l_Collider;
 		opponent->GetHurt(1);
 
 		/*if (m_Position.x > opponent->GetPosition().x) {
@@ -56,11 +56,12 @@ void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 		}*/
 	}
 	else {
-		Character* opponent = (Character*)l_Collider;
-		if (opponent->GetName() == "Cyborg") {
-			std::cout << "colliding with enemy character: " << l_Collider->GetName() << std::endl;
+		EnemyCharacter* opponent = (EnemyCharacter*)l_Collider;
+		if (opponent->GetName() == "Coin") {
+			opponent->Kill();
+			coinCount++;
+			std::cout << coinCount << std::endl;
 		}
-		// other behaviour
 	}
 }
 

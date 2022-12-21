@@ -6,7 +6,7 @@
 enum class EntityType { Base, Enemy, Player, Coin };
 
 enum class EntityState {
-	Running, Jumping, Attacking, Sliding, Dying
+	Idle, Running, Jumping, Attacking, Sliding, Dying
 };
 
 struct TileInfo;
@@ -51,6 +51,7 @@ public:
 	EntityState GetState() const;
 	const sf::Vector2f& GetPosition() const;
 	const sf::Vector2f& GetSize() const;
+	const int& GetCoinCount() const;
 
 	virtual void Update(float l_deltaTime);
 	virtual void Draw(sf::RenderWindow* l_Wind) = 0;
@@ -79,6 +80,7 @@ protected:
 	sf::Vector2f m_Size; // Size of the collision box.
 	sf::FloatRect m_AABB; // The bounding box for collisions.
 	EntityState m_State; // Current entity state.
+	int coinCount = 0;
 	// Flags for remembering axis collisions.
 	bool m_CollidingOnX;
 	bool m_CollidingOnY;

@@ -7,6 +7,13 @@ State_Game::State_Game(StateManager* l_StateManager) :
 State_Game::~State_Game() {}
 
 void State_Game::OnCreate() {
+	m_Font.loadFromFile("Graphics/Fonts/futuremillennium/FutureMillenniumItalic.ttf");
+
+	// current distance text
+	coinCountText.setFont(m_Font);
+	coinCountText.setCharacterSize(70);
+	coinCountText.setFillColor(sf::Color::White);
+
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Game, "Key_Escape", &State_Game::MainMenu, this);
 	evMgr->AddCallback(StateType::Game, "Key_P", &State_Game::Pause, this);
@@ -23,6 +30,9 @@ void State_Game::OnCreate() {
 		m_View.zoom(0.7f);
 	}
 	else if (size.x == 1680 && size.y == 1050) {
+		m_View.zoom(0.7f);
+	}
+	else {
 		m_View.zoom(0.7f);
 	}
 	m_StateMgr->GetContext()->m_Wind->GetRenderWindow()->setView(m_View);
@@ -46,6 +56,7 @@ void State_Game::OnDestroy() {
 void State_Game::Draw() {
 	m_GameMap->Draw();
 	m_StateMgr->GetContext()->m_EntityManager->Draw();
+	m_StateMgr->GetContext()->m_Wind->Draw(coinCountText);
 }
 
 void State_Game::Update(const sf::Time& l_Time) {
@@ -68,6 +79,9 @@ void State_Game::Update(const sf::Time& l_Time) {
 		else if (size.x == 1680 && size.y == 1050) {
 			m_View.setCenter(player->GetPosition().x + 300, (size.y / 100) * 95);
 		}
+		else {
+			m_View.setCenter(player->GetPosition().x + 300, (size.y / 100) * 95);
+		}
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
 
@@ -80,9 +94,18 @@ void State_Game::Update(const sf::Time& l_Time) {
 		m_View.setCenter(((m_GameMap->GetMapSize().x + 1) * Sheet::Tile_Size) - (viewSpace.width / 2), m_View.getCenter().y);
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
-
+	coinCountText.setPosition(viewSpace.left + 200, viewSpace.height + 50);
 	m_GameMap->Update(l_Time.asSeconds());
 	m_StateMgr->GetContext()->m_EntityManager->Update(l_Time.asSeconds());
+
+	coinCount = player->GetCoinCount();
+	std::cout << coinCount << std::endl;
+
+	std::stringstream coinStream;
+	coinStream << coinCount;
+
+	coinCountText.setString("hi: " + coinStream.str());
+	
 }
 
 void State_Game::MainMenu(EventDetails* l_details) {

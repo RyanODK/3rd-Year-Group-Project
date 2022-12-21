@@ -1,7 +1,6 @@
 #pragma once
 #include "BaseState.h"
 #include "EventManager.h"
-//#include "Background.h"
 #include <SFML/Graphics.hpp>
 
 class State_MainMenu : public BaseState {
@@ -19,10 +18,6 @@ public:
 	void Draw();
 
 	//void MouseClick(EventDetails* l_Details);
-
-	/*Background* GetBackground() {
-		return &m_mainMenuBackground;
-	};*/
 
 	void Play(EventDetails* l_Details);
 	void Credits(EventDetails* l_Details);
