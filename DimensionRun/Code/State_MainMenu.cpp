@@ -29,8 +29,8 @@ void State_MainMenu::OnCreate() {
 			(sf::VideoMode::getDesktopMode().height / 100) * 0));
 
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
-	eMgr->AddCallback(StateType::MainMenu, "MainMenu_Play", &State_MainMenu::Play, this);
-	eMgr->AddCallback(StateType::MainMenu, "MainMenu_Quit", &State_MainMenu::Quit, this);
+	eMgr->AddCallback(StateType::MainMenu, "MainMenu_PlayMouse", &State_MainMenu::Play, this);
+	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitMouse", &State_MainMenu::Quit, this);
 	
 	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 25.f, true);
 }
@@ -38,8 +38,8 @@ void State_MainMenu::OnCreate() {
 void State_MainMenu::OnDestroy() {
 	m_StateMgr->GetContext()->m_GuiManager->RemoveInterface(StateType::MainMenu, "MainMenu");
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
-	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_Play");
-	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_Quit");
+	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_PlayMouse");
+	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_QuitMouse");
 }
 
 void State_MainMenu::Activate() {

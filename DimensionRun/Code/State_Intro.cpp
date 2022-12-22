@@ -39,13 +39,16 @@ void State_Intro::OnCreate() {
 	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("IntroMusic", 40.f, true);
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
-	evMgr->AddCallback(StateType::Intro, "Intro_Continue",
+	evMgr->AddCallback(StateType::Intro, "Intro_ContinueKeyboard",
+		&State_Intro::Continue, this);
+	evMgr->AddCallback(StateType::Intro, "Intro_ContinueJoystick",
 		&State_Intro::Continue, this);
 }
 
 void State_Intro::OnDestroy() {
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
-	evMgr->RemoveCallback(StateType::Intro, "Intro_Continue");
+	evMgr->RemoveCallback(StateType::Intro, "Intro_ContinueKeyboard");
+	evMgr->RemoveCallback(StateType::Intro, "Intro_ContinueJoystick");
 }
 
 void State_Intro::Update(const sf::Time& l_Time) {

@@ -15,8 +15,10 @@ void State_Game::OnCreate() {
 	coinCountText.setFillColor(sf::Color::White);
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
-	evMgr->AddCallback(StateType::Game, "Key_Escape", &State_Game::MainMenu, this);
-	evMgr->AddCallback(StateType::Game, "Key_P", &State_Game::Pause, this);
+	evMgr->AddCallback(StateType::Game, "Key_MainMenuKeyboard", &State_Game::MainMenu, this);
+	evMgr->AddCallback(StateType::Game, "Key_MainMenuJoystick", &State_Game::MainMenu, this);
+	evMgr->AddCallback(StateType::Game, "Key_PauseKeyboard", &State_Game::Pause, this);
+	evMgr->AddCallback(StateType::Game, "Key_PauseJoystick", &State_Game::Pause, this);
 	evMgr->AddCallback(StateType::Game, "Key_O", &State_Game::ToggleOverlay, this);
 
 	sf::Vector2f size = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
@@ -45,8 +47,10 @@ void State_Game::OnCreate() {
 
 void State_Game::OnDestroy() {
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
-	evMgr->RemoveCallback(StateType::Game, "Key_Escape");
-	evMgr->RemoveCallback(StateType::Game, "Key_P");
+	evMgr->RemoveCallback(StateType::Game, "Key_MainMenuKeyboard");
+	evMgr->RemoveCallback(StateType::Game, "Key_MainMenuJoystick");
+	evMgr->RemoveCallback(StateType::Game, "Key_PauseKeyboard");
+	evMgr->RemoveCallback(StateType::Game, "Key_PauseJoystick");
 	evMgr->RemoveCallback(StateType::Game, "Key_O");
 	
 	delete m_GameMap;
@@ -99,7 +103,7 @@ void State_Game::Update(const sf::Time& l_Time) {
 	m_StateMgr->GetContext()->m_EntityManager->Update(l_Time.asSeconds());
 
 	coinCount = player->GetCoinCount();
-	std::cout << coinCount << std::endl;
+	//std::cout << coinCount << std::endl;
 
 	std::stringstream coinStream;
 	coinStream << coinCount;

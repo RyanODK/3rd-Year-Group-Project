@@ -72,7 +72,7 @@ void EventManager::HandleEvent(sf::Event& l_Event) {
 				}
 			}
 			else if (sfmlEvent == EventType::MButtonDown ||
-				sfmlEvent == EventType::MButtonUp) {
+					sfmlEvent == EventType::MButtonUp) {
 
 				if (e_itr.second.m_Code == l_Event.mouseButton.button) {
 					// matching event/keystroke
@@ -82,6 +82,17 @@ void EventManager::HandleEvent(sf::Event& l_Event) {
 
 					if (bind->m_Details.m_KeyCode != -1) {
 						bind->m_Details.m_KeyCode = e_itr.second.m_Code;
+					}
+					++(bind->c);
+					break;
+				}
+			}
+			else if (sfmlEvent == EventType::JoystickButtonDown ||
+					sfmlEvent == EventType::JoystickButtonUp) {
+
+				if (e_itr.second.m_Code == l_Event.joystickButton.button) {
+					if (bind->m_Details.m_ButtonCode != -1) {
+						bind->m_Details.m_ButtonCode = e_itr.second.m_Code;
 					}
 					++(bind->c);
 					break;
@@ -166,6 +177,15 @@ void EventManager::Update() {
 				break;
 			case(EventType::Joystick):
 				// Up for expansion.
+				if (sf::Joystick::isButtonPressed(0,
+					e_itr.second.m_Code))
+				{
+					if (bind->m_Details.m_ButtonCode != -1) {
+						bind->m_Details.m_ButtonCode = e_itr.second.m_Code;
+						std::cout << "something is being pressed" << std::endl;
+					}
+					++(bind->c);
+				}
 				break;
 			}
 		}

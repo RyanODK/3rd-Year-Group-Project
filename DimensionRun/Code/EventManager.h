@@ -21,6 +21,8 @@ enum class EventType {
 	MButtonDown = sf::Event::MouseButtonPressed,
 	MButtonUp = sf::Event::MouseButtonReleased,
 	MouseWheel = sf::Event::MouseWheelMoved,
+	JoystickButtonDown = sf::Event::JoystickButtonPressed,
+	JoystickButtonUp = sf::Event::JoystickButtonReleased,
 	WindowResized = sf::Event::Resized,
 	GainedFocus = sf::Event::GainedFocus,
 	LostFocus = sf::Event::LostFocus,
@@ -67,6 +69,7 @@ struct EventDetails {
 	sf::Vector2i m_Mouse;
 	int m_MouseWheelDelta;
 	int m_KeyCode; // single key code
+	int m_ButtonCode;
 
 	std::string m_guiInterface;
 	std::string m_guiElement;
@@ -78,6 +81,7 @@ struct EventDetails {
 		m_Mouse = sf::Vector2i(0, 0);
 		m_MouseWheelDelta = 0;
 		m_KeyCode = -1;
+		m_ButtonCode = -1;
 		m_guiInterface = "";
 		m_guiElement = "";
 		m_guiEvent = GUI_EventType::None;
@@ -209,8 +213,16 @@ public:
 		This will return the mouse cursor position to the console
 	*/
 	sf::Vector2i GetMousePos(sf::RenderWindow* l_Wind = nullptr) {
+		//std::cout << sf::Mouse::getPosition().x << sf::Mouse::getPosition().y << std::endl;
 		return (l_Wind ? sf::Mouse::getPosition(*l_Wind)
 			: sf::Mouse::getPosition());
+	}
+
+	sf::Vector2f GetJoystickPos() {
+		std::cout << sf::Joystick::getAxisPosition(0, sf::Joystick::X) <<
+			sf::Joystick::getAxisPosition(0, sf::Joystick::Y) << std::endl;
+		return sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), 
+			sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
 	}
 
 private:

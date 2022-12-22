@@ -25,7 +25,8 @@ void Window::Setup(const std::string& l_Title,
 	m_IsDone = false;
 	m_IsFocused = true; // default value for focused flag
 
-	m_EventManager.AddCallback(StateType(0), "Fullscreen_toggle", &Window::ToggleFullScreen, this);
+	m_EventManager.AddCallback(StateType(0), "Fullscreen_toggleKeyboard", &Window::ToggleFullScreen, this);
+	m_EventManager.AddCallback(StateType(0), "Fullscreen_toggleJoystick", &Window::ToggleFullScreen, this);
 	m_EventManager.AddCallback(StateType(0), "Window_close", &Window::Close, this);
 
 	Create();

@@ -27,12 +27,14 @@ void State_Paused::OnCreate() {
 	m_Rect.setFillColor(sf::Color(0, 0, 0, 150));
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
-	evMgr->AddCallback(StateType::Paused, "Key_P", &State_Paused::Unpause, this);
+	evMgr->AddCallback(StateType::Paused, "Key_PauseKeyboard", &State_Paused::Unpause, this);
+	evMgr->AddCallback(StateType::Paused, "Key_PauseJoystick", &State_Paused::Unpause, this);
 }
 
 void State_Paused::OnDestroy() {
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
-	evMgr->RemoveCallback(StateType::Paused, "Key_P");
+	evMgr->RemoveCallback(StateType::Paused, "Key_PauseKeyboard");
+	evMgr->RemoveCallback(StateType::Paused, "Key_PauseJoystick");
 }
 
 void State_Paused::Draw() {
