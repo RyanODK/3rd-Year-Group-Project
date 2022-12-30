@@ -307,6 +307,24 @@
     <None Include="Code\Resources\Media\GUI_Styles\MainMenu1050.style">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Code\Resources\Media\Spritesheets\Crab.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Crab.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Alien.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Alien.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Witch.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Witch.char">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Code\Resources\background.cfg.txt">

@@ -102,10 +102,13 @@
     <None Include="Code\Resources\audio.cfg" />
     <None Include="Code\Resources\fonts.cfg" />
     <None Include="Code\Resources\keys.cfg" />
+    <None Include="Code\Resources\Media\Entities\Alien.char" />
     <None Include="Code\Resources\Media\Entities\Coin.char" />
+    <None Include="Code\Resources\Media\Entities\Crab.char" />
     <None Include="Code\Resources\Media\Entities\Cyborg.char" />
     <None Include="Code\Resources\Media\Entities\EnemyList.list" />
     <None Include="Code\Resources\Media\Entities\Player.char" />
+    <None Include="Code\Resources\Media\Entities\Witch.char" />
     <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1050.interface" />
     <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1080.interface" />
     <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1440.interface" />
@@ -114,9 +117,12 @@
     <None Include="Code\Resources\Media\GUI_Styles\MainMenu1440.style" />
     <None Include="Code\Resources\Media\GUI_Styles\MainMenuLabel.style" />
     <None Include="Code\Resources\Media\GUI_Styles\MainMenuTitle.style" />
+    <None Include="Code\Resources\Media\Spritesheets\Alien.sheet" />
     <None Include="Code\Resources\Media\Spritesheets\Coin.sheet" />
+    <None Include="Code\Resources\Media\Spritesheets\Crab.sheet" />
     <None Include="Code\Resources\Media\Spritesheets\Cyborg.sheet" />
     <None Include="Code\Resources\Media\Spritesheets\Player.sheet" />
+    <None Include="Code\Resources\Media\Spritesheets\Witch.sheet" />
     <None Include="Code\Resources\Textures.cfg.txt" />
     <None Include="Code\Resources\tiles.cfg.txt" />
   </ItemGroup>
