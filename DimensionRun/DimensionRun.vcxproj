@@ -107,6 +107,7 @@
     <None Include="Code\Resources\Media\Entities\Crab.char" />
     <None Include="Code\Resources\Media\Entities\Cyborg.char" />
     <None Include="Code\Resources\Media\Entities\EnemyList.list" />
+    <None Include="Code\Resources\Media\Entities\Ghost.char" />
     <None Include="Code\Resources\Media\Entities\Player.char" />
     <None Include="Code\Resources\Media\Entities\Witch.char" />
     <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1050.interface" />
@@ -121,6 +122,7 @@
     <None Include="Code\Resources\Media\Spritesheets\Coin.sheet" />
     <None Include="Code\Resources\Media\Spritesheets\Crab.sheet" />
     <None Include="Code\Resources\Media\Spritesheets\Cyborg.sheet" />
+    <None Include="Code\Resources\Media\Spritesheets\Ghost.sheet" />
     <None Include="Code\Resources\Media\Spritesheets\Player.sheet" />
     <None Include="Code\Resources\Media\Spritesheets\Witch.sheet" />
     <None Include="Code\Resources\Textures.cfg.txt" />

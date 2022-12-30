@@ -325,6 +325,12 @@
     <None Include="Code\Resources\Media\Entities\Witch.char">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Code\Resources\Media\Entities\Ghost.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Ghost.sheet">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Code\Resources\background.cfg.txt">
