@@ -49,7 +49,7 @@ void State_Game::OnDestroy() {
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->RemoveCallback(StateType::Game, "Key_MainMenuKeyboard");
 	evMgr->RemoveCallback(StateType::Game, "Key_MainMenuJoystick");
-	evMgr->RemoveCallback(StateType::Game, "Key_PauseKeyboard");
+	evMgr->RemoveCallback(StateType::Game, "Key_PauseKeyboard"); 
 	evMgr->RemoveCallback(StateType::Game, "Key_PauseJoystick");
 	evMgr->RemoveCallback(StateType::Game, "Key_O");
 	

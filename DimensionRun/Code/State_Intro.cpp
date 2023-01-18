@@ -20,7 +20,7 @@ void State_Intro::OnCreate() {
 	m_MainTitle.setPosition(windowSize.x / 2.0f, 0);
 
 	m_Names.setFont(m_Font);
-	m_Names.setString({ "			Ali Hussein,\n		Harry Costello,\nRyan O' Donoghue Kelleher,\n		Edvinas Dirmeikis" });
+	m_Names.setString({ "			Ali Hussein,\n		Harry Costello,\nRyan O' Donoghue Kelleher\n" });
 	m_Names.setCharacterSize(30);
 	sf::FloatRect namesRect = m_Names.getLocalBounds();
 	m_Names.setOrigin(namesRect.left + namesRect.width / 2.0f,

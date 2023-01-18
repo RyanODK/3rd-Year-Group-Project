@@ -36,7 +36,10 @@ void State_MainMenu::OnCreate() {
 }
 
 void State_MainMenu::OnDestroy() {
+	//exit(0);
+	std::cout << "this works" << std::endl;
 	m_StateMgr->GetContext()->m_GuiManager->RemoveInterface(StateType::MainMenu, "MainMenu");
+	std::cout << "this works11" << std::endl;
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
 	GUI_Manager* gui = m_StateMgr->GetContext()->m_GuiManager;
 	gui->RemoveInterface(StateType::MainMenu, "MainMenu");
@@ -64,6 +67,7 @@ void State_MainMenu::Play(EventDetails* l_details) {
 void State_MainMenu::Credits(EventDetails* l_details) {}
 
 void State_MainMenu::Quit(EventDetails* l_details) { 
+	exit(0);
 	m_StateMgr->GetContext()->m_Wind->Close(); 
 }
 
