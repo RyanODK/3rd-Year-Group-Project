@@ -32,11 +32,10 @@ void State_MainMenu::OnCreate() {
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_PlayMouse", &State_MainMenu::Play, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitMouse", &State_MainMenu::Quit, this);
 	
-	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 25.f, true);
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 25.f, true);
 }
 
 void State_MainMenu::OnDestroy() {
-	//exit(0);
 	std::cout << "this works" << std::endl;
 	m_StateMgr->GetContext()->m_GuiManager->RemoveInterface(StateType::MainMenu, "MainMenu");
 	std::cout << "this works11" << std::endl;

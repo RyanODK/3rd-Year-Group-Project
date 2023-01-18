@@ -89,6 +89,7 @@ public:
 	const sf::Vector2u& GetMapSize() const;
 	const sf::Vector2f& GetPlayerStart() const;
 
+	void CreateMap();
 	void LoadMap(const std::string& l_Path);
 	void LoadNext(); 
 
@@ -124,6 +125,7 @@ private:
 
 	float m_MapGravity;
 	int m_PlayerId;
+	int m_MapCount = 1;
 
 	bool m_LoadNextMap;
 	std::string m_NextMap;

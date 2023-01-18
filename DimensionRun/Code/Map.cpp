@@ -44,6 +44,45 @@ const sf::Vector2f& Map::GetPlayerStart() const {
 	return m_PlayerStart; 
 }
 
+void Map::CreateMap() {
+	if (m_LoadNextMap) {
+		if (m_MapCount < 5) {
+			m_MapCount += 1;
+		}
+		else if (m_MapCount >= 6) {
+			m_MapCount == 1;
+		}
+	}
+	std::ofstream MapFile("Code/Maps/lol" + std::to_string(m_MapCount) + ".map");
+
+	MapFile << "|type|~id|x|y\n";
+	MapFile << "BACKGROUND bg" + std::to_string(m_MapCount) +
+		"Back bg" + std::to_string(m_MapCount) +
+		"Middle bg" + std::to_string(m_MapCount) +
+		"Front\n";
+	MapFile << "SIZE 63 35\n";
+	MapFile << "GRAVITY 512\n";
+	MapFile << "PLAYER 100 1300\n";
+
+	if (m_MapCount == 1) {
+		MapFile << "ENEMY Cyborg 800 1100\n";
+	}
+	else if(m_MapCount == 2) {
+		MapFile << "ENEMY Alien 300 1300\n";
+	}
+	else if (m_MapCount == 3) {
+		MapFile << "ENEMY Witch 300 1300\n";
+	}
+	else if (m_MapCount == 4) {
+		MapFile << "ENEMY Crab 300 1300\n";
+	}
+	else if (m_MapCount == 5) {
+		MapFile << "ENEMY Ghost 600 1300\n";
+	}
+
+	MapFile << "NEXTMAP map" + std::to_string(m_MapCount + 1) + ".map\n";
+}
+
 void Map::LoadMap(const std::string& l_path) {
 	std::ifstream mapFile;
 	mapFile.open(l_path);
