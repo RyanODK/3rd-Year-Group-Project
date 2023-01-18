@@ -218,10 +218,13 @@ public:
 			: sf::Mouse::getPosition());
 	}
 
-	sf::Vector2f GetJoystickPos() {
+	sf::Vector2i GetJoystickPos() {
 		std::cout << sf::Joystick::getAxisPosition(0, sf::Joystick::X) <<
 			sf::Joystick::getAxisPosition(0, sf::Joystick::Y) << std::endl;
-		return sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), 
+		sf::Mouse::setPosition(sf::Vector2i(
+			sf::Joystick::getAxisPosition(0, sf::Joystick::X),
+			sf::Joystick::getAxisPosition(0, sf::Joystick::Y)));
+		return sf::Vector2i(sf::Joystick::getAxisPosition(0, sf::Joystick::X), 
 			sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
 	}
 

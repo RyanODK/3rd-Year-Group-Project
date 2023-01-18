@@ -7,7 +7,6 @@
 #include "Utilities.h"
 
 template<typename Derived, typename T>
-
 class ResourceManager {
 public:
 	ResourceManager(const std::string& l_pathsFile) {

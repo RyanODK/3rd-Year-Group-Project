@@ -32,12 +32,14 @@ void State_MainMenu::OnCreate() {
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_PlayMouse", &State_MainMenu::Play, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitMouse", &State_MainMenu::Quit, this);
 	
-	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 25.f, true);
+	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 25.f, true);
 }
 
 void State_MainMenu::OnDestroy() {
 	m_StateMgr->GetContext()->m_GuiManager->RemoveInterface(StateType::MainMenu, "MainMenu");
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
+	GUI_Manager* gui = m_StateMgr->GetContext()->m_GuiManager;
+	gui->RemoveInterface(StateType::MainMenu, "MainMenu");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_PlayMouse");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_QuitMouse");
 }
@@ -54,30 +56,6 @@ void State_MainMenu::Activate() {
 		play.SetText("Play");
 	}
 }
-
-//void State_MainMenu::MouseClick(EventDetails* l_Details) {
-//	sf::Vector2i mousePos = l_Details->m_Mouse;
-//
-//	float halfX = m_ButtonSize.x / 2.0f;
-//	float halfY = m_ButtonSize.y / 2.0f;
-//
-//	for (int i = 0; i < 3; i++) {
-//		if (mousePos.x >= m_Rects[i].getPosition().x - halfX &&
-//			mousePos.x <= m_Rects[i].getPosition().x + halfX &&
-//			mousePos.y >= m_Rects[i].getPosition().y - halfY &&
-//			mousePos.y <= m_Rects[i].getPosition().y + halfY) {
-//			if (i == 0) {
-//				m_StateMgr->SwitchTo(StateType::Game);
-//			}
-//			else if (i == 1) {
-//				//m_StateMgr->SwitchTo(StateType::Credits);
-//			}
-//			else if (i == 2) {
-//				m_StateMgr->GetContext()->m_Wind->Close();
-//			}
-//		}
-//	}
-//}
 
 void State_MainMenu::Play(EventDetails* l_details) { 
 	m_StateMgr->SwitchTo(StateType::Game); 

@@ -1,10 +1,5 @@
 #pragma once
-#include "State_Intro.h"
-#include "State_MainMenu.h"
-#include "State_Game.h"
-#include "State_GameOver.h"
-#include "State_Paused.h"
-#include "State_Credits.h"
+#include "BaseState.h"
 #include "SharedContext.h"
 #include <vector>
 #include <unordered_map>

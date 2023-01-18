@@ -25,7 +25,7 @@ GUI_Manager::~GUI_Manager() {
 
 	for (auto& itr : m_interfaces) {
 		for (auto& itr2 : itr.second) {
-			delete itr2.second;
+			delete itr2.second; 
 		}
 	}
 }
@@ -114,6 +114,7 @@ bool GUI_Manager::PollEvent(GUI_Event& l_event) {
 }
 void GUI_Manager::Update(float l_dT) {
 	sf::Vector2i mousePos = m_eventMgr->GetMousePos(m_context->m_Wind->GetRenderWindow());
+	//sf::Vector2i mousePos = m_eventMgr->GetJoystickPos();
 
 	auto state = m_interfaces.find(m_currentState);
 	if (state == m_interfaces.end()) { return; }

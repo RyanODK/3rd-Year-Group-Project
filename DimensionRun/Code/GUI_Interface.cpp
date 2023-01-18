@@ -13,9 +13,9 @@ GUI_Interface::GUI_Interface(const std::string& l_name, GUI_Manager* l_guiManage
 }
 
 GUI_Interface::~GUI_Interface() {
-	delete m_backdropTexture;
-	delete m_contentTexture;
-	delete m_controlTexture;
+	if (m_backdropTexture){ delete m_backdropTexture; }
+	if (m_contentTexture){ delete m_contentTexture; }
+	if (m_controlTexture){ delete m_controlTexture; }
 	for (auto& itr : m_elements) {
 		delete itr.second;
 	}
