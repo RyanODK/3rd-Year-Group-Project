@@ -101,5 +101,6 @@ void Window::Draw(sf::Drawable& l_Drawable) {
 }
 
 void Window::Close(EventDetails* l_Details) {
+	exit(0);
 	m_IsDone = true;
 }

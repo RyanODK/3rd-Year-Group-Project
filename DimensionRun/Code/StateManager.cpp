@@ -5,8 +5,8 @@ StateManager::StateManager(SharedContext* l_Shared) : m_Shared(l_Shared) {
 	RegisterState<State_MainMenu>(StateType::MainMenu);
 	RegisterState<State_Game>(StateType::Game);
 	RegisterState<State_Paused>(StateType::Paused);
-    /*RegisterState<State_GameOver>(StateType::GameOver);
-    RegisterState<State_Credits>(StateType::Credits);*/
+    RegisterState<State_GameOver>(StateType::GameOver);
+    RegisterState<State_Credits>(StateType::Credits);
 }
 
 StateManager::~StateManager() {
@@ -83,7 +83,7 @@ bool StateManager::HasState(const StateType& l_type) {
 }
 
 void StateManager::Remove(const StateType& l_type) {
-    m_ToRemove.emplace_back(l_type);
+    m_ToRemove.push_back(l_type);
 }
 
 void StateManager::ProcessRequests() {

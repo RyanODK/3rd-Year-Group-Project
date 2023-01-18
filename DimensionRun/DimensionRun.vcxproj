@@ -42,7 +42,9 @@
     <ClCompile Include="Code\SoundManager.cpp" />
     <ClCompile Include="Code\SpriteSheet.cpp" />
     <ClCompile Include="Code\StateManager.cpp" />
+    <ClCompile Include="Code\State_Credits.cpp" />
     <ClCompile Include="Code\State_Game.cpp" />
+    <ClCompile Include="Code\State_GameOver.cpp" />
     <ClCompile Include="Code\State_Intro.cpp" />
     <ClCompile Include="Code\State_MainMenu.cpp" />
     <ClCompile Include="Code\State_Paused.cpp" />
