@@ -30,19 +30,19 @@ void State_MainMenu::OnCreate() {
 
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_PlayMouse", &State_MainMenu::Play, this);
+	eMgr->AddCallback(StateType::MainMenu, "MainMenu_CreditsMouse", &State_MainMenu::Credits, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitMouse", &State_MainMenu::Quit, this);
 	
 	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 25.f, true);
 }
 
 void State_MainMenu::OnDestroy() {
-	std::cout << "this works" << std::endl;
 	m_StateMgr->GetContext()->m_GuiManager->RemoveInterface(StateType::MainMenu, "MainMenu");
-	std::cout << "this works11" << std::endl;
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
 	GUI_Manager* gui = m_StateMgr->GetContext()->m_GuiManager;
 	gui->RemoveInterface(StateType::MainMenu, "MainMenu");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_PlayMouse");
+	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_CreditsMouse");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_QuitMouse");
 }
 
@@ -63,7 +63,9 @@ void State_MainMenu::Play(EventDetails* l_details) {
 	m_StateMgr->SwitchTo(StateType::Game); 
 }
 
-void State_MainMenu::Credits(EventDetails* l_details) {}
+void State_MainMenu::Credits(EventDetails* l_details) {
+	m_StateMgr->SwitchTo(StateType::Credits);
+}
 
 void State_MainMenu::Quit(EventDetails* l_details) { 
 	exit(0);

@@ -51,12 +51,14 @@ void State_Intro::OnDestroy() {
 }
 
 void State_Intro::Update(const sf::Time& l_Time) {
-	// less than five seconds
+	m_TimePassed += l_Time.asSeconds();
+	
 	if (m_TimePassed < 5.0f) {
-		m_TimePassed += l_Time.asSeconds();
 		m_MainTitle.setPosition(m_MainTitle.getPosition().x,
 			m_MainTitle.getPosition().y + (38 * l_Time.asSeconds()));
+	}
 
+	if (m_TimePassed < 6.0f) {
 		m_Names.setPosition(m_Names.getPosition().x,
 			m_Names.getPosition().y + (38 * l_Time.asSeconds()));
 

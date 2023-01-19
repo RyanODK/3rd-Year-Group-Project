@@ -20,13 +20,22 @@ public:
 	void Draw();
 
 	void MainMenu(EventDetails* l_Details); // switches state to MainMenu state
-	void Pause(EventDetails* l_Details); // switches state to Pause state
-
-	void ToggleOverlay(EventDetails* l_details);
 
 private:
 	sf::Font m_Font;
-	sf::Text coinCountText;
-	Map* m_GameMap;
-	int coinCount;
+
+	sf::Text m_MainTitle;
+	sf::Text m_ProgrammerTitle;
+	sf::Text m_SoundTitle;
+	sf::Text m_MusicTitle;
+	sf::Text m_ArtistsTitle;
+
+	sf::Text m_ProgrammerNames;
+	sf::Text m_SoundNames;
+	sf::Text m_MusicNames;
+	sf::Text m_ArtistNames;
+
+	sf::Text m_MainMenuText;
+
+	float m_TimePassed;
 };

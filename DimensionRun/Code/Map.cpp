@@ -80,7 +80,12 @@ void Map::CreateMap() {
 		MapFile << "ENEMY Ghost 600 1300\n";
 	}
 
-	MapFile << "NEXTMAP map" + std::to_string(m_MapCount + 1) + ".map\n";
+	if (m_MapCount != 5) {
+		MapFile << "NEXTMAP map" + std::to_string(m_MapCount + 1) + ".map\n";
+	}
+	else if(m_MapCount == 5) {
+		MapFile << "NEXTMAP map1.map\n";
+	}
 }
 
 void Map::LoadMap(const std::string& l_path) {
