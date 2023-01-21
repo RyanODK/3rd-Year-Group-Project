@@ -176,6 +176,10 @@ void GUI_Interface::Update(float l_dT) {
 		m_guiManager->GetContext()->m_EventManager->GetMousePos(
 			m_guiManager->GetContext()->m_Wind->GetRenderWindow()));
 
+	/*sf::Vector2f mousePos = sf::Vector2f(
+		m_guiManager->GetContext()->m_EventManager->GetJoystickPos(
+			m_guiManager->GetContext()->m_Wind->GetRenderWindow()));*/
+
 	if (m_beingMoved && m_moveMouseLast != mousePos) {
 		sf::Vector2f difference = mousePos - m_moveMouseLast;
 		m_moveMouseLast = mousePos;
@@ -231,6 +235,9 @@ void GUI_Interface::BeginMoving() {
 	SharedContext* context = m_guiManager->GetContext();
 	m_moveMouseLast = sf::Vector2f(context->m_EventManager->
 		GetMousePos(context->m_Wind->GetRenderWindow()));
+
+	/*m_moveMouseLast = sf::Vector2f(context->m_EventManager->
+		GetJoystickPos(m_guiManager->GetContext()->m_Wind->GetRenderWindow()));*/
 }
 
 void GUI_Interface::StopMoving() { m_beingMoved = false; }

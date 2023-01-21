@@ -337,6 +337,12 @@
     <None Include="Code\Resources\Media\Spritesheets\Ghost.sheet">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Code\Resources\Media\GUI_Styles\GameOver1440.style">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Interfaces\GameOver1440.interface">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Code\Resources\background.cfg.txt">

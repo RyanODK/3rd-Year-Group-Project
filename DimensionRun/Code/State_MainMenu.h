@@ -17,24 +17,9 @@ public:
 	void Update(const sf::Time& l_Time);
 	void Draw();
 
-	//void MouseClick(EventDetails* l_Details);
-
 	void Play(EventDetails* l_Details);
 	void Credits(EventDetails* l_Details);
 	void Quit(EventDetails* l_Details);
 
 private:
-	/*sf::Font m_Font;
-
-	sf::Text m_MainTitle;
-	
-	sf::Vector2f m_ButtonSize;
-	sf::Vector2f m_ButtonPos;
-	unsigned int m_ButtonPadding;
-
-	sf::RectangleShape m_Rects[3];
-	sf::Text m_Options[3];
-
-	Background m_mainMenuBackground;
-	TextureHolder m_TextureHolder;*/
 };

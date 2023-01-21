@@ -1,0 +1,4 @@
+Interface GameOver GameOver1440.style 0 0 Immovable NoTitle "Game over"
+Element Label Title 980 20 MainMenuTitle.style "GAME OVER"
+Element Label Retry 1100 600 MainMenuLabel.style "Retry"
+Element Label MainMenu 1100 726 MainMenuLabel.style "Main Menu"

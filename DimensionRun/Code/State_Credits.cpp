@@ -17,7 +17,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect titleRect = m_MainTitle.getLocalBounds();
 	m_MainTitle.setOrigin(titleRect.left + titleRect.width / 2.0f,
 		titleRect.top + titleRect.height / 2.0f);
-	m_MainTitle.setPosition(windowSize.x / 2.0f, windowSize.y / 4.0f);
+	m_MainTitle.setPosition(windowSize.x / 2.0f, windowSize.y / 5.0f);
 
 	m_ProgrammerTitle.setFont(m_Font);
 	m_ProgrammerTitle.setString({ "Programmers" });
@@ -57,25 +57,25 @@ void State_Credits::OnCreate() {
 void State_Credits::OnDestroy() {}
 
 void State_Credits::Update(const sf::Time& l_Time) {
-	// less than five seconds
-	if (m_TimePassed < 5.0f) {
-		m_TimePassed += l_Time.asSeconds();
+	//// less than five seconds
+	//if (m_TimePassed < 5.0f) {
+	//	m_TimePassed += l_Time.asSeconds();
 
-		m_MainTitle.setPosition(m_MainTitle.getPosition().x,
-			m_MainTitle.getPosition().y - (38 * l_Time.asSeconds()));
+	//	m_MainTitle.setPosition(m_MainTitle.getPosition().x,
+	//		m_MainTitle.getPosition().y - (38 * l_Time.asSeconds()));
 
-		m_ProgrammerTitle.setPosition(m_ProgrammerTitle.getPosition().x,
-			m_ProgrammerTitle.getPosition().y - (38 * l_Time.asSeconds()));
+	//	m_ProgrammerTitle.setPosition(m_ProgrammerTitle.getPosition().x,
+	//		m_ProgrammerTitle.getPosition().y - (38 * l_Time.asSeconds()));
 
-		m_ProgrammerNames.setPosition(m_ProgrammerNames.getPosition().x,
-			m_ProgrammerNames.getPosition().y - (38 * l_Time.asSeconds()));
+	//	m_ProgrammerNames.setPosition(m_ProgrammerNames.getPosition().x,
+	//		m_ProgrammerNames.getPosition().y - (38 * l_Time.asSeconds()));
 
-		m_ArtistsTitle.setPosition(m_ArtistsTitle.getPosition().x,
-			m_ArtistsTitle.getPosition().y - (38 * l_Time.asSeconds()));
+	//	m_ArtistsTitle.setPosition(m_ArtistsTitle.getPosition().x,
+	//		m_ArtistsTitle.getPosition().y - (38 * l_Time.asSeconds()));
 
-		m_ArtistNames.setPosition(m_ArtistNames.getPosition().x,
-			m_ArtistNames.getPosition().y - (38 * l_Time.asSeconds()));
-	}
+	//	m_ArtistNames.setPosition(m_ArtistNames.getPosition().x,
+	//		m_ArtistNames.getPosition().y - (38 * l_Time.asSeconds()));
+	//}
 }
 
 void State_Credits::Draw() {

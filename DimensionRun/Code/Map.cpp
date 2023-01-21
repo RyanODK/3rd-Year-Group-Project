@@ -55,12 +55,14 @@ void Map::CreateMap() {
 	}
 	std::ofstream MapFile("Code/Maps/lol" + std::to_string(m_MapCount) + ".map");
 
+	m_MapSize = 40 + (rand() % 60);
+
 	MapFile << "|type|~id|x|y\n";
 	MapFile << "BACKGROUND bg" + std::to_string(m_MapCount) +
 		"Back bg" + std::to_string(m_MapCount) +
 		"Middle bg" + std::to_string(m_MapCount) +
 		"Front\n";
-	MapFile << "SIZE 63 35\n";
+	MapFile << "SIZE " + std::to_string(m_MapSize) + " 35\n";
 	MapFile << "GRAVITY 512\n";
 	MapFile << "PLAYER 100 1300\n";
 
@@ -85,6 +87,62 @@ void Map::CreateMap() {
 	}
 	else if(m_MapCount == 5) {
 		MapFile << "NEXTMAP map1.map\n";
+	}
+
+	MapFile << "|TILE|ID|x|y\n";
+	MapFile << "|FLOOR|\n";
+
+	for (int i = 0; i <= m_MapSize; i++) {
+		m_RandomDeadlyTile = 1 + (rand() % 9);
+
+		if (m_MapCount == 1) {
+			if (i == m_MapSize) {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31 WARP\n";
+			}
+			else {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+			}
+		}
+		else if (m_MapCount == 2) {
+			if (i == m_MapSize) {
+				MapFile << "TILE 12 " + std::to_string(i) + " 31 WARP\n";
+			}
+			else {
+				if (m_RandomDeadlyTile == 4) {
+					MapFile << "TILE 14 " + std::to_string(i) + " 31\n";
+				}
+				else {
+					MapFile << "TILE 12 " + std::to_string(i) + " 31\n";
+				}
+			}
+		}
+		else if (m_MapCount == 3) {
+			MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+			if (i == m_MapSize) {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31 WARP\n";
+			}
+			else {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+			}
+		}
+		else if (m_MapCount == 4) {
+			MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+			if (i == m_MapSize) {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31 WARP\n";
+			}
+			else {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+			}
+		}
+		else if (m_MapCount == 5) {
+			MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+			if (i == m_MapSize) {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31 WARP\n";
+			}
+			else {
+				MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+			}
+		}
 	}
 }
 

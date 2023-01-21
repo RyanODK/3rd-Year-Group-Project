@@ -1,7 +1,6 @@
 #pragma once
 #include "BaseState.h"
 #include "EventManager.h"
-//#include "Background.h"
 #include "TextureHolder.h"
 
 class State_Paused : public BaseState {

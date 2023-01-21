@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <array>
+#include <iostream>
+#include <cstdlib>
 #include "Utilities.h"
 #include "SharedContext.h"
 #include "BaseState.h"
@@ -126,6 +128,8 @@ private:
 	float m_MapGravity;
 	int m_PlayerId;
 	int m_MapCount = 1;
+	int m_MapSize;
+	int m_RandomDeadlyTile;
 
 	bool m_LoadNextMap;
 	std::string m_NextMap;

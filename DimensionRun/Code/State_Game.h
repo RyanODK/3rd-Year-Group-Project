@@ -25,7 +25,10 @@ public:
 	void ToggleOverlay(EventDetails* l_details);
 
 private:
+	sf::Text distanceText;
 	sf::Text coinCountText;
 	Map* m_GameMap;
 	int coinCount;
+	float m_Distance;
+	int randomMusic;
 };

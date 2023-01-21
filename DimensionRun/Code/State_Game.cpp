@@ -7,6 +7,8 @@ State_Game::State_Game(StateManager* l_StateManager) :
 State_Game::~State_Game() {}
 
 void State_Game::OnCreate() {
+	srand((unsigned)time(NULL));
+
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Game, "Key_MainMenuKeyboard", &State_Game::MainMenu, this);
 	evMgr->AddCallback(StateType::Game, "Key_MainMenuJoystick", &State_Game::MainMenu, this);
@@ -36,7 +38,17 @@ void State_Game::OnCreate() {
 	m_GameMap->CreateMap();
 	m_GameMap->LoadMap("Code/Maps/map1.map");
 
-	//m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+	randomMusic = 1 + (rand() % 3);
+
+	if (randomMusic == 1) {
+		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+	}
+	else if (randomMusic == 2) {
+		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic2", 40.f, true);
+	}
+	else if (randomMusic == 3) {
+		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic3", 40.f, true);
+	}
 }
 
 void State_Game::OnDestroy() {
@@ -54,6 +66,7 @@ void State_Game::OnDestroy() {
 void State_Game::Draw() {
 	m_GameMap->Draw();
 	m_StateMgr->GetContext()->m_EntityManager->Draw();
+	m_StateMgr->GetContext()->m_Wind->Draw(distanceText);
 	m_StateMgr->GetContext()->m_Wind->Draw(coinCountText);
 }
 
@@ -61,12 +74,15 @@ void State_Game::Update(const sf::Time& l_Time) {
 	SharedContext* context = m_StateMgr->GetContext();
 	EntityBase* player = context->m_EntityManager->Find("Player");
 	sf::Vector2f size = m_StateMgr->GetContext()->m_Wind->GetWindowSize();
+	m_Distance += l_Time.asSeconds();
 
 	if (!player) {
 		std::cout << "Respawning player..." << std::endl;
 		context->m_EntityManager->AddEntity(EntityType::Player, "Player");
 		player = context->m_EntityManager->Find("Player");
 		player->SetPosition(m_GameMap->GetPlayerStart());
+		m_StateMgr->SwitchTo(StateType::GameOver);
+		m_StateMgr->Remove(StateType::Game);
 	}
 	else {
 		if (size.x == 2560 && size.y == 1440) {
@@ -95,6 +111,13 @@ void State_Game::Update(const sf::Time& l_Time) {
 		context->m_Wind->GetRenderWindow()->setView(m_View);
 	}
 
+	distanceText.setFont(*m_StateMgr->GetContext()->m_FontManager->GetResource("Main"));
+	distanceText.setPosition(context->m_Wind->GetRenderWindow()->getView().getCenter() - sf::Vector2f(
+		context->m_Wind->GetRenderWindow()->getView().getSize().x / 2,
+		context->m_Wind->GetRenderWindow()->getView().getSize().y / 3));
+	distanceText.setCharacterSize(70);
+	distanceText.setFillColor(sf::Color::White);
+
 	coinCountText.setFont(*m_StateMgr->GetContext()->m_FontManager->GetResource("Main"));
 	coinCountText.setPosition(context->m_Wind->GetRenderWindow()->getView().getCenter() - sf::Vector2f(
 		context->m_Wind->GetRenderWindow()->getView().getSize().x / 2,
@@ -109,11 +132,13 @@ void State_Game::Update(const sf::Time& l_Time) {
 	coinCount = player->GetCoinCount();
 	//std::cout << coinCount << std::endl;
 
+	std::stringstream distanceStream;
 	std::stringstream coinStream;
+	distanceStream << m_Distance;
 	coinStream << coinCount;
 
+	distanceText.setString(distanceStream.str());
 	coinCountText.setString("hi: " + coinStream.str());
-	
 }
 
 void State_Game::MainMenu(EventDetails* l_details) {

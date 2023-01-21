@@ -1,8 +1,6 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "BaseState.h"
-#include "Map.h"
-#include "Background.h"
-#include "TextureHolder.h"
 #include "EventManager.h"
 
 class State_GameOver : public BaseState {
@@ -19,14 +17,8 @@ public:
 	void Update(const sf::Time& l_Time);
 	void Draw();
 
+	void Retry(EventDetails* l_Details);
 	void MainMenu(EventDetails* l_Details); // switches state to MainMenu state
-	void Pause(EventDetails* l_Details); // switches state to Pause state
-
-	void ToggleOverlay(EventDetails* l_details);
 
 private:
-	sf::Font m_Font;
-	sf::Text coinCountText;
-	Map* m_GameMap;
-	int coinCount;
 };
