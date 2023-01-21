@@ -32,7 +32,7 @@ void State_GameOver::OnCreate() {
 	eMgr->AddCallback(StateType::GameOver, "GameOver_RetryMouse", &State_GameOver::Retry, this);
 	eMgr->AddCallback(StateType::GameOver, "GameOver_MainMenuMouse", &State_GameOver::MainMenu, this);
 
-	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("GameOverMusic", 40.f, true);
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("GameOverMusic", 10.f, true);
 }
 
 void State_GameOver::OnDestroy() {

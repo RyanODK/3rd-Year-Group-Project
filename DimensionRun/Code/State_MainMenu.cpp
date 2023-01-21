@@ -33,7 +33,7 @@ void State_MainMenu::OnCreate() {
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_CreditsMouse", &State_MainMenu::Credits, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitMouse", &State_MainMenu::Quit, this);
 	
-	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 25.f, true);
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 10.f, true);
 }
 
 void State_MainMenu::OnDestroy() {

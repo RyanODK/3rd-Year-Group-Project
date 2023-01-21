@@ -130,6 +130,15 @@ private:
 	int m_MapCount = 1;
 	int m_MapSize;
 	int m_RandomDeadlyTile;
+	
+	int m_DeadlyInt = 0;
+	int m_LastDeadly = 0;
+	int m_AirInt = 0;
+	int m_LastAir = 0;
+	int m_Gap = 0;
+
+	bool m_DeadlyTile;
+	bool m_AirTile;
 
 	bool m_LoadNextMap;
 	std::string m_NextMap;
