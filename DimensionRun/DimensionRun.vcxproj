@@ -112,10 +112,12 @@
     <None Include="Code\Resources\Media\Entities\Ghost.char" />
     <None Include="Code\Resources\Media\Entities\Player.char" />
     <None Include="Code\Resources\Media\Entities\Witch.char" />
+    <None Include="Code\Resources\Media\GUI_Interfaces\GameOver1080.interface" />
     <None Include="Code\Resources\Media\GUI_Interfaces\GameOver1440.interface" />
     <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1050.interface" />
     <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1080.interface" />
     <None Include="Code\Resources\Media\GUI_Interfaces\MainMenu1440.interface" />
+    <None Include="Code\Resources\Media\GUI_Styles\GameOver1080.style" />
     <None Include="Code\Resources\Media\GUI_Styles\GameOver1440.style" />
     <None Include="Code\Resources\Media\GUI_Styles\MainMenu1050.style" />
     <None Include="Code\Resources\Media\GUI_Styles\MainMenu1080.style" />

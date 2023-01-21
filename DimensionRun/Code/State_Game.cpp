@@ -41,13 +41,13 @@ void State_Game::OnCreate() {
 	randomMusic = 1 + (rand() % 3);
 
 	if (randomMusic == 1) {
-		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 40.f, true);
+		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 30.f, true);
 	}
 	else if (randomMusic == 2) {
-		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic2", 40.f, true);
+		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic2", 30.f, true);
 	}
 	else if (randomMusic == 3) {
-		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic3", 40.f, true);
+		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic3", 30.f, true);
 	}
 }
 
