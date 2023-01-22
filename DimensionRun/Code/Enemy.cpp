@@ -11,11 +11,13 @@ void Enemy::OnEntityCollision(EntityBase* l_collider, bool l_attack)
 {
 	/*if (m_State == EntityState::Dying) { return; }
 	if (l_attack) { return; }
-	if (l_collider->GetType() != EntityType::Player) { return; }
+	if (l_collider->GetType() != EntityType::Player) { return; }*/
 	EnemyCharacter* player = (EnemyCharacter*)l_collider;
-	SetState(EntityState::Attacking);
-	player->GetHurt(1);
-	if (m_Position.x > player->GetPosition().x) {
+	if (m_Name != "Coin") {
+		SetState(EntityState::Attacking);
+		player->GetHurt(1);
+	}
+	/*if (m_Position.x > player->GetPosition().x) {
 		player->AddVelocity(-m_Speed.x, 0);
 	}
 	else {

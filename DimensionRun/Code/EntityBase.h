@@ -80,7 +80,7 @@ protected:
 	sf::Vector2f m_Size; // Size of the collision box.
 	sf::FloatRect m_AABB; // The bounding box for collisions.
 	EntityState m_State; // Current entity state.
-	int coinCount = 0;
+	int coinCount;
 	// Flags for remembering axis collisions.
 	bool m_CollidingOnX;
 	bool m_CollidingOnY;

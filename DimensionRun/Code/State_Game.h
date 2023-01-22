@@ -31,4 +31,5 @@ private:
 	int coinCount;
 	float m_Distance;
 	int randomMusic;
+	int readCoinCount = 0;
 };

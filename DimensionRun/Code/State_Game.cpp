@@ -38,7 +38,7 @@ void State_Game::OnCreate() {
 	m_GameMap->CreateMap();
 	m_GameMap->LoadMap("Code/Maps/map1.map");
 
-	randomMusic = 1 + (rand() % 3);
+	randomMusic = 1 + (rand() % 4);
 
 	if (randomMusic == 1) {
 		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic1", 10.f, true);
@@ -48,6 +48,9 @@ void State_Game::OnCreate() {
 	}
 	else if (randomMusic == 3) {
 		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic3", 10.f, true);
+	}
+	else if (randomMusic == 4) {
+		m_StateMgr->GetContext()->m_SoundManager->PlayMusic("InGameMusic4", 10.f, true);
 	}
 }
 
@@ -129,13 +132,22 @@ void State_Game::Update(const sf::Time& l_Time) {
 	m_GameMap->Update(l_Time.asSeconds());
 	m_StateMgr->GetContext()->m_EntityManager->Update(l_Time.asSeconds());
 
+	std::ofstream CoinFile("Code/coinCount.txt");
+
 	coinCount = player->GetCoinCount();
+	CoinFile << std::to_string(coinCount);
+
+	CoinFile.close();
+
+	std::ifstream ReadCoinFile("Code/coinCount.txt");
+
+	ReadCoinFile >> readCoinCount;
 	//std::cout << coinCount << std::endl;
 
 	std::stringstream distanceStream;
 	std::stringstream coinStream;
 	distanceStream << m_Distance;
-	coinStream << coinCount;
+	coinStream << readCoinCount;
 
 	distanceText.setString(distanceStream.str());
 	coinCountText.setString("hi: " + coinStream.str());

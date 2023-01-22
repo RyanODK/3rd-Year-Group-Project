@@ -12,7 +12,7 @@ EntityBase::EntityBase(EntityManager* l_EntityMgr) :
 	m_EntityManager(l_EntityMgr), m_Name("BaseEntity"),
 	m_Type(EntityType::Base), m_ReferenceTile(nullptr),
 	m_State(EntityState::Running), m_Id(0),
-	m_CollidingOnX(false), m_CollidingOnY(false) {}
+	m_CollidingOnX(false), m_CollidingOnY(false), coinCount(0) {}
 
 EntityBase::~EntityBase() {}
 

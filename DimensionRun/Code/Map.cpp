@@ -53,7 +53,7 @@ void Map::CreateMap() {
 			m_MapCount == 1;
 		}
 	}
-	std::ofstream MapFile("Code/Maps/map" + std::to_string(m_MapCount) + ".map");
+	std::ofstream MapFile("Code/Maps/lol" + std::to_string(m_MapCount) + ".map");
 
 	m_MapSize = 40 + (rand() % 60);
 
