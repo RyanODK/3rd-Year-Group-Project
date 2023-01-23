@@ -106,6 +106,15 @@ void Map::CreateMap() {
 			m_AirTile = true;
 		}
 
+		if (m_DeadlyTile == true)
+		{
+			m_AirTile = false;
+		}
+		else if (m_AirTile == true)
+		{
+			m_DeadlyTile = false;
+		}
+
 		if (m_MapCount == 1) {
 			if (i == m_MapSize) {
 				MapFile << "TILE 16 " + std::to_string(i) + " 31 WARP\n";
