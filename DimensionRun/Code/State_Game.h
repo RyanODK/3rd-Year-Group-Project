@@ -27,9 +27,11 @@ public:
 private:
 	sf::Text distanceText;
 	sf::Text coinCountText;
+	sf::Text bestDistanceText;
 	Map* m_GameMap;
 	int coinCount;
 	float m_Distance;
+	float m_BestDistance;
 	int randomMusic;
 	int readCoinCount = 0;
 };

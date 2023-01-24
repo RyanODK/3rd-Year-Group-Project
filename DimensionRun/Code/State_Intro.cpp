@@ -28,14 +28,14 @@ void State_Intro::OnCreate() {
 	m_Names.setPosition(windowSize.x / 2.0f, titleRect.top + titleRect.height + 20);
 
 	m_continueText.setFont(m_Font);
-	m_continueText.setString({ "Press SPACE to continue" });
+	m_continueText.setString({ "Press SPACE or A to continue" });
 	m_continueText.setCharacterSize(20);
 	sf::FloatRect continueRect = m_continueText.getLocalBounds();
 	m_continueText.setOrigin(continueRect.left + continueRect.width / 2.0f,
 		continueRect.top + continueRect.height / 2.0f);
 	m_continueText.setPosition(windowSize.x / 2.0f, namesRect.top + namesRect.height + 45);
 
-	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("IntroMusic", 40.f, true);
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("IntroMusic", 30.f, true);
 
 	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
 	evMgr->AddCallback(StateType::Intro, "Intro_ContinueKeyboard",

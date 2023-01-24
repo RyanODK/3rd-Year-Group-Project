@@ -36,6 +36,4 @@ private:
 	sf::Text m_ArtistNames;
 
 	sf::Text m_MainMenuText;
-
-	float m_TimePassed;
 };

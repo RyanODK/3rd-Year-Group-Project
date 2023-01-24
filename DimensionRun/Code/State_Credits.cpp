@@ -17,7 +17,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect titleRect = m_MainTitle.getLocalBounds();
 	m_MainTitle.setOrigin(titleRect.left + titleRect.width / 2.0f,
 		titleRect.top + titleRect.height / 2.0f);
-	m_MainTitle.setPosition(windowSize.x / 2.0f, windowSize.y / 5.0f);
+	m_MainTitle.setPosition(windowSize.x / 2.0f, windowSize.y / 5.5f);
 
 	m_ProgrammerTitle.setFont(m_Font);
 	m_ProgrammerTitle.setString({ "Programmers" });
@@ -46,37 +46,71 @@ void State_Credits::OnCreate() {
 	m_ArtistsTitle.setPosition(windowSize.x / 2.0f, namesRect.top + namesRect.height + 450);
 
 	m_ArtistNames.setFont(m_Font);
-	m_ArtistNames.setString({ "			   Ali Hussein,\n		   Harry Costello,\n Ryan O' Donoghue Kelleher\n" });
+	m_ArtistNames.setString({ "Luis Zuno (@ansimuz),\n	   Moeda Dourada\n" });
 	m_ArtistNames.setCharacterSize(25);
 	sf::FloatRect namesRect1 = m_ArtistNames.getLocalBounds();
 	m_ArtistNames.setOrigin(namesRect1.left + namesRect1.width / 2.0f,
 		namesRect1.top + namesRect1.height / 2.0f);
 	m_ArtistNames.setPosition(windowSize.x / 2.0f, titleRect2.top + titleRect2.height + 610);
+
+	m_SoundTitle.setFont(m_Font);
+	m_SoundTitle.setString({ "Sound" });
+	m_SoundTitle.setCharacterSize(40);
+	m_SoundTitle.setStyle(sf::Text::Bold);
+	sf::FloatRect titleRect3 = m_SoundTitle.getLocalBounds();
+	m_SoundTitle.setOrigin(titleRect3.left + titleRect3.width / 2.0f,
+		titleRect3.top + titleRect3.height / 2.0f);
+	m_SoundTitle.setPosition(windowSize.x / 2.0f, namesRect1.top + namesRect1.height + 640);
+
+	m_SoundNames.setFont(m_Font);
+	m_SoundNames.setString({ "phoenix1291\n" });
+	m_SoundNames.setCharacterSize(25);
+	sf::FloatRect namesRect2 = m_SoundNames.getLocalBounds();
+	m_SoundNames.setOrigin(namesRect2.left + namesRect2.width / 2.0f,
+		namesRect2.top + namesRect2.height / 2.0f);
+	m_SoundNames.setPosition(windowSize.x / 2.0f, titleRect3.top + titleRect3.height + 750);
+
+	m_MusicTitle.setFont(m_Font);
+	m_MusicTitle.setString({ "Music" });
+	m_MusicTitle.setCharacterSize(40);
+	m_MusicTitle.setStyle(sf::Text::Bold);
+	sf::FloatRect titleRect4 = m_MusicTitle.getLocalBounds();
+	m_MusicTitle.setOrigin(titleRect4.left + titleRect4.width / 2.0f,
+		titleRect4.top + titleRect4.height / 2.0f);
+	m_MusicTitle.setPosition(windowSize.x / 2.0f, namesRect2.top + namesRect2.height + 780);
+
+	m_MusicNames.setFont(m_Font);
+	m_MusicNames.setString({ "		     DavidKBD,\n  Luis Zuno (@ansimuz),\n          Abstraction\n" });
+	m_MusicNames.setCharacterSize(25);
+	sf::FloatRect namesRect3 = m_MusicNames.getLocalBounds();
+	m_MusicNames.setOrigin(namesRect3.left + namesRect3.width / 2.0f,
+		namesRect3.top + namesRect3.height / 2.0f);
+	m_MusicNames.setPosition(windowSize.x / 2.0f, titleRect4.top + titleRect4.height + 880);
+
+	m_MainMenuText.setFont(m_Font);
+	m_MainMenuText.setString({ "Press SPACE or A for Main Menu" });
+	m_MainMenuText.setCharacterSize(20);
+	sf::FloatRect mainMenuRect = m_MainMenuText.getLocalBounds();
+	m_MainMenuText.setOrigin(mainMenuRect.left + mainMenuRect.width / 2.0f,
+		mainMenuRect.top + mainMenuRect.height / 2.0f);
+	m_MainMenuText.setPosition(windowSize.x / 2.0f, namesRect3.top + namesRect3.height + 960);
+
+	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("CreditsMusic", 10.f, true);
+
+	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
+	evMgr->AddCallback(StateType::Credits, "Intro_ContinueKeyboard",
+		&State_Credits::MainMenu, this);
+	evMgr->AddCallback(StateType::Credits, "Intro_ContinueJoystick",
+		&State_Credits::MainMenu, this);
 }
 
-void State_Credits::OnDestroy() {}
-
-void State_Credits::Update(const sf::Time& l_Time) {
-	//// less than five seconds
-	//if (m_TimePassed < 5.0f) {
-	//	m_TimePassed += l_Time.asSeconds();
-
-	//	m_MainTitle.setPosition(m_MainTitle.getPosition().x,
-	//		m_MainTitle.getPosition().y - (38 * l_Time.asSeconds()));
-
-	//	m_ProgrammerTitle.setPosition(m_ProgrammerTitle.getPosition().x,
-	//		m_ProgrammerTitle.getPosition().y - (38 * l_Time.asSeconds()));
-
-	//	m_ProgrammerNames.setPosition(m_ProgrammerNames.getPosition().x,
-	//		m_ProgrammerNames.getPosition().y - (38 * l_Time.asSeconds()));
-
-	//	m_ArtistsTitle.setPosition(m_ArtistsTitle.getPosition().x,
-	//		m_ArtistsTitle.getPosition().y - (38 * l_Time.asSeconds()));
-
-	//	m_ArtistNames.setPosition(m_ArtistNames.getPosition().x,
-	//		m_ArtistNames.getPosition().y - (38 * l_Time.asSeconds()));
-	//}
+void State_Credits::OnDestroy() {
+	EventManager* evMgr = m_StateMgr->GetContext()->m_EventManager;
+	evMgr->RemoveCallback(StateType::Credits, "Intro_ContinueKeyboard");
+	evMgr->RemoveCallback(StateType::Credits, "Intro_ContinueJoystick");
 }
+
+void State_Credits::Update(const sf::Time& l_Time) {}
 
 void State_Credits::Draw() {
 	sf::RenderWindow* window = m_StateMgr->GetContext()->m_Wind->GetRenderWindow();
@@ -86,6 +120,11 @@ void State_Credits::Draw() {
 	window->draw(m_ProgrammerNames);
 	window->draw(m_ArtistsTitle);
 	window->draw(m_ArtistNames);
+	window->draw(m_SoundTitle);
+	window->draw(m_SoundNames);
+	window->draw(m_MusicTitle);
+	window->draw(m_MusicNames);
+	window->draw(m_MainMenuText);
 }
 
 void State_Credits::MainMenu(EventDetails* l_Details){
