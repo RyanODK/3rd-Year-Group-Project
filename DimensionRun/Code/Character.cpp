@@ -7,6 +7,20 @@ Character::Character(EntityManager* l_EntityMgr) :
 	m_JumpVelocity(250), m_HitPoints(1) {
 
 	m_Name = "Character";
+
+	SlideAllow = true;
+
+	JumpBuffer.loadFromFile("Code/Resources/Media/Audio/InGameSounds/Sounds/jump.ogg");
+	jumpSound.setBuffer(JumpBuffer);
+	jumpSound.setVolume(50);
+
+	DeathBuffer.loadFromFile("Code/Resources/Media/Audio/InGameSounds/Sounds/death.ogg");
+	deathSound.setBuffer(DeathBuffer);
+	deathSound.setVolume(50);
+
+	CoinBuffer.loadFromFile("Code/Resources/Media/Audio/InGameSounds/Sounds/coin.ogg");
+	coinSound.setBuffer(CoinBuffer);
+	coinSound.setVolume(50);
 }
 
 Character::~Character() { }
@@ -35,6 +49,7 @@ void Character::Attack() {
 	if (GetState() == EntityState::Dying || GetState() == EntityState::Jumping || GetState() == EntityState::Attacking) {
 		return;
 	}
+
 	SetState(EntityState::Attacking);
 }
 
@@ -44,10 +59,13 @@ void Character::Slide() {
 		return;
 	}
 
-	SetState(EntityState::Sliding);
-	SetSize(26, 14);
-	m_SpriteSheet.SetSpriteSize(sf::Vector2f(26, 14.7));
-	UpdateAABB();
+	if (SlideAllow) {
+		SetState(EntityState::Sliding);
+		SetSize(26, 14);
+		m_SpriteSheet.SetSpriteSize(sf::Vector2f(26, 14.7));
+		UpdateAABB();
+		SlideAllow = false;
+	}
 }
 
 void Character::GetHurt(const int& l_Damage) {
@@ -55,7 +73,7 @@ void Character::GetHurt(const int& l_Damage) {
 		return;
 	}
 
-	m_HitPoints = (m_HitPoints - l_Damage > 0 ? m_HitPoints - l_Damage : 0);
+	//m_HitPoints = (m_HitPoints - l_Damage > 0 ? m_HitPoints - l_Damage : 0);
 
 	/*if (m_HitPoints) {
 		SetState(EntityState::Dying);
@@ -149,6 +167,15 @@ void Character::Animate() {
 
 void Character::Update(float l_deltaTime) {
 	EntityBase::Update(l_deltaTime);
+
+	if (!SlideAllow) {
+		SlideTimer += l_deltaTime;
+	}
+
+	if (SlideTimer >= 1.5f) {
+		SlideAllow = true;
+		SlideTimer = 0.0f;
+	}
 
 	if (m_AttackAABB.width != 0 && m_AttackAABB.height != 0) {
 		UpdateAttackAABB();

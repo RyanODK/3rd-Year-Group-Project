@@ -34,6 +34,10 @@ void State_MainMenu::OnCreate() {
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitMouse", &State_MainMenu::Quit, this);
 	
 	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("MainMenuMusic", 10.f, true);
+
+	buttonBuffer.loadFromFile("Code/Resources/Media/Audio/InGameSounds/Sounds/button.ogg");
+	buttonSound.setBuffer(buttonBuffer);
+	buttonSound.setVolume(50);
 }
 
 void State_MainMenu::OnDestroy() {
@@ -60,14 +64,17 @@ void State_MainMenu::Activate() {
 }
 
 void State_MainMenu::Play(EventDetails* l_details) { 
+	buttonSound.play();
 	m_StateMgr->SwitchTo(StateType::Game); 
 }
 
 void State_MainMenu::Credits(EventDetails* l_details) {
+	buttonSound.play();
 	m_StateMgr->SwitchTo(StateType::Credits);
 }
 
 void State_MainMenu::Quit(EventDetails* l_details) { 
+	buttonSound.play();
 	exit(0);
 	m_StateMgr->GetContext()->m_Wind->Close(); 
 }

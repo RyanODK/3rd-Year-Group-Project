@@ -27,6 +27,7 @@ Player::~Player() {
 
 void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 	if (m_State == EntityState::Dying) {
+		deathSound.play();
 		return;
 	}
 
@@ -58,6 +59,7 @@ void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 	else {
 		EnemyCharacter* opponent = (EnemyCharacter*)l_Collider;
 		if (opponent->GetName() == "Coin") {
+			coinSound.play();
 			opponent->Kill();
 			coinCount++;
 			//std::cout << coinCount << std::endl;
@@ -68,6 +70,10 @@ void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 void Player::React(EventDetails* l_Details) {
 	if (l_Details->m_Name == "Player_JumpKeyboard" || l_Details->m_Name == "Player_JumpJoystick") {
 		Character::Jump();
+
+		if (abs(m_Velocity.y) == 300) {
+			jumpSound.play();
+		}
 	}
 	else if (l_Details->m_Name == "Player_Attack") {
 		Character::Attack();

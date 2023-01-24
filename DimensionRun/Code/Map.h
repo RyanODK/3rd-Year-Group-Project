@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <unordered_map>
 #include <map>
 #include <fstream>
@@ -147,4 +148,7 @@ private:
 
 	BaseState* m_CurrentState;
 	SharedContext* m_Context;
+
+	sf::SoundBuffer MapBuffer;
+	sf::Sound nextMapSound;
 };

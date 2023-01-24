@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "EventManager.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class State_MainMenu : public BaseState {
 public:
@@ -22,4 +23,6 @@ public:
 	void Quit(EventDetails* l_Details);
 
 private:
+	sf::SoundBuffer buttonBuffer;
+	sf::Sound buttonSound;
 };

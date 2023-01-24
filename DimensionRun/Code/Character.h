@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Audio.hpp>
 #include "EntityBase.h"
 #include "SpriteSheet.h"
 
@@ -28,4 +29,16 @@ protected:
 	int m_HitPoints;
 	sf::FloatRect m_AttackAABB;
 	sf::Vector2f m_AttackAABBoffset;
+
+	bool SlideAllow;
+	float SlideTimer;
+
+	sf::SoundBuffer JumpBuffer;
+	sf::Sound jumpSound;
+
+	sf::SoundBuffer DeathBuffer;
+	sf::Sound deathSound;
+
+	sf::SoundBuffer CoinBuffer;
+	sf::Sound coinSound;
 };

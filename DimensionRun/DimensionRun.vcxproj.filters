@@ -349,6 +349,12 @@
     <None Include="Code\Resources\Media\GUI_Interfaces\GameOver1080.interface">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Code\Resources\Media\GUI_Styles\GameOver1050.style">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\GUI_Interfaces\GameOver1050.interface">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Code\Resources\background.cfg.txt">

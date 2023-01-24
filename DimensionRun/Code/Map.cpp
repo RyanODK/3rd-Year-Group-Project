@@ -9,6 +9,10 @@ Map::Map(SharedContext* l_Context, BaseState* l_currentState) :
 	m_Context->m_GameMap = this;
 	//loads tile from file
 	LoadTiles("Resources/tiles.cfg.txt");
+
+	MapBuffer.loadFromFile("Code/Resources/Media/Audio/InGameSounds/Sounds/teleport.ogg");
+	nextMapSound.setBuffer(MapBuffer);
+	nextMapSound.setVolume(50);
 }
 
 //desctuctor for map class
@@ -412,6 +416,7 @@ void Map::LoadTiles(const std::string& l_path) {
 
 void Map::Update(float l_DeltaTime) {
 	if (m_LoadNextMap) {
+		nextMapSound.play();
 		PurgeMap();
 		m_LoadNextMap = false;
 

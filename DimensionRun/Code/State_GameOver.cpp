@@ -33,6 +33,10 @@ void State_GameOver::OnCreate() {
 	eMgr->AddCallback(StateType::GameOver, "GameOver_MainMenuMouse", &State_GameOver::MainMenu, this);
 
 	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("GameOverMusic", 10.f, true);
+
+	buttonBuffer.loadFromFile("Code/Resources/Media/Audio/InGameSounds/Sounds/button.ogg");
+	buttonSound.setBuffer(buttonBuffer);
+	buttonSound.setVolume(50);
 }
 
 void State_GameOver::OnDestroy() {
@@ -50,6 +54,7 @@ void State_GameOver::Draw() {}
 
 void State_GameOver::Retry(EventDetails* l_Details)
 {
+	buttonSound.play();
 	m_StateMgr->SwitchTo(StateType::Game);
 	m_StateMgr->Remove(StateType::GameOver);
 }

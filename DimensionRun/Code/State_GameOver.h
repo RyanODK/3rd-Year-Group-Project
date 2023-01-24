@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "BaseState.h"
 #include "EventManager.h"
 
@@ -21,4 +22,6 @@ public:
 	void MainMenu(EventDetails* l_Details); // switches state to MainMenu state
 
 private:
+	sf::SoundBuffer buttonBuffer;
+	sf::Sound buttonSound;
 };
