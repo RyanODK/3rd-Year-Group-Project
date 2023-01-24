@@ -137,9 +137,15 @@ private:
 	int m_AirInt = 0;
 	int m_LastAir = 0;
 	int m_Gap = 0;
+	int m_Floating;
 
 	bool m_DeadlyTile;
 	bool m_AirTile;
+
+	int layer31[100];
+	int layer30[100];
+	int layer29[100];
+	int layer28[100];
 
 	bool m_LoadNextMap;
 	std::string m_NextMap;

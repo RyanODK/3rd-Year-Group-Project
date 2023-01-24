@@ -57,7 +57,7 @@ void Map::CreateMap() {
 			m_MapCount == 1;
 		}
 	}
-	std::ofstream MapFile("Code/Maps/lol" + std::to_string(m_MapCount) + ".map");
+	std::ofstream MapFile("Code/Maps/map" + std::to_string(m_MapCount) + ".map");
 
 	m_MapSize = 40 + (rand() % 60);
 
@@ -124,7 +124,63 @@ void Map::CreateMap() {
 				MapFile << "TILE 16 " + std::to_string(i) + " 31 WARP\n";
 			}
 			else {
-				MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+				for (int y = 31; y >= 28; y--)
+				{
+					if (y == 31)
+					{
+						if (m_DeadlyTile == true && m_DeadlyInt < 3 && i - m_LastDeadly > 5 && i - m_LastAir > 5 && i > 10)
+						{
+							MapFile << "TILE 6 " + std::to_string(i) + " 31\n";
+							layer31[i] = 0;
+							m_DeadlyInt++;
+							m_Gap = (rand() % 2);
+							if (m_DeadlyInt == 3 - m_Gap)
+							{
+								m_DeadlyTile = false;
+								m_DeadlyInt = 0;
+								m_LastDeadly = i;
+							}
+						}
+						else if (m_AirTile == true && m_AirInt < 3 && i - m_LastDeadly > 5 && i - m_LastAir > 5 && i > 10)
+						{
+							layer31[i] = 0;
+							m_AirInt++;
+							m_Gap = (rand() % 2);
+							if (m_AirInt == 3 - m_Gap)
+							{
+								m_AirTile = false;
+								m_AirInt = 0;
+								m_LastAir = i;
+							}
+						}
+						else {
+							m_DeadlyTile = false;
+							m_AirTile = false;
+							MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+							layer31[i] = 1;
+						}
+					}
+					else if (y == 29 && i > 10)
+					{
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 5)
+						{
+							MapFile << "TILE 16 " + std::to_string(i) + " 29\n";
+							layer29[i] = 1;
+						}
+					}
+					else if (y == 28 && i > 10)
+					{
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 8 && layer31[i] == 0)
+						{
+							MapFile << "TILE 16 " + std::to_string(i) + " 28\n";
+							layer28[i] = 1;
+						}
+					}
+				}
 			}
 		}
 		else if (m_MapCount == 2) {
@@ -132,34 +188,72 @@ void Map::CreateMap() {
 				MapFile << "TILE 12 " + std::to_string(i) + " 31 WARP\n";
 			}
 			else {
-				if (m_DeadlyTile == true && m_DeadlyInt < 3 && i - m_LastDeadly > 5 && i > 10)
+				for (int y = 31; y >= 28; y--)
 				{
-					MapFile << "TILE 14 " + std::to_string(i) + " 31\n";
-					m_DeadlyInt++;
-					m_Gap = (rand() % 2);
-					if (m_DeadlyInt == 3 - m_Gap)
+					if (y == 31)
 					{
-						m_DeadlyTile = false;
-						m_DeadlyInt = 0;
-						m_LastDeadly = i;
+						if (m_DeadlyTile == true && m_DeadlyInt < 3 && i - m_LastDeadly > 5 && i - m_LastAir > 5 && i > 10)
+						{
+							MapFile << "TILE 14 " + std::to_string(i) + " 31\n";
+							layer31[i] = 0;
+							m_DeadlyInt++;
+							m_Gap = (rand() % 2);
+							if (m_DeadlyInt == 3 - m_Gap)
+							{
+								m_DeadlyTile = false;
+								m_DeadlyInt = 0;
+								m_LastDeadly = i;
+							}
+						}
+						else if (m_AirTile == true && m_AirInt < 3 && i - m_LastDeadly > 5 && i - m_LastAir > 5 && i > 10)
+						{
+							layer31[i] = 0;
+							m_AirInt++;
+							m_Gap = (rand() % 2);
+							if (m_AirInt == 3 - m_Gap)
+							{
+								m_AirTile = false;
+								m_AirInt = 0;
+								m_LastAir = i;
+							}
+						}
+						else {
+							m_DeadlyTile = false;
+							m_AirTile = false;
+							MapFile << "TILE 12 " + std::to_string(i) + " 31\n";
+							layer31[i] = 1;
+						}
 					}
-				}
-				else if (m_AirTile == true && m_AirInt < 3 && i - m_LastDeadly > 5 && i > 10)
-				{
-					m_AirInt++;
-					m_Gap = (rand() % 2);
-					if (m_AirInt == 3 - m_Gap)
+					else if (y == 30 && i > 10)
 					{
-						m_AirTile = false;
-						m_AirInt = 0;
-						//m_LastAir = i;
-						m_LastDeadly = i;
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 3 || m_Floating == 5 || m_Floating == 7)
+						{
+							MapFile << "TILE 12 " + std::to_string(i) + " 30\n";
+							layer30[i] = 1;
+						}
 					}
-				}
-				else {
-					m_DeadlyTile = false;
-					m_AirTile = false;
-					MapFile << "TILE 12 " + std::to_string(i) + " 31\n";
+					else if (y == 29 && i > 10)
+					{
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 5 && layer30[i] == 0)
+						{
+							MapFile << "TILE 12 " + std::to_string(i) + " 29\n";
+							layer29[i] = 1;
+						}
+					}
+					else if (y == 28 && i > 10)
+					{
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 8 && layer30[i] == 0 && layer29[i] == 0)
+						{
+							MapFile << "TILE 12 " + std::to_string(i) + " 28\n";
+							layer28[i] = 1;
+						}
+					}
 				}
 			}
 		}
@@ -182,16 +276,81 @@ void Map::CreateMap() {
 			}
 		}
 		else if (m_MapCount == 5) {
-			MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
 			if (i == m_MapSize) {
-				MapFile << "TILE 16 " + std::to_string(i) + " 31 WARP\n";
+				MapFile << "TILE 0 " + std::to_string(i) + " 31 WARP\n";
 			}
 			else {
-				MapFile << "TILE 16 " + std::to_string(i) + " 31\n";
+				for (int y = 31; y >= 28; y--)
+				{
+					if (y == 31)
+					{
+						if (m_DeadlyTile == true && m_DeadlyInt < 3 && i - m_LastDeadly > 5 && i - m_LastAir > 5 && i > 10)
+						{
+							MapFile << "TILE 6 " + std::to_string(i) + " 31\n";
+							layer31[i] = 0;
+							m_DeadlyInt++;
+							m_Gap = (rand() % 2);
+							if (m_DeadlyInt == 3 - m_Gap)
+							{
+								m_DeadlyTile = false;
+								m_DeadlyInt = 0;
+								m_LastDeadly = i;
+							}
+						}
+						else if (m_AirTile == true && m_AirInt < 3 && i - m_LastDeadly > 5 && i - m_LastAir > 5 && i > 10)
+						{
+							layer31[i] = 0;
+							m_AirInt++;
+							m_Gap = (rand() % 2);
+							if (m_AirInt == 3 - m_Gap)
+							{
+								m_AirTile = false;
+								m_AirInt = 0;
+								m_LastAir = i;
+							}
+						}
+						else {
+							m_DeadlyTile = false;
+							m_AirTile = false;
+							MapFile << "TILE 0 " + std::to_string(i) + " 31\n";
+							layer31[i] = 1;
+						}
+					}
+					else if (y == 30 && i > 10)
+					{
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 3 || m_Floating == 5 || m_Floating == 7)
+						{
+							MapFile << "TILE 0 " + std::to_string(i) + " 30\n";
+							layer30[i] = 1;
+						}
+					}
+					else if (y == 29 && i > 10)
+					{
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 5 && layer30[i] == 0)
+						{
+							MapFile << "TILE 0 " + std::to_string(i) + " 29\n";
+							layer29[i] = 1;
+						}
+					}
+					else if (y == 28 && i > 10)
+					{
+						m_Floating = 1 + (rand() % 9);
+
+						if (m_Floating == 8 && layer30[i] == 0 && layer29[i] == 0)
+						{
+							MapFile << "TILE 0 " + std::to_string(i) + " 28\n";
+							layer28[i] = 1;
+						}
+					}
+				}
 			}
 		}
+		}
 	}
-}
 
 void Map::LoadMap(const std::string& l_path) {
 	std::ifstream mapFile;
