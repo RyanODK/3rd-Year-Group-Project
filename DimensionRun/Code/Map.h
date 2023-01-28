@@ -141,11 +141,27 @@ private:
 
 	bool m_DeadlyTile;
 	bool m_AirTile;
+	bool m_NextGap;
 
-	int layer31[100];
-	int layer30[100];
-	int layer29[100];
-	int layer28[100];
+	int map1Layer31[100];
+	int map1Layer29[100];
+	int map1Layer27[100];
+
+	int map2Layer31[100];
+	int map2Layer29[100];
+	int map2Layer27[100];
+
+	int map3Layer31[100];
+	int map3Layer29[100];
+	int map3Layer27[100];
+
+	int map4Layer31[100];
+	int map4Layer29[100];
+	int map4Layer27[100];
+
+	int map5Layer31[100];
+	int map5Layer29[100];
+	int map5Layer27[100];
 
 	bool m_LoadNextMap;
 	std::string m_NextMap;
