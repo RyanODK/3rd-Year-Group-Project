@@ -17,7 +17,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect titleRect = m_MainTitle.getLocalBounds();
 	m_MainTitle.setOrigin(titleRect.left + titleRect.width / 2.0f,
 		titleRect.top + titleRect.height / 2.0f);
-	m_MainTitle.setPosition(windowSize.x / 2.0f, windowSize.y / 5.5f);
+	m_MainTitle.setPosition(windowSize.x / 2.0f, windowSize.y / 7.0f);
 
 	m_ProgrammerTitle.setFont(m_Font);
 	m_ProgrammerTitle.setString({ "Programmers" });
@@ -26,7 +26,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect titleRect1 = m_ProgrammerTitle.getLocalBounds();
 	m_ProgrammerTitle.setOrigin(titleRect1.left + titleRect1.width / 2.0f,
 		titleRect1.top + titleRect1.height / 2.0f);
-	m_ProgrammerTitle.setPosition(windowSize.x / 2.0f, titleRect.top + titleRect.height + 285);
+	m_ProgrammerTitle.setPosition(windowSize.x / 2.0f, titleRect.top + titleRect.height + 205);
 
 	m_ProgrammerNames.setFont(m_Font);
 	m_ProgrammerNames.setString({ "			   Ali Hussein,\n		   Harry Costello,\n Ryan O' Donoghue Kelleher\n" });
@@ -34,7 +34,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect namesRect = m_ProgrammerNames.getLocalBounds();
 	m_ProgrammerNames.setOrigin(namesRect.left + namesRect.width / 2.0f,
 		namesRect.top + namesRect.height / 2.0f);
-	m_ProgrammerNames.setPosition(windowSize.x / 2.0f, titleRect1.top + titleRect1.height + 420);
+	m_ProgrammerNames.setPosition(windowSize.x / 2.0f, titleRect1.top + titleRect1.height + 340);
 
 	m_ArtistsTitle.setFont(m_Font);
 	m_ArtistsTitle.setString({ "Artists" });
@@ -43,7 +43,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect titleRect2 = m_ArtistsTitle.getLocalBounds();
 	m_ArtistsTitle.setOrigin(titleRect2.left + titleRect2.width / 2.0f,
 		titleRect2.top + titleRect2.height / 2.0f);
-	m_ArtistsTitle.setPosition(windowSize.x / 2.0f, namesRect.top + namesRect.height + 450);
+	m_ArtistsTitle.setPosition(windowSize.x / 2.0f, namesRect.top + namesRect.height + 370);
 
 	m_ArtistNames.setFont(m_Font);
 	m_ArtistNames.setString({ "Luis Zuno (@ansimuz),\n	   Moeda Dourada\n" });
@@ -51,7 +51,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect namesRect1 = m_ArtistNames.getLocalBounds();
 	m_ArtistNames.setOrigin(namesRect1.left + namesRect1.width / 2.0f,
 		namesRect1.top + namesRect1.height / 2.0f);
-	m_ArtistNames.setPosition(windowSize.x / 2.0f, titleRect2.top + titleRect2.height + 610);
+	m_ArtistNames.setPosition(windowSize.x / 2.0f, titleRect2.top + titleRect2.height + 515);
 
 	m_SoundTitle.setFont(m_Font);
 	m_SoundTitle.setString({ "Sound" });
@@ -60,7 +60,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect titleRect3 = m_SoundTitle.getLocalBounds();
 	m_SoundTitle.setOrigin(titleRect3.left + titleRect3.width / 2.0f,
 		titleRect3.top + titleRect3.height / 2.0f);
-	m_SoundTitle.setPosition(windowSize.x / 2.0f, namesRect1.top + namesRect1.height + 640);
+	m_SoundTitle.setPosition(windowSize.x / 2.0f, namesRect1.top + namesRect1.height + 550);
 
 	m_SoundNames.setFont(m_Font);
 	m_SoundNames.setString({ "phoenix1291\n" });
@@ -68,7 +68,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect namesRect2 = m_SoundNames.getLocalBounds();
 	m_SoundNames.setOrigin(namesRect2.left + namesRect2.width / 2.0f,
 		namesRect2.top + namesRect2.height / 2.0f);
-	m_SoundNames.setPosition(windowSize.x / 2.0f, titleRect3.top + titleRect3.height + 750);
+	m_SoundNames.setPosition(windowSize.x / 2.0f, titleRect3.top + titleRect3.height + 645);
 
 	m_MusicTitle.setFont(m_Font);
 	m_MusicTitle.setString({ "Music" });
@@ -77,7 +77,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect titleRect4 = m_MusicTitle.getLocalBounds();
 	m_MusicTitle.setOrigin(titleRect4.left + titleRect4.width / 2.0f,
 		titleRect4.top + titleRect4.height / 2.0f);
-	m_MusicTitle.setPosition(windowSize.x / 2.0f, namesRect2.top + namesRect2.height + 780);
+	m_MusicTitle.setPosition(windowSize.x / 2.0f, namesRect2.top + namesRect2.height + 700);
 
 	m_MusicNames.setFont(m_Font);
 	m_MusicNames.setString({ "		     DavidKBD,\n  Luis Zuno (@ansimuz),\n          Abstraction\n" });
@@ -85,7 +85,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect namesRect3 = m_MusicNames.getLocalBounds();
 	m_MusicNames.setOrigin(namesRect3.left + namesRect3.width / 2.0f,
 		namesRect3.top + namesRect3.height / 2.0f);
-	m_MusicNames.setPosition(windowSize.x / 2.0f, titleRect4.top + titleRect4.height + 880);
+	m_MusicNames.setPosition(windowSize.x / 2.0f, titleRect4.top + titleRect4.height + 795);
 
 	m_MainMenuText.setFont(m_Font);
 	m_MainMenuText.setString({ "Press SPACE or A for Main Menu" });
@@ -93,7 +93,7 @@ void State_Credits::OnCreate() {
 	sf::FloatRect mainMenuRect = m_MainMenuText.getLocalBounds();
 	m_MainMenuText.setOrigin(mainMenuRect.left + mainMenuRect.width / 2.0f,
 		mainMenuRect.top + mainMenuRect.height / 2.0f);
-	m_MainMenuText.setPosition(windowSize.x / 2.0f, namesRect3.top + namesRect3.height + 960);
+	m_MainMenuText.setPosition(windowSize.x / 2.0f, namesRect3.top + namesRect3.height + 850);
 
 	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("CreditsMusic", 10.f, true);
 

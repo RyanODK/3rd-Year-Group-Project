@@ -24,3 +24,9 @@ bg4Front Graphics/warped-files/PNG/environment/layers/blank.png
 bg5Back Graphics/gothicvania-cemetery-files/demo\assets/environment/bg-moon.png
 bg5Middle Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-mountains.png
 bg5Front Graphics/gothicvania-cemetery-files/demo/assets/environment/bg-graveyard.png
+XboxA Code/Resources/Media/Textures/XboxButtons/XboxOne_A.png
+XboxB Code/Resources/Media/Textures/XboxButtons/XboxOne_B.png
+XboxX Code/Resources/Media/Textures/XboxButtons/XboxOne_X.png
+XboxY Code/Resources/Media/Textures/XboxButtons/XboxOne_Y.png
+XboxMenu Code/Resources/Media/Textures/XboxButtons/XboxOne_Menu.png
+XboxWindow Code/Resources/Media/Textures/XboxButtons/XboxOne_Windows.png

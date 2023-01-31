@@ -55,6 +55,7 @@ void State_Game::OnCreate() {
 
 	std::ifstream ReadHighScore("Code/highScore.txt");
 	ReadHighScore >> m_BestDistance;
+	ReadHighScore.close();
 }
 
 void State_Game::OnDestroy() {
@@ -121,41 +122,40 @@ void State_Game::Update(const sf::Time& l_Time) {
 	distanceText.setFont(*m_StateMgr->GetContext()->m_FontManager->GetResource("Main"));
 	distanceText.setPosition(context->m_Wind->GetRenderWindow()->getView().getCenter() - sf::Vector2f(
 		context->m_Wind->GetRenderWindow()->getView().getSize().x / 2,
-		context->m_Wind->GetRenderWindow()->getView().getSize().y / 3));
+		context->m_Wind->GetRenderWindow()->getView().getSize().y / 2));
 	distanceText.setCharacterSize(70);
 	distanceText.setFillColor(sf::Color::White);
 
 	bestDistanceText.setFont(*m_StateMgr->GetContext()->m_FontManager->GetResource("Main"));
 	bestDistanceText.setPosition(context->m_Wind->GetRenderWindow()->getView().getCenter() - sf::Vector2f(
 		context->m_Wind->GetRenderWindow()->getView().getSize().x / 2,
-		context->m_Wind->GetRenderWindow()->getView().getSize().y / 4));
-	bestDistanceText.setCharacterSize(70);
+		context->m_Wind->GetRenderWindow()->getView().getSize().y / 2.5));
+	bestDistanceText.setCharacterSize(35);
 	bestDistanceText.setFillColor(sf::Color::White);
 
 	coinCountText.setFont(*m_StateMgr->GetContext()->m_FontManager->GetResource("Main"));
 	coinCountText.setPosition(context->m_Wind->GetRenderWindow()->getView().getCenter() - sf::Vector2f(
 		context->m_Wind->GetRenderWindow()->getView().getSize().x / 2,
-		context->m_Wind->GetRenderWindow()->getView().getSize().y / 2));
-	coinCountText.setCharacterSize(70);
-	coinCountText.setFillColor(sf::Color::White);
+		context->m_Wind->GetRenderWindow()->getView().getSize().y / 2.8));
+	coinCountText.setCharacterSize(50);
+	coinCountText.setFillColor(sf::Color::Yellow);
 
 	m_GameMap->CreateMap();
 	m_GameMap->Update(l_Time.asSeconds());
 	m_StateMgr->GetContext()->m_EntityManager->Update(l_Time.asSeconds());
 
-	std::ofstream CoinFile("Code/coinCount.txt");
 	std::ofstream HighScore("Code/highScore.txt");
-	std::ifstream ReadCoinFile("Code/coinCount.txt");
-
-	coinCount = player->GetCoinCount();
-	CoinFile << std::to_string(coinCount);
-	CoinFile.close();
 
 	if (m_Distance > m_BestDistance) {
 		HighScore << m_Distance;
+		HighScore.close();
+	}
+	else {
+		HighScore << m_BestDistance;
+		HighScore.close();
 	}
 
-	ReadCoinFile >> readCoinCount;
+	coinCount = player->GetCoinCount();
 	//std::cout << coinCount << std::endl;
 
 	std::stringstream distanceStream;
@@ -168,11 +168,11 @@ void State_Game::Update(const sf::Time& l_Time) {
 	bestDistanceStream.precision(0);
 	bestDistanceStream << std::fixed << m_BestDistance;
 
-	coinStream << readCoinCount;
+	coinStream << coinCount;
 
 	distanceText.setString(distanceStream.str() + "m");
 	bestDistanceText.setString("Best: " + bestDistanceStream.str() + "m");
-	coinCountText.setString("hi: " + coinStream.str());
+	coinCountText.setString(coinStream.str());
 }
 
 void State_Game::MainMenu(EventDetails* l_details) {

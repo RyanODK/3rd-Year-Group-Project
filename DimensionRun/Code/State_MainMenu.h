@@ -25,4 +25,10 @@ public:
 private:
 	sf::SoundBuffer buttonBuffer;
 	sf::Sound buttonSound;
+
+	std::string textureString;
+	sf::Sprite XboxA;
+
+	sf::Texture* texture;
+	sf::Vector2f m_ScaleFactors;
 };

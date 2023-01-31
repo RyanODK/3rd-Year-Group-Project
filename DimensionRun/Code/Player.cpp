@@ -32,7 +32,7 @@ void Player::OnEntityCollision(EntityBase* l_Collider, bool l_Attack) {
 	}
 
 	if (l_Attack) {
-		if (m_State != EntityState::Attacking) {
+		if (m_State != EntityState::Sliding) {
 			return;
 		}
 
