@@ -356,6 +356,50 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="Code\Resources\Media\Entities\Bipedal.char" />
+    <None Include="Code\Resources\Media\Entities\MechGolem.char" />
+    <None Include="Code\Resources\Media\Entities\NightBorne.char" />
+    <None Include="Code\Resources\Media\Entities\Orc.char" />
+    <None Include="Code\Resources\Media\Spritesheets\Bipedal.sheet" />
+    <None Include="Code\Resources\Media\Spritesheets\MechGolem.sheet" />
+    <None Include="Code\Resources\Media\Spritesheets\NightBorne.sheet" />
+    <None Include="Code\Resources\Media\Spritesheets\Orc.sheet" />
+    <None Include="Code\Resources\Media\Entities\Lizard.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Wolf.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Wizard.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Thing.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\MediumMech.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Lizard.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Entities\Spider.char">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Spider.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Wizard.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Wolf.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\MediumMech.sheet">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Code\Resources\Media\Spritesheets\Thing.sheet">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Code\Resources\background.cfg.txt">

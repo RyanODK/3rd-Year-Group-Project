@@ -6,6 +6,16 @@ Crab Code/Resources/Media/Textures/SmallEnemy/crab-idle.png
 Alien Code/Resources/Media/Textures/SmallEnemy/alien-enemy-idle.png
 Witch Code/Resources/Media/Textures/SmallEnemy/witch.png
 Ghost Code/Resources/Media/Textures/SmallEnemy/ghost2.png
+Bipedal Code/Resources/Media/Textures/LargeEnemy/Bipedal.png
+NightBorne Code/Resources/Media/Textures/LargeEnemy/NightBorne.png
+Orc Code/Resources/Media/Textures/LargeEnemy/orc.png
+Wolf Code/Resources/Media/Textures/LargeEnemy/wolf.png
+MechGolem Code/Resources/Media/Textures/LargeEnemy/mechGolem.png
+Thing Code/Resources/Media/Textures/MediumEnemy/thing.png
+MediumMech Code/Resources/Media/Textures/MediumEnemy/mediumMech.png
+Wizard Code/Resources/Media/Textures/MediumEnemy/wizard.png
+Lizard Code/Resources/Media/Textures/MediumEnemy/lizard.png
+Spider Code/Resources/Media/Textures/MediumEnemy/spider.png
 bgMainMenu1440 Code/Resources/Media/Textures/bg1440.png
 bgMainMenu1080 Code/Resources/Media/Textures/bg1080.png
 bgMainMenu1050 Code/Resources/Media/Textures/bg1050.png
