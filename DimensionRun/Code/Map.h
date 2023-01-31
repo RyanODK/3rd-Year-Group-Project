@@ -143,6 +143,20 @@ private:
 	bool m_AirTile;
 	bool m_NextGap;
 
+	int c = 0;
+	int d = 0;
+	int e = 0;
+	int z = 0;
+
+	int m_RandEnemy = 0;
+	int m_LastEnemy = 0;
+
+	bool m_HasNext;
+	int m_LastTile = 0;
+
+	bool m_HasNext27;
+	int m_LastTile27 = 0;
+
 	int map1Layer31[100];
 	int map1Layer29[100];
 	int map1Layer27[100];
