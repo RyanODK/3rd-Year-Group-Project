@@ -96,6 +96,7 @@
     <ClInclude Include="Code\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Code\Maps\map1.map" />
     <None Include="Code\Maps\map2.map" />
     <None Include="Code\Maps\map3.map" />

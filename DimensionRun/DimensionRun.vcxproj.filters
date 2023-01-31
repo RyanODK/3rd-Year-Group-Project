@@ -355,6 +355,7 @@
     <None Include="Code\Resources\Media\GUI_Interfaces\GameOver1050.interface">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Code\Resources\background.cfg.txt">

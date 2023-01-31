@@ -49,6 +49,7 @@ const sf::Vector2f& Map::GetPlayerStart() const {
 }
 
 void Map::CreateMap() {
+	//m_MapCount = 0 + (rand() % 5);
 	if (m_LoadNextMap) {
 		if (m_MapCount < 5) {
 			m_MapCount += 1;

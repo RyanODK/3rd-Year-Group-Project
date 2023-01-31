@@ -13,7 +13,7 @@ void Enemy::OnEntityCollision(EntityBase* l_collider, bool l_attack)
 	if (l_attack) { return; }
 	if (l_collider->GetType() != EntityType::Player) { return; }*/
 	EnemyCharacter* player = (EnemyCharacter*)l_collider;
-	if (m_Name != "Coin") {
+	if (m_Name != "Coin" && player->GetState() != EntityState::Sliding) {
 		SetState(EntityState::Attacking);
 		player->GetHurt(1);
 	}
