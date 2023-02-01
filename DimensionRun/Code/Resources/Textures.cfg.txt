@@ -6,7 +6,7 @@ Crab Code/Resources/Media/Textures/SmallEnemy/crab-idle.png
 Alien Code/Resources/Media/Textures/SmallEnemy/alien-enemy-idle.png
 Witch Code/Resources/Media/Textures/SmallEnemy/witch.png
 Ghost Code/Resources/Media/Textures/SmallEnemy/ghost2.png
-Bipedal Code/Resources/Media/Textures/LargeEnemy/Bipedal.png
+Bipedal Code/Resources/Media/Textures/LargeEnemy/MilitaryIncursionBot.png
 NightBorne Code/Resources/Media/Textures/LargeEnemy/NightBorne.png
 Orc Code/Resources/Media/Textures/LargeEnemy/orc.png
 Wolf Code/Resources/Media/Textures/LargeEnemy/wolf.png

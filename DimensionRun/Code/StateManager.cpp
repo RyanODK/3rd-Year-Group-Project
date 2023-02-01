@@ -1,4 +1,5 @@
 #include "StateManager.h"
+#include "State_Controls.h"
 #include "State_Intro.h"
 #include "State_MainMenu.h"
 #include "State_Game.h"
@@ -7,6 +8,7 @@
 #include "State_Credits.h"
 
 StateManager::StateManager(SharedContext* l_Shared) : m_Shared(l_Shared) {
+    RegisterState<State_Controls>(StateType::Controls);
     RegisterState<State_Intro>(StateType::Intro);
 	RegisterState<State_MainMenu>(StateType::MainMenu);
 	RegisterState<State_Game>(StateType::Game);

@@ -6,7 +6,7 @@
 
 // all possible States the game could be in for now
 enum class StateType {
-	Intro = 1, MainMenu, Game, Paused, GameOver, Credits
+	Intro = 1, Controls, MainMenu, Game, Paused, GameOver, Credits
 };
 
 // this is a container of a vector for the used Statetype and a pointer to the BaseState class

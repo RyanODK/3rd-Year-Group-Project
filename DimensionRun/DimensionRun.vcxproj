@@ -42,6 +42,7 @@
     <ClCompile Include="Code\SoundManager.cpp" />
     <ClCompile Include="Code\SpriteSheet.cpp" />
     <ClCompile Include="Code\StateManager.cpp" />
+    <ClCompile Include="Code\State_Controls.cpp" />
     <ClCompile Include="Code\State_Credits.cpp" />
     <ClCompile Include="Code\State_Game.cpp" />
     <ClCompile Include="Code\State_GameOver.cpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="Code\SoundManager.h" />
     <ClInclude Include="Code\SpriteSheet.h" />
     <ClInclude Include="Code\StateManager.h" />
+    <ClInclude Include="Code\State_Controls.h" />
     <ClInclude Include="Code\State_Credits.h" />
     <ClInclude Include="Code\State_Game.h" />
     <ClInclude Include="Code\State_GameOver.h" />

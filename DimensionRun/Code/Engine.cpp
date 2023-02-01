@@ -18,7 +18,7 @@ Engine::Engine() : m_Window("Dimension Run",
 	m_Context.m_GuiManager = &m_GuiManager;
 
 	m_FontManager.RequireResource("Main");
-	m_StateManager.SwitchTo(StateType::MainMenu);
+	m_StateManager.SwitchTo(StateType::Controls);
 }
 
 Engine::~Engine() {

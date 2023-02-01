@@ -54,7 +54,7 @@ void Character::Attack() {
 }
 
 void Character::Slide() {
-	if (GetState() == EntityState::Dying || GetState() == EntityState::Jumping || GetState() == EntityState::Sliding ) {
+	if (GetState() == EntityState::Dying || GetState() == EntityState::Sliding ) {
 		//std::cout << "cant slide" << std::endl;
 		return;
 	}

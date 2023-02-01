@@ -31,6 +31,8 @@ void State_GameOver::OnCreate() {
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
 	eMgr->AddCallback(StateType::GameOver, "GameOver_RetryMouse", &State_GameOver::Retry, this);
 	eMgr->AddCallback(StateType::GameOver, "GameOver_MainMenuMouse", &State_GameOver::MainMenu, this);
+	eMgr->AddCallback(StateType::GameOver, "GameOver_RetryJoystick", &State_GameOver::Retry, this);
+	eMgr->AddCallback(StateType::GameOver, "GameOver_MainMenuJoystick", &State_GameOver::MainMenu, this);
 
 	m_StateMgr->GetContext()->m_SoundManager->PlayMusic("GameOverMusic", 10.f, true);
 
@@ -46,6 +48,8 @@ void State_GameOver::OnDestroy() {
 	gui->RemoveInterface(StateType::GameOver, "GameOver");
 	eMgr->RemoveCallback(StateType::GameOver, "GameOver_RetryMouse");
 	eMgr->RemoveCallback(StateType::GameOver, "GameOver_MainMenuMouse");
+	eMgr->RemoveCallback(StateType::GameOver, "GameOver_RetryJoystick");
+	eMgr->RemoveCallback(StateType::GameOver, "GameOver_MainMenuJoystick");
 }
 
 void State_GameOver::Update(const sf::Time& l_Time) {}

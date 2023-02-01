@@ -133,13 +133,6 @@ void State_Game::Update(const sf::Time& l_Time) {
 	bestDistanceText.setCharacterSize(35);
 	bestDistanceText.setFillColor(sf::Color::White);
 
-	coinCountText.setFont(*m_StateMgr->GetContext()->m_FontManager->GetResource("Main"));
-	coinCountText.setPosition(context->m_Wind->GetRenderWindow()->getView().getCenter() - sf::Vector2f(
-		context->m_Wind->GetRenderWindow()->getView().getSize().x / 2,
-		context->m_Wind->GetRenderWindow()->getView().getSize().y / 2.8));
-	coinCountText.setCharacterSize(50);
-	coinCountText.setFillColor(sf::Color::Yellow);
-
 	m_GameMap->CreateMap();
 	m_GameMap->Update(l_Time.asSeconds());
 	m_StateMgr->GetContext()->m_EntityManager->Update(l_Time.asSeconds());
@@ -155,12 +148,8 @@ void State_Game::Update(const sf::Time& l_Time) {
 		HighScore.close();
 	}
 
-	coinCount = player->GetCoinCount();
-	//std::cout << coinCount << std::endl;
-
 	std::stringstream distanceStream;
 	std::stringstream bestDistanceStream;
-	std::stringstream coinStream;
 
 	distanceStream.precision(0);
 	distanceStream << std::fixed << m_Distance;
@@ -168,11 +157,8 @@ void State_Game::Update(const sf::Time& l_Time) {
 	bestDistanceStream.precision(0);
 	bestDistanceStream << std::fixed << m_BestDistance;
 
-	coinStream << coinCount;
-
 	distanceText.setString(distanceStream.str() + "m");
 	bestDistanceText.setString("Best: " + bestDistanceStream.str() + "m");
-	coinCountText.setString(coinStream.str());
 }
 
 void State_Game::MainMenu(EventDetails* l_details) {

@@ -1,10 +1,10 @@
 Texture Bipedal
-Size 80 64
+Size 158 80
 Scale 2 2
 Padding 0.0 0.0
 Spacing 0.0 0.0
 |Type|Name|StartFrame|EndFrame|Row|FrameTime|FrameActionStart|FrameActionEnd|
 AnimationType Directional
 Animation Attack 0 0 5 0.09 0 0
-Animation Idle 0 6 0 0.2 -1 -1
-Animation Death 0 5 1 0.2 -1 -1
+Animation Idle 0 4 1 0.2 -1 -1
+Animation Death 0 9 0 0.2 -1 -1
