@@ -60,7 +60,7 @@ void Map::CreateMap() {
 	}
 	std::ofstream MapFile("Code/Maps/map" + std::to_string(m_MapCount) + ".map");
 
-	m_MapSize = 40 + (rand() % 60);
+	m_MapSize = 300 + (rand() % 160);
 
 	MapFile << "|type|~id|x|y\n";
 	MapFile << "BACKGROUND bg" + std::to_string(m_MapCount) +
@@ -822,7 +822,7 @@ void Map::CreateMap() {
 
 				if (m_RandEnemy == 1 || m_RandEnemy == 5)
 				{
-					if (map1Layer31[i] == 1 && i - m_LastEnemy > 10)
+					if (map1Layer31[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Cyborg " + std::to_string(z) + " 1290\n";
@@ -831,7 +831,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 3 || m_RandEnemy == 7)
 				{
-					if (map1Layer29[i] == 1 && i - m_LastEnemy > 10)
+					if (map1Layer29[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY MediumMech " + std::to_string(z) + " 1204\n";
@@ -840,7 +840,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 8 || m_RandEnemy == 4)
 				{
-					if (map1Layer27[i] == 1 && i - m_LastEnemy > 10)
+					if (map1Layer27[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Bipedal " + std::to_string(z) + " 1118\n";
@@ -861,7 +861,7 @@ void Map::CreateMap() {
 
 				if (m_RandEnemy == 1 || m_RandEnemy == 5)
 				{
-					if (map2Layer31[i] == 1 && i - m_LastEnemy > 10)
+					if (map2Layer31[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Alien " + std::to_string(z) + " 1290\n";
@@ -870,7 +870,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 3 || m_RandEnemy == 7)
 				{
-					if (map2Layer29[i] == 1 && i - m_LastEnemy > 10)
+					if (map2Layer29[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Spider " + std::to_string(z) + " 1204\n";
@@ -879,7 +879,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 8 || m_RandEnemy == 4)
 				{
-					if (map2Layer27[i] == 1 && i - m_LastEnemy > 10)
+					if (map2Layer27[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Orc " + std::to_string(z) + " 1118\n";
@@ -900,7 +900,7 @@ void Map::CreateMap() {
 
 				if (m_RandEnemy == 1 || m_RandEnemy == 5)
 				{
-					if (map3Layer31[i] == 1 && i - m_LastEnemy > 10)
+					if (map3Layer31[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Witch " + std::to_string(z) + " 1290\n";
@@ -909,7 +909,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 3 || m_RandEnemy == 7)
 				{
-					if (map3Layer29[i] == 1 && i - m_LastEnemy > 10)
+					if (map3Layer29[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Wizard " + std::to_string(z) + " 1204\n";
@@ -918,7 +918,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 8 || m_RandEnemy == 4)
 				{
-					if (map3Layer27[i] == 1 && i - m_LastEnemy > 10)
+					if (map3Layer27[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Wolf " + std::to_string(z) + " 1118\n";
@@ -938,7 +938,7 @@ void Map::CreateMap() {
 
 				if (m_RandEnemy == 1 || m_RandEnemy == 5)
 				{
-					if (map4Layer31[i] == 1 && i - m_LastEnemy > 10)
+					if (map4Layer31[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Crab " + std::to_string(z) + " 1290\n";
@@ -947,7 +947,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 3 || m_RandEnemy == 7)
 				{
-					if (map4Layer29[i] == 1 && i - m_LastEnemy > 10)
+					if (map4Layer29[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Thing " + std::to_string(z) + " 1204\n";
@@ -956,7 +956,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 8 || m_RandEnemy == 4)
 				{
-					if (map4Layer27[i] == 1 && i - m_LastEnemy > 10)
+					if (map4Layer27[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY NightBorne " + std::to_string(z) + " 1118\n";
@@ -976,7 +976,7 @@ void Map::CreateMap() {
 
 				if (m_RandEnemy == 1 || m_RandEnemy == 5)
 				{
-					if (map5Layer31[i] == 1 && i - m_LastEnemy > 10)
+					if (map5Layer31[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Ghost " + std::to_string(z) + " 1290\n";
@@ -985,7 +985,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 3 || m_RandEnemy == 7)
 				{
-					if (map5Layer29[i] == 1 && i - m_LastEnemy > 10)
+					if (map5Layer29[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY Lizard " + std::to_string(z) + " 1204\n";
@@ -994,7 +994,7 @@ void Map::CreateMap() {
 				}
 				else if (m_RandEnemy == 8 || m_RandEnemy == 4)
 				{
-					if (map5Layer27[i] == 1 && i - m_LastEnemy > 10)
+					if (map5Layer27[i] == 1 && i - m_LastEnemy > 20)
 					{
 						z = i * 43;
 						MapFile << "ENEMY MechGolem " + std::to_string(z) + " 1118\n";

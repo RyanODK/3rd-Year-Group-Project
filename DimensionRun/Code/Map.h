@@ -157,25 +157,25 @@ private:
 	bool m_HasNext27;
 	int m_LastTile27 = 0;
 
-	int map1Layer31[100];
-	int map1Layer29[100];
-	int map1Layer27[100];
+	int map1Layer31[500];
+	int map1Layer29[500];
+	int map1Layer27[500];
 
-	int map2Layer31[100];
-	int map2Layer29[100];
-	int map2Layer27[100];
+	int map2Layer31[500];
+	int map2Layer29[500];
+	int map2Layer27[500];
 
-	int map3Layer31[100];
-	int map3Layer29[100];
-	int map3Layer27[100];
+	int map3Layer31[500];
+	int map3Layer29[500];
+	int map3Layer27[500];
 
-	int map4Layer31[100];
-	int map4Layer29[100];
-	int map4Layer27[100];
+	int map4Layer31[500];
+	int map4Layer29[500];
+	int map4Layer27[500];
 
-	int map5Layer31[100];
-	int map5Layer29[100];
-	int map5Layer27[100];
+	int map5Layer31[500];
+	int map5Layer29[500];
+	int map5Layer27[500];
 
 	bool m_LoadNextMap;
 	std::string m_NextMap;
