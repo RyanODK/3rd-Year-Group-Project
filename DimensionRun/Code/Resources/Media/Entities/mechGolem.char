@@ -1,7 +1,7 @@
 Name MechGolem
 Spritesheet MechGolem.sheet
 Hitpoints 1
-BoundingBox 100 85
+BoundingBox 3 35
 DamageBox 0 0 14 14
 Speed 512 64
 JumpVelocity 128

@@ -1,5 +1,5 @@
 Texture Lizard
-Size 96 35
+Size 96 38
 Scale 2.5 2.5
 Padding 0.0 0.0
 Spacing 0.0 0.0
@@ -7,4 +7,4 @@ Spacing 0.0 0.0
 AnimationType Directional
 Animation Attack 0 0 5 0.09 0 0
 Animation Idle 0 5 0 0.2 -1 -1
-Animation Death 0 5 1 0.2 -1 -1
+Animation Death 0 5 1 0.1 -1 -1

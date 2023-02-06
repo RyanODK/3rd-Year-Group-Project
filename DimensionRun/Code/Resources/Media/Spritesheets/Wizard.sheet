@@ -1,6 +1,6 @@
 Texture Wizard
 Size 150 80
-Scale 2.5 2.5
+Scale 2.0 2.0
 Padding 0.0 0.0
 Spacing 0.0 0.0
 |Type|Name|StartFrame|EndFrame|Row|FrameTime|FrameActionStart|FrameActionEnd|
