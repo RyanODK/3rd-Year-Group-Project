@@ -1,6 +1,10 @@
 #pragma once
 #include "GUI_Element.h"
 
+/*
+	THIS CODE WAS CREATED BY Raimondas Pupius FROM THE BOOK SFML GAME DEVELOPMENT BY EXAMPLE
+*/
+
 class GUI_Textfield : public GUI_Element {
 public:
 	GUI_Textfield(const std::string& l_name, GUI_Interface* l_owner);

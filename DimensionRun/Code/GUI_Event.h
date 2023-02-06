@@ -1,6 +1,10 @@
 #pragma once
 #include <string>
 
+/*
+	THIS CODE WAS CREATED BY Raimondas Pupius FROM THE BOOK SFML GAME DEVELOPMENT BY EXAMPLE
+*/
+
 enum class GUI_EventType { None, Click, Release, Hover, Leave };
 
 struct ClickCoordinates {

@@ -7,6 +7,10 @@
 #include "GUI_Style.h"
 #include <sstream>
 
+/*
+	THIS CODE WAS CREATED BY Raimondas Pupius FROM THE BOOK SFML GAME DEVELOPMENT BY EXAMPLE
+*/
+
 enum class GUI_ElementType { None = -1, Window, Label, Button, Scrollbar, Textfield };
 
 using ElementStyles = std::unordered_map<GUI_ElementState, GUI_Style>;

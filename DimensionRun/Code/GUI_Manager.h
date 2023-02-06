@@ -12,6 +12,10 @@
 #include <functional>
 #include <fstream>
 
+/*
+	THIS CODE WAS CREATED BY Raimondas Pupius FROM THE BOOK SFML GAME DEVELOPMENT BY EXAMPLE
+*/
+
 using GUI_Interfaces = std::map<std::string, GUI_Interface*>;
 using GUI_Container = std::unordered_map<StateType, GUI_Interfaces>;
 using GUI_Events = std::unordered_map<StateType, std::vector<GUI_Event>>;

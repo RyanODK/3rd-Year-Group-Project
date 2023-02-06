@@ -6,6 +6,10 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
+/*
+	THIS CODE WAS CREATED BY Raimondas Pupius FROM THE BOOK SFML GAME DEVELOPMENT BY EXAMPLE
+*/
+
 using Elements = std::unordered_map<std::string, GUI_Element*>;
 
 class GUI_Manager;

@@ -2,6 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
+/*
+	THIS CODE WAS CREATED BY Raimondas Pupius FROM THE BOOK SFML GAME DEVELOPMENT BY EXAMPLE
+*/
+
 enum class GUI_ElementState { Neutral, Focused, Clicked };
 
 struct GUI_Style {

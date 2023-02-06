@@ -1,6 +1,10 @@
 #pragma once
 #include "GUI_Element.h"
 
+/*
+	THIS CODE WAS CREATED BY Raimondas Pupius FROM THE BOOK SFML GAME DEVELOPMENT BY EXAMPLE
+*/
+
 enum class SliderType { Horizontal, Vertical };
 
 class GUI_Scrollbar : public GUI_Element {
