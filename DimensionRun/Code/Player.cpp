@@ -71,7 +71,7 @@ void Player::React(EventDetails* l_Details) {
 	if (l_Details->m_Name == "Player_JumpKeyboard" || l_Details->m_Name == "Player_JumpJoystick") {
 		Character::Jump();
 
-		if (abs(m_Velocity.y) == 300) {
+		if (abs(m_Velocity.y) == 1000) {
 			jumpSound.play();
 		}
 	}
