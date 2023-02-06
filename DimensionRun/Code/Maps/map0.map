@@ -1,9 +1,0 @@
-|type|~id|x|y
-BACKGROUND bg0Back bg0Middle bg0Front
-SIZE 75 35
-GRAVITY 512
-PLAYER 100 1300
-NEXTMAP map1.map
-|TILE|ID|x|y
-|FLOOR|
-|ENEMIES|

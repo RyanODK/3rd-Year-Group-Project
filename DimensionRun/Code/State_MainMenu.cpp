@@ -10,9 +10,11 @@ void State_MainMenu::OnCreate() {
 	EventManager* eMgr = m_StateMgr->GetContext()->m_EventManager;
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_PlayMouse", &State_MainMenu::Play, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_CreditsMouse", &State_MainMenu::Credits, this);
+	eMgr->AddCallback(StateType::MainMenu, "MainMenu_ControlsMouse", &State_MainMenu::Controls, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitMouse", &State_MainMenu::Quit, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_PlayJoystick", &State_MainMenu::Play, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_CreditsJoystick", &State_MainMenu::Credits, this);
+	eMgr->AddCallback(StateType::MainMenu, "MainMenu_ControlsJoystick", &State_MainMenu::Controls, this);
 	eMgr->AddCallback(StateType::MainMenu, "MainMenu_QuitJoystick", &State_MainMenu::Quit, this);
 
 	GUI_Manager* gui = m_StateMgr->GetContext()->m_GuiManager;
@@ -66,9 +68,11 @@ void State_MainMenu::OnDestroy() {
 	gui->RemoveInterface(StateType::MainMenu, "MainMenu");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_PlayMouse");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_CreditsMouse");
+	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_ControlsMouse");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_QuitMouse");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_PlayJoystick");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_CreditsJoystick");
+	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_ControlsJoystick");
 	eMgr->RemoveCallback(StateType::MainMenu, "MainMenu_QuitJoystick");
 
 	m_StateMgr->GetContext()->m_TextureManager->ReleaseResource(textureString);
@@ -95,6 +99,11 @@ void State_MainMenu::Play(EventDetails* l_details) {
 void State_MainMenu::Credits(EventDetails* l_details) {
 	buttonSound.play();
 	m_StateMgr->SwitchTo(StateType::Credits);
+}
+
+void State_MainMenu::Controls(EventDetails* l_Details) {
+	buttonSound.play();
+	m_StateMgr->SwitchTo(StateType::Controls);
 }
 
 void State_MainMenu::Quit(EventDetails* l_details) { 

@@ -1,6 +1,6 @@
 Texture PlayerSprite
 Size 27 33
-Scale 4.1 4.1
+Scale 2.5 2.5
 Padding 0.0 0.0
 Spacing 0.0 0.0
 |Type|Name|StartFrame|EndFrame|Row|FrameTime|FrameActionStart|FrameActionEnd|

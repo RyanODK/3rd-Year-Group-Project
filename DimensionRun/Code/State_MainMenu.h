@@ -20,6 +20,7 @@ public:
 
 	void Play(EventDetails* l_Details);
 	void Credits(EventDetails* l_Details);
+	void Controls(EventDetails* l_Details);
 	void Quit(EventDetails* l_Details);
 
 private:

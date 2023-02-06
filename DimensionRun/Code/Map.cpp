@@ -60,7 +60,7 @@ void Map::CreateMap() {
 	}
 	std::ofstream MapFile("Code/Maps/map" + std::to_string(m_MapCount) + ".map");
 
-	m_MapSize = 300 + (rand() % 160);
+	m_MapSize = 100 + (rand() % 50);
 
 	MapFile << "|type|~id|x|y\n";
 	MapFile << "BACKGROUND bg" + std::to_string(m_MapCount) +
